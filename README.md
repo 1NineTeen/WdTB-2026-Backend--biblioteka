@@ -26,28 +26,86 @@ wymagania, zasady zaliczenia i opis reguł projektu.
 | LAB 06 | Rozbudowa: zdarzenia, konfiguracja, zadania cykliczne |
 | LAB 07 | Odrabianie |
 
-## Po forku
+## Fork: własne repozytorium zespołu
 
-1. *Settings → General → Repository name* → `WdTB-2026-Backend-<nazwaprojektu>` → **Rename**.
-2. Zakładka **Actions** → *I understand my workflows, go ahead and enable them*.
-3. *Settings → Collaborators → Add people*: osoby z zespołu i `wkoszela`.
-4. Nazwa projektu i link do repozytorium do arkusza zespołów.
-5. Pull Requesty kierujcie do **swojego** repozytorium (*base repository* = Wasz fork).
+Robi to **jedna osoba z zespołu** (osoba hostująca), pozostałe osoby patrzą i dołączają w kroku 4.
 
-Szczegóły: `docs/lab01.html`, część B.
+1. **Fork.** Na stronie tego repozytorium kliknijcie **Fork** → *Owner*: Wasze konto → **Create fork**.
+   Fork to Wasza kopia szablonu na Waszym koncie; w niej pracuje cały zespół.
+2. **Zmiana nazwy.** W forku: *Settings → General → Repository name* → zamieńcie końcówkę `-projectname-`
+   na nazwę projektu, np. `WdTB-2026-Backend-deskhop` → **Rename**. Nazwa projektu: jedno słowo, małe litery,
+   bez polskich znaków. Nie macie jeszcze pomysłu? Zmieńcie nazwę później, ale przed końcem LAB 01.
+3. **Włączenie sprawdzania.** Zakładka **Actions** → *I understand my workflows, go ahead and enable them*.
+   W forkach GitHub Actions jest domyślnie wyłączony; bez tego reguły nie będą się uruchamiać.
+4. **Zespół.** *Settings → Collaborators → Add people*: pozostałe osoby z zespołu, żeby mogły wysyłać zmiany.
+   Zaproszone osoby akceptują zaproszenie (e-mail albo https://github.com/notifications). Prowadzącego nie dodajecie:
+   repozytorium jest publiczne, wystarczy link w arkuszu.
+5. **Arkusz zespołów.** Jedna osoba wpisuje cały zespół w zakładce swojej grupy: nazwa projektu, link do repozytorium,
+   **krótki opis** (1–2 zdania: jaki problem rozwiązujecie i dla kogo) i dane trzech osób. Szczegóły projektu opisujecie w `PROJEKT.md`.
 
-## Uruchomienie
+Dwie rzeczy, o których łatwo zapomnieć:
 
-Wymagania: JDK 21 lub nowsze, IntelliJ IDEA (albo Maven 3.9+), Git. Docker nie jest potrzebny.
+- **Pull Requesty** kierujcie do **swojego** repozytorium. GitHub domyślnie proponuje repozytorium prowadzącego,
+  więc przy tworzeniu PR zmieńcie *base repository* na `<login>/WdTB-2026-Backend-<nazwaprojektu>`.
+- **Nowe materiały.** Na początku każdych zajęć: na stronie forka **Sync fork → Update branch**, potem w IntelliJ
+  *Git → Pull*.
 
-```bash
-mvn spring-boot:run      # aplikacja: http://localhost:8080, konsola bazy H2: http://localhost:8080/h2-console
-mvn verify               # testy zespołu i reguły dla laboratorium z <lab> w pom.xml
-mvn verify -Dlab=2       # podgląd reguł kolejnego laboratorium
-```
+## Projekt w IntelliJ IDEA
 
-Baza H2 (JDBC URL `jdbc:h2:file:./data/wdtb`, użytkownik `sa`, hasło puste). Tabele tworzy Hibernate z encji,
-dane startowe są w `src/main/resources/data.sql`.
+Wymagania: JDK 21 lub nowsze, IntelliJ IDEA (Maven i Git są wbudowane), konto na GitHubie. Docker nie jest potrzebny.
+
+### Pobranie projektu (każda osoba)
+
+1. *File → New → Project from Version Control* (na ekranie powitalnym: **Clone Repository**).
+2. URL: `https://github.com/<login>/WdTB-2026-Backend-<nazwaprojektu>.git` → **Clone** → **Trust Project**.
+3. IntelliJ rozpozna projekt Maven i pobierze zależności (pasek postępu na dole okna, za pierwszym razem kilka minut).
+4. Brak JDK? *File → Project Structure → Project → SDK → Download JDK* → wersja 21 lub nowsza.
+
+### Uruchomienie aplikacji
+
+1. Otwórzcie klasę `ProjektApplication` (po zmianie nazwy: `<NazwaProjektu>Application`).
+2. Kliknijcie zieloną strzałkę obok metody `main` → *Run 'ProjektApplication'*.
+3. W oknie *Run* na dole poczekajcie na `Started ProjektApplication in … seconds`.
+4. Otwórzcie http://localhost:8080 (strona startowa) i http://localhost:8080/h2-console (baza danych:
+   JDBC URL `jdbc:h2:file:./data/wdtb`, użytkownik `sa`, hasło puste).
+
+Kolejne uruchomienia: przycisk *Run* (zielona strzałka) na górnym pasku. Po każdej zmianie w kodzie, `data.sql`
+albo `application.properties` zrestartujcie aplikację: *Rerun* w oknie *Run*. Zatrzymanie: czerwony kwadrat.
+
+Tabele tworzy Hibernate z encji przy każdym starcie, a potem wczytuje dane z `src/main/resources/data.sql`.
+Dane dopisane ręcznie w konsoli H2 znikają po restarcie; to, co ma zostać, dopiszcie do `data.sql`.
+
+| Problem | Rozwiązanie |
+|---|---|
+| `Port 8080 was already in use` | aplikacja już działa: zatrzymajcie poprzednie uruchomienie (czerwony kwadrat) |
+| czerwone importy po zmianie `pom.xml` | panel *Maven* → *Reload All Maven Projects* (albo ikona *Load Maven Changes*) |
+| po zmianie nazwy klasy startowej *Run* nie działa | uruchomcie nową klasę strzałką obok `main`; stara konfiguracja wskazuje nieistniejącą klasę |
+
+### Testy i reguły projektu
+
+| Co | Jak |
+|---|---|
+| testy i reguły dla laboratorium z `<lab>` w `pom.xml` | panel *Maven* (prawa krawędź okna) → *Lifecycle* → dwuklik na *verify* |
+| podgląd reguł kolejnego laboratorium | dwa razy `Ctrl` (*Run Anything*) → `mvn verify -Dlab=2` |
+
+Wynik jest w oknie *Run*: przy każdej regule zielony albo czerwony znak, a przy czerwonej opis, co poprawić.
+
+## Co zmodyfikować na LAB 01
+
+| Plik | Zmiana | Reguła |
+|---|---|---|
+| pakiet `pl.wsb.projekt` | *Refactor → Rename* na pakiecie → `pl.wsb.<nazwaprojektu>` | R1.01 |
+| `ProjektApplication.java` | *Refactor → Rename* na klasie → `<NazwaProjektu>Application` | R1.01 |
+| `pom.xml`, `<artifactId>` | `wdtb-2026-backend-<nazwaprojektu>` | R1.01 |
+| `pom.xml`, `<version>` | `1.0.0-<nrindeksu1>-<nrindeksu2>-<nrindeksu3>` | R1.06 |
+| `PROJEKT.md` | zespół, problem, persona, 5 historyjek, wstępny diagram ER | R1.02 |
+| `src/main/resources/data.sql` | każda osoba dopisuje swoje konto (wzór w komentarzu na końcu pliku) | R1.04 |
+| `src/main/resources/static/index.html` | wizytówka projektu: zastąpcie wszystkie `[uzupełnij]` | R1.05 |
+
+Każda osoba robi co najmniej jeden Pull Request (np. swoje konto w `data.sql`), a recenzję robi inna osoba z zespołu.
+Nie zmieniajcie katalogu `src/test/java/pl/wsb/rules` ani `.github/workflows`: tam są reguły, którymi sprawdzamy projekt.
+
+Szczegóły krok po kroku: `docs/lab01.html`.
 
 ## Konwencja nazw
 

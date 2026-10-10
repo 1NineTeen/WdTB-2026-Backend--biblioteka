@@ -23,7 +23,7 @@
         <archunit.version>1.4.1</archunit.version>
         <!--
             Numer laboratorium, którego reguły projektu są aktywne.
-            Lokalnie podnosisz go sam na początku każdego labu.
+            Lokalnie podnosisz go sam na początku każdego laboratorium.
             W GitHub Actions tag lab-N uruchamia reguły laboratorium N.
         -->
         <lab>1</lab>

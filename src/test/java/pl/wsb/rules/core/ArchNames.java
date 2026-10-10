@@ -2,7 +2,7 @@ package pl.wsb.rules.core;
 
 import java.util.List;
 
-/** Nazwy adnotacji podawane jako tekst, żeby reguły kolejnych labów kompilowały się bez ich zależności. */
+/** Nazwy adnotacji podawane jako tekst, żeby reguły kolejnych laboratoriów kompilowały się bez ich zależności. */
 public final class ArchNames {
 
     public static final String SERVICE = "org.springframework.stereotype.Service";

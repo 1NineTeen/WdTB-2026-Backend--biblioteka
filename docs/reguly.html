@@ -24,8 +24,8 @@ więc ten sam zestaw ocenia wszystkie zespoły.</p>
 <h2>Jak to działa</h2>
 <ul>
 <li>Każda klasa reguł ma <code>@SinceLab(n)</code> i jest aktywna, gdy <code>lab &gt;= n</code>.</li>
-<li>Lokalnie numer labu bierze się z <code>&lt;lab&gt;</code> w <code>pom.xml</code>. Możecie zajrzeć w przyszłość: <code>mvn verify -Dlab=3</code>.</li>
-<li>Na GitHubie numer labu bierze się z tagu: <code>lab-2</code> uruchamia reguły LAB 02. Reguły są pobierane z repozytorium
+<li>Lokalnie numer laboratorium bierze się z <code>&lt;lab&gt;</code> w <code>pom.xml</code>. Możecie zajrzeć w przyszłość: w IntelliJ dwa razy <kbd>Ctrl</kbd> (<em>Run Anything</em>) i <code>mvn verify -Dlab=3</code>.</li>
+<li>Na GitHubie numer laboratorium bierze się z tagu: <code>lab-2</code> uruchamia reguły LAB 02. Reguły są pobierane z repozytorium
   szablonu przed każdym przebiegiem. <strong>Modyfikowanie reguł lokalnie nic nie daje.</strong> Jeśli uważacie, że reguła jest błędna,
   zgłoście to prowadzącemu. Trafne zgłoszenie to bonus.</li>
 <li>Reguły są <strong>bramką</strong>, nie oceną. Zielony pipeline oznacza „można oceniać”, a nie „5.0”.</li>
@@ -34,7 +34,7 @@ więc ten sam zestaw ocenia wszystkie zespoły.</p>
 <div class="tbl"><table>
 <thead>
 <tr>
-<th>Lab</th>
+<th>LAB</th>
 <th>Narzędzie</th>
 <th>Co sprawdza</th>
 </tr>
@@ -53,7 +53,7 @@ więc ten sam zestaw ocenia wszystkie zespoły.</p>
 <tr>
 <td>03</td>
 <td>+ <strong>ArchUnit</strong></td>
-<td>od tego labu także kod: encje, repozytoria, zapytania</td>
+<td>od tego laboratorium także kod: encje, repozytoria, zapytania</td>
 </tr>
 <tr>
 <td>04–06</td>
@@ -273,7 +273,7 @@ R5.07 ≥8 endpointów, w tym POST, PUT/PATCH, DELETE · R5.08 OpenAPI (springdo
 <h2>LAB 06 · Rozbudowa</h2>
 <p>R6.01 rekord <code>@ConfigurationProperties</code> · R6.02 zdarzenie <code>*Event</code> w <code>api</code> + listener · R6.03 <code>@Scheduled</code> ·
 R6.04 klienci HTTP tylko w <code>infrastructure</code></p>
-<p>Podgląd wszystkich reguł: <code>mvn verify -Dlab=6</code>.</p>
+<p>Podgląd wszystkich reguł: w IntelliJ dwa razy <kbd>Ctrl</kbd> (<em>Run Anything</em>) i <code>mvn verify -Dlab=6</code>.</p>
 </article></main>
 <footer>
   <span>Wprowadzenie do technologii backendowych · laboratoria</span>

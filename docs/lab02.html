@@ -57,7 +57,7 @@ enumów i typów liczbowych, czytania SQL generowanego przez Hibernate, wstawian
 <hr />
 <h2>A · Od szkicu do planu pracy (10 min)</h2>
 <ol>
-<li>W <code>pom.xml</code> ustawcie <code>&lt;lab&gt;2&lt;/lab&gt;</code> i uruchomcie <code>mvn verify</code>. Czerwone reguły R2.* to plan na dziś.</li>
+<li>W <code>pom.xml</code> ustawcie <code>&lt;lab&gt;2&lt;/lab&gt;</code> i uruchomcie <em>verify</em> (IntelliJ: panel <em>Maven</em> → <em>Lifecycle</em> → <em>verify</em>). Czerwone reguły R2.* to plan na dziś.</li>
 <li>Przejrzyjcie diagram ER z LAB 01 i uwagi z prezentacji. Poprawki zróbcie teraz, zanim powstanie kod.</li>
 <li>Każda encja = jedno issue przypisane do jednej osoby. Każda osoba robi co najmniej jedną encję.</li>
 </ol>
@@ -203,7 +203,7 @@ insert into booking (customer_id, offer_id, price, status) values (1, 1, 25.00, 
 </ul>
 <h2>D · Konsola H2 (15 min)</h2>
 <ol>
-<li>Uruchomcie aplikację i w logach znajdźcie <code>create table …</code> wygenerowane przez Hibernate.</li>
+<li>Uruchomcie aplikację w IntelliJ (<em>Run</em> na <code>ProjektApplication</code>) i w logach znajdźcie <code>create table …</code> wygenerowane przez Hibernate.</li>
 <li>W http://localhost:8080/h2-console sprawdźcie i zapiszcie w opisie Pull Requesta:
    - jak wygląda tabela łącząca N:M i jaki ma klucz główny,
    - po której stronie relacji 1:1 jest klucz obcy i skąd wziął się na nim <code>UNIQUE</code>,

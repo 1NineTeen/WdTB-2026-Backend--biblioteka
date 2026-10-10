@@ -79,13 +79,16 @@ w przeglądarce.</p>
    Jeśli nie macie jeszcze pomysłu, zmieńcie nazwę po części D.</li>
 <li><strong>Włączenie sprawdzania.</strong> Zakładka <strong>Actions</strong> → <em>I understand my workflows, go ahead and enable them</em>.
    W forkach GitHub Actions jest domyślnie wyłączony; bez tego reguły nie będą się uruchamiać.</li>
-<li><strong>Zespół i prowadzący.</strong> <em>Settings → Collaborators → Add people</em>: dodajcie pozostałe osoby z zespołu oraz <code>wkoszela</code>.
-   Zaproszone osoby akceptują zaproszenie (e-mail albo https://github.com/notifications).</li>
-<li><strong>Arkusz zespołów.</strong> W zakładce swojej grupy: numer zespołu, <strong>nazwa projektu</strong> (ta sama co po
-   <code>WdTB-2026-Backend-</code>), link do repozytorium <code>https://github.com/&lt;login&gt;/WdTB-2026-Backend-&lt;nazwaprojektu&gt;</code>
+<li><strong>Zespół.</strong> <em>Settings → Collaborators → Add people</em>: dodajcie pozostałe osoby z zespołu, żeby mogły wysyłać zmiany.
+   Zaproszone osoby akceptują zaproszenie (e-mail albo https://github.com/notifications). Prowadzącego nie dodajecie:
+   repozytorium jest publiczne, wystarczy link w arkuszu.</li>
+<li><strong>Arkusz zespołów.</strong> Jedna osoba wpisuje cały zespół w zakładce swojej grupy: numer zespołu, <strong>nazwa projektu</strong> (ta sama co po
+   <code>WdTB-2026-Backend-</code>), link do repozytorium <code>https://github.com/&lt;login&gt;/WdTB-2026-Backend-&lt;nazwaprojektu&gt;</code>,
+   <strong>krótki opis projektu</strong> (1–2 zdania: jaki problem rozwiązujecie i dla kogo; szczegóły trafiają do <code>PROJEKT.md</code>)
    oraz dane każdej osoby (imię i nazwisko, numer indeksu, e-mail). Osoba hostująca zaznacza „tak” w kolumnie <em>Host</em>.</li>
-<li><strong>Klon.</strong> Każda osoba: <code>git clone https://github.com/&lt;login&gt;/WdTB-2026-Backend-&lt;nazwaprojektu&gt;.git</code> i otwiera
-   projekt w IntelliJ IDEA jako projekt Maven (JDK 21 lub nowsze: <em>File → Project Structure → SDK → Download JDK</em>).</li>
+<li><strong>Klon.</strong> Każda osoba w IntelliJ IDEA: <em>File → New → Project from Version Control</em> (na ekranie powitalnym: <em>Clone Repository</em>),
+   URL <code>https://github.com/&lt;login&gt;/WdTB-2026-Backend-&lt;nazwaprojektu&gt;.git</code> → <em>Clone</em> → <em>Trust Project</em>.
+   IntelliJ rozpozna projekt Maven i pobierze zależności. Brak JDK 21 lub nowszego: <em>File → Project Structure → SDK → Download JDK</em>.</li>
 </ol>
 <blockquote>
 <p>⚠️ <strong>Pull Requesty w forku.</strong> Przy tworzeniu Pull Requesta GitHub domyślnie proponuje repozytorium prowadzącego
@@ -135,13 +138,14 @@ w przeglądarce.</p>
 </tr>
 <tr>
 <td><code>src/test/java/pl/wsb/rules</code></td>
-<td>reguły projektu, czyli automatyczne testy sprawdzające wymagania labów</td>
+<td>reguły projektu, czyli automatyczne testy sprawdzające wymagania laboratoriów</td>
 </tr>
 </tbody>
 </table></div>
 <h3>C2. Uruchomcie aplikację</h3>
 <ol>
-<li><em>Run</em> na klasie <code>ProjektApplication</code> (albo <code>mvn spring-boot:run</code>). Obserwujcie logi: zobaczycie <code>create table user_account</code>
+<li>W IntelliJ otwórzcie klasę <code>ProjektApplication</code> i kliknijcie zieloną strzałkę obok metody <code>main</code> → <em>Run 'ProjektApplication'</em>.
+   Kolejne uruchomienia: przycisk <em>Run</em> na górnym pasku. Obserwujcie logi w oknie <em>Run</em>: zobaczycie <code>create table user_account</code>
    wygenerowane przez Hibernate i na końcu <code>Started ProjektApplication in … seconds</code>.</li>
 <li>Otwórzcie <strong>http://localhost:8080</strong>. Strona startowa potwierdza, że backend działa.</li>
 <li>Otwórzcie <strong>http://localhost:8080/h2-console</strong>. JDBC URL: <code>jdbc:h2:file:./data/wdtb</code>, użytkownik <code>sa</code>, hasło puste.</li>
@@ -247,7 +251,7 @@ erDiagram
 <ol>
 <li>Zmiany wysyłacie przez Pull Requesty (każda osoba co najmniej jeden: konto w <code>data.sql</code>, nazwa projektu, opis).
    Recenzję robi inna osoba z zespołu.</li>
-<li>Lokalnie: <code>mvn verify</code>. Na GitHubie w zakładce <em>Actions</em> przebieg „Testy i reguły” na <code>main</code> powinien być zielony:
+<li>Lokalnie w IntelliJ: panel <em>Maven</em> → <em>Lifecycle</em> → dwuklik na <em>verify</em>. Na GitHubie w zakładce <em>Actions</em> przebieg „Testy i reguły” na <code>main</code> powinien być zielony:
    reguły <strong>R1.01–R1.06</strong>. W <em>Summary</em> przebiegu widać, które reguły jeszcze nie przechodzą.</li>
 <li>Przed końcem zajęć jedna osoba taguje <code>lab-1</code>: <code>git tag lab-1 &amp;&amp; git push origin lab-1</code>
    (albo <em>Releases → Draft a new release → Choose a tag: lab-1</em>).</li>

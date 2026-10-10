@@ -49,6 +49,7 @@ nav.jump a:hover { border-color: var(--blue); color: var(--blue); }
 .eyebrow { font: 600 12px/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--blue); }
 .hero h1 { font-size: clamp(34px, 5.6vw, 58px); font-weight: 800; line-height: 1.04; letter-spacing: -.02em; max-width: 18ch; }
 .lead { font-size: 18.5px; color: var(--muted); max-width: 64ch; }
+.lead code { white-space: nowrap; }
 .facts { display: flex; flex-wrap: wrap; gap: 8px; }
 .fact { display: inline-flex; gap: 8px; align-items: baseline; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-size: 14px; color: var(--ink); }
 .fact b { font: 400 11.5px/1 var(--font-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }

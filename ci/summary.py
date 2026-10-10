@@ -21,7 +21,7 @@ if not suites:
     print("Brak raportów testów (kompilacja się nie powiodła?). Sprawdź log kroku „Testy i reguły”.")
     raise SystemExit(0)
 
-print("| Zestaw | Wynik | Przeszło | Nie przeszło | Pominięte (kolejne laby) |")
+print("| Zestaw | Wynik | Przeszło | Nie przeszło | Pominięte (kolejne laboratoria) |")
 print("|---|---|---|---|---|")
 for name, total, failed, skipped in suites:
     if total == len(skipped):
