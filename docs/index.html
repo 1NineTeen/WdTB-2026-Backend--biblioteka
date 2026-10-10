@@ -14,7 +14,7 @@
 <div class="wrap">
   <div class="top">
     <span class="logo"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></span>
-    <nav class="jump" aria-label="Dokumentacja"><a href="index.html" aria-current="page">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+    <nav class="jump" aria-label="Dokumentacja"><a href="index.html" aria-current="page">Start</a><a href="lab01.html">LAB 01</a><span class="disabled" aria-disabled="true" title="Instrukcja pojawi się przed zajęciami">LAB 02</span><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
   </div>
 
   <header class="hero">
@@ -195,25 +195,24 @@
     <div class="sec-head">
       <span class="sec-num">3. HARMONOGRAM</span>
       <h2>Siedem zajęć z każdą grupą</h2>
-      <p>Każda z siedmiu grup przechodzi ten sam program. Instrukcje LAB 01–02 są w sekcji <a href="#instrukcje">Instrukcje</a> i w repozytorium (katalog <code>docs/</code>); kolejne pojawią się przed zajęciami.</p>
+      <p>Każda z siedmiu grup przechodzi ten sam program. Instrukcja LAB 01 jest w sekcji <a href="#instrukcje">Instrukcje</a> i w repozytorium (katalog <code>docs/</code>); kolejne pojawią się przed zajęciami.</p>
     </div>
     <div class="road">
       <article class="stop ready">
         <div class="badge">01</div>
         <div class="stop-body">
           <div class="stop-title"><h3>Start</h3><span class="tagp">bez oceny</span><span class="tagp ready">instrukcja</span></div>
-          <p>Powitanie, podział na zespoły i wpis w arkuszu grupy. Wymyślacie własny projekt, potem zakładacie fork przemianowany na WdTB-2026-Backend-&lt;nazwa&gt;, uruchamiacie aplikację w IntelliJ i opisujecie pomysł: karta projektu i wizytówka na stronie startowej. Na koniec prezentacja.</p>
-          <div class="tags"><span class="tag">GitHub</span><span class="tag">IntelliJ</span><span class="tag">H2</span><span class="tag">PROJEKT.md</span></div>
+          <p>Powitanie, zespoły i fork szablonu. Zespół siada razem: uruchamia aplikację w IntelliJ, opracowuje pomysł i wpisuje go do projektu (nazwa, konta, wizytówka). Wizytówkę zespół prezentuje na początku LAB 02.</p>
+          <div class="tags"><span class="tag">GitHub</span><span class="tag">IntelliJ</span><span class="tag">H2</span><span class="tag">wizytówka</span></div>
           <a class="go" href="lab01.html">Otwórz instrukcję LAB 01 →</a>
         </div>
       </article>
-      <article class="stop ready">
+      <article class="stop">
         <div class="badge">02</div>
         <div class="stop-body">
-          <div class="stop-title"><h3>Encje i relacje</h3><span class="tagp ready">instrukcja</span></div>
+          <div class="stop-title"><h3>Encje i relacje</h3></div>
           <p>Pomysł zamieniamy w model JPA: 4–6 tabel, relacje 1:N, N:M i 1:1, enumy, kwoty w BigDecimal, dane startowe w data.sql.</p>
           <div class="tags"><span class="tag">@Entity</span><span class="tag">@ManyToOne</span><span class="tag">@OneToMany</span><span class="tag">@ManyToMany</span><span class="tag">@OneToOne</span></div>
-          <a class="go" href="lab02.html">Otwórz instrukcję LAB 02 →</a>
         </div>
       </article>
       <article class="stop">
@@ -261,27 +260,9 @@
   <section id="wymagania">
     <div class="sec-head">
       <span class="sec-num">4. WYMAGANIA</span>
-      <h2>Ile czego w projekcie</h2>
-      <p>Minimum sprawdzają automatyczne reguły w pipeline. Zalecane to docelowy rozmiar projektu.</p>
-    </div>
-    <div class="table-wrap">
-      <table class="req">
-        <thead><tr><th>Element</th><th>Minimum</th><th>Zalecane</th><th>LAB</th></tr></thead>
-        <tbody>
-          <tr><td>Moduły biznesowe</td><td>2</td><td>2–3</td><td>02</td></tr>
-          <tr><td>Własne tabele (poza <code>user_account</code>)</td><td>4</td><td><b>5–6</b> (max 8)</td><td>02</td></tr>
-          <tr><td>Relacje 1:N</td><td>–</td><td>≥2, jedna dwukierunkowa</td><td>02</td></tr>
-          <tr><td>Relacja N:M</td><td>1</td><td>encja łącząca z atrybutami</td><td>02</td></tr>
-          <tr><td>Relacja 1:1</td><td>1</td><td>np. konto ↔ profil</td><td>02</td></tr>
-          <tr><td>Enum jako tekst / kwoty w BigDecimal</td><td>1 / tak</td><td>2 / tak</td><td>02</td></tr>
-          <tr><td>Dane startowe w <code>data.sql</code></td><td>2 tabele × 3 wiersze</td><td>5–10 wierszy w głównych tabelach</td><td>02</td></tr>
-          <tr><td>Zapytania pochodne / <code>@Query</code></td><td>3 / 2 (w tym GROUP BY)</td><td>4–6 / 3–5</td><td>03</td></tr>
-          <tr><td>Pytania inwestora</td><td>5</td><td>5, każde z testem</td><td>03</td></tr>
-          <tr><td>Serwisy</td><td>1 na moduł</td><td>2–4, ≥3 reguły biznesowe</td><td>04</td></tr>
-          <tr><td>Endpointy REST</td><td>8 (POST, PUT/PATCH, DELETE)</td><td><b>10–15</b>, 2 zasoby z CRUD</td><td>05</td></tr>
-          <tr><td>Testy zespołu</td><td>repozytorium, serwis, kontroler</td><td>25+</td><td>03–05</td></tr>
-        </tbody>
-      </table>
+      <h2>Wymagania projektu</h2>
+      <p>Wymagania podajemy osobno dla każdego laboratorium; kolejne pojawią się przed danymi zajęciami.
+         Aktualne: <a href="wymagania.html">Wymagania</a>.</p>
     </div>
   </section>
 
@@ -291,7 +272,7 @@
       <h2>Instrukcje do laboratoriów</h2>
       <p>Ta sama dokumentacja jest w repozytorium szablonu: otwórzcie <code>docs/index.html</code>. Wybierzcie zakładkę.</p>
     </div>
-    <div class="doc-links"><a class="doc-link" href="lab01.html"><b>LAB 01 · Start</b></a><a class="doc-link" href="lab02.html"><b>LAB 02 · Encje i relacje</b></a><a class="doc-link" href="wymagania.html"><b>Wymagania projektu</b></a><a class="doc-link" href="zasady.html"><b>Zasady zaliczenia</b></a><a class="doc-link" href="reguly.html"><b>Reguły projektu</b></a><a class="doc-link" href="pomysl.html"><b>Pomysł na projekt</b></a><a class="doc-link" href="zespol.html"><b>Praca w zespole</b></a><a class="doc-link" href="roadmapa.html"><b>Roadmapa</b></a></div>
+    <div class="doc-links"><a class="doc-link" href="lab01.html"><b>LAB 01 · Start</b></a><span class="doc-link disabled" aria-disabled="true"><b>LAB 02 · Encje i relacje</b> (wkrótce)</span><a class="doc-link" href="wymagania.html"><b>Wymagania projektu</b></a><a class="doc-link" href="zasady.html"><b>Zasady zaliczenia</b></a><a class="doc-link" href="reguly.html"><b>Reguły projektu</b></a><a class="doc-link" href="pomysl.html"><b>Pomysł na projekt</b></a><a class="doc-link" href="zespol.html"><b>Praca w zespole</b></a><a class="doc-link" href="roadmapa.html"><b>Roadmapa</b></a></div>
   </section>
 
   <section id="organizacja">
@@ -323,7 +304,7 @@
           <li>Zadania robicie w trakcie zajęć, nie w domu</li>
           <li>Kryteria oceny prowadzący podaje na początku zajęć</li>
           <li>Ocena na koniec zajęć, ze stanu tagu <code>lab-N</code></li>
-          <li>Jedna osoba hostuje repozytorium, wszyscy piszą kod i robią recenzje</li>
+          <li>Jedna osoba hostuje repozytorium, wszyscy piszą kod i rozumieją cały projekt</li>
         </ul>
       </div>
     </div>

@@ -14,7 +14,7 @@
 <div class="wrap">
 <div class="top">
   <a class="logo" href="index.html"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></a>
-  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html" aria-current="page">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html" aria-current="page">LAB 01</a><span class="disabled" aria-disabled="true" title="Instrukcja pojawi się przed zajęciami">LAB 02</span><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
 </div>
 <main class="doc"><article class="md">
 <h1>LAB 01 · Start: projekt, aplikacja i opis pomysłu</h1>
@@ -28,15 +28,12 @@ wymagania, zasady zaliczenia). Cała dokumentacja jest w katalogu <code>docs/</c
 w przeglądarce.</p>
 <h2>Plan zajęć</h2>
 <ol class="agenda">
-<li><strong>A · Powitanie</strong></li>
-<li><strong>B · Omówienie przedmiotu:</strong> backend, baza danych, architektura warstwowa, plan 7 zajęć</li>
-<li><strong>C · Podział na zespoły:</strong> wpis do arkusza zespołów (Excel)</li>
-<li><strong>D · Praca twórcza nad projektem:</strong> problem, persona, historyjki, dane</li>
-<li><strong>E · Zrozumienie aplikacji:</strong> repozytorium zespołu, struktura projektu, uruchomienie aplikacji, pierwsze zmiany, opis projektu</li>
-<li><strong>F · Prezentacja</strong> wizytówki na http://localhost:8080: autorzy, pomysł i zmiany</li>
+<li><strong>A · Powitanie i omówienie przedmiotu</strong></li>
+<li><strong>B · Zespół i repozytorium:</strong> arkusz zespołów, fork szablonu</li>
+<li><strong>C · Praca zespołu:</strong> zespół siada razem, uruchamia aplikację, opracowuje pomysł i wypełnia wymagane pliki</li>
 </ol>
 <hr />
-<h2>A · Powitanie</h2>
+<h2>A · Powitanie i omówienie przedmiotu</h2>
 <p>Poznajemy się. Prowadzący przedstawia przedmiot i sposób pracy:</p>
 <ul>
 <li><strong>7 laboratoriów:</strong> LAB 01 nie jest oceniany, LAB 07 służy do odrabiania zaległości,</li>
@@ -44,8 +41,7 @@ w przeglądarce.</p>
 <li>wymagania każdego laboratorium sprawdzają automatyczne reguły na GitHubie,</li>
 <li>zasady zaliczenia i obecności: <a href="zasady.html">Zasady</a>.</li>
 </ul>
-<h2>B · Omówienie przedmiotu</h2>
-<p>Otwórzcie <a href="index.html">stronę główną dokumentacji</a>. Przejdźcie razem z prowadzącym przez sekcje 1–2:</p>
+<p>Następnie przechodzimy razem przez sekcje 1–2 <a href="index.html">strony głównej dokumentacji</a>:</p>
 <ul>
 <li><strong>Backend</strong> to serwer, z którym rozmawia aplikacja webowa i mobilna. Przyjmuje żądanie HTTP, sprawdza reguły,
   czyta i zapisuje dane w bazie, odsyła JSON.</li>
@@ -53,77 +49,41 @@ w przeglądarce.</p>
 <li><strong>Architektura warstwowa:</strong> Controller → Service → Repository → baza. Każdą warstwę zbudujecie na innych zajęciach.</li>
 </ul>
 <p>Plan wszystkich zajęć: <a href="roadmapa.html">Roadmapa</a>.</p>
-<h2>C · Podział na zespoły</h2>
-<p>Zespół to <strong>3 osoby</strong>. Utwórzcie zespoły i wpiszcie je do <strong>arkusza zespołów</strong> (plik Excel, link podaje prowadzący):</p>
-<ol>
-<li>Otwórzcie zakładkę swojej grupy (Grupa 1 … Grupa 7).</li>
-<li>Jedna osoba wybiera wolny numer zespołu i wpisuje cały zespół: imię i nazwisko, numer indeksu i e-mail uczelniany każdej osoby.</li>
-<li>Nazwę projektu, link do repozytorium i krótki opis uzupełnicie w części E, gdy będziecie mieli pomysł i repozytorium.</li>
-</ol>
-<h2>D · Praca twórcza nad projektem</h2>
-<p>Każdy zespół buduje backend <strong>własnej koncepcji biznesowej</strong>. Warunki, które musi spełnić: <a href="pomysl.html">Koncepcja projektu</a>,
-skala projektu: <a href="wymagania.html">Wymagania</a>.</p>
-<h3>D1. Pomysł na biznes</h3>
-<p>Zespół opracowuje koncepcję przedsięwzięcia, którego podstawą jest aplikacja webowa lub mobilna z własnym backendem.
-Punktem wyjścia jest rzeczywista potrzeba rynkowa: proces, który dla określonej grupy klientów jest dziś czasochłonny,
-kosztowny lub niewygodny.</p>
-<ol>
-<li>Każda osoba przedstawia propozycję: jaki problem rozwiązuje aplikacja, kto jest jej klientem i dlaczego obecne
-   rozwiązania są niewystarczające.</li>
-<li>Zespół wybiera jedną koncepcję, która:
-   <ul>
-   <li>ma określoną grupę odbiorców i model przychodu (prowizja, abonament, reklama, sprzedaż usług),</li>
-   <li>opiera się na przechowywaniu i przetwarzaniu danych, czyli wymaga backendu z bazą danych,</li>
-   <li>da się zamodelować w 4–6 tabelach.</li>
-   </ul></li>
-</ol>
-<h3>D2. Rozwinięcie pomysłu</h3>
-<p>Odpowiedzcie wspólnie na pytania i zapiszcie odpowiedzi:</p>
-<ol>
-<li><strong>Kto</strong> korzysta z aplikacji? Opiszcie jedną konkretną osobę (persona): kim jest, czego potrzebuje.</li>
-<li><strong>Co</strong> ta osoba robi w aplikacji? Wypiszcie 8 historyjek w formacie „Jako &lt;kto&gt; chcę &lt;co&gt;, aby &lt;po co&gt;”
-   i wybierzcie 5 najważniejszych.</li>
-<li><strong>Jakie dane</strong> są potrzebne? Wypiszcie rzeczowniki z historyjek: to kandydaci na encje. Dopiszcie do każdej
-   kilka pól i zaznaczcie relacje (1:N, N:M, 1:1).</li>
-<li><strong>Co ma status</strong> (np. rezerwacja: nowa, potwierdzona, anulowana) i <strong>co się liczy</strong> (kwota, ilość, czas)?</li>
-<li>Kto z użytkowników ma <strong>konto</strong> w tabeli <code>user_account</code>?</li>
-</ol>
-<p>Przytnijcie model do <strong>4–6 tabel</strong>. Wszystko ponad to zostawcie na później.</p>
-<h3>D3. Nazwa projektu</h3>
-<p>Wybierzcie nazwę: jedno słowo, małe litery, bez polskich znaków (np. <code>deskhop</code>). Ta sama nazwa trafi do repozytorium, pakietu Javy i arkusza. Wyniki zapiszcie na kartce albo w notatce: w części E przeniesiecie je do <code>PROJEKT.md</code>.</p>
-<h2>E · Zrozumienie aplikacji</h2>
-<p>Zespół zakłada własne repozytorium, poznaje strukturę aplikacji i sposób jej działania, a następnie przenosi do niej opracowaną koncepcję.</p>
-<h3>E1. Fork i repozytorium zespołu</h3>
-<p>Jedna osoba z zespołu hostuje repozytorium: forkuje szablon na swoje konto. Pozostałe osoby patrzą i dołączają w kroku 4.</p>
+<h2>B · Zespół i repozytorium</h2>
+<h3>B1. Arkusz zespołów</h3>
+<p>Zespół to <strong>3 osoby</strong>. Utwórzcie zespoły i wpiszcie je do <strong>arkusza zespołów</strong> (plik Excel, link podaje prowadzący):
+jedna osoba otwiera zakładkę swojej grupy, wybiera wolny numer zespołu i wpisuje cały zespół (imię i nazwisko, numer indeksu,
+e-mail uczelniany). Nazwę projektu, link i krótki opis uzupełnicie w części C.</p>
+<h3>B2. Fork szablonu</h3>
+<p>Jedna osoba z zespołu hostuje repozytorium. Pozostałe osoby patrzą i dołączają w kroku 3.</p>
 <ol>
 <li><strong>Fork.</strong> Otwórzcie https://github.com/wkoszela/WdTB-2026-Backend--projectname- i kliknijcie <strong>Fork</strong> → <em>Owner</em>: Wasze konto →
-   <strong>Create fork</strong>.</li>
-<li><strong>Zmiana nazwy.</strong> Fork dostaje nazwę szablonu <code>WdTB-2026-Backend--projectname-</code>. W forku:
-   <em>Settings → General → Repository name</em> → zamieńcie końcówkę <code>-projectname-</code> na nazwę projektu z kroku D3:
-   <code>WdTB-2026-Backend-&lt;nazwaprojektu&gt;</code>, np. <code>WdTB-2026-Backend-deskhop</code> → <strong>Rename</strong>.
-   Nazwa projektu: jedno słowo, małe litery, bez polskich znaków. Ta sama nazwa trafi do pakietu Javy i do arkusza.</li>
+   <strong>Create fork</strong>. Nazwę forka zmienicie w części C, gdy będziecie mieli nazwę projektu.</li>
 <li><strong>Włączenie sprawdzania.</strong> Zakładka <strong>Actions</strong> → <em>I understand my workflows, go ahead and enable them</em>.
    W forkach GitHub Actions jest domyślnie wyłączony; bez tego reguły nie będą się uruchamiać.</li>
 <li><strong>Zespół.</strong> <em>Settings → Collaborators → Add people</em>: dodajcie pozostałe osoby z zespołu, żeby mogły wysyłać zmiany.
    Zaproszone osoby akceptują zaproszenie (e-mail albo https://github.com/notifications). Prowadzącego nie dodajecie:
    repozytorium jest publiczne, wystarczy link w arkuszu.</li>
-<li><strong>Arkusz zespołów.</strong> Przy swoim zespole uzupełnijcie <strong>nazwę projektu</strong> (ta sama co po
-   <code>WdTB-2026-Backend-</code>), link do repozytorium <code>https://github.com/&lt;login&gt;/WdTB-2026-Backend-&lt;nazwaprojektu&gt;</code>
-   i <strong>krótki opis projektu</strong> (1–2 zdania: jaki problem rozwiązujecie i dla kogo; szczegóły trafiają do <code>PROJEKT.md</code>).
-   Osoba hostująca zaznacza „tak” w kolumnie <em>Host</em>.</li>
-<li><strong>Klon.</strong> Na LAB 01 wystarczy osoba, która commituje; pozostałe klonują najpóźniej na LAB 02. W IntelliJ IDEA: <em>File → New → Project from Version Control</em> (na ekranie powitalnym: <em>Clone Repository</em>),
-   URL <code>https://github.com/&lt;login&gt;/WdTB-2026-Backend-&lt;nazwaprojektu&gt;.git</code> → <em>Clone</em> → <em>Trust Project</em>.
-   IntelliJ rozpozna projekt Maven i pobierze zależności. Brak JDK 21 lub nowszego: <em>File → Project Structure → SDK → Download JDK</em>.</li>
+<li><strong>Klon.</strong> Osoba hostująca w IntelliJ IDEA: <em>File → New → Project from Version Control</em> (na ekranie powitalnym: <em>Clone Repository</em>),
+   URL forka → <em>Clone</em> → <em>Trust Project</em>. IntelliJ rozpozna projekt Maven i pobierze zależności.
+   Brak JDK 21 lub nowszego: <em>File → Project Structure → SDK → Download JDK</em>. Pozostałe osoby klonują najpóźniej na LAB 02.</li>
 </ol>
 <blockquote>
-<p>⚠️ <strong>Pull Requesty w forku.</strong> Przy tworzeniu Pull Requesta GitHub domyślnie proponuje repozytorium prowadzącego
-(<code>wkoszela/WdTB-2026-Backend--projectname-</code>). Zmieńcie <strong>base repository</strong> na swoje
-(<code>&lt;login&gt;/WdTB-2026-Backend-&lt;nazwaprojektu&gt;</code>), inaczej zmiany trafią do prowadzącego zamiast do Was.</p>
 <p><strong>Nowe materiały.</strong> Na początku kolejnych zajęć kliknijcie na stronie repozytorium <strong>Sync fork → Update branch</strong>,
 żeby pobrać nowe instrukcje z <code>docs/</code>.</p>
 </blockquote>
-<h3>E2. Poznajcie projekt</h3>
-<p>Przejrzyjcie strukturę, zanim cokolwiek zmienicie:</p>
+<h2>C · Praca zespołu</h2>
+<p>Zespół siada razem przy komputerze osoby hostującej. Poznajecie aplikację, opracowujecie pomysł i od razu wpisujecie go
+do projektu. Na LAB 01 wystarczy, że zmiany zacommituje <strong>jedna osoba z zespołu</strong>.</p>
+<h3>C1. Uruchomienie aplikacji</h3>
+<ol>
+<li>W IntelliJ otwórzcie klasę <code>ProjektApplication</code> i kliknijcie zieloną strzałkę obok metody <code>main</code> → <em>Run 'ProjektApplication'</em>.
+   W oknie <em>Run</em> zobaczycie <code>create table user_account</code> wygenerowane przez Hibernate i na końcu <code>Started ProjektApplication in … seconds</code>.</li>
+<li>Otwórzcie <strong>http://localhost:8080</strong>: strona startowa potwierdza, że backend działa. To ją zamienicie w wizytówkę projektu.</li>
+<li>Otwórzcie <strong>http://localhost:8080/h2-console</strong> (JDBC URL <code>jdbc:h2:file:./data/wdtb</code>, użytkownik <code>sa</code>, hasło puste)
+   i wykonajcie <code>SELECT * FROM user_account;</code>.</li>
+</ol>
+<p>Najważniejsze pliki projektu:</p>
 <div class="tbl"><table>
 <thead>
 <tr>
@@ -157,36 +117,26 @@ kosztowny lub niewygodny.</p>
 <td>strona startowa aplikacji</td>
 </tr>
 <tr>
-<td><code>PROJEKT.md</code></td>
-<td>karta Waszego projektu (uzupełnicie w kroku E5)</td>
-</tr>
-<tr>
 <td><code>src/test/java/pl/wsb/rules</code></td>
 <td>reguły projektu, czyli automatyczne testy sprawdzające wymagania laboratoriów</td>
 </tr>
 </tbody>
 </table></div>
-<h3>E3. Uruchomcie aplikację</h3>
+<h3>C2. Pomysł na projekt</h3>
+<p>Opracujcie koncepcję projektu według strony <a href="pomysl.html">Koncepcja projektu</a> (wstęp, przykład i warunki).</p>
+<h3>C3. Wymagane pliki</h3>
+<p>Wpiszcie pomysł do projektu. Po każdej zmianie zrestartujcie aplikację i sprawdźcie efekt.</p>
 <ol>
-<li>W IntelliJ otwórzcie klasę <code>ProjektApplication</code> i kliknijcie zieloną strzałkę obok metody <code>main</code> → <em>Run 'ProjektApplication'</em>.
-   Kolejne uruchomienia: przycisk <em>Run</em> na górnym pasku. Obserwujcie logi w oknie <em>Run</em>: zobaczycie <code>create table user_account</code>
-   wygenerowane przez Hibernate i na końcu <code>Started ProjektApplication in … seconds</code>.</li>
-<li>Otwórzcie <strong>http://localhost:8080</strong>. Strona startowa potwierdza, że backend działa.</li>
-<li>Otwórzcie <strong>http://localhost:8080/h2-console</strong>. JDBC URL: <code>jdbc:h2:file:./data/wdtb</code>, użytkownik <code>sa</code>, hasło puste.</li>
-<li>Wykonajcie w konsoli:</li>
-</ol>
-<pre><code class="language-sql">SELECT * FROM user_account;
-SELECT role, COUNT(*) FROM user_account GROUP BY role;
-</code></pre>
-<h3>E4. Pierwsze zmiany</h3>
-<p>Na LAB 01 wystarczy, że zmiany zacommituje <strong>jedna osoba z zespołu</strong>. Pracujcie razem przy jej komputerze.</p>
-<ol>
-<li><strong>Konta zespołu (reguła R1.04):</strong> dopiszcie konta wszystkich osób z zespołu do <code>src/main/resources/data.sql</code>
-   (wzór jest w komentarzu na końcu pliku). Restart aplikacji → sprawdźcie, że wszyscy jesteście w tabeli <code>user_account</code>.</li>
-<li><strong>Port:</strong> zmieńcie tymczasowo port aplikacji na <code>8091</code> (<code>server.port=8091</code> w <code>application.properties</code>),
-   uruchomcie i sprawdźcie, że strona działa pod nowym adresem. Potem przywróćcie 8080.</li>
-<li><strong>Nazwa projektu w kodzie (R1.01, osoba hostująca repozytorium).</strong> Zmieniacie ją dopiero teraz, gdy macie nazwę z kroku D3.
-   Ta sama nazwa co w repozytorium i w arkuszu:</li>
+<li><strong>Nazwa projektu (R1.01):</strong> jedno słowo, małe litery, bez polskich znaków (np. <code>deskhop</code>). Fork: <em>Settings → General → Repository name</em> → <code>WdTB-2026-Backend-&lt;nazwaprojektu&gt;</code> → <strong>Rename</strong>.
+   W kodzie: pakiet <code>pl.wsb.projekt</code> → <code>pl.wsb.&lt;nazwaprojektu&gt;</code> i klasa <code>ProjektApplication</code> → <code>&lt;NazwaProjektu&gt;Application</code>
+   (IntelliJ: <em>Refactor → Rename</em>), w <code>pom.xml</code> <code>&lt;artifactId&gt;wdtb-2026-backend-&lt;nazwaprojektu&gt;&lt;/artifactId&gt;</code>.</li>
+<li><strong>Wersja (R1.05):</strong> w <code>pom.xml</code> <code>&lt;version&gt;1.0.0-&lt;nrindeksu1&gt;-&lt;nrindeksu2&gt;-&lt;nrindeksu3&gt;&lt;/version&gt;</code>.</li>
+<li><strong>Konta zespołu (R1.03):</strong> w <code>src/main/resources/data.sql</code> konta wszystkich osób z zespołu (wzór w komentarzu na końcu pliku).
+   Po restarcie sprawdźcie w konsoli H2, że jesteście w tabeli <code>user_account</code>.</li>
+<li><strong>Wizytówka (R1.04):</strong> w <code>src/main/resources/static/index.html</code> zastąpcie wszystkie <code>[uzupełnij]</code>:
+   nazwa, jedno zdanie o problemie, autorzy, persona, 3 najważniejsze funkcje i zmiany wprowadzone na LAB 01.</li>
+<li><strong>Arkusz zespołów:</strong> przy swoim zespole nazwa projektu, link do repozytorium i krótki opis (1–2 zdania).
+   Osoba hostująca zaznacza „tak” w kolumnie <em>Host</em>.</li>
 </ol>
 <div class="tbl"><table>
 <thead>
@@ -198,7 +148,7 @@ SELECT role, COUNT(*) FROM user_account GROUP BY role;
 </thead>
 <tbody>
 <tr>
-<td>repozytorium (fork, po zmianie nazwy)</td>
+<td>repozytorium (fork)</td>
 <td><code>WdTB-2026-Backend-&lt;nazwaprojektu&gt;</code></td>
 <td><code>WdTB-2026-Backend-deskhop</code></td>
 </tr>
@@ -228,52 +178,19 @@ SELECT role, COUNT(*) FROM user_account GROUP BY role;
 <li>pakiet <code>pl.wsb.projekt</code> → <code>pl.wsb.&lt;nazwaprojektu&gt;</code> (IntelliJ: <em>Refactor → Rename</em> na pakiecie),</li>
 <li><code>ProjektApplication</code> → <code>&lt;NazwaProjektu&gt;Application</code>,</li>
 <li>w <code>pom.xml</code> dopiszcie nazwę do <code>&lt;artifactId&gt;wdtb-2026-backend&lt;/artifactId&gt;</code>,</li>
-<li>w <code>pom.xml</code> ustawcie <strong>wersję</strong> z numerami indeksów osób z zespołu (R1.06):
+<li>w <code>pom.xml</code> ustawcie <strong>wersję</strong> z numerami indeksów osób z zespołu (R1.05):
      <code>&lt;version&gt;1.0.0-&lt;nrindeksu1&gt;-&lt;nrindeksu2&gt;-&lt;nrindeksu3&gt;&lt;/version&gt;</code>, np. <code>1.0.0-123456-123457-123458</code>.</li>
 </ul>
-<p>Nazwa projektu: jedno słowo, małe litery, bez polskich znaków.</p>
 <blockquote>
 <p>Hibernate tworzy tabele od nowa przy każdym starcie (<code>ddl-auto=create-drop</code>), a potem wczytuje <code>data.sql</code>.
 Dlatego dane dopisane ręcznie w konsoli H2 znikają po restarcie, a dane z <code>data.sql</code> zostają.</p>
 </blockquote>
-<h3>E5. Opis projektu</h3>
-<ol>
-<li><strong><code>PROJEKT.md</code> (R1.02):</strong> przenieście tu wyniki części D: zespół (wiersze <code>| @login-github</code>), problem, persona, model przychodu,
-   <strong>5 historyjek</strong> (<code>N. Jako &lt;kto&gt; chcę &lt;co&gt;, aby &lt;po co&gt;.</code>), moduły i <strong>wstępny diagram ER</strong>:</li>
-</ol>
-<pre><code class="language-markdown">```mermaid
-erDiagram
-    USER_ACCOUNT ||--o| CUSTOMER : &quot;ma profil&quot;
-    CUSTOMER ||--o{ BOOKING : &quot;składa&quot;
-    OFFER ||--o{ BOOKING : &quot;dotyczy&quot;
-    OFFER }o--o{ CATEGORY : &quot;należy do&quot;
-```
-</code></pre>
-<ol start="2">
-<li><strong>Strona startowa (R1.05):</strong> w <code>src/main/resources/static/index.html</code> uzupełnijcie wizytówkę projektu
-   (zastąpcie wszystkie <code>[uzupełnij]</code>): nazwa, jedno zdanie o problemie, autorzy, persona, 3 najważniejsze funkcje
-   i zmiany wprowadzone na LAB 01. Restart aplikacji → wizytówka jest pod http://localhost:8080.
-   Na jej podstawie prezentujecie projekt w części F.</li>
-</ol>
-<p>W dzienniku decyzji <code>PROJEKT.md</code> zapiszcie jedną rzecz, z której zrezygnowaliście, i dlaczego.</p>
-<h3>E6. Pull Requesty i reguły</h3>
-<ol>
-<li>Na LAB 01 wystarczy, że <strong>jedna osoba z zespołu</strong> zacommituje i wypchnie zmiany (<em>Git → Commit</em>, potem <em>Push</em>).
-   Od LAB 02 każda osoba wysyła własne Pull Requesty, a recenzję robi inna osoba z zespołu.</li>
-<li>Lokalnie w IntelliJ: panel <em>Maven</em> → <em>Lifecycle</em> → dwuklik na <em>verify</em>. Na GitHubie w zakładce <em>Actions</em> przebieg „Testy i reguły” na <code>main</code> sprawdza
-   reguły <strong>R1.01–R1.06</strong>. Celem jest zielony przebieg, ale na LAB 01 czerwone reguły nie mają konsekwencji:
-   pokazują, co jeszcze zostało do zrobienia. W <em>Summary</em> przebiegu widać, które reguły jeszcze nie przechodzą.</li>
-<li>Przed końcem zajęć jedna osoba taguje <code>lab-1</code>: <code>git tag lab-1 &amp;&amp; git push origin lab-1</code>
-   (albo <em>Releases → Draft a new release → Choose a tag: lab-1</em>).</li>
-</ol>
-<h2>F · Prezentacja</h2>
-<p>Na koniec zajęć każdy zespół prezentuje swoją <strong>wizytówkę</strong>, czyli stronę startową aplikacji
-na <strong>http://localhost:8080</strong> (krok E5):</p>
-<ol>
-<li><strong>Autorzy:</strong> kto tworzy projekt.</li>
-<li><strong>Pomysł:</strong> problem, klient (persona) i najważniejsze funkcje.</li>
-<li><strong>Zmiany:</strong> co zespół zmienił w projekcie na tych zajęciach.</li>
-</ol>
+<h3>C4. Wysłanie zmian</h3>
+<p>W IntelliJ: <em>Git → Commit</em>, potem <em>Push</em>.</p>
+<blockquote>
+<p><strong>Prezentacja na początku LAB 02.</strong> Kolejne zajęcia zaczynamy od prezentacji wizytówek, czyli stron startowych
+aplikacji na <strong>http://localhost:8080</strong>: autorzy, pomysł (problem, klient, najważniejsze funkcje) i zmiany wprowadzone na LAB 01.</p>
+</blockquote>
 <h3>Reguły LAB 01</h3>
 <div class="tbl"><table>
 <thead>
@@ -289,22 +206,18 @@ na <strong>http://localhost:8080</strong> (krok E5):</p>
 </tr>
 <tr>
 <td>R1.02</td>
-<td><code>PROJEKT.md</code>: zespół, ≥5 historyjek, diagram ER, zero <code>&lt;uzupełnij&gt;</code></td>
-</tr>
-<tr>
-<td>R1.03</td>
 <td>aplikacja startuje</td>
 </tr>
 <tr>
-<td>R1.04</td>
+<td>R1.03</td>
 <td>w <code>user_account</code> są co najmniej 3 konta poza kontami demo</td>
 </tr>
 <tr>
-<td>R1.05</td>
+<td>R1.04</td>
 <td>strona startowa nie zawiera już <code>[uzupełnij]</code></td>
 </tr>
 <tr>
-<td>R1.06</td>
+<td>R1.05</td>
 <td>wersja w <code>pom.xml</code>: <code>1.0.0-&lt;nr indeksu&gt;-&lt;nr indeksu&gt;[-&lt;nr indeksu&gt;]</code></td>
 </tr>
 </tbody>

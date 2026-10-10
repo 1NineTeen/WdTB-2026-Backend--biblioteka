@@ -14,13 +14,13 @@
 <div class="wrap">
 <div class="top">
   <a class="logo" href="index.html"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></a>
-  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html" aria-current="page">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><span class="disabled" aria-disabled="true" title="Instrukcja pojawi się przed zajęciami">LAB 02</span><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html" aria-current="page">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
 </div>
 <main class="doc"><article class="md">
 <h1>Roadmapa laboratoriów</h1>
 <p>Każde laboratorium dokłada jedną warstwę backendu, a reguły projektu rosną razem z kodem.
 Laboratoria 01–02 są rozpisane szczegółowo. Pozostałe opisują zakres i wymagania; instrukcje pojawią się przed zajęciami.
-Liczby (ile tabel, zapytań, endpointów): <a href="wymagania.html">WYMAGANIA.md</a>. Zaliczenie, obecności i kryteria ocen: <a href="zasady.html">ZASADY.md</a>.
+Wymagania laboratoriów: <a href="wymagania.html">Wymagania</a>. Zaliczenie i obecności: <a href="zasady.html">Zasady</a>.
 Pracujemy na zajęciach; kryteria oceny prowadzący podaje zawsze na początku zajęć.</p>
 <pre><code>LAB 01        LAB 02          LAB 03            LAB 04           LAB 05           LAB 06          LAB 07
 Start     →   Encje i     →   Repozytoria   →   Serwisy i    →   Kontrolery   →   Rozbudowa   →   Odrabianie
@@ -32,15 +32,14 @@ opis pomysłu  JPA, data.sql   Spring Data       DI, transakcje   DTO, walidacja
 <p>→ <a href="lab01.html">instrukcja LAB 01</a></p>
 <ul>
 <li>powitanie i omówienie przedmiotu: backend, baza danych, architektura warstwowa (<a href="index.html">strona główna</a>)</li>
-<li>podział na zespoły 3-osobowe: wpis do arkusza grupy (Excel)</li>
-<li><strong>praca twórcza nad projektem:</strong> problem, persona, historyjki, wstępny model danych, nazwa projektu</li>
-<li><strong>zrozumienie aplikacji:</strong> fork przemianowany na <code>WdTB-2026-Backend-&lt;nazwaprojektu&gt;</code>, uruchomienie w IntelliJ, konsola H2, pierwsze zmiany, <code>PROJEKT.md</code> i wizytówka na stronie startowej</li>
-<li><strong>prezentacja</strong> wizytówki na stronie startowej aplikacji: autorzy, pomysł i zmiany</li>
-<li><strong>Reguły:</strong> R1.01–R1.06</li>
+<li><strong>zespół i repozytorium:</strong> wpis do arkusza grupy (Excel), fork szablonu</li>
+<li><strong>praca zespołu:</strong> uruchomienie aplikacji w IntelliJ, pomysł na projekt, nazwa projektu w repozytorium i kodzie, konta w <code>data.sql</code>, wizytówka na stronie startowej</li>
+<li><strong>Reguły:</strong> R1.01–R1.05</li>
 </ul>
 <h2>LAB 02 · Encje i relacje</h2>
-<p>→ <a href="lab02.html">instrukcja LAB 02</a></p>
+<p>Instrukcja pojawi się przed zajęciami.</p>
 <ul>
+<li><strong>na początek: prezentacja wizytówek</strong> z LAB 01 (autorzy, pomysł, zmiany)</li>
 <li>encje JPA: <code>@Entity</code>, <code>@Table</code>, <code>@Id</code>, <code>@GeneratedValue</code>, <code>@Column</code>, <code>@Enumerated</code></li>
 <li>relacje: <code>@ManyToOne</code>, <code>@OneToMany(mappedBy)</code>, <code>@ManyToMany</code> / encja łącząca, <code>@OneToOne</code>, powiązanie z <code>user_account</code></li>
 <li>typy: <code>BigDecimal</code> dla kwot, enumy jako tekst, daty</li>

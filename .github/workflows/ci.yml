@@ -4,7 +4,7 @@
 #   - tag lab-N (np. lab-2, lab-3-poprawa)  → reguły LAB N,
 #   - ręczne uruchomienie (Actions → Run workflow) → numer podany w formularzu,
 #   - pozostałe przypadki (push, pull request) → <lab> z pom.xml,
-#     a w samym repozytorium szablonu tylko R1.03 (aplikacja startuje).
+#     a w samym repozytorium szablonu tylko R1.02 (aplikacja startuje).
 # Reguły są zawsze pobierane z repozytorium szablonu, więc lokalne zmiany w src/test/java/pl/wsb/rules
 # nie wpływają na wynik.
 
@@ -64,9 +64,9 @@ jobs:
             echo "args=-Dlab=$LAB" >> "$GITHUB_OUTPUT"
           elif [ "$GITHUB_REPOSITORY" = "$RULES_REPO" ]; then
             # Sam szablon ma celowo niewypełnione LAB 01 (to zadania zespołów), więc sprawdzamy tylko,
-            # czy projekt się kompiluje i aplikacja startuje (R1.03). Pełne reguły: tag lab-N albo Run workflow.
+            # czy projekt się kompiluje i aplikacja startuje (R1.02). Pełne reguły: tag lab-N albo Run workflow.
             echo "args=-Dlab=1 -Dtest=Lab01ProjectRulesTest#applicationStarts -Dsurefire.failIfNoSpecifiedTests=false" >> "$GITHUB_OUTPUT"
-            LAB="1 (szablon: tylko R1.03)"
+            LAB="1 (szablon: tylko R1.02)"
           fi
           echo "Obowiązujące reguły: LAB ${LAB:-z pom.xml}"
 

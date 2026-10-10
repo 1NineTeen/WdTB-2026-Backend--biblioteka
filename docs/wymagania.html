@@ -14,66 +14,12 @@
 <div class="wrap">
 <div class="top">
   <a class="logo" href="index.html"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></a>
-  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html" aria-current="page">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><span class="disabled" aria-disabled="true" title="Instrukcja pojawi się przed zajęciami">LAB 02</span><a href="wymagania.html" aria-current="page">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
 </div>
 <main class="doc"><article class="md">
-<h1>Wymagania projektu: ile czego</h1>
-<p>Kolumna <strong>Minimum</strong> to próg wymagany na danym laboratorium.
-Kolumna <strong>Zalecane</strong> to docelowy rozmiar projektu. Przekroczenie górnej granicy zalecanego zakresu
-nie jest wymagane.</p>
+<h1>Wymagania projektu</h1>
+<p>Wymagania podajemy osobno dla każdego laboratorium. Wymagania kolejnych laboratoriów pojawią się przed danymi zajęciami.</p>
 <p><strong>Kryteria oceny</strong> prowadzący podaje na początku każdego laboratorium.</p>
-<h2>Skala projektu w skrócie</h2>
-<div class="tbl"><table>
-<thead>
-<tr>
-<th></th>
-<th>Minimum</th>
-<th>Zalecane</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Osoby w zespole</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Moduły biznesowe</td>
-<td>2</td>
-<td>2–3</td>
-</tr>
-<tr>
-<td>Własne tabele (poza <code>user_account</code>)</td>
-<td>4</td>
-<td><strong>5–6</strong> (max 8)</td>
-</tr>
-<tr>
-<td>Repozytoria</td>
-<td>1 na encję główną</td>
-<td>3–5</td>
-</tr>
-<tr>
-<td>Pytania inwestora (zapytania raportowe)</td>
-<td>5</td>
-<td>5</td>
-</tr>
-<tr>
-<td>Serwisy</td>
-<td>1 na moduł</td>
-<td>2–4</td>
-</tr>
-<tr>
-<td>Endpointy REST</td>
-<td>8</td>
-<td><strong>10–15</strong></td>
-</tr>
-<tr>
-<td>Testy napisane przez zespół</td>
-<td>1 na repozytorium, serwis i kontroler</td>
-<td>25+</td>
-</tr>
-</tbody>
-</table></div>
 <h2>LAB 01 · Start (bez oceny)</h2>
 <div class="tbl"><table>
 <thead>
@@ -89,19 +35,15 @@ nie jest wymagane.</p>
 </tr>
 <tr>
 <td>Konta zespołu</td>
-<td>konta wszystkich osób z zespołu w <code>data.sql</code> (R1.04)</td>
+<td>konta wszystkich osób z zespołu w <code>data.sql</code> (R1.03)</td>
 </tr>
 <tr>
 <td>Wersja projektu</td>
-<td><code>1.0.0-&lt;nrindeksu1&gt;-&lt;nrindeksu2&gt;-&lt;nrindeksu3&gt;</code> w <code>pom.xml</code> (R1.06)</td>
+<td><code>1.0.0-&lt;nrindeksu1&gt;-&lt;nrindeksu2&gt;-&lt;nrindeksu3&gt;</code> w <code>pom.xml</code> (R1.05)</td>
 </tr>
 <tr>
 <td>Wizytówka projektu</td>
-<td>strona startowa <code>static/index.html</code> uzupełniona (R1.05)</td>
-</tr>
-<tr>
-<td><code>PROJEKT.md</code></td>
-<td>3 osoby, problem, persona, model przychodu, <strong>≥5 historyjek</strong>, wstępny diagram ER</td>
+<td>strona startowa <code>static/index.html</code> uzupełniona (R1.04)</td>
 </tr>
 <tr>
 <td>Arkusz zespołów</td>
@@ -109,244 +51,6 @@ nie jest wymagane.</p>
 </tr>
 </tbody>
 </table></div>
-<h2>LAB 02 · Encje i relacje</h2>
-<div class="tbl"><table>
-<thead>
-<tr>
-<th>Element</th>
-<th>Minimum</th>
-<th>Zalecane</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Własne tabele</td>
-<td>4</td>
-<td>5–6</td>
-</tr>
-<tr>
-<td>Klucz główny w każdej tabeli</td>
-<td>tak</td>
-<td><code>Long</code> z <code>IDENTITY</code></td>
-</tr>
-<tr>
-<td>Klucze obce</td>
-<td>4</td>
-<td>5–8</td>
-</tr>
-<tr>
-<td>Relacje 1:N</td>
-<td>–</td>
-<td><strong>≥2</strong>, w tym ≥1 dwukierunkowa (<code>mappedBy</code>)</td>
-</tr>
-<tr>
-<td>Relacja N:M</td>
-<td>1</td>
-<td>encja łącząca <strong>z atrybutami</strong> (data, ilość, status)</td>
-</tr>
-<tr>
-<td>Relacja 1:1</td>
-<td>1</td>
-<td>np. konto ↔ profil</td>
-</tr>
-<tr>
-<td>Powiązanie z <code>user_account</code></td>
-<td>1</td>
-<td>każdy typ użytkownika ma konto</td>
-</tr>
-<tr>
-<td>Enum zapisany jako tekst</td>
-<td>1 kolumna</td>
-<td>2 (np. status, typ)</td>
-</tr>
-<tr>
-<td>Dane startowe w <code>data.sql</code></td>
-<td>2 tabele po 3 wiersze</td>
-<td>5–10 wierszy w głównych tabelach, różne statusy</td>
-</tr>
-<tr>
-<td>Kwoty i ilości</td>
-<td><code>BigDecimal</code>, zero <code>double</code></td>
-<td>precyzja <code>(10, 2)</code> dla kwot</td>
-</tr>
-</tbody>
-</table></div>
-<h2>LAB 03 · Repozytoria i zapytania</h2>
-<div class="tbl"><table>
-<thead>
-<tr>
-<th>Element</th>
-<th>Minimum</th>
-<th>Zalecane</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Value object <code>@Embeddable</code></td>
-<td>1</td>
-<td>1–2 (<code>Money</code>, <code>Address</code>, <code>TimeSlot</code>)</td>
-</tr>
-<tr>
-<td>Test każdego repozytorium</td>
-<td>tak</td>
-<td>2–4 testy na repozytorium</td>
-</tr>
-<tr>
-<td>Zapytania pochodne</td>
-<td>3</td>
-<td>4–6</td>
-</tr>
-<tr>
-<td><code>@Query</code> (JPQL)</td>
-<td>2, w tym 1 z <code>GROUP BY</code></td>
-<td>3–5</td>
-</tr>
-<tr>
-<td>Stronicowanie <code>Page</code>/<code>Slice</code></td>
-<td>1</td>
-<td>na każdej liście, która rośnie</td>
-</tr>
-<tr>
-<td>Projekcja (record/interfejs)</td>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Rozwiązany N+1 (<code>@EntityGraph</code>/<code>JOIN FETCH</code>)</td>
-<td>1</td>
-<td>+ test z <code>QueryCounter</code></td>
-</tr>
-<tr>
-<td>Pytania inwestora</td>
-<td>5 w <code>PROJEKT.md</code></td>
-<td>każde z metodą i testem</td>
-</tr>
-</tbody>
-</table></div>
-<h2>LAB 04 · Serwisy i komponenty</h2>
-<div class="tbl"><table>
-<thead>
-<tr>
-<th>Element</th>
-<th>Minimum</th>
-<th>Zalecane</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>@Service</code> w <code>&lt;moduł&gt;.application</code></td>
-<td>1 na moduł z encjami</td>
-<td>1–2 na moduł</td>
-</tr>
-<tr>
-<td>Reguły biznesowe w kodzie</td>
-<td>–</td>
-<td><strong>≥3</strong> (np. „nie można zarezerwować wyprzedanej oferty”), każda z wyjątkiem domenowym</td>
-</tr>
-<tr>
-<td>Publiczne API modułu (<code>&lt;moduł&gt;.api</code>)</td>
-<td>moduły rozmawiają tylko przez nie</td>
-<td>interfejs + rekordy</td>
-</tr>
-<tr>
-<td>Testy jednostkowe serwisów (Mockito)</td>
-<td>1 klasa na serwis</td>
-<td>3–5 testów na serwis, w tym przypadki błędne</td>
-</tr>
-<tr>
-<td>Wstrzykiwanie</td>
-<td>tylko przez konstruktor</td>
-<td><code>final</code> pola</td>
-</tr>
-</tbody>
-</table></div>
-<h2>LAB 05 · Kontrolery REST</h2>
-<div class="tbl"><table>
-<thead>
-<tr>
-<th>Element</th>
-<th>Minimum</th>
-<th>Zalecane</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Endpointy</td>
-<td>8, w tym POST, PUT/PATCH, DELETE</td>
-<td>10–15</td>
-</tr>
-<tr>
-<td>Zasoby z pełnym CRUD</td>
-<td>–</td>
-<td><strong>2</strong></td>
-</tr>
-<tr>
-<td>Endpointy raportowe (pytania inwestora)</td>
-<td>–</td>
-<td>2–3</td>
-</tr>
-<tr>
-<td>Stronicowanie w API</td>
-<td>–</td>
-<td>na każdej liście (<code>?page=&amp;size=&amp;sort=</code>)</td>
-</tr>
-<tr>
-<td>DTO jako rekordy, walidacja <code>@Valid</code></td>
-<td>tak</td>
-<td>własny walidator dla 1 reguły</td>
-</tr>
-<tr>
-<td>Obsługa błędów <code>ProblemDetail</code></td>
-<td>tak</td>
-<td>400, 404, 409 z czytelnym komunikatem</td>
-</tr>
-<tr>
-<td>Testy kontrolerów</td>
-<td>1 klasa na kontroler</td>
-<td><code>@WebMvcTest</code> dla każdego endpointu</td>
-</tr>
-<tr>
-<td>Dokumentacja OpenAPI</td>
-<td>tak</td>
-<td>opisy i przykłady na DTO</td>
-</tr>
-</tbody>
-</table></div>
-<h2>LAB 06 · Rozbudowa</h2>
-<div class="tbl"><table>
-<thead>
-<tr>
-<th>Element</th>
-<th>Minimum</th>
-<th>Zalecane</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Konfiguracja <code>@ConfigurationProperties</code> (rekord)</td>
-<td>1</td>
-<td>progi i czasy biznesowe zamiast „magicznych liczb”</td>
-</tr>
-<tr>
-<td>Zdarzenie <code>*Event</code> + listener w innym module</td>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Zadanie cykliczne <code>@Scheduled</code></td>
-<td>1</td>
-<td>np. wygaszanie rezerwacji</td>
-</tr>
-<tr>
-<td>Integracja HTTP (<code>RestClient</code> w <code>infrastructure</code>)</td>
-<td>jeśli jest, to tylko tam</td>
-<td>wywołanie API zespołu partnerskiego (zadanie dodatkowe)</td>
-</tr>
-</tbody>
-</table></div>
-<h2>LAB 07 · Odrabianie</h2>
-<p>Brak nowych wymagań. Zespoły uzupełniają zaległe laboratoria, a osoby z nieobecnościami zaliczają brakujący materiał.
-Zespoły bez zaległości mogą pokazać projekt i podnieść ocenę zadaniami dodatkowymi.</p>
 </article></main>
 <footer>
   <span>Wprowadzenie do technologii backendowych · laboratoria</span>

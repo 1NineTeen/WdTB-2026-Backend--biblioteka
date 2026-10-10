@@ -14,7 +14,7 @@
 <div class="wrap">
 <div class="top">
   <a class="logo" href="index.html"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></a>
-  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><span class="disabled" aria-disabled="true" title="Instrukcja pojawi się przed zajęciami">LAB 02</span><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
 </div>
 <main class="doc"><article class="md">
 <h1>Dla prowadzącego: konfiguracja GitHub</h1>
@@ -28,13 +28,13 @@
 <h2>Repozytoria zespołów (forki)</h2>
 <ul>
 <li>Osoba hostująca forkuje szablon na swoje konto i zmienia nazwę forka na <code>WdTB-2026-Backend-&lt;nazwaprojektu&gt;</code>
-  (instrukcja krok po kroku: LAB 01, krok E1).</li>
+  (instrukcja krok po kroku: LAB 01, krok B2).</li>
 <li>W forku trzeba raz włączyć GitHub Actions (zakładka <em>Actions</em>).</li>
 <li><em>Settings → Collaborators</em>: tylko zespół. Prowadzącego nie trzeba dodawać, bo forki publicznego szablonu są publiczne; link jest w arkuszu. Wszystkie forki widać też w <em>Insights → Forks</em> szablonu.</li>
 <li>Nazwa projektu i link do repozytorium trafiają do arkusza zespołów (zakładka grupy). Arkusz sprawdza, czy link
   zawiera <code>WdTB-2026-Backend-&lt;nazwa projektu&gt;</code>.</li>
-<li>Dane osobowe w repozytorium: loginy GitHub i imiona w <code>PROJEKT.md</code> oraz numery indeksów w wersji projektu
-  (<code>pom.xml</code>, R1.06). Repozytoria są publiczne, więc te numery są widoczne publicznie. E-maile są tylko w arkuszu.</li>
+<li>Dane osobowe w repozytorium: imiona i nazwiska na wizytówce (<code>static/index.html</code>) oraz numery indeksów w wersji projektu
+  (<code>pom.xml</code>, R1.05). Repozytoria są publiczne, więc te numery są widoczne publicznie. E-maile są tylko w arkuszu.</li>
 <li>Nowe instrukcje zespoły pobierają przyciskiem <em>Sync fork</em> (reguły workflow i tak pobiera z szablonu).</li>
 </ul>
 <h2>Jak działa sprawdzanie</h2>
@@ -57,8 +57,8 @@ mvn verify -Dlab=N
 <h2>Ocena laboratorium (na koniec zajęć, ok. 5 min na zespół)</h2>
 <ol>
 <li>Przebieg <em>Testy i reguły</em> dla tagu <code>lab-N</code> jest zielony.</li>
-<li>Raport <em>Wkład członków zespołu</em>: czy każda osoba ma commity i zmergowany Pull Request, kto robił recenzje.</li>
-<li>Losowa osoba, losowa linia z Pull Requesta innej osoby: „co to robi?”, „dlaczego tak?”, „zmień X na Y”.</li>
+<li>Raport <em>Wkład członków zespołu</em>: czy każda osoba ma commity.</li>
+<li>Dowolna osoba z zespołu wyjaśnia wskazany fragment kodu: „co to robi?”, „dlaczego tak?”, „zmień X na Y”.</li>
 <li>Pytanie kontrolne z instrukcji laboratorium.</li>
 <li>Wpis oceny do własnego arkusza ocen (arkusz zespołów jest wspólny ze studentami).</li>
 </ol>

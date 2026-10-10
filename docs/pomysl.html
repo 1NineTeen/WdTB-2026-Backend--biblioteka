@@ -14,19 +14,43 @@
 <div class="wrap">
 <div class="top">
   <a class="logo" href="index.html"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></a>
-  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html" aria-current="page">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><span class="disabled" aria-disabled="true" title="Instrukcja pojawi się przed zajęciami">LAB 02</span><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html" aria-current="page">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
 </div>
 <main class="doc"><article class="md">
 <h1>Koncepcja projektu</h1>
 <p>Każdy zespół buduje backend <strong>własnej koncepcji biznesowej</strong>. Projekt nie musi być przedsięwzięciem na dużą skalę.
 Wymagana jest rzeczywista potrzeba określonej grupy klientów, którą można zaspokoić aplikacją opartą na bazie danych.</p>
+<h2>Na czym polega projekt</h2>
+<p>Zespół tworzy <strong>backend</strong>, czyli serwerową część aplikacji: przechowuje dane w bazie, pilnuje reguł biznesowych
+i udostępnia je przez REST API. Z takiego backendu mogłaby korzystać aplikacja webowa lub mobilna; samego interfejsu
+użytkownika nie budujecie.</p>
+<p>Koncepcja powstaje na LAB 01 i towarzyszy zespołowi przez cały semestr. Na kolejnych laboratoriach zamieniacie ją
+w model danych, zapytania do bazy, logikę biznesową i REST API. Dlatego warto wybrać temat, który zespół rozumie
+i który da się rozwijać przez kilka tygodni.</p>
+<p>Dobra koncepcja opisuje:</p>
+<ul>
+<li><strong>problem:</strong> co dziś jest czasochłonne, kosztowne lub niewygodne,</li>
+<li><strong>klienta:</strong> kto ma ten problem i będzie korzystał z aplikacji,</li>
+<li><strong>funkcje:</strong> co klient może zrobić w aplikacji,</li>
+<li><strong>dane:</strong> jakie informacje aplikacja przechowuje i jak się one zmieniają w czasie.</li>
+</ul>
+<h2>Przykład koncepcji</h2>
+<div class="tbl"><table>
+<tbody>
+<tr><td><strong>Problem</strong></td><td>Kawiarnia przyjmuje rezerwacje stolików w zeszycie; zdarzają się podwójne rezerwacje, a właścicielka nie wie, które godziny są najbardziej oblegane.</td></tr>
+<tr><td><strong>Klient</strong></td><td>Anna, właścicielka kawiarni, oraz jej goście.</td></tr>
+<tr><td><strong>Funkcje</strong></td><td>przeglądanie wolnych stolików, rezerwacja na wybraną godzinę, potwierdzenie i odwołanie rezerwacji, raport obłożenia dla właścicielki.</td></tr>
+<tr><td><strong>Dane</strong></td><td>stoliki (liczba miejsc, sala), rezerwacje (gość, stolik, data, godzina, status), goście, godziny otwarcia.</td></tr>
+<tr><td><strong>Moduły</strong></td><td><code>seating</code> (stoliki) i <code>booking</code> (rezerwacje).</td></tr>
+</tbody>
+</table></div>
 <h2>Warunki, które koncepcja musi spełnić</h2>
 <ul>
 <li>☐ <strong>Określony klient (persona)</strong>, a nie „wszyscy”, np. „Anna, właścicielka kawiarni, chce przyjmować rezerwacje stolików online”.</li>
 <li>☐ <strong>Co najmniej 2 moduły</strong>, czyli dwie odrębne części aplikacji, z których każda zarządza własnymi danymi.
    Np. w aplikacji kawiarni jeden moduł obsługuje <em>stoliki</em> (lista, liczba miejsc, dostępność), a drugi <em>rezerwacje</em>
    (kto, kiedy, który stolik, status). W kodzie każdy moduł to osobny pakiet, np. <code>seating</code> (stoliki) i <code>booking</code> (rezerwacje).</li>
-<li>☐ <strong>5–6 własnych tabel</strong> (minimum 4, poza gotową tabelą <code>user_account</code> z szablonu). Szczegóły: <a href="wymagania.html">Wymagania</a>.</li>
+<li>☐ <strong>5–6 własnych tabel</strong> (minimum 4, poza gotową tabelą <code>user_account</code> z szablonu).</li>
 <li>☐ <strong>Obiekt ze statusem i cyklem życia</strong>: rezerwacja, zamówienie, zgłoszenie, wypożyczenie.</li>
 <li>☐ <strong>Wielkości mierzalne</strong>: kwoty, czas, ilości, punkty.</li>
 <li>☐ <strong>Relacja wiele-do-wielu</strong>, najlepiej z własnymi atrybutami (np. rezerwacja = klient + oferta + data + status).</li>
@@ -43,10 +67,10 @@ Wymagana jest rzeczywista potrzeba określonej grupy klientów, którą można z
 <ol>
 <li><strong>Potrzeba rynkowa:</strong> każda osoba przedstawia propozycję przedsięwzięcia opartego na aplikacji: jaki problem
    rozwiązuje, kto jest klientem i dlaczego obecne rozwiązania są niewystarczające. Zespół wybiera jedną koncepcję.</li>
-<li><strong>Klient i model biznesowy:</strong> persona, problem w jednym zdaniu, model przychodu (prowizja, abonament, reklama, sprzedaż usług).</li>
+<li><strong>Klient i funkcje:</strong> persona, problem w jednym zdaniu i najważniejsze funkcje aplikacji.</li>
 <li><strong>Analiza opisu:</strong> rzeczowniki z opisu problemu to kandydaci na encje, czasowniki to kandydaci na przypadki użycia i statusy.</li>
 </ol>
-<p>Koncepcję zespół prezentuje na koniec LAB 01 (<a href="lab01.html">część F</a>) na podstawie wizytówki na stronie startowej aplikacji: autorzy, opis pomysłu i wprowadzone zmiany.</p>
+<p>Koncepcję zespół prezentuje na początku LAB 02 na podstawie wizytówki na stronie startowej aplikacji: autorzy, opis pomysłu i wprowadzone zmiany.</p>
 <h2>Przykładowe obszary</h2>
 <p>Poniższe obszary nie są gotowymi tematami, lecz kierunkami do własnej interpretacji:
 rezerwacja zasobów na godziny · wymiana i wypożyczanie przedmiotów · dopasowanie usługodawców do klientów ·

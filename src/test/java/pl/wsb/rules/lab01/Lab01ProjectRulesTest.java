@@ -41,30 +41,7 @@ class Lab01ProjectRulesTest {
     }
 
     @Test
-    @DisplayName("R1.02 PROJEKT.md: szkic pomysłu – zespół, problem, 5 historyjek, wstępny diagram ER")
-    void projectCardIsFilled() {
-        String card = Project.read("PROJEKT.md");
-
-        assertThat(linesContaining(card, "<uzupełnij>"))
-                .as("PROJEKT.md: zastąpcie wszystkie znaczniki <uzupełnij> (poniżej linie, w których jeszcze są)")
-                .isEmpty();
-        assertThat(card.contains("erDiagram"))
-                .withFailMessage("PROJEKT.md: dodajcie diagram ER w bloku ```mermaid erDiagram")
-                .isTrue();
-        long members = Pattern.compile("(?m)^\\|\\s*@\\S+").matcher(card).results().count();
-        assertThat(members)
-                .withFailMessage("PROJEKT.md: tabela zespołu ma mieć wszystkie osoby (wiersze zaczynające się od | @login-github). "
-                        + "Teraz: " + members)
-                .isGreaterThanOrEqualTo(2);
-        long stories = Pattern.compile("(?mi)^\\s*\\d+\\.\\s*jako\\b").matcher(card).results().count();
-        assertThat(stories)
-                .withFailMessage("PROJEKT.md: co najmniej 5 historyjek w formacie '1. Jako <kto> chcę <co>, aby <po co>'. "
-                        + "Teraz: " + stories)
-                .isGreaterThanOrEqualTo(5);
-    }
-
-    @Test
-    @DisplayName("R1.03 Aplikacja startuje (Spring Boot + baza H2)")
+    @DisplayName("R1.02 Aplikacja startuje (Spring Boot + baza H2)")
     void applicationStarts() {
         try (ConfigurableApplicationContext context = ProjectApp.startWithHibernateSchema()) {
             assertThat(context.isActive()).isTrue();
@@ -72,7 +49,7 @@ class Lab01ProjectRulesTest {
     }
 
     @Test
-    @DisplayName("R1.04 Każda osoba z zespołu ma swoje konto w data.sql (min. 3 konta poza demo)")
+    @DisplayName("R1.03 Każda osoba z zespołu ma swoje konto w data.sql (min. 3 konta poza demo)")
     void teamMembersHaveAccounts() {
         Set<String> demo = Set.of("ola@student.merito.pl", "kuba@student.merito.pl", "firma@example.com", "admin@example.com");
         try (ConfigurableApplicationContext context = ProjectApp.startWithHibernateSchema()) {
@@ -87,7 +64,7 @@ class Lab01ProjectRulesTest {
     }
 
     @Test
-    @DisplayName("R1.05 Strona startowa (static/index.html) opisuje Wasz projekt")
+    @DisplayName("R1.04 Strona startowa (static/index.html) opisuje Wasz projekt")
     void startPageDescribesProject() {
         String page = Project.read("src/main/resources/static/index.html");
         // komentarze HTML zamieniamy na tyle samo pustych linii, żeby numery linii zgadzały się z plikiem
@@ -100,7 +77,7 @@ class Lab01ProjectRulesTest {
     }
 
     @Test
-    @DisplayName("R1.06 Wersja w pom.xml: 1.0.0-<nr indeksu>-<nr indeksu>[-<nr indeksu>]")
+    @DisplayName("R1.05 Wersja w pom.xml: 1.0.0-<nr indeksu>-<nr indeksu>[-<nr indeksu>]")
     void versionContainsStudentNumbers() {
         Matcher version = Pattern.compile("<version>([^<]+)</version>")
                 .matcher(Project.read("pom.xml").replaceAll("(?s)<parent>.*?</parent>", ""));

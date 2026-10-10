@@ -16,6 +16,3 @@ git log --no-merges --numstat --format='@%aN' "$RANGE" | awk '
     NF == 3 && $1 != "-" { added[author] += $1; removed[author] += $2 }
     END { for (a in added) printf "%-32s +%-6d -%d\n", a, added[a], removed[a] }'
 
-echo
-echo "== Pull requesty zmergowane do main =="
-git log --merges --first-parent --format='%h %aN: %s' "$RANGE" | grep -iE "merge (pull request|branch)" || echo "(brak)"
