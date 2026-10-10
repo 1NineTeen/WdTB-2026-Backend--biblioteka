@@ -6,6 +6,7 @@ Materiały przygotował: **Wojciech Koszela**, prowadzący
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Wojciech%20Koszela-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/wkoszela/)
 [![GitHub](https://img.shields.io/badge/GitHub-wkoszela-181717?logo=github&logoColor=white)](https://github.com/wkoszela)
+[![E-mail](https://img.shields.io/badge/E--mail-wojciech.koszela%40wroclaw.merito.pl-C8102E)](mailto:wojciech.koszela@wroclaw.merito.pl)
 
 **Dokumentacja: otwórzcie [`docs/index.html`](docs/index.html) w przeglądarce.** Są tam instrukcje do zajęć,
 wymagania, zasady zaliczenia i opis reguł projektu.
