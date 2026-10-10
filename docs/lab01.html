@@ -65,9 +65,17 @@ e-mail uczelniany). Nazwę projektu, link i krótki opis uzupełnicie w części
 <li><strong>Zespół.</strong> <em>Settings → Collaborators → Add people</em>: dodajcie pozostałe osoby z zespołu, żeby mogły wysyłać zmiany.
    Zaproszone osoby akceptują zaproszenie (e-mail albo https://github.com/notifications). Prowadzącego nie dodajecie:
    repozytorium jest publiczne, wystarczy link w arkuszu.</li>
-<li><strong>Klon.</strong> Osoba hostująca w IntelliJ IDEA: <em>File → New → Project from Version Control</em> (na ekranie powitalnym: <em>Clone Repository</em>),
-   URL forka → <em>Clone</em> → <em>Trust Project</em>. IntelliJ rozpozna projekt Maven i pobierze zależności.
-   Brak JDK 21 lub nowszego: <em>File → Project Structure → SDK → Download JDK</em>. Pozostałe osoby klonują najpóźniej na LAB 02.</li>
+<li><strong>Klon.</strong> Osoba hostująca pobiera repozytorium w IntelliJ IDEA przez integrację z GitHubem:
+   <ol>
+   <li><em>File → New → Project from Version Control</em> (na ekranie powitalnym: <em>Clone Repository</em>).</li>
+   <li>Po lewej stronie okna wybierzcie <strong>GitHub</strong> → <em>Log In via GitHub…</em>. Otworzy się przeglądarka:
+      zalogujcie się na GitHubie i kliknijcie <em>Authorize</em>. Logowanie wykonuje się jednorazowo; później IntelliJ pamięta konto.</li>
+   <li>Na liście repozytoriów Waszego konta wybierzcie fork <code>WdTB-2026-Backend--projectname--</code>, sprawdźcie katalog
+      w polu <em>Directory</em> i kliknijcie <em>Clone</em> → <em>Trust Project</em>.</li>
+   </ol>
+   IntelliJ rozpozna projekt Maven i pobierze zależności. Zamiast logowania można też wybrać <em>Repository URL</em> i wkleić URL forka.
+   Brak JDK 21 lub nowszego: <em>File → Project Structure → SDK → Download JDK</em>. Pozostałe osoby klonują najpóźniej na LAB 02
+   w ten sam sposób (fork widzą na liście po zaakceptowaniu zaproszenia do zespołu).</li>
 </ol>
 <blockquote>
 <p><strong>Nowe materiały.</strong> Na początku kolejnych zajęć kliknijcie na stronie repozytorium <strong>Sync fork → Update branch</strong>,
