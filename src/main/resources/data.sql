@@ -1,5 +1,5 @@
 -- Dane startowe aplikacji. Tabele tworzy Hibernate z encji, a ten plik Spring Boot uruchamia zaraz potem.
--- LAB 01: każda osoba z zespołu dopisuje tu swoje konto (reguła R1.04).
+-- LAB 01: dopiszcie tu konta wszystkich osób z zespołu (reguła R1.04).
 -- LAB 02: dopiszcie dane do swoich tabel (kolejność: najpierw tabele, na które wskazują klucze obce).
 insert into user_account (email, display_name, role, created_at) values
     ('ola@student.merito.pl',   'Ola',   'USER',    current_timestamp),

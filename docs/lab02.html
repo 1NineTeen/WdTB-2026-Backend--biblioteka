@@ -19,11 +19,9 @@
 <main class="doc"><article class="md">
 <h1>LAB 02 · Encje i relacje w JPA</h1>
 <p><strong>Cel:</strong> pomysł z LAB 01 zamieniacie w model danych JPA. Hibernate buduje z niego tabele w H2, a plik <code>data.sql</code>
-wypełnia je danymi startowymi. Pipeline na <code>main</code> z tagiem <code>lab-2</code> jest zielony (reguły <strong>R1.* i R2.01–R2.10</strong>).</p>
+wypełnia je danymi startowymi.</p>
 <p><strong>Czego się nauczysz:</strong> mapowania encji (<code>@Entity</code>, <code>@Table</code>, <code>@Id</code>, <code>@Column</code>), relacji (1:N, N:M, 1:1),
 enumów i typów liczbowych, czytania SQL generowanego przez Hibernate, wstawiania danych przez <code>data.sql</code>.</p>
-<p><strong>Jak sprawdzamy:</strong> reguły LAB 02 nie analizują kodu. Uruchamiają aplikację na pustej bazie H2 i czytają jej schemat
-(tabele, klucze, typy kolumn) oraz liczbę wierszy, czyli to samo, co zobaczycie w konsoli H2.</p>
 <div class="tbl"><table>
 <thead>
 <tr>
@@ -57,67 +55,56 @@ enumów i typów liczbowych, czytania SQL generowanego przez Hibernate, wstawian
 <hr />
 <h2>A · Od szkicu do planu pracy (10 min)</h2>
 <ol>
-<li>W <code>pom.xml</code> ustawcie <code>&lt;lab&gt;2&lt;/lab&gt;</code> i uruchomcie <em>verify</em> (IntelliJ: panel <em>Maven</em> → <em>Lifecycle</em> → <em>verify</em>). Czerwone reguły R2.* to plan na dziś.</li>
 <li>Przejrzyjcie diagram ER z LAB 01 i uwagi z prezentacji. Poprawki zróbcie teraz, zanim powstanie kod.</li>
 <li>Każda encja = jedno issue przypisane do jednej osoby. Każda osoba robi co najmniej jedną encję.</li>
 </ol>
 <h2>B · Encje i relacje (60 min)</h2>
 <p>Wzorem jest gotowa encja <code>UserAccount</code> w pakiecie <code>account.domain</code>. Swoje encje dodajecie w pakietach
 <code>pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.domain</code>, np. <code>pl.wsb.deskhop.booking.domain</code>.</p>
-<h3>Czego reguły oczekują od bazy</h3>
+<h3>Czego wymagamy od bazy</h3>
 <div class="tbl"><table>
 <thead>
 <tr>
 <th>W bazie musi być…</th>
 <th>Jak to uzyskać w JPA</th>
-<th>Reguła</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>aplikacja startuje bez błędów</td>
 <td>poprawne mapowanie (pierwszy <code>Caused by</code> w logu wskaże błąd)</td>
-<td>R2.01</td>
 </tr>
 <tr>
 <td>≥4 Wasze tabele, każda z kluczem głównym</td>
 <td><code>@Entity</code>, <code>@Table(name = "…")</code>, <code>@Id</code> + <code>@GeneratedValue</code></td>
-<td>R2.02, R2.03</td>
 </tr>
 <tr>
 <td>≥4 klucze obce</td>
 <td><code>@ManyToOne</code> + <code>@JoinColumn</code>, <code>@OneToOne</code>, tabela łącząca</td>
-<td>R2.04</td>
 </tr>
 <tr>
 <td>tabela łącząca dwie inne (N:M)</td>
 <td><code>@ManyToMany</code> + <code>@JoinTable</code> <strong>albo</strong> encja z dwoma <code>@ManyToOne</code></td>
-<td>R2.05</td>
 </tr>
 <tr>
 <td>klucz obcy z <code>UNIQUE</code> (1:1)</td>
 <td><code>@OneToOne</code> + <code>@JoinColumn</code></td>
-<td>R2.06</td>
 </tr>
 <tr>
 <td>powiązanie z <code>user_account</code></td>
 <td>np. <code>@OneToOne UserAccount account</code> w profilu klienta</td>
-<td>R2.07</td>
 </tr>
 <tr>
 <td>kolumna <code>ENUM</code></td>
 <td>pole typu enum z <code>@Enumerated(EnumType.STRING)</code></td>
-<td>R2.08</td>
 </tr>
 <tr>
 <td>brak kolumn <code>DOUBLE</code>/<code>REAL</code></td>
 <td>kwoty i ilości jako <code>BigDecimal</code></td>
-<td>R2.09</td>
 </tr>
 <tr>
 <td>dane w ≥2 Waszych tabelach (≥3 wiersze)</td>
 <td><code>insert</code> w <code>data.sql</code> (część C)</td>
-<td>R2.10</td>
 </tr>
 </tbody>
 </table></div>
@@ -185,8 +172,8 @@ public class Customer {
 <li><strong>Lombok:</strong> <code>@Getter</code> jest w porządku. <code>@Data</code> na encjach odpada (pętle w <code>toString</code>, <code>hashCode</code> na relacjach).</li>
 </ul>
 <h2>C · Dane startowe w <code>data.sql</code> (20 min)</h2>
-<p>Dopiszcie do <code>src/main/resources/data.sql</code> dane do swoich tabel: co najmniej 3 wiersze w co najmniej 2 tabelach
-(R2.10), najlepiej 5–10 w głównych tabelach, z różnymi statusami.</p>
+<p>Dopiszcie do <code>src/main/resources/data.sql</code> dane do swoich tabel: co najmniej 3 wiersze w co najmniej 2 tabelach,
+najlepiej 5–10 w głównych tabelach, z różnymi statusami.</p>
 <pre><code class="language-sql">insert into customer (account_id, home_city) values (1, 'Wrocław'), (2, 'Wrocław'), (5, 'Poznań');
 insert into offer (title, price, status) values
     ('Biurko przy oknie', 25.00, 'AVAILABLE'),
@@ -214,45 +201,12 @@ insert into booking (customer_id, offer_id, price, status) values (1, 1, 25.00, 
 <h2>E · Zielony pipeline i tag (15 min)</h2>
 <ol>
 <li>Wszystkie Pull Requesty zmergowane, przebieg „Testy i reguły” na <code>main</code> zielony.</li>
-<li>Przed końcem zajęć jedna osoba taguje <code>lab-2</code> na <code>main</code> (<code>git tag lab-2 &amp;&amp; git push origin lab-2</code>).
-   Tag uruchamia reguły LAB 02; wynik w zakładce <em>Actions</em>.</li>
+<li>Przed końcem zajęć jedna osoba taguje <code>lab-2</code> na <code>main</code> (<code>git tag lab-2 &amp;&amp; git push origin lab-2</code>).</li>
 <li>Zgłoście się do oceny jeszcze na zajęciach. Prowadzący ocenia stan z tagu.</li>
 </ol>
 <hr />
-<h2>Kryteria oceny</h2>
-<blockquote>
-<p>Pracujemy na zajęciach: ocenę wystawia prowadzący na koniec zajęć, ze stanu tagu <code>lab-2</code>.
-Kryteria poniżej to plan; dokładne kryteria prowadzący podaje zawsze na początku zajęć.</p>
-</blockquote>
-<div class="tbl"><table>
-<thead>
-<tr>
-<th>Ocena</th>
-<th>Wymagania</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>3.0</strong></td>
-<td>tag <code>lab-2</code>, pipeline zielony (R1.*, R2.01–R2.10)</td>
-</tr>
-<tr>
-<td><strong>4.0</strong></td>
-<td>jak 3.0 + model w zalecanym rozmiarze (5–6 tabel, ≥2 relacje 1:N, encja łącząca z atrybutami); <strong>każda osoba</strong> ma zmergowany Pull Request z encją i merytoryczną recenzję; diagram ER zgadza się z tabelami w H2</td>
-</tr>
-<tr>
-<td><strong>5.0</strong></td>
-<td>jak 4.0 + jedno <strong>wyzwanie 5.0</strong> + poprawne odpowiedzi na pytania kontrolne</td>
-</tr>
-</tbody>
-</table></div>
-<h3>Wyzwania 5.0 (jedno do wyboru)</h3>
-<ul>
-<li><strong>Value object:</strong> <code>@Embeddable</code> (np. <code>Money</code>, <code>Address</code>, <code>TimeSlot</code>) użyty przez <code>@Embedded</code>; pokażcie w H2, gdzie trafiły kolumny.</li>
-<li><strong>Audyt:</strong> <code>@MappedSuperclass</code> z <code>createdAt</code>/<code>updatedAt</code> uzupełnianymi przez <code>@PrePersist</code>/<code>@PreUpdate</code>.</li>
-<li><strong>Poprawne <code>equals</code>/<code>hashCode</code></strong> encji (po identyfikatorze) z testem pokazującym, że encja nie „ginie” z <code>HashSet</code> po zapisie.</li>
-<li><strong>Ograniczenia w bazie:</strong> <code>@UniqueConstraint</code> na kilku kolumnach i <code>@Check</code>; pokażcie w H2, że baza odrzuca złe dane.</li>
-</ul>
+<h2>Ocena</h2>
+<p><strong>Kryteria oceny</strong> prowadzący podaje na początku każdego laboratorium.</p>
 <h3>Pytania kontrolne (losowa osoba z zespołu)</h3>
 <ol>
 <li>Dlaczego encja potrzebuje konstruktora bezargumentowego i dlaczego może być <code>protected</code>?</li>
@@ -261,37 +215,6 @@ Kryteria poniżej to plan; dokładne kryteria prowadzący podaje zawsze na pocz�
 <li><code>EnumType.ORDINAL</code> vs <code>STRING</code>: pokaż na przykładzie, jak ORDINAL psuje dane.</li>
 <li>Dlaczego <code>0.1 + 0.2</code> w <code>double</code> to problem dla aplikacji, która liczy pieniądze?</li>
 </ol>
-<h2>Najczęstsze czerwone reguły</h2>
-<div class="tbl"><table>
-<thead>
-<tr>
-<th>Komunikat</th>
-<th>Co zrobić</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>R2.01 Aplikacja nie wstała</code></td>
-<td>przeczytaj <strong>pierwotną przyczynę</strong> w komunikacie: literówka w <code>mappedBy</code>, słowo zastrzeżone albo błąd w <code>data.sql</code></td>
-</tr>
-<tr>
-<td><code>R2.05</code> brak tabeli N:M</td>
-<td><code>@ManyToMany</code> z <code>@JoinTable</code> albo encja łącząca z dwoma <code>@ManyToOne</code></td>
-</tr>
-<tr>
-<td><code>R2.06</code> brak 1:1</td>
-<td><code>@OneToOne</code> + <code>@JoinColumn</code> po stronie, która ma mieć kolumnę</td>
-</tr>
-<tr>
-<td><code>R2.08</code> brak ENUM</td>
-<td><code>@Enumerated(EnumType.STRING)</code> na polu typu enum w Waszej encji</td>
-</tr>
-<tr>
-<td><code>R2.10</code> za mało danych</td>
-<td>dopisz <code>insert</code> do <code>data.sql</code>; w komunikacie widać liczbę wierszy w każdej tabeli</td>
-</tr>
-</tbody>
-</table></div>
 </article></main>
 <footer>
   <span>Wprowadzenie do technologii backendowych · laboratoria</span>

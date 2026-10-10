@@ -34,7 +34,7 @@ Robi to **jedna osoba z zespołu** (osoba hostująca), pozostałe osoby patrzą 
    Fork to Wasza kopia szablonu na Waszym koncie; w niej pracuje cały zespół.
 2. **Zmiana nazwy.** W forku: *Settings → General → Repository name* → zamieńcie końcówkę `-projectname-`
    na nazwę projektu, np. `WdTB-2026-Backend-deskhop` → **Rename**. Nazwa projektu: jedno słowo, małe litery,
-   bez polskich znaków. Nie macie jeszcze pomysłu? Zmieńcie nazwę później, ale przed końcem LAB 01.
+   bez polskich znaków. Nazwę wybieracie w części D LAB 01 (praca nad pomysłem), więc fork i zmianę nazwy robicie dopiero po niej.
 3. **Włączenie sprawdzania.** Zakładka **Actions** → *I understand my workflows, go ahead and enable them*.
    W forkach GitHub Actions jest domyślnie wyłączony; bez tego reguły nie będą się uruchamiać.
 4. **Zespół.** *Settings → Collaborators → Add people*: pozostałe osoby z zespołu, żeby mogły wysyłać zmiany.
@@ -54,7 +54,7 @@ Dwie rzeczy, o których łatwo zapomnieć:
 
 Wymagania: JDK 21 lub nowsze, IntelliJ IDEA (Maven i Git są wbudowane), konto na GitHubie. Docker nie jest potrzebny.
 
-### Pobranie projektu (każda osoba)
+### Pobranie projektu
 
 1. *File → New → Project from Version Control* (na ekranie powitalnym: **Clone Repository**).
 2. URL: `https://github.com/<login>/WdTB-2026-Backend-<nazwaprojektu>.git` → **Clone** → **Trust Project**.
@@ -86,11 +86,12 @@ Dane dopisane ręcznie w konsoli H2 znikają po restarcie; to, co ma zostać, do
 | Co | Jak |
 |---|---|
 | testy i reguły dla laboratorium z `<lab>` w `pom.xml` | panel *Maven* (prawa krawędź okna) → *Lifecycle* → dwuklik na *verify* |
-| podgląd reguł kolejnego laboratorium | dwa razy `Ctrl` (*Run Anything*) → `mvn verify -Dlab=2` |
 
 Wynik jest w oknie *Run*: przy każdej regule zielony albo czerwony znak, a przy czerwonej opis, co poprawić.
 
 ## Co zmodyfikować na LAB 01
+
+Nazwę projektu w repozytorium, pakiecie, klasie startowej i `artifactId` zmieniacie dopiero po części D (gdy macie pomysł i nazwę).
 
 | Plik | Zmiana | Reguła |
 |---|---|---|
@@ -99,10 +100,11 @@ Wynik jest w oknie *Run*: przy każdej regule zielony albo czerwony znak, a przy
 | `pom.xml`, `<artifactId>` | `wdtb-2026-backend-<nazwaprojektu>` | R1.01 |
 | `pom.xml`, `<version>` | `1.0.0-<nrindeksu1>-<nrindeksu2>-<nrindeksu3>` | R1.06 |
 | `PROJEKT.md` | zespół, problem, persona, 5 historyjek, wstępny diagram ER | R1.02 |
-| `src/main/resources/data.sql` | każda osoba dopisuje swoje konto (wzór w komentarzu na końcu pliku) | R1.04 |
+| `src/main/resources/data.sql` | konta wszystkich osób z zespołu (wzór w komentarzu na końcu pliku) | R1.04 |
 | `src/main/resources/static/index.html` | wizytówka projektu: zastąpcie wszystkie `[uzupełnij]` | R1.05 |
 
-Każda osoba robi co najmniej jeden Pull Request (np. swoje konto w `data.sql`), a recenzję robi inna osoba z zespołu.
+Na LAB 01 wystarczy, że zmiany zacommituje jedna osoba z zespołu. Od LAB 02 każda osoba robi własne Pull Requesty,
+a recenzję robi inna osoba z zespołu.
 Nie zmieniajcie katalogu `src/test/java/pl/wsb/rules` ani `.github/workflows`: tam są reguły, którymi sprawdzamy projekt.
 
 Szczegóły krok po kroku: `docs/lab01.html`.

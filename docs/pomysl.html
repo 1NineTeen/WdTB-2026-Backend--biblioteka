@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pomysł na projekt · Wprowadzenie do technologii backendowych</title>
+<title>Koncepcja projektu · Wprowadzenie do technologii backendowych</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -17,39 +17,41 @@
   <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html" aria-current="page">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
 </div>
 <main class="doc"><article class="md">
-<h1>Jak wymyślić pomysł na projekt</h1>
-<p>Każdy zespół buduje backend <strong>własnego pomysłu</strong>. Nie musi to być biznes na miliony. Wystarczy realny problem
-konkretnych ludzi, który da się rozwiązać aplikacją z bazą danych.</p>
-<h2>Warunki, które pomysł musi spełnić</h2>
+<h1>Koncepcja projektu</h1>
+<p>Każdy zespół buduje backend <strong>własnej koncepcji biznesowej</strong>. Projekt nie musi być przedsięwzięciem na dużą skalę.
+Wymagana jest rzeczywista potrzeba określonej grupy klientów, którą można zaspokoić aplikacją opartą na bazie danych.</p>
+<h2>Warunki, które koncepcja musi spełnić</h2>
 <ul>
-<li>☐ <strong>Konkretny użytkownik (persona)</strong>, a nie „wszyscy”. Np. „Ola, studentka zaoczna, szuka taniego obiadu po zajęciach”.</li>
-<li>☐ <strong>Co najmniej 2 moduły biznesowe</strong>, np. <code>offer</code> + <code>booking</code>, <code>tutor</code> + <code>lesson</code>.</li>
-<li>☐ <strong>5–6 własnych tabel</strong> (minimum 4, plus gotowa <code>user_account</code> z szablonu). Szczegóły: <a href="wymagania.html">WYMAGANIA.md</a>.</li>
-<li>☐ <strong>Coś, co ma status i cykl życia</strong>: rezerwacja, zamówienie, zgłoszenie, wypożyczenie…</li>
-<li>☐ <strong>Coś, co się liczy</strong>: pieniądze, czas, ilość, punkty.</li>
-<li>☐ <strong>Naturalna relacja wiele-do-wielu</strong>, najlepiej z własnymi danymi (np. rezerwacja = klient + oferta + data + status).</li>
-<li>☐ <strong>Pięć pytań „inwestora”</strong>, na które baza musi umieć odpowiedzieć (LAB 03), np. „ile rezerwacji w tym miesiącu per miasto?”.</li>
+<li>☐ <strong>Określony klient (persona)</strong>, a nie „wszyscy”, np. „Anna, właścicielka kawiarni, chce przyjmować rezerwacje stolików online”.</li>
+<li>☐ <strong>Co najmniej 2 moduły</strong>, czyli dwie odrębne części aplikacji, z których każda zarządza własnymi danymi.
+   Np. w aplikacji kawiarni jeden moduł obsługuje <em>stoliki</em> (lista, liczba miejsc, dostępność), a drugi <em>rezerwacje</em>
+   (kto, kiedy, który stolik, status). W kodzie każdy moduł to osobny pakiet, np. <code>seating</code> (stoliki) i <code>booking</code> (rezerwacje).</li>
+<li>☐ <strong>5–6 własnych tabel</strong> (minimum 4, poza gotową tabelą <code>user_account</code> z szablonu). Szczegóły: <a href="wymagania.html">Wymagania</a>.</li>
+<li>☐ <strong>Obiekt ze statusem i cyklem życia</strong>: rezerwacja, zamówienie, zgłoszenie, wypożyczenie.</li>
+<li>☐ <strong>Wielkości mierzalne</strong>: kwoty, czas, ilości, punkty.</li>
+<li>☐ <strong>Relacja wiele-do-wielu</strong>, najlepiej z własnymi atrybutami (np. rezerwacja = klient + oferta + data + status).</li>
+<li>☐ <strong>Pięć pytań biznesowych („inwestora”)</strong>, na które baza danych musi umieć odpowiedzieć (LAB 03),
+   np. „ile rezerwacji zrealizowano w bieżącym miesiącu w poszczególnych miastach?”.</li>
 </ul>
 <h2>Czego unikać</h2>
 <ul>
-<li>klonów wielkich serwisów („Facebook, tylko lepszy”): za duże i nudne,</li>
-<li>danych wrażliwych (zdrowie, poglądy, dane dzieci), płatności prawdziwymi pieniędzmi i scrapingu cudzych serwisów,</li>
-<li>pomysłów bez backendu (czysta gra, kalkulator, sama strona wizytówka).</li>
+<li>kopii dużych serwisów („Facebook, tylko lepszy”): zakres przekracza możliwości projektu,</li>
+<li>danych wrażliwych (zdrowie, poglądy, dane dzieci), płatności prawdziwymi pieniędzmi i pobierania danych z cudzych serwisów (scraping),</li>
+<li>koncepcji bez backendu (gra, kalkulator, statyczna strona informacyjna).</li>
 </ul>
-<h2>Pomysł w 15 minut (LAB 01)</h2>
+<h2>Opracowanie koncepcji (LAB 01)</h2>
 <ol>
-<li><strong>Problem</strong> (5 min): każdy z zespołu zapisuje 3 rzeczy, które go irytują na studiach, w pracy, w mieście albo
-   w hobby. Wybierzcie jedną, która dotyczy też innych ludzi.</li>
-<li><strong>Kto i po co</strong> (5 min): persona, jedno zdanie problemu, jak produkt zarabia (prowizja / abonament / reklama).</li>
-<li><strong>Rzeczowniki i czasowniki</strong> (5 min): wypiszcie rzeczowniki z opisu problemu (kandydaci na encje)
-   i czasowniki (kandydaci na przypadki użycia i statusy).</li>
+<li><strong>Potrzeba rynkowa:</strong> każda osoba przedstawia propozycję przedsięwzięcia opartego na aplikacji: jaki problem
+   rozwiązuje, kto jest klientem i dlaczego obecne rozwiązania są niewystarczające. Zespół wybiera jedną koncepcję.</li>
+<li><strong>Klient i model biznesowy:</strong> persona, problem w jednym zdaniu, model przychodu (prowizja, abonament, reklama, sprzedaż usług).</li>
+<li><strong>Analiza opisu:</strong> rzeczowniki z opisu problemu to kandydaci na encje, czasowniki to kandydaci na przypadki użycia i statusy.</li>
 </ol>
-<p>Zgłoście pomysł prowadzącemu (2 zdania) przed rozpoczęciem modelowania. Dwa zespoły nie mogą mieć tego samego pomysłu.</p>
-<h2>Iskry, jeśli brakuje inspiracji</h2>
-<p>Nie są to gotowe tematy, tylko kierunki do własnej interpretacji:
-rezerwacje czegoś na godziny · wymiana lub wypożyczanie rzeczy między ludźmi · dopasowywanie ludzi do ludzi ·
-wydarzenia i zapisy · zlecenia i oferty · wspólne rozliczenia · śledzenie postępów i rankingi · wolontariat i lokalne
-społeczności · ratowanie rzeczy przed wyrzuceniem.</p>
+<p>Koncepcję zespół prezentuje na koniec LAB 01 (<a href="lab01.html">część F</a>) na podstawie wizytówki na stronie startowej aplikacji: autorzy, opis pomysłu i wprowadzone zmiany.</p>
+<h2>Przykładowe obszary</h2>
+<p>Poniższe obszary nie są gotowymi tematami, lecz kierunkami do własnej interpretacji:
+rezerwacja zasobów na godziny · wymiana i wypożyczanie przedmiotów · dopasowanie usługodawców do klientów ·
+wydarzenia i zapisy · zlecenia i oferty · wspólne rozliczenia kosztów · monitorowanie postępów i rankingi ·
+wolontariat i społeczności lokalne · ograniczanie marnowania żywności i przedmiotów.</p>
 </article></main>
 <footer>
   <span>Wprowadzenie do technologii backendowych · laboratoria</span>

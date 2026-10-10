@@ -21,7 +21,7 @@
 <h2>Pracujemy na zajęciach</h2>
 <ul>
 <li>Zadania z danego laboratorium wykonujecie <strong>na zajęciach</strong>, nie w domu.</li>
-<li><strong>Kryteria oceny prowadzący podaje zawsze na początku zajęć.</strong> Tabela niżej to plan, który może się zmienić.</li>
+<li><strong>Kryteria oceny prowadzący podaje na początku każdego laboratorium.</strong></li>
 <li>Ocenę wystawia prowadzący <strong>na koniec zajęć</strong>, ze stanu repozytorium na tagu <code>lab-N</code> zrobionym w trakcie zajęć.</li>
 <li>Czego nie skończycie na zajęciach, nadrabiacie na ostatnich zajęciach (LAB 07).</li>
 </ul>
@@ -38,66 +38,14 @@
 <ul>
 <li>osoby z niezaliczonym materiałem (nieobecność, ocena niedostateczna) zaliczają brakujące laboratorium,</li>
 <li>zespoły poprawiają niezaliczone laboratoria na miejscu (stan oceniany z nowego tagu, np. <code>lab-3-poprawa</code>),</li>
-<li>zespoły bez zaległości mogą pokazać projekt i podnieść ocenę wyzwaniami 5.0.</li>
+<li>zespoły bez zaległości mogą pokazać projekt i podnieść ocenę zadaniami dodatkowymi.</li>
 </ul>
 <h2>Ocena z laboratorium</h2>
 <ul>
 <li>LAB 01 <strong>nie jest oceniany</strong> (konfiguracja i szkic pomysłu).</li>
 <li>Oceniane są laboratoria <strong>02–06</strong>. Ocena z laboratorium to średnia z tych pięciu ocen.</li>
-<li>Każde laboratorium oceniane jest ze stanu repozytorium na tagu <code>lab-N</code>: zielone „Testy i reguły” to warunek konieczny (3.0).</li>
+<li>Każde laboratorium oceniane jest ze stanu repozytorium na tagu <code>lab-N</code>: zielone „Testy i reguły” to warunek konieczny.</li>
 </ul>
-<h2>Kryteria oceny laboratoriów (plan)</h2>
-<div class="tbl"><table>
-<thead>
-<tr>
-<th>LAB</th>
-<th>3.0</th>
-<th>4.0</th>
-<th>5.0</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>01</td>
-<td>bez oceny</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>02 · Encje i relacje</td>
-<td>zielone reguły R1–R2, tag <code>lab-2</code></td>
-<td>5–6 tabel, ≥2 relacje 1:N, encja łącząca z atrybutami, dane w <code>data.sql</code>; każda osoba ma Pull Request z encją</td>
-<td>wyzwanie (np. <code>@Embeddable</code>, audyt, <code>equals</code>/<code>hashCode</code>) + pytania kontrolne</td>
-</tr>
-<tr>
-<td>03 · Repozytoria i zapytania</td>
-<td>zielone reguły R1–R3, tag <code>lab-3</code></td>
-<td>5 pytań inwestora, każde z metodą i testem; każda osoba ma Pull Request z zapytaniem</td>
-<td>wyzwanie (np. <code>Specification</code>, test N+1 „przed/po”) + pytania kontrolne</td>
-</tr>
-<tr>
-<td>04 · Serwisy i komponenty</td>
-<td>zielone reguły R1–R4, tag <code>lab-4</code></td>
-<td>≥3 reguły biznesowe z wyjątkami i testami; każda osoba ma Pull Request z serwisem</td>
-<td>wyzwanie (np. testy parametryzowane, Spring Modulith) + pytania kontrolne</td>
-</tr>
-<tr>
-<td>05 · Kontrolery REST</td>
-<td>zielone reguły R1–R5, tag <code>lab-5</code></td>
-<td>2 zasoby z pełnym CRUD, endpoint raportowy, plik <code>.http</code>; każda osoba ma Pull Request z endpointem</td>
-<td>wyzwanie (np. własny walidator, stronicowanie i sortowanie w API) + pytania kontrolne</td>
-</tr>
-<tr>
-<td>06 · Rozbudowa</td>
-<td>zielone reguły R1–R6, tag <code>lab-6</code></td>
-<td>zdarzenie i zadanie cykliczne z testami</td>
-<td>integracja z API innego zespołu + pytania kontrolne</td>
-</tr>
-</tbody>
-</table></div>
-<p>Pytania kontrolne zadaje prowadzący losowej osobie z zespołu.
-- <strong>Ocena indywidualna:</strong> osoba bez własnego zmergowanego Pull Requesta na danym laboratorium albo bez zrozumienia
-  wskazanego fragmentu kodu zespołu dostaje za to laboratorium maksymalnie 3.0.</p>
 <h2>Ocena końcowa z przedmiotu</h2>
 <div class="tbl"><table>
 <thead>

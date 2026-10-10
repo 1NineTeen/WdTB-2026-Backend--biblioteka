@@ -24,11 +24,11 @@ więc ten sam zestaw ocenia wszystkie zespoły.</p>
 <h2>Jak to działa</h2>
 <ul>
 <li>Każda klasa reguł ma <code>@SinceLab(n)</code> i jest aktywna, gdy <code>lab &gt;= n</code>.</li>
-<li>Lokalnie numer laboratorium bierze się z <code>&lt;lab&gt;</code> w <code>pom.xml</code>. Możecie zajrzeć w przyszłość: w IntelliJ dwa razy <kbd>Ctrl</kbd> (<em>Run Anything</em>) i <code>mvn verify -Dlab=3</code>.</li>
-<li>Na GitHubie numer laboratorium bierze się z tagu: <code>lab-2</code> uruchamia reguły LAB 02. Reguły są pobierane z repozytorium
+<li>Lokalnie numer laboratorium bierze się z <code>&lt;lab&gt;</code> w <code>pom.xml</code>.</li>
+<li>Na GitHubie numer laboratorium bierze się z tagu: <code>lab-1</code> uruchamia reguły LAB 01. Reguły są pobierane z repozytorium
   szablonu przed każdym przebiegiem. <strong>Modyfikowanie reguł lokalnie nic nie daje.</strong> Jeśli uważacie, że reguła jest błędna,
   zgłoście to prowadzącemu. Trafne zgłoszenie to bonus.</li>
-<li>Reguły są <strong>bramką</strong>, nie oceną. Zielony pipeline oznacza „można oceniać”, a nie „5.0”.</li>
+<li>Reguły są <strong>bramką</strong>, nie oceną. Zielony pipeline oznacza „można oceniać”, a nie ocenę.</li>
 </ul>
 <h2>Jak reguły patrzą na projekt</h2>
 <div class="tbl"><table>
@@ -44,21 +44,6 @@ więc ten sam zestaw ocenia wszystkie zespoły.</p>
 <td>01</td>
 <td>pliki + Spring Boot</td>
 <td>tożsamość projektu, <code>PROJEKT.md</code>, wizytówka, aplikacja startuje, konta zespołu</td>
-</tr>
-<tr>
-<td>02</td>
-<td><strong>Spring Boot + JDBC</strong></td>
-<td>uruchamia aplikację na pustej H2, czyta schemat bazy (tabele, klucze, typy kolumn) i liczy wiersze z <code>data.sql</code>: to samo, co widzicie w konsoli H2</td>
-</tr>
-<tr>
-<td>03</td>
-<td>+ <strong>ArchUnit</strong></td>
-<td>od tego laboratorium także kod: encje, repozytoria, zapytania</td>
-</tr>
-<tr>
-<td>04–06</td>
-<td>ArchUnit</td>
-<td>warstwy, moduły, zależności, konwencje Springa</td>
 </tr>
 </tbody>
 </table></div>
@@ -107,173 +92,7 @@ pl.wsb.&lt;projekt&gt;.shared | common | config moduły wspólne, dostępne dla 
 </tr>
 </tbody>
 </table></div>
-<h2>LAB 02 · Encje i relacje (schemat bazy, bez ArchUnit)</h2>
-<div class="tbl"><table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Reguła</th>
-<th>Dlaczego</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>R2.01</td>
-<td>Aplikacja startuje, a Hibernate tworzy tabele bez błędów</td>
-<td>mapowanie jest spójne</td>
-</tr>
-<tr>
-<td>R2.02</td>
-<td>≥4 własne tabele (poza <code>user_account</code>)</td>
-<td>model musi mieć realną strukturę</td>
-</tr>
-<tr>
-<td>R2.03</td>
-<td>Każda tabela ma klucz główny</td>
-<td><code>@Id</code></td>
-</tr>
-<tr>
-<td>R2.04</td>
-<td>≥4 klucze obce</td>
-<td>tabele są powiązane relacjami</td>
-</tr>
-<tr>
-<td>R2.05</td>
-<td>Tabela z kluczami obcymi do dwóch różnych tabel</td>
-<td>relacja N:M</td>
-</tr>
-<tr>
-<td>R2.06</td>
-<td>Klucz obcy z ograniczeniem <code>UNIQUE</code></td>
-<td>relacja 1:1</td>
-</tr>
-<tr>
-<td>R2.07</td>
-<td>Własna tabela wskazuje na <code>user_account</code></td>
-<td>użytkownicy produktu mają konta</td>
-</tr>
-<tr>
-<td>R2.08</td>
-<td>Kolumna typu <code>ENUM</code> w Waszej tabeli</td>
-<td><code>@Enumerated(EnumType.STRING)</code></td>
-</tr>
-<tr>
-<td>R2.09</td>
-<td>Brak kolumn <code>DOUBLE</code>/<code>REAL</code>/<code>FLOAT</code></td>
-<td>pieniądze tylko w <code>BigDecimal</code></td>
-</tr>
-<tr>
-<td>R2.10</td>
-<td>≥2 własne tabele mają po ≥3 wiersze z <code>data.sql</code></td>
-<td>dane do oglądania i testów</td>
-</tr>
-</tbody>
-</table></div>
-<h2>LAB 03 · Encje (ArchUnit), repozytoria, zapytania</h2>
-<div class="tbl"><table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Reguła</th>
-<th>Dlaczego</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>R3.01</td>
-<td><code>@Entity</code>, <code>@Embeddable</code>, <code>@MappedSuperclass</code> w <code>&lt;moduł&gt;.domain</code></td>
-<td>przewidywalne miejsce modelu</td>
-</tr>
-<tr>
-<td>R3.02</td>
-<td>Encje mają konstruktor bezargumentowy <code>public</code>/<code>protected</code></td>
-<td>wymóg JPA</td>
-</tr>
-<tr>
-<td>R3.03</td>
-<td>Pola encji nie są publiczne</td>
-<td>stan zmieniają metody</td>
-</tr>
-<tr>
-<td>R3.04</td>
-<td><code>@Table(name = "snake_case")</code>, bez słów zastrzeżonych</td>
-<td>kontrakt z bazą i <code>data.sql</code></td>
-</tr>
-<tr>
-<td>R3.05</td>
-<td><code>@ManyToOne</code> / <code>@OneToOne</code> mają <code>fetch = LAZY</code></td>
-<td>domyślne EAGER = N+1</td>
-</tr>
-<tr>
-<td>R3.06</td>
-<td>Pola enum mają <code>@Enumerated(EnumType.STRING)</code></td>
-<td>ORDINAL psuje dane</td>
-</tr>
-<tr>
-<td>R3.07</td>
-<td>Brak <code>float</code>/<code>double</code> w modelu</td>
-<td><code>BigDecimal</code></td>
-</tr>
-<tr>
-<td>R3.08</td>
-<td><code>@Id</code> typu <code>Long</code> albo <code>UUID</code></td>
-<td><code>long</code> = 0 zamiast <code>null</code></td>
-</tr>
-<tr>
-<td>R3.09</td>
-<td>Value object <code>@Embeddable</code> użyty jako pole</td>
-<td><code>Money</code>, <code>Address</code>, <code>TimeSlot</code></td>
-</tr>
-<tr>
-<td>R3.10</td>
-<td>Repozytoria to interfejsy <code>*Repository</code> w <code>&lt;moduł&gt;.domain</code></td>
-<td>kolekcja obiektów domeny</td>
-</tr>
-<tr>
-<td>R3.11</td>
-<td>Każde repozytorium ma test <code>&lt;Nazwa&gt;Test</code> (<code>@DataJpaTest</code>)</td>
-<td>zapytanie bez testu to zgadywanie</td>
-</tr>
-<tr>
-<td>R3.12</td>
-<td>≥3 zapytania pochodne</td>
-<td>konwencja Spring Data</td>
-</tr>
-<tr>
-<td>R3.13</td>
-<td>≥2 <code>@Query</code> (JPQL), w tym jedna z <code>GROUP BY</code></td>
-<td>pytania inwestora</td>
-</tr>
-<tr>
-<td>R3.14</td>
-<td>Metoda z <code>Pageable</code>, zwracająca <code>Page</code>/<code>Slice</code></td>
-<td>listy rosną</td>
-</tr>
-<tr>
-<td>R3.15</td>
-<td>Projekcja: rekord albo interfejs</td>
-<td>tylko potrzebne kolumny</td>
-</tr>
-<tr>
-<td>R3.16</td>
-<td><code>@EntityGraph</code> albo <code>JOIN FETCH</code></td>
-<td>jawne rozwiązanie N+1</td>
-</tr>
-</tbody>
-</table></div>
-<h2>LAB 04 · Serwisy i komponenty</h2>
-<p>R4.01 <code>@Service</code> w <code>application</code> · R4.02 brak wstrzykiwania przez pole · R4.03 moduły rozmawiają tylko przez <code>api</code> ·
-R4.04 brak cykli między modułami · R4.05 <code>@Transactional</code> tylko w <code>application</code> · R4.06 domena nie zależy od
-web/infrastructure · R4.07 bez <code>System.out</code>, JUL i wyjątków ogólnych · R4.08 każdy serwis ma test ·
-R4.09 każdy moduł z encjami ma serwis</p>
-<h2>LAB 05 · Kontrolery REST</h2>
-<p>R5.01 <code>@RestController</code> w <code>web</code> · R5.02 kontrolery nie znają encji ani repozytoriów · R5.03 DTO to rekordy ·
-R5.04 <code>@RestControllerAdvice</code> · R5.05 <code>@Valid</code> na <code>@RequestBody</code> · R5.06 każdy kontroler ma test ·
-R5.07 ≥8 endpointów, w tym POST, PUT/PATCH, DELETE · R5.08 OpenAPI (springdoc)</p>
-<h2>LAB 06 · Rozbudowa</h2>
-<p>R6.01 rekord <code>@ConfigurationProperties</code> · R6.02 zdarzenie <code>*Event</code> w <code>api</code> + listener · R6.03 <code>@Scheduled</code> ·
-R6.04 klienci HTTP tylko w <code>infrastructure</code></p>
-<p>Podgląd wszystkich reguł: w IntelliJ dwa razy <kbd>Ctrl</kbd> (<em>Run Anything</em>) i <code>mvn verify -Dlab=6</code>.</p>
+<p>Reguły kolejnych laboratoriów pojawią się w szablonie przed danymi zajęciami.</p>
 </article></main>
 <footer>
   <span>Wprowadzenie do technologii backendowych · laboratoria</span>
