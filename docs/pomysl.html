@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pomysł na projekt · Wprowadzenie do technologii backendowych</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=localStorage.getItem('wdtb-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+  <a class="logo" href="index.html"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></a>
+  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html" aria-current="page">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+</div>
+<main class="doc"><article class="md">
+<h1>Jak wymyślić pomysł na projekt</h1>
+<p>Każdy zespół buduje backend <strong>własnego pomysłu</strong>. Nie musi to być biznes na miliony. Wystarczy realny problem
+konkretnych ludzi, który da się rozwiązać aplikacją z bazą danych.</p>
+<h2>Warunki, które pomysł musi spełnić</h2>
+<ul>
+<li>☐ <strong>Konkretny użytkownik (persona)</strong>, a nie „wszyscy”. Np. „Ola, studentka zaoczna, szuka taniego obiadu po zajęciach”.</li>
+<li>☐ <strong>Co najmniej 2 moduły biznesowe</strong>, np. <code>offer</code> + <code>booking</code>, <code>tutor</code> + <code>lesson</code>.</li>
+<li>☐ <strong>5–6 własnych tabel</strong> (minimum 4, plus gotowa <code>user_account</code> z szablonu). Szczegóły: <a href="wymagania.html">WYMAGANIA.md</a>.</li>
+<li>☐ <strong>Coś, co ma status i cykl życia</strong>: rezerwacja, zamówienie, zgłoszenie, wypożyczenie…</li>
+<li>☐ <strong>Coś, co się liczy</strong>: pieniądze, czas, ilość, punkty.</li>
+<li>☐ <strong>Naturalna relacja wiele-do-wielu</strong>, najlepiej z własnymi danymi (np. rezerwacja = klient + oferta + data + status).</li>
+<li>☐ <strong>Pięć pytań „inwestora”</strong>, na które baza musi umieć odpowiedzieć (LAB 03), np. „ile rezerwacji w tym miesiącu per miasto?”.</li>
+</ul>
+<h2>Czego unikać</h2>
+<ul>
+<li>klonów wielkich serwisów („Facebook, tylko lepszy”): za duże i nudne,</li>
+<li>danych wrażliwych (zdrowie, poglądy, dane dzieci), płatności prawdziwymi pieniędzmi i scrapingu cudzych serwisów,</li>
+<li>pomysłów bez backendu (czysta gra, kalkulator, sama strona wizytówka).</li>
+</ul>
+<h2>Pomysł w 15 minut (LAB 01)</h2>
+<ol>
+<li><strong>Problem</strong> (5 min): każdy z zespołu zapisuje 3 rzeczy, które go irytują na studiach, w pracy, w mieście albo
+   w hobby. Wybierzcie jedną, która dotyczy też innych ludzi.</li>
+<li><strong>Kto i po co</strong> (5 min): persona, jedno zdanie problemu, jak produkt zarabia (prowizja / abonament / reklama).</li>
+<li><strong>Rzeczowniki i czasowniki</strong> (5 min): wypiszcie rzeczowniki z opisu problemu (kandydaci na encje)
+   i czasowniki (kandydaci na przypadki użycia i statusy).</li>
+</ol>
+<p>Zgłoście pomysł prowadzącemu (2 zdania) przed rozpoczęciem modelowania. Dwa zespoły nie mogą mieć tego samego pomysłu.</p>
+<h2>Iskry, jeśli brakuje inspiracji</h2>
+<p>Nie są to gotowe tematy, tylko kierunki do własnej interpretacji:
+rezerwacje czegoś na godziny · wymiana lub wypożyczanie rzeczy między ludźmi · dopasowywanie ludzi do ludzi ·
+wydarzenia i zapisy · zlecenia i oferty · wspólne rozliczenia · śledzenie postępów i rankingi · wolontariat i lokalne
+społeczności · ratowanie rzeczy przed wyrzuceniem.</p>
+</article></main>
+<footer>
+  <span>Wprowadzenie do technologii backendowych · laboratoria</span>
+  <span class="author">Prowadzący: <b>Wojciech Koszela</b> · <a href="https://www.linkedin.com/in/wkoszela/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/wkoszela" target="_blank" rel="noopener">GitHub</a></span>
+  <span class="logo"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></span>
+</footer>
+</div>
+<script>
+(function () {
+  var root = document.documentElement, btn = document.querySelector('.theme-toggle');
+  if (!btn) return;
+  function current() {
+    return root.getAttribute('data-theme') ||
+      (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+  function label() { btn.textContent = current() === 'dark' ? '☀ Jasny' : '☾ Ciemny'; }
+  btn.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('wdtb-theme', next); } catch (e) {}
+    label();
+  });
+  label();
+})();
+</script>
+</body>
+</html>

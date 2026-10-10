@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wprowadzenie do technologii backendowych</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=localStorage.getItem('wdtb-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <span class="logo"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></span>
+    <nav class="jump" aria-label="Dokumentacja"><a href="index.html" aria-current="page">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+  </div>
+
+  <header class="hero">
+    <div class="eyebrow">Laboratoria · rok akademicki 2026/2027</div>
+    <h1>Wprowadzenie do technologii backendowych</h1>
+    <p class="lead">Siedem laboratoriów, trzyosobowy zespół i własny projekt <code>WdTB-2026-Backend-&lt;nazwa&gt;</code>. Budujecie serwer, z którego korzystałaby aplikacja webowa i mobilna: model danych i relacje, repozytoria i zapytania, serwisy, kontrolery REST.</p>
+    <div class="facts">
+      <span class="fact"><b>Zespół</b> 3 osoby</span>
+      <span class="fact"><b>Zajęcia</b> 7 (LAB 01 bez oceny, LAB 07 odrabianie)</span>
+      <span class="fact"><b>Stack</b> Java 21 · Spring Boot 3.5</span>
+      <span class="fact"><b>Baza</b> H2 (wbudowana)</span>
+      <span class="fact"><b>Repo</b> WdTB-2026-Backend-&lt;nazwa&gt; na GitHubie</span>
+    </div>
+  </header>
+
+  <section id="backend">
+    <div class="sec-head">
+      <span class="sec-num">1. CZYM JEST BACKEND</span>
+      <h2>To, czego użytkownik nie widzi</h2>
+      <p>Aplikacja w przeglądarce i aplikacja na telefonie wyglądają inaczej, ale rozmawiają z tym samym serwerem. Serwer przyjmuje żądanie, sprawdza reguły biznesowe, czyta i zapisuje dane w bazie, a potem odsyła odpowiedź w JSON. Tę środkową część budujecie na laboratoriach.</p>
+    </div>
+    <figure>
+      <div class="fig-scroll">
+        <svg class="flow" viewBox="0 0 980 300" role="img" aria-label="Aplikacja webowa i mobilna wysyłają żądania HTTP z JSON do backendu Spring Boot, który odczytuje i zapisuje dane w bazie przez SQL, a potem odsyła odpowiedź JSON.">
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+            <marker id="arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="head-blue" d="M0,0 L10,5 L0,10 z"/></marker>
+          </defs>
+
+          <text x="110" y="28" text-anchor="middle" class="mono small muted">KLIENCI</text>
+          <rect x="30" y="46" width="160" height="96" rx="8" class="box"/>
+          <line x1="30" y1="66" x2="190" y2="66" class="line"/>
+          <circle cx="42" cy="56" r="3" fill="currentColor"/><circle cx="52" cy="56" r="3" fill="currentColor"/><circle cx="62" cy="56" r="3" fill="currentColor"/>
+          <rect x="46" y="78" width="70" height="8" rx="2" class="soft"/>
+          <rect x="46" y="94" width="128" height="8" rx="2" class="soft"/>
+          <rect x="46" y="110" width="100" height="8" rx="2" class="soft"/>
+          <text x="110" y="162" text-anchor="middle" class="label">Aplikacja webowa</text>
+          <rect x="80" y="182" width="60" height="100" rx="10" class="box"/>
+          <line x1="100" y1="192" x2="120" y2="192" class="line"/>
+          <rect x="90" y="204" width="40" height="8" rx="2" class="soft"/>
+          <rect x="90" y="218" width="40" height="8" rx="2" class="soft"/>
+          <rect x="90" y="232" width="28" height="8" rx="2" class="soft"/>
+          <text x="152" y="270" class="label">Aplikacja mobilna</text>
+
+          <path d="M196 94 C 270 94, 290 130, 360 136" class="line" marker-end="url(#arr)"/>
+          <path d="M146 222 C 270 222, 290 176, 360 170" class="line" marker-end="url(#arr)"/>
+          <text x="262" y="112" text-anchor="middle" class="mono small">GET /api/offers</text>
+          <text x="262" y="212" text-anchor="middle" class="mono small">POST /api/bookings</text>
+          <text x="262" y="160" text-anchor="middle" class="small muted">HTTP + JSON</text>
+
+          <path d="M366 70 C 300 50, 250 40, 196 52" class="dash" marker-end="url(#arr)"/>
+          <text x="290" y="40" text-anchor="middle" class="small muted">200 OK + JSON</text>
+
+          <text x="510" y="28" text-anchor="middle" class="mono small accent">BACKEND · TO BUDUJECIE</text>
+          <rect x="366" y="46" width="288" height="236" rx="14" class="box-accent"/>
+          <text x="510" y="74" text-anchor="middle" class="label">Spring Boot (Java)</text>
+          <rect x="396" y="90" width="228" height="38" rx="7" class="box"/>
+          <text x="510" y="114" text-anchor="middle" class="small">Controller · REST API</text>
+          <rect x="396" y="148" width="228" height="38" rx="7" class="box"/>
+          <text x="510" y="172" text-anchor="middle" class="small">Service · reguły biznesowe</text>
+          <rect x="396" y="206" width="228" height="38" rx="7" class="box"/>
+          <text x="510" y="230" text-anchor="middle" class="small">Repository · dostęp do danych</text>
+          <line x1="510" y1="128" x2="510" y2="146" class="line" marker-end="url(#arr)"/>
+          <line x1="510" y1="186" x2="510" y2="204" class="line" marker-end="url(#arr)"/>
+
+          <line x1="654" y1="214" x2="796" y2="214" class="line-accent" marker-end="url(#arrB)"/>
+          <line x1="796" y1="240" x2="654" y2="240" class="line" marker-end="url(#arr)"/>
+          <text x="725" y="204" text-anchor="middle" class="mono small accent">SQL (Hibernate)</text>
+          <text x="725" y="258" text-anchor="middle" class="small muted">wiersze tabel</text>
+
+          <text x="878" y="28" text-anchor="middle" class="mono small muted">BAZA DANYCH</text>
+          <path d="M800 92 v136 a78 18 0 0 0 156 0 v-136" class="box"/>
+          <ellipse cx="878" cy="92" rx="78" ry="18" class="box"/>
+          <path d="M800 138 a78 18 0 0 0 156 0" class="line"/>
+          <path d="M800 184 a78 18 0 0 0 156 0" class="line"/>
+          <text x="878" y="128" text-anchor="middle" class="small">tabele</text>
+          <text x="878" y="172" text-anchor="middle" class="small">relacje</text>
+          <text x="878" y="284" text-anchor="middle" class="label">H2 (wbudowana)</text>
+        </svg>
+      </div>
+      <figcaption>Jeden backend obsługuje wielu klientów. Klient nie widzi bazy: zna tylko adresy API i format JSON. Baza nie wie nic o klientach: odpowiada na zapytania SQL, które w Javie generuje Hibernate.</figcaption>
+    </figure>
+    <div class="two">
+      <div class="card">
+        <h3>Relacyjna baza danych</h3>
+        <p>Dane w tabelach powiązanych kluczami obcymi: klient ma wiele rezerwacji, rezerwacja dotyczy jednej oferty. Na zajęciach H2: baza wbudowana w aplikację, nic nie trzeba instalować.</p>
+      </div>
+      <div class="card">
+        <h3>JPA i Hibernate</h3>
+        <p>Klasy Javy oznaczone <code>@Entity</code> są mapowane na tabele. Zamiast pisać SQL ręcznie, piszecie repozytoria Spring Data, a Hibernate tłumaczy je na zapytania.</p>
+      </div>
+      <div class="card">
+        <h3>REST API</h3>
+        <p>Zasoby pod adresami (<code>/api/offers</code>) i metody HTTP: GET czyta, POST tworzy, PUT/PATCH zmienia, DELETE usuwa. Odpowiedź to JSON i kod statusu (200, 201, 400, 404).</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="warstwy">
+    <div class="sec-head">
+      <span class="sec-num">2. ARCHITEKTURA WARSTWOWA</span>
+      <h2>Każda warstwa ma jedno zadanie</h2>
+      <p>Żądanie przechodzi przez warstwy z góry na dół, a odpowiedź wraca tą samą drogą. Każdą warstwę budujecie na innym laboratorium.</p>
+    </div>
+    <figure>
+      <div class="fig-scroll">
+        <svg class="layers" viewBox="0 0 820 520" role="img" aria-label="Warstwy backendu od góry: klient, Controller (LAB 05), Service (LAB 04), Repository (LAB 03), baza danych z encjami (LAB 02). DTO istnieją tylko między klientem a kontrolerem, encje tylko między serwisem a bazą.">
+          <defs>
+            <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+          </defs>
+          <rect x="200" y="20" width="320" height="58" rx="10" class="box"/>
+          <text x="360" y="46" text-anchor="middle" class="label">Klient</text>
+          <text x="360" y="64" text-anchor="middle" class="small muted">przeglądarka, aplikacja mobilna, plik .http</text>
+
+          <line x1="360" y1="78" x2="360" y2="122" class="line" marker-end="url(#ar2)"/>
+          <text x="372" y="105" class="mono small">HTTP + JSON</text>
+
+          <rect x="200" y="124" width="320" height="64" rx="10" class="box-accent"/>
+          <text x="360" y="150" text-anchor="middle" class="label">Controller</text>
+          <text x="360" y="170" text-anchor="middle" class="mono small">@RestController</text>
+          <rect x="100" y="142" width="76" height="26" rx="13" class="pill"/>
+          <text x="138" y="159" text-anchor="middle" class="pill-text">LAB 05</text>
+
+          <line x1="360" y1="188" x2="360" y2="232" class="line" marker-end="url(#ar2)"/>
+          <text x="372" y="215" class="mono small">wywołanie metody</text>
+
+          <rect x="200" y="234" width="320" height="64" rx="10" class="box-accent"/>
+          <text x="360" y="260" text-anchor="middle" class="label">Service</text>
+          <text x="360" y="280" text-anchor="middle" class="mono small">@Service · @Transactional</text>
+          <rect x="100" y="252" width="76" height="26" rx="13" class="pill"/>
+          <text x="138" y="269" text-anchor="middle" class="pill-text">LAB 04</text>
+
+          <line x1="360" y1="298" x2="360" y2="342" class="line" marker-end="url(#ar2)"/>
+          <text x="372" y="325" class="mono small">findBy…, @Query</text>
+
+          <rect x="200" y="344" width="320" height="64" rx="10" class="box-accent"/>
+          <text x="360" y="370" text-anchor="middle" class="label">Repository</text>
+          <text x="360" y="390" text-anchor="middle" class="mono small">JpaRepository · Spring Data</text>
+          <rect x="100" y="362" width="76" height="26" rx="13" class="pill"/>
+          <text x="138" y="379" text-anchor="middle" class="pill-text">LAB 03</text>
+
+          <line x1="360" y1="408" x2="360" y2="440" class="line" marker-end="url(#ar2)"/>
+          <text x="372" y="430" class="mono small">SQL</text>
+
+          <rect x="200" y="442" width="320" height="58" rx="10" class="box"/>
+          <text x="360" y="468" text-anchor="middle" class="label">Baza danych</text>
+          <text x="360" y="486" text-anchor="middle" class="small muted">tabele, klucze, relacje · data.sql</text>
+
+          <rect x="560" y="20" width="230" height="168" rx="12" class="dash"/>
+          <text x="675" y="48" text-anchor="middle" class="label">DTO</text>
+          <text x="675" y="68" text-anchor="middle" class="mono small">record OfferResponse(…)</text>
+          <text x="675" y="98" text-anchor="middle" class="small muted">kształt JSON w API</text>
+          <text x="675" y="116" text-anchor="middle" class="small muted">walidacja @Valid</text>
+          <text x="675" y="146" text-anchor="middle" class="small muted">żyją tylko między</text>
+          <text x="675" y="164" text-anchor="middle" class="small muted">klientem a kontrolerem</text>
+
+          <rect x="560" y="234" width="230" height="266" rx="12" class="dash"/>
+          <text x="675" y="262" text-anchor="middle" class="label">Encje</text>
+          <text x="675" y="282" text-anchor="middle" class="mono small">@Entity · @ManyToOne</text>
+          <text x="675" y="312" text-anchor="middle" class="small muted">klasa Javy = tabela</text>
+          <text x="675" y="330" text-anchor="middle" class="small muted">pole = kolumna</text>
+          <text x="675" y="348" text-anchor="middle" class="small muted">relacja = klucz obcy</text>
+          <text x="675" y="378" text-anchor="middle" class="small muted">nie wychodzą poza</text>
+          <text x="675" y="396" text-anchor="middle" class="small muted">serwis do kontrolera</text>
+          <rect x="637" y="440" width="76" height="26" rx="13" class="pill"/>
+          <text x="675" y="457" text-anchor="middle" class="pill-text">LAB 02</text>
+
+          <text x="20" y="54" class="small muted">kto pyta</text>
+          <text x="20" y="476" class="small muted">gdzie leżą dane</text>
+        </svg>
+      </div>
+      <figcaption>Kontroler zamienia JSON na wywołanie serwisu i z powrotem, serwis pilnuje reguł biznesowych i transakcji, repozytorium rozmawia z bazą. DTO istnieją tylko na brzegu (kontroler), a encje tylko w środku (serwis, repozytorium). Dzięki temu zmiana tabeli nie psuje klientów API, a reguły projektu sprawdzają ten podział automatycznie.</figcaption>
+    </figure>
+  </section>
+
+  <section id="roadmapa">
+    <div class="sec-head">
+      <span class="sec-num">3. HARMONOGRAM</span>
+      <h2>Siedem zajęć z każdą grupą</h2>
+      <p>Każda z siedmiu grup przechodzi ten sam program. Instrukcje LAB 01–02 są w sekcji <a href="#instrukcje">Instrukcje</a> i w repozytorium (katalog <code>docs/</code>); kolejne pojawią się przed zajęciami.</p>
+    </div>
+    <div class="road">
+      <article class="stop ready">
+        <div class="badge">01</div>
+        <div class="stop-body">
+          <div class="stop-title"><h3>Start</h3><span class="tagp">bez oceny</span><span class="tagp ready">instrukcja</span></div>
+          <p>Zespół, fork szablonu na GitHubie przemianowany na WdTB-2026-Backend-&lt;nazwa&gt;, wpis w arkuszu grupy. Uruchamiacie aplikację, oglądacie dane w konsoli H2 i dopisujecie swoje konta. Pomysł rozwijacie i opisujecie: karta projektu i wizytówka na stronie startowej.</p>
+          <div class="tags"><span class="tag">GitHub</span><span class="tag">IntelliJ</span><span class="tag">H2</span><span class="tag">PROJEKT.md</span></div>
+          <a class="go" href="lab01.html">Otwórz instrukcję LAB 01 →</a>
+        </div>
+      </article>
+      <article class="stop ready">
+        <div class="badge">02</div>
+        <div class="stop-body">
+          <div class="stop-title"><h3>Encje i relacje</h3><span class="tagp ready">instrukcja</span></div>
+          <p>Pomysł zamieniamy w model JPA: 4–6 tabel, relacje 1:N, N:M i 1:1, enumy, kwoty w BigDecimal, dane startowe w data.sql.</p>
+          <div class="tags"><span class="tag">@Entity</span><span class="tag">@ManyToOne</span><span class="tag">@OneToMany</span><span class="tag">@ManyToMany</span><span class="tag">@OneToOne</span></div>
+          <a class="go" href="lab02.html">Otwórz instrukcję LAB 02 →</a>
+        </div>
+      </article>
+      <article class="stop">
+        <div class="badge">03</div>
+        <div class="stop-body">
+          <div class="stop-title"><h3>Repozytoria i zapytania</h3></div>
+          <p>Repozytoria Spring Data, pięć „pytań inwestora” jako zapytania z testami, polowanie na problem N+1.</p>
+          <div class="tags"><span class="tag">JpaRepository</span><span class="tag">@Query</span><span class="tag">GROUP BY</span><span class="tag">Pageable</span><span class="tag">@DataJpaTest</span></div>
+        </div>
+      </article>
+      <article class="stop">
+        <div class="badge">04</div>
+        <div class="stop-body">
+          <div class="stop-title"><h3>Serwisy i komponenty</h3></div>
+          <p>Kontener IoC, wstrzykiwanie zależności, transakcje, reguły biznesowe z wyjątkami domenowymi, testy z Mockito.</p>
+          <div class="tags"><span class="tag">@Service</span><span class="tag">@Component</span><span class="tag">@Bean</span><span class="tag">@Transactional</span><span class="tag">Mockito</span></div>
+        </div>
+      </article>
+      <article class="stop">
+        <div class="badge">05</div>
+        <div class="stop-body">
+          <div class="stop-title"><h3>Kontrolery REST</h3></div>
+          <p>10–15 endpointów z DTO i walidacją, obsługa błędów, stronicowanie, raporty, dokumentacja OpenAPI.</p>
+          <div class="tags"><span class="tag">@RestController</span><span class="tag">record DTO</span><span class="tag">@Valid</span><span class="tag">ProblemDetail</span><span class="tag">OpenAPI</span></div>
+        </div>
+      </article>
+      <article class="stop">
+        <div class="badge">06</div>
+        <div class="stop-body">
+          <div class="stop-title"><h3>Rozbudowa</h3></div>
+          <p>Zdarzenia między modułami, konfiguracja, zadania cykliczne. Na 5.0 integracja z API innego zespołu.</p>
+          <div class="tags"><span class="tag">@EventListener</span><span class="tag">@ConfigurationProperties</span><span class="tag">@Scheduled</span><span class="tag">RestClient</span></div>
+        </div>
+      </article>
+      <article class="stop">
+        <div class="badge">07</div>
+        <div class="stop-body">
+          <div class="stop-title"><h3>Odrabianie</h3><span class="tagp event">ostatnie zajęcia</span></div>
+          <p>Nadrobienie niezaliczonego materiału i poprawy czerwonych labów. Zespoły bez zaległości pokazują projekt i podnoszą ocenę wyzwaniami 5.0.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="wymagania">
+    <div class="sec-head">
+      <span class="sec-num">4. WYMAGANIA</span>
+      <h2>Ile czego w projekcie</h2>
+      <p>Minimum sprawdzają automatyczne reguły w pipeline (ocena 3.0). Zalecany rozmiar to projekt „w sam raz” na 4.0–5.0.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="req">
+        <thead><tr><th>Element</th><th>Minimum</th><th>Zalecane</th><th>Lab</th></tr></thead>
+        <tbody>
+          <tr><td>Moduły biznesowe</td><td>2</td><td>2–3</td><td>02</td></tr>
+          <tr><td>Własne tabele (poza <code>user_account</code>)</td><td>4</td><td><b>5–6</b> (max 8)</td><td>02</td></tr>
+          <tr><td>Relacje 1:N</td><td>–</td><td>≥2, jedna dwukierunkowa</td><td>02</td></tr>
+          <tr><td>Relacja N:M</td><td>1</td><td>encja łącząca z atrybutami</td><td>02</td></tr>
+          <tr><td>Relacja 1:1</td><td>1</td><td>np. konto ↔ profil</td><td>02</td></tr>
+          <tr><td>Enum jako tekst / kwoty w BigDecimal</td><td>1 / tak</td><td>2 / tak</td><td>02</td></tr>
+          <tr><td>Dane startowe w <code>data.sql</code></td><td>2 tabele × 3 wiersze</td><td>5–10 wierszy w głównych tabelach</td><td>02</td></tr>
+          <tr><td>Zapytania pochodne / <code>@Query</code></td><td>3 / 2 (w tym GROUP BY)</td><td>4–6 / 3–5</td><td>03</td></tr>
+          <tr><td>Pytania inwestora</td><td>5</td><td>5, każde z testem</td><td>03</td></tr>
+          <tr><td>Serwisy</td><td>1 na moduł</td><td>2–4, ≥3 reguły biznesowe</td><td>04</td></tr>
+          <tr><td>Endpointy REST</td><td>8 (POST, PUT/PATCH, DELETE)</td><td><b>10–15</b>, 2 zasoby z CRUD</td><td>05</td></tr>
+          <tr><td>Testy zespołu</td><td>repozytorium, serwis, kontroler</td><td>25+</td><td>03–05</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="instrukcje">
+    <div class="sec-head">
+      <span class="sec-num">5. INSTRUKCJE</span>
+      <h2>Instrukcje do laboratoriów</h2>
+      <p>Ta sama dokumentacja jest w repozytorium szablonu: otwórzcie <code>docs/index.html</code>. Wybierzcie zakładkę.</p>
+    </div>
+    <div class="doc-links"><a class="doc-link" href="lab01.html"><b>LAB 01 · Start</b></a><a class="doc-link" href="lab02.html"><b>LAB 02 · Encje i relacje</b></a><a class="doc-link" href="wymagania.html"><b>Wymagania projektu</b></a><a class="doc-link" href="zasady.html"><b>Zasady zaliczenia</b></a><a class="doc-link" href="reguly.html"><b>Reguły projektu</b></a><a class="doc-link" href="pomysl.html"><b>Pomysł na projekt</b></a><a class="doc-link" href="zespol.html"><b>Praca w zespole</b></a><a class="doc-link" href="roadmapa.html"><b>Roadmapa</b></a></div>
+  </section>
+
+  <section id="organizacja">
+    <div class="sec-head">
+      <span class="sec-num">6. INFORMACJE ORGANIZACYJNE</span>
+      <h2>Pierwsze zajęcia</h2>
+    </div>
+    <div class="two">
+      <div class="card">
+        <h3>Na start</h3>
+        <ul>
+          <li>Zespół 3 osoby</li>
+          <li>Jedna osoba forkuje <code>wkoszela/WdTB-2026-Backend--projectname-</code>, zmienia nazwę na <code>WdTB-2026-Backend-&lt;nazwa&gt;</code> i dodaje resztę zespołu</li>
+          <li>Prowadzący dodany jako współpracownik repozytorium</li>
+          <li>Wpis w arkuszu swojej grupy: nazwa projektu, link do repozytorium, imię i nazwisko, nr indeksu, e-mail</li>
+          <li>Uruchomiona aplikacja: strona startowa i konsola H2</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Wymagania sprzętowe</h3>
+        <ul>
+          <li>JDK 21 lub nowsze</li>
+          <li>IntelliJ IDEA z Mavenem</li>
+          <li>Git i konto GitHub</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Pracujemy na zajęciach</h3>
+        <ul>
+          <li>Zadania robicie w trakcie zajęć, nie w domu</li>
+          <li>Kryteria oceny prowadzący podaje na początku zajęć</li>
+          <li>Ocena na koniec zajęć, ze stanu tagu <code>lab-N</code></li>
+          <li>Jedna osoba hostuje repozytorium, wszyscy piszą kod i robią recenzje</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="zaliczenie">
+    <div class="sec-head">
+      <span class="sec-num">7. WARUNKI ZALICZENIA</span>
+      <h2>Ocena i obecności</h2>
+    </div>
+    <div class="grades">
+      <div class="grade"><span class="pct">70%</span><h3>Laboratorium</h3><p>Średnia ocen z labów 02–06 ze stanu repozytorium na tagach <code>lab-N</code>. LAB 01 nie jest oceniany.</p></div>
+      <div class="grade"><span class="pct">30%</span><h3>Wykład</h3><p>Zgodnie z zasadami wykładu.</p></div>
+      <div class="grade"><span class="pct">1</span><h3>Dopuszczalna nieobecność</h3><p>Każda kolejna to niezaliczony materiał, do odrobienia na LAB 07.</p></div>
+    </div>
+    <div class="two">
+      <div class="card"><h3>3.0</h3><p>Zielone „Testy i reguły” dla danego labu i tag <code>lab-N</code>.</p></div>
+      <div class="card"><h3>4.0</h3><p>Projekt w zalecanym rozmiarze, każda osoba ma zmergowany Pull Request z merytoryczną recenzją.</p></div>
+      <div class="card"><h3>5.0</h3><p>Do tego wyzwanie dodatkowe i odpowiedzi na pytania kontrolne.</p></div>
+    </div>
+    <p class="note">Kryteria oceny prowadzący podaje zawsze na początku zajęć, a ocenę wystawia na ich koniec. Przychodzicie na zajęcia swojej grupy. Do grupy wcześniejszej lub późniejszej można przyjść tylko wtedy, gdy jest wolne miejsce. Na ocenie losowa osoba z zespołu tłumaczy losowy fragment kodu; osoba bez własnego zmergowanego Pull Requesta dostaje za dany lab maksymalnie 3.0.</p>
+  </section>
+
+  <section id="technologie">
+    <div class="sec-head">
+      <span class="sec-num">8. TECHNOLOGIE</span>
+      <h2>Z czym pracujemy</h2>
+    </div>
+    <dl class="tech">
+      <dt>Język</dt><dd>Java 21 (działa także na nowszym JDK)</dd>
+      <dt>Framework</dt><dd>Spring Boot 3.5 (reguły działają także ze Spring Boot 4)</dd>
+      <dt>Dane</dt><dd>Spring Data JPA (Hibernate), baza H2; tabele tworzy Hibernate z encji, dane startowe w <code>data.sql</code></dd>
+      <dt>Testy</dt><dd>JUnit 5, AssertJ, Mockito, Spring Boot Test, ArchUnit od LAB 03</dd>
+      <dt>Narzędzia</dt><dd>Maven, IntelliJ IDEA, GitHub i GitHub Actions</dd>
+    </dl>
+  </section>
+
+  <footer>
+    <span>Wprowadzenie do technologii backendowych · laboratoria</span>
+    <span class="author">Prowadzący: <b>Wojciech Koszela</b> · <a href="https://www.linkedin.com/in/wkoszela/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/wkoszela" target="_blank" rel="noopener">GitHub</a></span>
+    <span class="logo"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></span>
+  </footer>
+</div>
+<script>
+(function () {
+  var root = document.documentElement, btn = document.querySelector('.theme-toggle');
+  if (!btn) return;
+  function current() {
+    return root.getAttribute('data-theme') ||
+      (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+  function label() { btn.textContent = current() === 'dark' ? '☀ Jasny' : '☾ Ciemny'; }
+  btn.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('wdtb-theme', next); } catch (e) {}
+    label();
+  });
+  label();
+})();
+</script>
+</body>
+</html>

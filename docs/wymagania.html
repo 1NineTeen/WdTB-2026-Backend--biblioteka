@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wymagania projektu · Wprowadzenie do technologii backendowych</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=localStorage.getItem('wdtb-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+  <a class="logo" href="index.html"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></a>
+  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html" aria-current="page">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+</div>
+<main class="doc"><article class="md">
+<h1>Wymagania projektu: ile czego</h1>
+<p>Kolumna <strong>Minimum</strong> to próg sprawdzany automatycznie przez reguły (zielone „Testy i reguły” = ocena 3.0).
+Kolumna <strong>Zalecane</strong> to rozmiar, przy którym projekt jest „w sam raz” na ocenę 4.0–5.0. Więcej niż górna granica
+zalecanego zakresu nie daje punktów, tylko więcej pracy.</p>
+<h2>Skala projektu w skrócie</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th></th>
+<th>Minimum</th>
+<th>Zalecane</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Osoby w zespole</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Moduły biznesowe</td>
+<td>2</td>
+<td>2–3</td>
+</tr>
+<tr>
+<td>Własne tabele (poza <code>user_account</code>)</td>
+<td>4</td>
+<td><strong>5–6</strong> (max 8)</td>
+</tr>
+<tr>
+<td>Repozytoria</td>
+<td>1 na encję główną</td>
+<td>3–5</td>
+</tr>
+<tr>
+<td>Pytania inwestora (zapytania raportowe)</td>
+<td>5</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Serwisy</td>
+<td>1 na moduł</td>
+<td>2–4</td>
+</tr>
+<tr>
+<td>Endpointy REST</td>
+<td>8</td>
+<td><strong>10–15</strong></td>
+</tr>
+<tr>
+<td>Testy napisane przez zespół</td>
+<td>1 na repozytorium, serwis i kontroler</td>
+<td>25+</td>
+</tr>
+</tbody>
+</table></div>
+<h2>LAB 01 · Start (bez oceny)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Wymaganie</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Projekt</td>
+<td>repozytorium <code>WdTB-2026-Backend-&lt;nazwaprojektu&gt;</code>, pakiet <code>pl.wsb.&lt;nazwaprojektu&gt;</code>, <code>artifactId</code> <code>wdtb-2026-backend-&lt;nazwaprojektu&gt;</code>, aplikacja startuje</td>
+</tr>
+<tr>
+<td>Konta zespołu</td>
+<td>każda osoba dopisuje swoje konto do <code>data.sql</code> (R1.04)</td>
+</tr>
+<tr>
+<td>Wizytówka projektu</td>
+<td>strona startowa <code>static/index.html</code> uzupełniona (R1.05)</td>
+</tr>
+<tr>
+<td><code>PROJEKT.md</code></td>
+<td>3 osoby, problem, persona, model przychodu, <strong>≥5 historyjek</strong>, wstępny diagram ER</td>
+</tr>
+<tr>
+<td>Arkusz zespołów</td>
+<td>nazwa projektu, link do repozytorium, dane każdej osoby</td>
+</tr>
+</tbody>
+</table></div>
+<h2>LAB 02 · Encje i relacje</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Minimum (reguła)</th>
+<th>Zalecane</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Własne tabele</td>
+<td>4 (R2.02)</td>
+<td>5–6</td>
+</tr>
+<tr>
+<td>Klucz główny w każdej tabeli</td>
+<td>tak (R2.03)</td>
+<td><code>Long</code> z <code>IDENTITY</code></td>
+</tr>
+<tr>
+<td>Klucze obce</td>
+<td>4 (R2.04)</td>
+<td>5–8</td>
+</tr>
+<tr>
+<td>Relacje 1:N</td>
+<td>–</td>
+<td><strong>≥2</strong>, w tym ≥1 dwukierunkowa (<code>mappedBy</code>)</td>
+</tr>
+<tr>
+<td>Relacja N:M</td>
+<td>1 (R2.05)</td>
+<td>encja łącząca <strong>z atrybutami</strong> (data, ilość, status)</td>
+</tr>
+<tr>
+<td>Relacja 1:1</td>
+<td>1 (R2.06)</td>
+<td>np. konto ↔ profil</td>
+</tr>
+<tr>
+<td>Powiązanie z <code>user_account</code></td>
+<td>1 (R2.07)</td>
+<td>każdy typ użytkownika ma konto</td>
+</tr>
+<tr>
+<td>Enum zapisany jako tekst</td>
+<td>1 kolumna (R2.08)</td>
+<td>2 (np. status, typ)</td>
+</tr>
+<tr>
+<td>Dane startowe w <code>data.sql</code></td>
+<td>2 tabele po 3 wiersze (R2.10)</td>
+<td>5–10 wierszy w głównych tabelach, różne statusy</td>
+</tr>
+<tr>
+<td>Kwoty i ilości</td>
+<td><code>BigDecimal</code>, zero <code>double</code> (R2.09)</td>
+<td>precyzja <code>(10, 2)</code> dla kwot</td>
+</tr>
+</tbody>
+</table></div>
+<h2>LAB 03 · Repozytoria i zapytania</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Minimum (reguła)</th>
+<th>Zalecane</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Value object <code>@Embeddable</code></td>
+<td>1 (R3.09)</td>
+<td>1–2 (<code>Money</code>, <code>Address</code>, <code>TimeSlot</code>)</td>
+</tr>
+<tr>
+<td>Test każdego repozytorium</td>
+<td>tak (R3.11)</td>
+<td>2–4 testy na repozytorium</td>
+</tr>
+<tr>
+<td>Zapytania pochodne</td>
+<td>3 (R3.12)</td>
+<td>4–6</td>
+</tr>
+<tr>
+<td><code>@Query</code> (JPQL)</td>
+<td>2, w tym 1 z <code>GROUP BY</code> (R3.13)</td>
+<td>3–5</td>
+</tr>
+<tr>
+<td>Stronicowanie <code>Page</code>/<code>Slice</code></td>
+<td>1 (R3.14)</td>
+<td>na każdej liście, która rośnie</td>
+</tr>
+<tr>
+<td>Projekcja (record/interfejs)</td>
+<td>1 (R3.15)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Rozwiązany N+1 (<code>@EntityGraph</code>/<code>JOIN FETCH</code>)</td>
+<td>1 (R3.16)</td>
+<td>+ test z <code>QueryCounter</code></td>
+</tr>
+<tr>
+<td>Pytania inwestora</td>
+<td>5 w <code>PROJEKT.md</code></td>
+<td>każde z metodą i testem</td>
+</tr>
+</tbody>
+</table></div>
+<h2>LAB 04 · Serwisy i komponenty</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Minimum (reguła)</th>
+<th>Zalecane</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@Service</code> w <code>&lt;moduł&gt;.application</code></td>
+<td>1 na moduł z encjami (R4.01, R4.09)</td>
+<td>1–2 na moduł</td>
+</tr>
+<tr>
+<td>Reguły biznesowe w kodzie</td>
+<td>–</td>
+<td><strong>≥3</strong> (np. „nie można zarezerwować wyprzedanej oferty”), każda z wyjątkiem domenowym</td>
+</tr>
+<tr>
+<td>Publiczne API modułu (<code>&lt;moduł&gt;.api</code>)</td>
+<td>moduły rozmawiają tylko przez nie (R4.03)</td>
+<td>interfejs + rekordy</td>
+</tr>
+<tr>
+<td>Testy jednostkowe serwisów (Mockito)</td>
+<td>1 klasa na serwis (R4.08)</td>
+<td>3–5 testów na serwis, w tym przypadki błędne</td>
+</tr>
+<tr>
+<td>Wstrzykiwanie</td>
+<td>tylko przez konstruktor (R4.02)</td>
+<td><code>final</code> pola</td>
+</tr>
+</tbody>
+</table></div>
+<h2>LAB 05 · Kontrolery REST</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Minimum (reguła)</th>
+<th>Zalecane</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Endpointy</td>
+<td>8, w tym POST, PUT/PATCH, DELETE (R5.07)</td>
+<td>10–15</td>
+</tr>
+<tr>
+<td>Zasoby z pełnym CRUD</td>
+<td>–</td>
+<td><strong>2</strong></td>
+</tr>
+<tr>
+<td>Endpointy raportowe (pytania inwestora)</td>
+<td>–</td>
+<td>2–3</td>
+</tr>
+<tr>
+<td>Stronicowanie w API</td>
+<td>–</td>
+<td>na każdej liście (<code>?page=&amp;size=&amp;sort=</code>)</td>
+</tr>
+<tr>
+<td>DTO jako rekordy, walidacja <code>@Valid</code></td>
+<td>tak (R5.03, R5.05)</td>
+<td>własny walidator dla 1 reguły</td>
+</tr>
+<tr>
+<td>Obsługa błędów <code>ProblemDetail</code></td>
+<td>tak (R5.04)</td>
+<td>400, 404, 409 z czytelnym komunikatem</td>
+</tr>
+<tr>
+<td>Testy kontrolerów</td>
+<td>1 klasa na kontroler (R5.06)</td>
+<td><code>@WebMvcTest</code> dla każdego endpointu</td>
+</tr>
+<tr>
+<td>Dokumentacja OpenAPI</td>
+<td>tak (R5.08)</td>
+<td>opisy i przykłady na DTO</td>
+</tr>
+</tbody>
+</table></div>
+<h2>LAB 06 · Rozbudowa</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Minimum (reguła)</th>
+<th>Zalecane</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Konfiguracja <code>@ConfigurationProperties</code> (rekord)</td>
+<td>1 (R6.01)</td>
+<td>progi i czasy biznesowe zamiast „magicznych liczb”</td>
+</tr>
+<tr>
+<td>Zdarzenie <code>*Event</code> + listener w innym module</td>
+<td>1 (R6.02)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Zadanie cykliczne <code>@Scheduled</code></td>
+<td>1 (R6.03)</td>
+<td>np. wygaszanie rezerwacji</td>
+</tr>
+<tr>
+<td>Integracja HTTP (<code>RestClient</code> w <code>infrastructure</code>)</td>
+<td>jeśli jest, to tylko tam (R6.04)</td>
+<td>wywołanie API zespołu partnerskiego (5.0)</td>
+</tr>
+</tbody>
+</table></div>
+<h2>LAB 07 · Odrabianie</h2>
+<p>Brak nowych wymagań. Zespoły uzupełniają zaległe laby, a osoby z nieobecnościami zaliczają brakujący materiał.
+Zespoły bez zaległości mogą pokazać projekt i podnieść ocenę wyzwaniami 5.0.</p>
+</article></main>
+<footer>
+  <span>Wprowadzenie do technologii backendowych · laboratoria</span>
+  <span class="author">Prowadzący: <b>Wojciech Koszela</b> · <a href="https://www.linkedin.com/in/wkoszela/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/wkoszela" target="_blank" rel="noopener">GitHub</a></span>
+  <span class="logo"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></span>
+</footer>
+</div>
+<script>
+(function () {
+  var root = document.documentElement, btn = document.querySelector('.theme-toggle');
+  if (!btn) return;
+  function current() {
+    return root.getAttribute('data-theme') ||
+      (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+  function label() { btn.textContent = current() === 'dark' ? '☀ Jasny' : '☾ Ciemny'; }
+  btn.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('wdtb-theme', next); } catch (e) {}
+    label();
+  });
+  label();
+})();
+</script>
+</body>
+</html>

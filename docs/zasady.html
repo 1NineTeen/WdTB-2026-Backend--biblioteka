@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zasady zaliczenia · Wprowadzenie do technologii backendowych</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=localStorage.getItem('wdtb-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+  <a class="logo" href="index.html"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></a>
+  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html">Wymagania</a><a href="zasady.html" aria-current="page">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+</div>
+<main class="doc"><article class="md">
+<h1>Zasady zaliczenia</h1>
+<h2>Pracujemy na zajęciach</h2>
+<ul>
+<li>Zadania z danego laboratorium wykonujecie <strong>na zajęciach</strong>, nie w domu.</li>
+<li><strong>Kryteria oceny prowadzący podaje zawsze na początku zajęć.</strong> Tabela niżej to plan, który może się zmienić.</li>
+<li>Ocenę wystawia prowadzący <strong>na koniec zajęć</strong>, ze stanu repozytorium na tagu <code>lab-N</code> zrobionym w trakcie zajęć.</li>
+<li>Czego nie skończycie na zajęciach, nadrabiacie na ostatnich zajęciach (LAB 07).</li>
+</ul>
+<h2>Obecność</h2>
+<ul>
+<li>Przychodzicie <strong>na zajęcia swojej grupy</strong>.</li>
+<li>Wyjątkowo można przyjść na zajęcia <strong>grupy wcześniejszej lub późniejszej</strong>, <strong>o ile jest wolne miejsce</strong>.
+  Zapytajcie prowadzącego przed zajęciami.</li>
+<li><strong>Jedna nieobecność jest dopuszczalna</strong> bez konsekwencji. Materiał z tych zajęć nadrabiacie z zespołem.</li>
+<li><strong>Każda kolejna nieobecność oznacza niezaliczony materiał</strong> z tych zajęć. Można go odrobić na ostatnich zajęciach (LAB 07).</li>
+</ul>
+<h2>Odrabianie: LAB 07</h2>
+<p>Ostatnie zajęcia służą do nadrobienia zaległości:</p>
+<ul>
+<li>osoby z niezaliczonym materiałem (nieobecność, ocena niedostateczna) zaliczają brakujący lab,</li>
+<li>zespoły poprawiają niezaliczone laby na miejscu (stan oceniany z nowego tagu, np. <code>lab-3-poprawa</code>),</li>
+<li>zespoły bez zaległości mogą pokazać projekt i podnieść ocenę wyzwaniami 5.0.</li>
+</ul>
+<h2>Ocena z laboratorium</h2>
+<ul>
+<li>LAB 01 <strong>nie jest oceniany</strong> (konfiguracja i szkic pomysłu).</li>
+<li>Oceniane są laby <strong>02–06</strong>. Ocena z laboratorium to średnia z tych pięciu ocen.</li>
+<li>Każdy lab oceniany jest ze stanu repozytorium na tagu <code>lab-N</code>: zielone „Testy i reguły” to warunek konieczny (3.0).</li>
+</ul>
+<h2>Kryteria oceny laboratoriów (plan)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Lab</th>
+<th>3.0</th>
+<th>4.0</th>
+<th>5.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>bez oceny</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>02 · Encje i relacje</td>
+<td>zielone reguły R1–R2, tag <code>lab-2</code></td>
+<td>5–6 tabel, ≥2 relacje 1:N, encja łącząca z atrybutami, dane w <code>data.sql</code>; każda osoba ma Pull Request z encją</td>
+<td>wyzwanie (np. <code>@Embeddable</code>, audyt, <code>equals</code>/<code>hashCode</code>) + pytania kontrolne</td>
+</tr>
+<tr>
+<td>03 · Repozytoria i zapytania</td>
+<td>zielone reguły R1–R3, tag <code>lab-3</code></td>
+<td>5 pytań inwestora, każde z metodą i testem; każda osoba ma Pull Request z zapytaniem</td>
+<td>wyzwanie (np. <code>Specification</code>, test N+1 „przed/po”) + pytania kontrolne</td>
+</tr>
+<tr>
+<td>04 · Serwisy i komponenty</td>
+<td>zielone reguły R1–R4, tag <code>lab-4</code></td>
+<td>≥3 reguły biznesowe z wyjątkami i testami; każda osoba ma Pull Request z serwisem</td>
+<td>wyzwanie (np. testy parametryzowane, Spring Modulith) + pytania kontrolne</td>
+</tr>
+<tr>
+<td>05 · Kontrolery REST</td>
+<td>zielone reguły R1–R5, tag <code>lab-5</code></td>
+<td>2 zasoby z pełnym CRUD, endpoint raportowy, plik <code>.http</code>; każda osoba ma Pull Request z endpointem</td>
+<td>wyzwanie (np. własny walidator, stronicowanie i sortowanie w API) + pytania kontrolne</td>
+</tr>
+<tr>
+<td>06 · Rozbudowa</td>
+<td>zielone reguły R1–R6, tag <code>lab-6</code></td>
+<td>zdarzenie i zadanie cykliczne z testami</td>
+<td>integracja z API innego zespołu + pytania kontrolne</td>
+</tr>
+</tbody>
+</table></div>
+<p>Pytania kontrolne zadaje prowadzący losowej osobie z zespołu.
+- <strong>Ocena indywidualna:</strong> osoba bez własnego zmergowanego Pull Requesta na danym labie albo bez zrozumienia
+  wskazanego fragmentu kodu zespołu dostaje za ten lab maksymalnie 3.0.</p>
+<h2>Ocena końcowa z przedmiotu</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Składnik</th>
+<th>Waga</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Laboratorium</td>
+<td><strong>70%</strong></td>
+</tr>
+<tr>
+<td>Wykład</td>
+<td><strong>30%</strong></td>
+</tr>
+</tbody>
+</table></div>
+</article></main>
+<footer>
+  <span>Wprowadzenie do technologii backendowych · laboratoria</span>
+  <span class="author">Prowadzący: <b>Wojciech Koszela</b> · <a href="https://www.linkedin.com/in/wkoszela/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/wkoszela" target="_blank" rel="noopener">GitHub</a></span>
+  <span class="logo"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></span>
+</footer>
+</div>
+<script>
+(function () {
+  var root = document.documentElement, btn = document.querySelector('.theme-toggle');
+  if (!btn) return;
+  function current() {
+    return root.getAttribute('data-theme') ||
+      (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+  function label() { btn.textContent = current() === 'dark' ? '☀ Jasny' : '☾ Ciemny'; }
+  btn.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('wdtb-theme', next); } catch (e) {}
+    label();
+  });
+  label();
+})();
+</script>
+</body>
+</html>

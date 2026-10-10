@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roadmapa · Wprowadzenie do technologii backendowych</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=localStorage.getItem('wdtb-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+  <a class="logo" href="index.html"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></a>
+  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html" aria-current="page">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+</div>
+<main class="doc"><article class="md">
+<h1>Roadmapa laboratoriów</h1>
+<p>Każde laboratorium dokłada jedną warstwę backendu, a reguły projektu rosną razem z kodem.
+Laboratoria 01–02 są rozpisane szczegółowo. Pozostałe opisują zakres i wymagania; instrukcje pojawią się przed zajęciami.
+Liczby (ile tabel, zapytań, endpointów): <a href="wymagania.html">WYMAGANIA.md</a>. Zaliczenie, obecności i kryteria ocen: <a href="zasady.html">ZASADY.md</a>.
+Pracujemy na zajęciach; kryteria oceny prowadzący podaje zawsze na początku zajęć.</p>
+<pre><code>LAB 01        LAB 02          LAB 03            LAB 04           LAB 05           LAB 06          LAB 07
+Start     →   Encje i     →   Repozytoria   →   Serwisy i    →   Kontrolery   →   Rozbudowa   →   Odrabianie
+bez oceny     relacje         i zapytania       komponenty       REST             zdarzenia,      poprawy,
+opis pomysłu  JPA, data.sql   Spring Data       DI, transakcje   DTO, walidacja   integracje      wyzwania 5.0
+</code></pre>
+<hr />
+<h2>LAB 01 · Start (bez oceny)</h2>
+<p>→ <a href="lab01.html">instrukcja LAB 01</a></p>
+<ul>
+<li>wprowadzenie: backend, baza danych, architektura warstwowa (<a href="index.html">strona główna</a>)</li>
+<li>zespół 3-osobowy, fork szablonu na GitHubie przemianowany na <code>WdTB-2026-Backend-&lt;nazwaprojektu&gt;</code>, wpis w arkuszu grupy</li>
+<li>uruchomienie aplikacji: strona startowa, konsola H2, zapytania SQL, pierwsze zmiany (konto w <code>data.sql</code>, port, nazwa projektu)</li>
+<li><strong>pomysł:</strong> persona, historyjki, wstępny model danych</li>
+<li><strong>opis projektu:</strong> <code>PROJEKT.md</code> i wizytówka na stronie startowej, 2-minutowa prezentacja</li>
+<li><strong>Reguły:</strong> R1.01–R1.05</li>
+</ul>
+<h2>LAB 02 · Encje i relacje</h2>
+<p>→ <a href="lab02.html">instrukcja LAB 02</a></p>
+<ul>
+<li>encje JPA: <code>@Entity</code>, <code>@Table</code>, <code>@Id</code>, <code>@GeneratedValue</code>, <code>@Column</code>, <code>@Enumerated</code></li>
+<li>relacje: <code>@ManyToOne</code>, <code>@OneToMany(mappedBy)</code>, <code>@ManyToMany</code> / encja łącząca, <code>@OneToOne</code>, powiązanie z <code>user_account</code></li>
+<li>typy: <code>BigDecimal</code> dla kwot, enumy jako tekst, daty</li>
+<li>konsola H2: czytanie DDL wygenerowanego przez Hibernate</li>
+<li>dane startowe w <code>data.sql</code></li>
+<li><strong>Reguły:</strong> R2.01–R2.10, sprawdzane tylko na schemacie bazy i danych</li>
+</ul>
+<h2>LAB 03 · Repozytoria i zapytania</h2>
+<ul>
+<li>pierwsze reguły ArchUnit: higiena encji (LAZY, STRING, konstruktor, <code>@Embeddable</code>)</li>
+<li>Spring Data JPA: zapytania pochodne, <code>@Query</code> (JPQL), <code>GROUP BY</code>, projekcje, <code>Pageable</code></li>
+<li>problem N+1: <code>QueryCounter</code>, <code>@EntityGraph</code>, <code>JOIN FETCH</code></li>
+<li>„pytania inwestora” i testy <code>@DataJpaTest</code></li>
+<li><strong>Reguły:</strong> R3.01–R3.16</li>
+</ul>
+<h2>LAB 04 · Serwisy i komponenty</h2>
+<ul>
+<li>kontener IoC: <code>@Component</code>, <code>@Service</code>, <code>@Configuration</code> + <code>@Bean</code>, wstrzykiwanie przez konstruktor, cykl życia i zasięg beana</li>
+<li>warstwa <code>application</code>: przypadki użycia, <code>@Transactional</code> (propagacja, <code>readOnly</code>, rollback)</li>
+<li>reguły biznesowe w kodzie i wyjątki domenowe</li>
+<li><strong>moduły:</strong> pakiet <code>api</code> jako publiczny kontrakt modułu; relacje encji między modułami zastępujemy identyfikatorami</li>
+<li>testy jednostkowe z Mockito, testy parametryzowane</li>
+<li><strong>Reguły:</strong> R4.01–R4.09</li>
+</ul>
+<h2>LAB 05 · Kontrolery REST</h2>
+<ul>
+<li><code>@RestController</code>, mapowania HTTP, <code>ResponseEntity</code>, kody odpowiedzi, nagłówek <code>Location</code></li>
+<li>DTO jako rekordy, mapowanie encja ↔ DTO</li>
+<li>Bean Validation (<code>@Valid</code>, <code>@NotBlank</code>, <code>@Future</code>), <code>@RestControllerAdvice</code> + <code>ProblemDetail</code></li>
+<li>stronicowanie i filtrowanie w API, endpointy raportowe z pytaniami inwestora</li>
+<li>OpenAPI / Swagger UI (springdoc), pliki <code>.http</code> w IntelliJ</li>
+<li><code>@WebMvcTest</code> + <code>MockMvc</code></li>
+<li><strong>Reguły:</strong> R5.01–R5.08</li>
+</ul>
+<h2>LAB 06 · Rozbudowa</h2>
+<ul>
+<li>zdarzenia aplikacyjne: <code>ApplicationEventPublisher</code>, rekordy <code>*Event</code>, <code>@TransactionalEventListener</code></li>
+<li>konfiguracja: <code>@ConfigurationProperties</code> jako rekord, profile</li>
+<li><code>@Scheduled</code>: wygaszanie rezerwacji, przypomnienia, raport dnia</li>
+<li><strong>wyzwanie 5.0:</strong> integracja z API innego zespołu przez <code>RestClient</code> w <code>infrastructure</code>, z testem <code>MockRestServiceServer</code></li>
+<li><strong>Reguły:</strong> R6.01–R6.04</li>
+</ul>
+<h2>LAB 07 · Odrabianie</h2>
+<ul>
+<li>nadrobienie niezaliczonego materiału (nieobecności, oceny niedostateczne)</li>
+<li>poprawa czerwonych labów zespołu</li>
+<li>zespoły bez zaległości: krótka prezentacja projektu i wyzwania 5.0 podnoszące ocenę</li>
+</ul>
+</article></main>
+<footer>
+  <span>Wprowadzenie do technologii backendowych · laboratoria</span>
+  <span class="author">Prowadzący: <b>Wojciech Koszela</b> · <a href="https://www.linkedin.com/in/wkoszela/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/wkoszela" target="_blank" rel="noopener">GitHub</a></span>
+  <span class="logo"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></span>
+</footer>
+</div>
+<script>
+(function () {
+  var root = document.documentElement, btn = document.querySelector('.theme-toggle');
+  if (!btn) return;
+  function current() {
+    return root.getAttribute('data-theme') ||
+      (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+  function label() { btn.textContent = current() === 'dark' ? '☀ Jasny' : '☾ Ciemny'; }
+  btn.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('wdtb-theme', next); } catch (e) {}
+    label();
+  });
+  label();
+})();
+</script>
+</body>
+</html>

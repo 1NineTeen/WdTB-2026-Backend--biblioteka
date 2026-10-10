@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LAB 01 · Start · Wprowadzenie do technologii backendowych</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=localStorage.getItem('wdtb-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+  <a class="logo" href="index.html"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></a>
+  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html" aria-current="page">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+</div>
+<main class="doc"><article class="md">
+<h1>LAB 01 · Start: projekt, aplikacja i opis pomysłu</h1>
+<blockquote>
+<p><strong>Zajęcia nie są oceniane.</strong> Na koniec macie działający projekt na GitHubie, uruchomioną aplikację
+i porządnie opisany pomysł na własny projekt. Od LAB 02 budujecie na tym fundamencie.</p>
+<p><strong>Pracujemy na zajęciach, nie w domu.</strong> Wszystko z tej instrukcji robicie w trakcie zajęć.</p>
+</blockquote>
+<p>Materiały: <a href="index.html">strona główna dokumentacji</a> (czym jest backend, architektura warstwowa, plan 7 zajęć,
+wymagania, zasady zaliczenia). Cała dokumentacja jest w katalogu <code>docs/</code> repozytorium: otwórzcie <code>docs/index.html</code>
+w przeglądarce.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Czas</th>
+<th>Część</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>15 min</td>
+<td>A · Wprowadzenie: backend, baza danych, architektura warstwowa</td>
+</tr>
+<tr>
+<td>20 min</td>
+<td>B · Zespół, fork, arkusz</td>
+</tr>
+<tr>
+<td>30 min</td>
+<td>C · Uruchomienie aplikacji i pierwsze zmiany</td>
+</tr>
+<tr>
+<td>35 min</td>
+<td>D · Pomysł na projekt i jego opis</td>
+</tr>
+<tr>
+<td>20 min</td>
+<td>E · Zielony pipeline i prezentacja pomysłu</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>A · Wprowadzenie (15 min)</h2>
+<p>Otwórzcie <a href="index.html">stronę główną dokumentacji</a>. Przejdźcie razem z prowadzącym przez sekcje 1–2:</p>
+<ul>
+<li><strong>Backend</strong> to serwer, z którym rozmawia aplikacja webowa i mobilna. Przyjmuje żądanie HTTP, sprawdza reguły,
+  czyta i zapisuje dane w bazie, odsyła JSON.</li>
+<li><strong>Baza danych</strong> przechowuje dane w tabelach powiązanych kluczami. U nas: H2, wbudowana w aplikację.</li>
+<li><strong>Architektura warstwowa:</strong> Controller → Service → Repository → baza. Każdą warstwę zbudujecie na innych zajęciach.</li>
+</ul>
+<h2>B · Zespół, fork, arkusz (20 min)</h2>
+<p>Zespół to <strong>3 osoby</strong>. Jedna osoba hostuje repozytorium: forkuje szablon na swoje konto.</p>
+<h3>Po forku: krok po kroku</h3>
+<p>Robi to osoba hostująca repozytorium, pozostałe osoby patrzą i robią to samo przy kolejnych krokach.</p>
+<ol>
+<li><strong>Fork.</strong> Otwórzcie https://github.com/wkoszela/WdTB-2026-Backend--projectname- i kliknijcie <strong>Fork</strong> → <em>Owner</em>: Wasze konto →
+   <strong>Create fork</strong>.</li>
+<li><strong>Zmiana nazwy.</strong> Fork dostaje nazwę szablonu <code>WdTB-2026-Backend--projectname-</code>. W forku:
+   <em>Settings → General → Repository name</em> → zamieńcie końcówkę <code>-projectname-</code> na nazwę projektu:
+   <code>WdTB-2026-Backend-&lt;nazwaprojektu&gt;</code>, np. <code>WdTB-2026-Backend-deskhop</code> → <strong>Rename</strong>.
+   Nazwa projektu: jedno słowo, małe litery, bez polskich znaków. Ta sama nazwa trafi do pakietu Javy i do arkusza.
+   Jeśli nie macie jeszcze pomysłu, zmieńcie nazwę po części D.</li>
+<li><strong>Włączenie sprawdzania.</strong> Zakładka <strong>Actions</strong> → <em>I understand my workflows, go ahead and enable them</em>.
+   W forkach GitHub Actions jest domyślnie wyłączony; bez tego reguły nie będą się uruchamiać.</li>
+<li><strong>Zespół i prowadzący.</strong> <em>Settings → Collaborators → Add people</em>: dodajcie pozostałe osoby z zespołu oraz <code>wkoszela</code>.
+   Zaproszone osoby akceptują zaproszenie (e-mail albo https://github.com/notifications).</li>
+<li><strong>Arkusz zespołów.</strong> W zakładce swojej grupy: numer zespołu, <strong>nazwa projektu</strong> (ta sama co po
+   <code>WdTB-2026-Backend-</code>), link do repozytorium <code>https://github.com/&lt;login&gt;/WdTB-2026-Backend-&lt;nazwaprojektu&gt;</code>
+   oraz dane każdej osoby (imię i nazwisko, numer indeksu, e-mail). Osoba hostująca zaznacza „tak” w kolumnie <em>Host</em>.</li>
+<li><strong>Klon.</strong> Każda osoba: <code>git clone https://github.com/&lt;login&gt;/WdTB-2026-Backend-&lt;nazwaprojektu&gt;.git</code> i otwiera
+   projekt w IntelliJ IDEA jako projekt Maven (JDK 21 lub nowsze: <em>File → Project Structure → SDK → Download JDK</em>).</li>
+</ol>
+<blockquote>
+<p>⚠️ <strong>Pull Requesty w forku.</strong> Przy tworzeniu Pull Requesta GitHub domyślnie proponuje repozytorium prowadzącego
+(<code>wkoszela/WdTB-2026-Backend--projectname-</code>). Zmieńcie <strong>base repository</strong> na swoje
+(<code>&lt;login&gt;/WdTB-2026-Backend-&lt;nazwaprojektu&gt;</code>), inaczej zmiany trafią do prowadzącego zamiast do Was.</p>
+<p><strong>Nowe materiały.</strong> Na początku kolejnych zajęć kliknijcie na stronie repozytorium <strong>Sync fork → Update branch</strong>,
+żeby pobrać nowe instrukcje z <code>docs/</code>.</p>
+</blockquote>
+<h2>C · Uruchomienie aplikacji i pierwsze zmiany (30 min)</h2>
+<h3>C1. Poznajcie projekt</h3>
+<p>Przejrzyjcie strukturę, zanim cokolwiek zmienicie:</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Plik / katalog</th>
+<th>Co zawiera</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pom.xml</code></td>
+<td>zależności (Spring Boot, JPA, H2) i wersja projektu</td>
+</tr>
+<tr>
+<td><code>src/main/java/pl/wsb/projekt/ProjektApplication.java</code></td>
+<td>klasa startowa z <code>@SpringBootApplication</code></td>
+</tr>
+<tr>
+<td><code>src/main/java/…/account/domain/UserAccount.java</code></td>
+<td>jedyna gotowa encja: konto użytkownika (tabela <code>user_account</code>)</td>
+</tr>
+<tr>
+<td><code>src/main/resources/application.properties</code></td>
+<td>konfiguracja: adres bazy, konsola H2, logi SQL</td>
+</tr>
+<tr>
+<td><code>src/main/resources/data.sql</code></td>
+<td>dane startowe wczytywane przy każdym uruchomieniu</td>
+</tr>
+<tr>
+<td><code>src/main/resources/static/index.html</code></td>
+<td>strona startowa aplikacji</td>
+</tr>
+<tr>
+<td><code>PROJEKT.md</code></td>
+<td>karta Waszego projektu (uzupełnicie w części D)</td>
+</tr>
+<tr>
+<td><code>src/test/java/pl/wsb/rules</code></td>
+<td>reguły projektu, czyli automatyczne testy sprawdzające wymagania labów</td>
+</tr>
+</tbody>
+</table></div>
+<h3>C2. Uruchomcie aplikację</h3>
+<ol>
+<li><em>Run</em> na klasie <code>ProjektApplication</code> (albo <code>mvn spring-boot:run</code>). Obserwujcie logi: zobaczycie <code>create table user_account</code>
+   wygenerowane przez Hibernate i na końcu <code>Started ProjektApplication in … seconds</code>.</li>
+<li>Otwórzcie <strong>http://localhost:8080</strong>. Strona startowa potwierdza, że backend działa.</li>
+<li>Otwórzcie <strong>http://localhost:8080/h2-console</strong>. JDBC URL: <code>jdbc:h2:file:./data/wdtb</code>, użytkownik <code>sa</code>, hasło puste.</li>
+<li>Wykonajcie w konsoli:</li>
+</ol>
+<pre><code class="language-sql">SELECT * FROM user_account;
+SELECT role, COUNT(*) FROM user_account GROUP BY role;
+</code></pre>
+<h3>C3. Pierwsze zmiany (każda osoba robi swój commit)</h3>
+<ol>
+<li><strong>Swoje konto (reguła R1.04):</strong> każda osoba dopisuje się do <code>src/main/resources/data.sql</code>
+   (wzór jest w komentarzu na końcu pliku). Restart aplikacji → sprawdźcie, że jesteście w tabeli <code>user_account</code>.</li>
+<li><strong>Port:</strong> zmieńcie tymczasowo port aplikacji na <code>8091</code> (<code>server.port=8091</code> w <code>application.properties</code>),
+   uruchomcie i sprawdźcie, że strona działa pod nowym adresem. Potem przywróćcie 8080.</li>
+<li><strong>Nazwa projektu w kodzie (R1.01, osoba hostująca repozytorium).</strong> Ta sama nazwa co w repozytorium i w arkuszu:</li>
+</ol>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Gdzie</th>
+<th>Wzór</th>
+<th>Przykład</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>repozytorium (fork, po zmianie nazwy)</td>
+<td><code>WdTB-2026-Backend-&lt;nazwaprojektu&gt;</code></td>
+<td><code>WdTB-2026-Backend-deskhop</code></td>
+</tr>
+<tr>
+<td>pakiet Javy</td>
+<td><code>pl.wsb.&lt;nazwaprojektu&gt;</code></td>
+<td><code>pl.wsb.deskhop</code></td>
+</tr>
+<tr>
+<td>klasa startowa</td>
+<td><code>&lt;NazwaProjektu&gt;Application</code></td>
+<td><code>DeskhopApplication</code></td>
+</tr>
+<tr>
+<td><code>artifactId</code> w <code>pom.xml</code></td>
+<td><code>wdtb-2026-backend-&lt;nazwaprojektu&gt;</code></td>
+<td><code>wdtb-2026-backend-deskhop</code></td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>pakiet <code>pl.wsb.projekt</code> → <code>pl.wsb.&lt;nazwaprojektu&gt;</code> (IntelliJ: <em>Refactor → Rename</em> na pakiecie),</li>
+<li><code>ProjektApplication</code> → <code>&lt;NazwaProjektu&gt;Application</code>,</li>
+<li>w <code>pom.xml</code> dopiszcie nazwę do <code>&lt;artifactId&gt;wdtb-2026-backend&lt;/artifactId&gt;</code>.</li>
+</ul>
+<p>Nazwa projektu: jedno słowo, małe litery, bez polskich znaków.</p>
+<blockquote>
+<p>Hibernate tworzy tabele od nowa przy każdym starcie (<code>ddl-auto=create-drop</code>), a potem wczytuje <code>data.sql</code>.
+Dlatego dane dopisane ręcznie w konsoli H2 znikają po restarcie, a dane z <code>data.sql</code> zostają.</p>
+</blockquote>
+<h2>D · Pomysł na projekt i jego opis (35 min)</h2>
+<p>Każdy zespół buduje backend <strong>własnego pomysłu</strong>. Kryteria dobrego pomysłu: <a href="pomysl.html">Pomysł na projekt</a>,
+skala projektu: <a href="wymagania.html">Wymagania</a>.</p>
+<h3>D1. Problem (10 min)</h3>
+<p>Każda osoba zapisuje 3 rzeczy, które ją irytują na studiach, w pracy, w mieście albo w hobby. Wybierzcie jedną,
+która dotyczy też innych ludzi i da się ją rozwiązać aplikacją z bazą danych.</p>
+<h3>D2. Rozwinięcie pomysłu (15 min)</h3>
+<p>Odpowiedzcie wspólnie na pytania i zapiszcie odpowiedzi:</p>
+<ol>
+<li><strong>Kto</strong> korzysta z aplikacji? Opiszcie jedną konkretną osobę (persona): kim jest, czego potrzebuje.</li>
+<li><strong>Co</strong> ta osoba robi w aplikacji? Wypiszcie 8 historyjek w formacie „Jako <kto> chcę <co>, aby <po co>”
+   i wybierzcie 5 najważniejszych.</li>
+<li><strong>Jakie dane</strong> są potrzebne? Wypiszcie rzeczowniki z historyjek: to kandydaci na encje. Dopiszcie do każdej
+   kilka pól i zaznaczcie relacje (1:N, N:M, 1:1).</li>
+<li><strong>Co ma status</strong> (np. rezerwacja: nowa, potwierdzona, anulowana) i <strong>co się liczy</strong> (kwota, ilość, czas)?</li>
+<li>Kto z użytkowników ma <strong>konto</strong> w tabeli <code>user_account</code>?</li>
+</ol>
+<p>Przytnijcie model do <strong>4–6 tabel</strong>. Wszystko ponad to zostawcie na później.</p>
+<h3>D3. Opis projektu (10 min)</h3>
+<ol>
+<li><strong><code>PROJEKT.md</code> (R1.02):</strong> zespół (wiersze <code>| @login-github</code>), problem, persona, model przychodu,
+   <strong>5 historyjek</strong> (<code>N. Jako &lt;kto&gt; chcę &lt;co&gt;, aby &lt;po co&gt;.</code>), moduły i <strong>wstępny diagram ER</strong>:</li>
+</ol>
+<pre><code class="language-markdown">```mermaid
+erDiagram
+    USER_ACCOUNT ||--o| CUSTOMER : &quot;ma profil&quot;
+    CUSTOMER ||--o{ BOOKING : &quot;składa&quot;
+    OFFER ||--o{ BOOKING : &quot;dotyczy&quot;
+    OFFER }o--o{ CATEGORY : &quot;należy do&quot;
+```
+</code></pre>
+<ol start="2">
+<li><strong>Strona startowa (R1.05):</strong> w <code>src/main/resources/static/index.html</code> uzupełnijcie wizytówkę projektu
+   (zastąpcie wszystkie <code>[uzupełnij]</code>): nazwa, jedno zdanie o problemie, persona, 3 najważniejsze funkcje, zespół.
+   Restart aplikacji → wizytówka jest pod http://localhost:8080.</li>
+</ol>
+<p>W dzienniku decyzji <code>PROJEKT.md</code> zapiszcie jedną rzecz, z której zrezygnowaliście, i dlaczego.</p>
+<h2>E · Zielony pipeline i prezentacja (20 min)</h2>
+<ol>
+<li>Zmiany wysyłacie przez Pull Requesty (każda osoba co najmniej jeden: konto w <code>data.sql</code>, nazwa projektu, opis).
+   Recenzję robi inna osoba z zespołu.</li>
+<li>Lokalnie: <code>mvn verify</code>. Na GitHubie w zakładce <em>Actions</em> przebieg „Testy i reguły” na <code>main</code> powinien być zielony:
+   reguły <strong>R1.01–R1.05</strong>. W <em>Summary</em> przebiegu widać, które reguły jeszcze nie przechodzą.</li>
+<li>Przed końcem zajęć jedna osoba taguje <code>lab-1</code>: <code>git tag lab-1 &amp;&amp; git push origin lab-1</code>
+   (albo <em>Releases → Draft a new release → Choose a tag: lab-1</em>).</li>
+<li><strong>Prezentacja:</strong> każdy zespół w 2 minuty pokazuje wizytówkę na http://localhost:8080 i diagram ER.</li>
+</ol>
+<h3>Reguły LAB 01</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Co sprawdza</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1.01</td>
+<td>pakiet <code>pl.wsb.&lt;projekt&gt;</code> i własny <code>artifactId</code></td>
+</tr>
+<tr>
+<td>R1.02</td>
+<td><code>PROJEKT.md</code>: zespół, ≥5 historyjek, diagram ER, zero <code>&lt;uzupełnij&gt;</code></td>
+</tr>
+<tr>
+<td>R1.03</td>
+<td>aplikacja startuje</td>
+</tr>
+<tr>
+<td>R1.04</td>
+<td>w <code>user_account</code> są co najmniej 3 konta poza kontami demo</td>
+</tr>
+<tr>
+<td>R1.05</td>
+<td>strona startowa nie zawiera już <code>[uzupełnij]</code></td>
+</tr>
+</tbody>
+</table></div>
+</article></main>
+<footer>
+  <span>Wprowadzenie do technologii backendowych · laboratoria</span>
+  <span class="author">Prowadzący: <b>Wojciech Koszela</b> · <a href="https://www.linkedin.com/in/wkoszela/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/wkoszela" target="_blank" rel="noopener">GitHub</a></span>
+  <span class="logo"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></span>
+</footer>
+</div>
+<script>
+(function () {
+  var root = document.documentElement, btn = document.querySelector('.theme-toggle');
+  if (!btn) return;
+  function current() {
+    return root.getAttribute('data-theme') ||
+      (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+  function label() { btn.textContent = current() === 'dark' ? '☀ Jasny' : '☾ Ciemny'; }
+  btn.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('wdtb-theme', next); } catch (e) {}
+    label();
+  });
+  label();
+})();
+</script>
+</body>
+</html>

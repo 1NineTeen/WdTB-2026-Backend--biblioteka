@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reguły projektu · Wprowadzenie do technologii backendowych</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=localStorage.getItem('wdtb-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+  <a class="logo" href="index.html"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></a>
+  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html" aria-current="page">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+</div>
+<main class="doc"><article class="md">
+<h1>Reguły projektu</h1>
+<p>Reguły to testy w <code>src/test/java/pl/wsb/rules</code>. Są <strong>generyczne</strong>: nie wiedzą, czy budujecie wypożyczalnię ubrań,
+czy platformę korepetycji. Opierają się wyłącznie na konwencjach (schemat bazy, nazwy pakietów, adnotacje, pliki),
+więc ten sam zestaw ocenia wszystkie zespoły.</p>
+<h2>Jak to działa</h2>
+<ul>
+<li>Każda klasa reguł ma <code>@SinceLab(n)</code> i jest aktywna, gdy <code>lab &gt;= n</code>.</li>
+<li>Lokalnie numer labu bierze się z <code>&lt;lab&gt;</code> w <code>pom.xml</code>. Możecie zajrzeć w przyszłość: <code>mvn verify -Dlab=3</code>.</li>
+<li>Na GitHubie numer labu bierze się z tagu: <code>lab-2</code> uruchamia reguły LAB 02. Reguły są pobierane z repozytorium
+  szablonu przed każdym przebiegiem. <strong>Modyfikowanie reguł lokalnie nic nie daje.</strong> Jeśli uważacie, że reguła jest błędna,
+  zgłoście to prowadzącemu. Trafne zgłoszenie to bonus.</li>
+<li>Reguły są <strong>bramką</strong>, nie oceną. Zielony pipeline oznacza „można oceniać”, a nie „5.0”.</li>
+</ul>
+<h2>Jak reguły patrzą na projekt</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Lab</th>
+<th>Narzędzie</th>
+<th>Co sprawdza</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>pliki + Spring Boot</td>
+<td>tożsamość projektu, <code>PROJEKT.md</code>, wizytówka, aplikacja startuje, konta zespołu</td>
+</tr>
+<tr>
+<td>02</td>
+<td><strong>Spring Boot + JDBC</strong></td>
+<td>uruchamia aplikację na pustej H2, czyta schemat bazy (tabele, klucze, typy kolumn) i liczy wiersze z <code>data.sql</code>: to samo, co widzicie w konsoli H2</td>
+</tr>
+<tr>
+<td>03</td>
+<td>+ <strong>ArchUnit</strong></td>
+<td>od tego labu także kod: encje, repozytoria, zapytania</td>
+</tr>
+<tr>
+<td>04–06</td>
+<td>ArchUnit</td>
+<td>warstwy, moduły, zależności, konwencje Springa</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Konwencja pakietów</h2>
+<pre><code>pl.wsb.&lt;projekt&gt;                          klasa @SpringBootApplication (dokładnie jedna)
+pl.wsb.&lt;projekt&gt;.account.domain           gotowe konto użytkownika (user_account)
+pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.domain           @Entity, @Embeddable, enumy, *Repository
+pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.application      @Service, przypadki użycia, @Transactional
+pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.api              publiczny kontrakt: fasady, rekordy, zdarzenia
+pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.web              @RestController, *Request / *Response
+pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.infrastructure   klienci HTTP, integracje
+pl.wsb.&lt;projekt&gt;.shared | common | config moduły wspólne, dostępne dla wszystkich
+</code></pre>
+<h2>LAB 01 · Start</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Reguła</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1.01</td>
+<td>Pakiet <code>pl.wsb.&lt;nazwaprojektu&gt;</code> i <code>artifactId</code> <code>wdtb-2026-backend-&lt;nazwaprojektu&gt;</code></td>
+</tr>
+<tr>
+<td>R1.02</td>
+<td><code>PROJEKT.md</code>: zespół, ≥5 historyjek, diagram <code>erDiagram</code>, zero <code>&lt;uzupełnij&gt;</code></td>
+</tr>
+<tr>
+<td>R1.03</td>
+<td>Aplikacja startuje (Spring Boot + H2)</td>
+</tr>
+<tr>
+<td>R1.04</td>
+<td>W <code>user_account</code> są co najmniej 3 konta poza kontami demo (każda osoba z zespołu)</td>
+</tr>
+<tr>
+<td>R1.05</td>
+<td>Strona startowa <code>static/index.html</code> nie zawiera <code>[uzupełnij]</code> (wizytówka projektu)</td>
+</tr>
+</tbody>
+</table></div>
+<h2>LAB 02 · Encje i relacje (schemat bazy, bez ArchUnit)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Reguła</th>
+<th>Dlaczego</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R2.01</td>
+<td>Aplikacja startuje, a Hibernate tworzy tabele bez błędów</td>
+<td>mapowanie jest spójne</td>
+</tr>
+<tr>
+<td>R2.02</td>
+<td>≥4 własne tabele (poza <code>user_account</code>)</td>
+<td>model musi mieć realną strukturę</td>
+</tr>
+<tr>
+<td>R2.03</td>
+<td>Każda tabela ma klucz główny</td>
+<td><code>@Id</code></td>
+</tr>
+<tr>
+<td>R2.04</td>
+<td>≥4 klucze obce</td>
+<td>tabele są powiązane relacjami</td>
+</tr>
+<tr>
+<td>R2.05</td>
+<td>Tabela z kluczami obcymi do dwóch różnych tabel</td>
+<td>relacja N:M</td>
+</tr>
+<tr>
+<td>R2.06</td>
+<td>Klucz obcy z ograniczeniem <code>UNIQUE</code></td>
+<td>relacja 1:1</td>
+</tr>
+<tr>
+<td>R2.07</td>
+<td>Własna tabela wskazuje na <code>user_account</code></td>
+<td>użytkownicy produktu mają konta</td>
+</tr>
+<tr>
+<td>R2.08</td>
+<td>Kolumna typu <code>ENUM</code> w Waszej tabeli</td>
+<td><code>@Enumerated(EnumType.STRING)</code></td>
+</tr>
+<tr>
+<td>R2.09</td>
+<td>Brak kolumn <code>DOUBLE</code>/<code>REAL</code>/<code>FLOAT</code></td>
+<td>pieniądze tylko w <code>BigDecimal</code></td>
+</tr>
+<tr>
+<td>R2.10</td>
+<td>≥2 własne tabele mają po ≥3 wiersze z <code>data.sql</code></td>
+<td>dane do oglądania i testów</td>
+</tr>
+</tbody>
+</table></div>
+<h2>LAB 03 · Encje (ArchUnit), repozytoria, zapytania</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Reguła</th>
+<th>Dlaczego</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R3.01</td>
+<td><code>@Entity</code>, <code>@Embeddable</code>, <code>@MappedSuperclass</code> w <code>&lt;moduł&gt;.domain</code></td>
+<td>przewidywalne miejsce modelu</td>
+</tr>
+<tr>
+<td>R3.02</td>
+<td>Encje mają konstruktor bezargumentowy <code>public</code>/<code>protected</code></td>
+<td>wymóg JPA</td>
+</tr>
+<tr>
+<td>R3.03</td>
+<td>Pola encji nie są publiczne</td>
+<td>stan zmieniają metody</td>
+</tr>
+<tr>
+<td>R3.04</td>
+<td><code>@Table(name = "snake_case")</code>, bez słów zastrzeżonych</td>
+<td>kontrakt z bazą i <code>data.sql</code></td>
+</tr>
+<tr>
+<td>R3.05</td>
+<td><code>@ManyToOne</code> / <code>@OneToOne</code> mają <code>fetch = LAZY</code></td>
+<td>domyślne EAGER = N+1</td>
+</tr>
+<tr>
+<td>R3.06</td>
+<td>Pola enum mają <code>@Enumerated(EnumType.STRING)</code></td>
+<td>ORDINAL psuje dane</td>
+</tr>
+<tr>
+<td>R3.07</td>
+<td>Brak <code>float</code>/<code>double</code> w modelu</td>
+<td><code>BigDecimal</code></td>
+</tr>
+<tr>
+<td>R3.08</td>
+<td><code>@Id</code> typu <code>Long</code> albo <code>UUID</code></td>
+<td><code>long</code> = 0 zamiast <code>null</code></td>
+</tr>
+<tr>
+<td>R3.09</td>
+<td>Value object <code>@Embeddable</code> użyty jako pole</td>
+<td><code>Money</code>, <code>Address</code>, <code>TimeSlot</code></td>
+</tr>
+<tr>
+<td>R3.10</td>
+<td>Repozytoria to interfejsy <code>*Repository</code> w <code>&lt;moduł&gt;.domain</code></td>
+<td>kolekcja obiektów domeny</td>
+</tr>
+<tr>
+<td>R3.11</td>
+<td>Każde repozytorium ma test <code>&lt;Nazwa&gt;Test</code> (<code>@DataJpaTest</code>)</td>
+<td>zapytanie bez testu to zgadywanie</td>
+</tr>
+<tr>
+<td>R3.12</td>
+<td>≥3 zapytania pochodne</td>
+<td>konwencja Spring Data</td>
+</tr>
+<tr>
+<td>R3.13</td>
+<td>≥2 <code>@Query</code> (JPQL), w tym jedna z <code>GROUP BY</code></td>
+<td>pytania inwestora</td>
+</tr>
+<tr>
+<td>R3.14</td>
+<td>Metoda z <code>Pageable</code>, zwracająca <code>Page</code>/<code>Slice</code></td>
+<td>listy rosną</td>
+</tr>
+<tr>
+<td>R3.15</td>
+<td>Projekcja: rekord albo interfejs</td>
+<td>tylko potrzebne kolumny</td>
+</tr>
+<tr>
+<td>R3.16</td>
+<td><code>@EntityGraph</code> albo <code>JOIN FETCH</code></td>
+<td>jawne rozwiązanie N+1</td>
+</tr>
+</tbody>
+</table></div>
+<h2>LAB 04 · Serwisy i komponenty</h2>
+<p>R4.01 <code>@Service</code> w <code>application</code> · R4.02 brak wstrzykiwania przez pole · R4.03 moduły rozmawiają tylko przez <code>api</code> ·
+R4.04 brak cykli między modułami · R4.05 <code>@Transactional</code> tylko w <code>application</code> · R4.06 domena nie zależy od
+web/infrastructure · R4.07 bez <code>System.out</code>, JUL i wyjątków ogólnych · R4.08 każdy serwis ma test ·
+R4.09 każdy moduł z encjami ma serwis</p>
+<h2>LAB 05 · Kontrolery REST</h2>
+<p>R5.01 <code>@RestController</code> w <code>web</code> · R5.02 kontrolery nie znają encji ani repozytoriów · R5.03 DTO to rekordy ·
+R5.04 <code>@RestControllerAdvice</code> · R5.05 <code>@Valid</code> na <code>@RequestBody</code> · R5.06 każdy kontroler ma test ·
+R5.07 ≥8 endpointów, w tym POST, PUT/PATCH, DELETE · R5.08 OpenAPI (springdoc)</p>
+<h2>LAB 06 · Rozbudowa</h2>
+<p>R6.01 rekord <code>@ConfigurationProperties</code> · R6.02 zdarzenie <code>*Event</code> w <code>api</code> + listener · R6.03 <code>@Scheduled</code> ·
+R6.04 klienci HTTP tylko w <code>infrastructure</code></p>
+<p>Podgląd wszystkich reguł: <code>mvn verify -Dlab=6</code>.</p>
+</article></main>
+<footer>
+  <span>Wprowadzenie do technologii backendowych · laboratoria</span>
+  <span class="author">Prowadzący: <b>Wojciech Koszela</b> · <a href="https://www.linkedin.com/in/wkoszela/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/wkoszela" target="_blank" rel="noopener">GitHub</a></span>
+  <span class="logo"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></span>
+</footer>
+</div>
+<script>
+(function () {
+  var root = document.documentElement, btn = document.querySelector('.theme-toggle');
+  if (!btn) return;
+  function current() {
+    return root.getAttribute('data-theme') ||
+      (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+  function label() { btn.textContent = current() === 'dark' ? '☀ Jasny' : '☾ Ciemny'; }
+  btn.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('wdtb-theme', next); } catch (e) {}
+    label();
+  });
+  label();
+})();
+</script>
+</body>
+</html>

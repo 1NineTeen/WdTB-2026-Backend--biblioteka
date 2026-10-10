@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Praca w zespole · Wprowadzenie do technologii backendowych</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=localStorage.getItem('wdtb-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+  <a class="logo" href="index.html"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></a>
+  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html" aria-current="page">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+</div>
+<main class="doc"><article class="md">
+<h1>Praca w zespole</h1>
+<h2>Zespół</h2>
+<ul>
+<li><strong>3 osoby</strong>, jedno repozytorium na GitHubie: fork <code>wkoszela/WdTB-2026-Backend--projectname-</code> przemianowany na
+  <code>WdTB-2026-Backend-&lt;nazwaprojektu&gt;</code> (krok po kroku: <a href="lab01.html">LAB 01</a>).</li>
+<li>Zespół wpisuje się do <strong>arkusza zespołów</strong> w zakładce swojej grupy: imię i nazwisko, numer indeksu, e-mail każdej
+  osoby oraz link do repozytorium. Repozytorium hostuje jedna osoba z zespołu. Bez wpisu w arkuszu zespół nie jest oceniany.</li>
+<li>Osoba hostująca repozytorium jest jego właścicielem. Pozostałe osoby i prowadzącego dodaje jako współpracowników
+  (<em>Settings → Collaborators → Add people</em>).</li>
+</ul>
+<h2>Kto co robi</h2>
+<p>Nie ma przydzielonych ról. Jedna osoba hostuje repozytorium, a pracę dzielicie na zajęciach według encji,
+zapytań czy endpointów: każdy pisze kod i każdy robi recenzje u innych.</p>
+<h2>Przepływ pracy</h2>
+<pre><code>issue  →  gałąź  →  commity  →  Pull Request  →  recenzja innej osoby  →  zielone „Testy i reguły”  →  merge do main
+</code></pre>
+<ol>
+<li><strong>Issue</strong> dla każdej historyjki / pytania inwestora (szablony: <em>New issue</em> → <em>Historyjka</em> / <em>Pytanie inwestora</em>), przypisane do jednej osoby.</li>
+<li><strong>Gałąź</strong> od <code>main</code>: <code>&lt;nr-issue&gt;-krotki-opis</code>, np. <code>12-encja-rezerwacji</code>. GitHub tworzy ją z poziomu issue (<em>Development → Create a branch</em>).</li>
+<li><strong>Pull Request</strong> do <strong>Waszego</strong> repozytorium (<em>base repository</em> = Wasz fork, nie <code>wkoszela/WdTB-2026-Backend--projectname-</code>),
+   szablon opisu wczyta się sam, <code>Closes #12</code> w opisie. Mały PR (do ~300 linii) = szybka recenzja.</li>
+<li><strong>Recenzja:</strong> co najmniej jeden merytoryczny komentarz od innej osoby. „LGTM” to nie recenzja.</li>
+<li><strong>Merge</strong> tylko przy zielonym sprawdzeniu „Testy i reguły”.</li>
+</ol>
+<h2>Ustawienia repozytorium na GitHubie (osoba hostująca, LAB 01)</h2>
+<ul>
+<li><em>Settings → Branches → Add branch ruleset</em> (albo <em>Add classic branch protection rule</em>) dla <code>main</code>:
+  ✅ <em>Require a pull request before merging</em> (1 zatwierdzenie), ✅ <em>Require status checks to pass</em>
+  (wybierzcie „Testy i reguły projektu” po pierwszym przebiegu), ✅ <em>Block force pushes</em>.</li>
+<li><em>Settings → General → Pull Requests</em>: ✅ <em>Automatically delete head branches</em>.</li>
+<li><em>Issues → Labels</em>: <code>historyjka</code>, <code>pytanie-inwestora</code>.</li>
+<li><em>Issues → Milestones</em>: <code>LAB 01</code> … <code>LAB 07</code>.</li>
+</ul>
+<h2>Konflikty w Gicie</h2>
+<ul>
+<li><strong><code>data.sql</code> edytuje cały zespół</strong>, więc konflikty są tu najczęstsze. Dopisujcie dane na końcu sekcji swojej tabeli i często mergujcie <code>main</code>.</li>
+<li>Przed Pull Requestem: <code>git fetch &amp;&amp; git rebase origin/main</code> (albo merge <code>main</code> do swojej gałęzi).</li>
+</ul>
+<h2>Ocena indywidualna</h2>
+<ul>
+<li>Raport <em>Wkład członków zespołu</em> (zakładka <em>Actions</em> → <em>Summary</em>) pokazuje commity i zmienione linie per autor od poprzedniego tagu. To punkt wyjścia
+  do rozmowy, nie ocena.</li>
+<li>Na ocenie prowadzący wybiera losową osobę i losowy fragment kodu: „wytłumacz”, „zmień”, „dlaczego tak?”.</li>
+<li>Osoba bez zmergowanego Pull Requesta na danym labie dostaje za ten lab maksymalnie 3.0.</li>
+</ul>
+<h2>Kiedy zespół się sypie</h2>
+<p>Jeśli ktoś nie pracuje, zespół zgłasza to prowadzącemu od razu, na zajęciach.
+Nie ratujcie oceny kolegi własną pracą bez słowa.</p>
+</article></main>
+<footer>
+  <span>Wprowadzenie do technologii backendowych · laboratoria</span>
+  <span class="author">Prowadzący: <b>Wojciech Koszela</b> · <a href="https://www.linkedin.com/in/wkoszela/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/wkoszela" target="_blank" rel="noopener">GitHub</a></span>
+  <span class="logo"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></span>
+</footer>
+</div>
+<script>
+(function () {
+  var root = document.documentElement, btn = document.querySelector('.theme-toggle');
+  if (!btn) return;
+  function current() {
+    return root.getAttribute('data-theme') ||
+      (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+  function label() { btn.textContent = current() === 'dark' ? '☀ Jasny' : '☾ Ciemny'; }
+  btn.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('wdtb-theme', next); } catch (e) {}
+    label();
+  });
+  label();
+})();
+</script>
+</body>
+</html>

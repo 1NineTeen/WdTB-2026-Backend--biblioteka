@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Backend działa · WdTB-2026-Backend</title>
+<style>
+  :root { --ink: #141e50; --blue: #006efa; --muted: #5b6685; --line: #d5def0; --bg: #f5f8fd; --tint: #e8f0ff; --ok: #1d7a4c; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 "Segoe UI", system-ui, -apple-system, sans-serif; padding: 32px 20px 64px; }
+  main { max-width: 860px; margin: 0 auto; display: grid; gap: 28px; }
+  header { display: grid; gap: 14px; }
+  .logo { height: 60px; width: auto; }
+  h1 { margin: 0; font-size: clamp(28px, 5vw, 42px); line-height: 1.1; }
+  h2 { margin: 0 0 10px; font-size: 20px; }
+  p { margin: 0; }
+  .status { display: inline-flex; gap: 10px; align-items: center; font-weight: 600; color: var(--ok); }
+  .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px #d6f0e0; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+  code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .9em; background: var(--tint); padding: 2px 6px; border-radius: 5px; }
+  .btn { display: inline-block; margin-top: 12px; background: var(--blue); color: #fff; text-decoration: none; font-weight: 600; padding: 10px 16px; border-radius: 8px; }
+  .btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+  table { border-collapse: collapse; width: 100%; margin-top: 10px; font-size: 15px; }
+  td { padding: 6px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td:first-child { color: var(--muted); white-space: nowrap; width: 1%; }
+  ol { margin: 8px 0 0; padding-left: 22px; }
+  li + li { margin-top: 4px; }
+  .muted { color: var(--muted); font-size: 14px; }
+  .project { border: 2px solid var(--blue); }
+  .project .pitch { font-size: 18px; margin-bottom: 6px; }
+  pre { background: var(--tint); border-radius: 8px; padding: 12px 14px; overflow-x: auto; margin: 10px 0 0; font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img class="logo" src="merito-logo.png" alt="Uniwersytet WSB Merito Wrocław">
+    <span class="status"><span class="dot" aria-hidden="true"></span>Backend działa</span>
+    <h1>Wprowadzenie do technologii backendowych</h1>
+    <p>Tę stronę serwuje Wasza aplikacja Spring Boot z pliku <code>src/main/resources/static/index.html</code>.
+       Możecie ją zmienić na wizytówkę swojego projektu.</p>
+  </header>
+
+  <!-- LAB 01: wizytówka Waszego projektu. Zastąpcie wszystkie znaczniki „uzupełnij” w nawiasach kwadratowych (reguła R1.05). -->
+  <section class="card project">
+    <h2>[uzupełnij: nazwa projektu]</h2>
+    <p class="pitch">[uzupełnij: jedno zdanie – jaki problem rozwiązujecie i dla kogo]</p>
+    <table>
+      <tr><td>Dla kogo</td><td>[uzupełnij: persona, np. „Ola, studentka zaoczna, szuka taniego obiadu po zajęciach”]</td></tr>
+      <tr><td>Co będzie umiał</td><td>[uzupełnij: 3 najważniejsze funkcje, np. przeglądanie ofert, rezerwacja, raport dla właściciela]</td></tr>
+      <tr><td>Zespół</td><td>[uzupełnij: imiona i nazwiska, grupa]</td></tr>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>1. Zajrzyjcie do bazy danych</h2>
+    <p>Aplikacja ma wbudowaną bazę H2. Na start jest w niej jedna tabela, <code>user_account</code>, z kontami z pliku <code>data.sql</code>.</p>
+    <table>
+      <tr><td>JDBC URL</td><td><code>jdbc:h2:file:./data/wdtb</code></td></tr>
+      <tr><td>Użytkownik</td><td><code>sa</code></td></tr>
+      <tr><td>Hasło</td><td>(puste)</td></tr>
+    </table>
+    <a class="btn" href="/h2-console">Otwórz konsolę H2</a>
+    <p class="muted" style="margin-top:12px">Spróbujcie zapytania:</p>
+    <pre>SELECT role, COUNT(*) FROM user_account GROUP BY role;</pre>
+  </section>
+
+  <section class="card">
+    <h2>2. Co dalej</h2>
+    <ol>
+      <li><b>LAB 01:</b> opiszcie projekt (<code>PROJEKT.md</code> i ta strona), dopiszcie swoje konta do <code>data.sql</code>.</li>
+      <li><b>LAB 02:</b> dodajcie swoje encje i dane startowe; nowe tabele pojawią się w konsoli H2 po restarcie.</li>
+      <li><b>LAB 03:</b> repozytoria i zapytania.</li>
+      <li><b>LAB 04–05:</b> serwisy i REST API; endpointy pojawią się pod <code>/api/…</code>, dokumentacja pod <code>/swagger-ui.html</code>.</li>
+    </ol>
+    <p class="muted" style="margin-top:12px">Instrukcje: otwórzcie <code>docs/index.html</code> z repozytorium. Testy i reguły: <code>mvn verify</code>.</p>
+  </section>
+</main>
+</body>
+</html>
