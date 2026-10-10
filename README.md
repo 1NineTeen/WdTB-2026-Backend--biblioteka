@@ -8,8 +8,10 @@ Materiały przygotował: **Wojciech Koszela**, prowadzący
 [![GitHub](https://img.shields.io/badge/GitHub-wkoszela-181717?logo=github&logoColor=white)](https://github.com/wkoszela)
 [![E-mail](https://img.shields.io/badge/E--mail-wojciech.koszela%40wroclaw.merito.pl-C8102E)](mailto:wojciech.koszela@wroclaw.merito.pl)
 
-**Dokumentacja: otwórzcie [`docs/index.html`](docs/index.html) w przeglądarce.** Są tam instrukcje do zajęć,
-wymagania, zasady zaliczenia i opis reguł projektu.
+**Dokumentacja: [wkoszela.github.io/WdTB-2026-Backend--projectname--](https://wkoszela.github.io/WdTB-2026-Backend--projectname--/)**
+(instrukcja LAB 01: [`lab01.html`](https://wkoszela.github.io/WdTB-2026-Backend--projectname--/lab01.html)).
+Są tam instrukcje do zajęć, wymagania, zasady zaliczenia i opis reguł projektu.
+Te same strony znajdują się w katalogu [`docs/`](docs/index.html); po sklonowaniu repozytorium można je otworzyć lokalnie w przeglądarce.
 
 ## W skrócie
 
