@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,8 +26,8 @@ class Lab01ProjectRulesTest {
         String name = Project.rootPackage().substring((Project.BASE_PACKAGE + ".").length());
 
         assertThat(name)
-                .as("Pakiet główny musi mieć postać pl.wsb.<nazwaprojektu> (jedno słowo, małe litery, bez polskich znaków). "
-                        + "Zmień pl.wsb.projekt na nazwę Waszego projektu.")
+                .withFailMessage("Pakiet główny musi mieć postać pl.wsb.<nazwaprojektu> (jedno słowo, małe litery, bez polskich znaków). "
+                        + "Zmieńcie pl.wsb.projekt na nazwę Waszego projektu. Teraz: pl.wsb." + name)
                 .matches("[a-z][a-z0-9]*")
                 .isNotEqualTo("projekt");
 
@@ -34,7 +35,8 @@ class Lab01ProjectRulesTest {
                 .matcher(Project.read("pom.xml").replaceAll("(?s)<parent>.*?</parent>", ""));
         assertThat(artifact.find()).isTrue();
         assertThat(artifact.group(1))
-                .as("W pom.xml ustaw <artifactId>wdtb-2026-backend-" + name + "</artifactId> (repozytorium: WdTB-2026-Backend-" + name + ")")
+                .withFailMessage("W pom.xml ustawcie <artifactId>wdtb-2026-backend-" + name + "</artifactId> (repozytorium: WdTB-2026-Backend-" + name + "). "
+                        + "Teraz: " + artifact.group(1))
                 .isEqualTo("wdtb-2026-backend-" + name);
     }
 
@@ -43,17 +45,21 @@ class Lab01ProjectRulesTest {
     void projectCardIsFilled() {
         String card = Project.read("PROJEKT.md");
 
-        assertThat(card)
-                .as("PROJEKT.md: zastąp wszystkie znaczniki <uzupełnij>")
-                .doesNotContain("<uzupełnij>");
-        assertThat(card)
-                .as("PROJEKT.md: dodaj diagram ER w bloku ```mermaid erDiagram")
-                .contains("erDiagram");
-        assertThat(Pattern.compile("(?m)^\\|\\s*@\\S+").matcher(card).results().count())
-                .as("PROJEKT.md: tabela zespołu ma mieć wszystkie osoby (wiersze zaczynające się od | @login-github)")
+        assertThat(linesContaining(card, "<uzupełnij>"))
+                .as("PROJEKT.md: zastąpcie wszystkie znaczniki <uzupełnij> (poniżej linie, w których jeszcze są)")
+                .isEmpty();
+        assertThat(card.contains("erDiagram"))
+                .withFailMessage("PROJEKT.md: dodajcie diagram ER w bloku ```mermaid erDiagram")
+                .isTrue();
+        long members = Pattern.compile("(?m)^\\|\\s*@\\S+").matcher(card).results().count();
+        assertThat(members)
+                .withFailMessage("PROJEKT.md: tabela zespołu ma mieć wszystkie osoby (wiersze zaczynające się od | @login-github). "
+                        + "Teraz: " + members)
                 .isGreaterThanOrEqualTo(2);
-        assertThat(Pattern.compile("(?mi)^\\s*\\d+\\.\\s*jako\\b").matcher(card).results().count())
-                .as("PROJEKT.md: co najmniej 5 historyjek w formacie '1. Jako <kto> chcę <co>, aby <po co>'")
+        long stories = Pattern.compile("(?mi)^\\s*\\d+\\.\\s*jako\\b").matcher(card).results().count();
+        assertThat(stories)
+                .withFailMessage("PROJEKT.md: co najmniej 5 historyjek w formacie '1. Jako <kto> chcę <co>, aby <po co>'. "
+                        + "Teraz: " + stories)
                 .isGreaterThanOrEqualTo(5);
     }
 
@@ -72,8 +78,10 @@ class Lab01ProjectRulesTest {
         try (ConfigurableApplicationContext context = ProjectApp.startWithHibernateSchema()) {
             List<String> emails = context.getBean(JdbcTemplate.class)
                     .queryForList("select lower(email) from user_account", String.class);
-            assertThat(emails.stream().filter(e -> !demo.contains(e)).count())
-                    .as("Dopiszcie do src/main/resources/data.sql konta wszystkich osób z zespołu. Teraz w bazie: " + emails)
+            long teamAccounts = emails.stream().filter(e -> !demo.contains(e)).count();
+            assertThat(teamAccounts)
+                    .withFailMessage("Dopiszcie do src/main/resources/data.sql konta wszystkich osób z zespołu "
+                            + "(są " + teamAccounts + ", potrzeba co najmniej 3). Teraz w bazie: " + emails)
                     .isGreaterThanOrEqualTo(3);
         }
     }
@@ -81,9 +89,14 @@ class Lab01ProjectRulesTest {
     @Test
     @DisplayName("R1.05 Strona startowa (static/index.html) opisuje Wasz projekt")
     void startPageDescribesProject() {
-        assertThat(Project.read("src/main/resources/static/index.html").replaceAll("(?s)<!--.*?-->", ""))
-                .as("Uzupełnijcie wizytówkę projektu w src/main/resources/static/index.html (zastąpcie wszystkie [uzupełnij])")
-                .doesNotContain("[uzupełnij");
+        String page = Project.read("src/main/resources/static/index.html");
+        // komentarze HTML zamieniamy na tyle samo pustych linii, żeby numery linii zgadzały się z plikiem
+        String withoutComments = Pattern.compile("(?s)<!--.*?-->").matcher(page)
+                .replaceAll(m -> "\n".repeat((int) m.group().lines().count() - 1));
+        assertThat(linesContaining(withoutComments, "[uzupełnij"))
+                .as("Uzupełnijcie wizytówkę projektu w src/main/resources/static/index.html "
+                        + "(zastąpcie wszystkie [uzupełnij]; poniżej linie, w których jeszcze są)")
+                .isEmpty();
     }
 
     @Test
@@ -94,12 +107,21 @@ class Lab01ProjectRulesTest {
         assertThat(version.find()).isTrue();
         String value = version.group(1).trim();
         assertThat(value)
-                .as("W pom.xml ustaw <version>1.0.0-<numery indeksów osób z zespołu oddzielone myślnikiem></version>, "
+                .withFailMessage("W pom.xml ustawcie <version>1.0.0-<numery indeksów osób z zespołu oddzielone myślnikiem></version>, "
                         + "np. 1.0.0-123456-123457-123458. Teraz: " + value)
                 .matches("1\\.0\\.0(-\\d{5,7}){2,3}");
         String[] numbers = value.substring("1.0.0-".length()).split("-");
         assertThat(Set.of(numbers))
-                .as("Każdy numer indeksu w wersji wpisujemy raz: " + value)
+                .withFailMessage("Każdy numer indeksu w wersji wpisujecie raz. Teraz: " + value)
                 .hasSize(numbers.length);
+    }
+
+    /** Linie z danym znacznikiem w formacie "linia N: …", żeby błąd wskazywał miejsce zamiast wypisywać cały plik. */
+    private static List<String> linesContaining(String text, String marker) {
+        List<String> lines = text.lines().toList();
+        return IntStream.range(0, lines.size())
+                .filter(i -> lines.get(i).contains(marker))
+                .mapToObj(i -> "linia " + (i + 1) + ": " + lines.get(i).strip())
+                .toList();
     }
 }

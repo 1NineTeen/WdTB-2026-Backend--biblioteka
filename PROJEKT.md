@@ -1,6 +1,6 @@
 # WdTB-2026-Backend-<uzupełnij: nazwa projektu>
 
-> Karta Waszego projektu z przedmiotu Wprowadzenie do technologii backendowych. Reguła R1.02 sprawdza, czy zastąpiliście wszystkie znaczniki `<uzupełnij>`.
+> Karta Waszego projektu z przedmiotu Wprowadzenie do technologii backendowych. Reguła R1.02 sprawdza, czy zastąpiliście wszystkie znaczniki „uzupełnij” w nawiasach ostrych.
 > Plik jest żywy: aktualizujcie go na każdym labie. Jak wymyślić pomysł: `docs/pomysl.html`.
 
 **Problem w jednym zdaniu:** <uzupełnij>
