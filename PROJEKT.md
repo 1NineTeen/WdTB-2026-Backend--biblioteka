@@ -12,7 +12,7 @@
 ## Zespół
 
 Zespół 3-osobowy. Każdy wiersz zaczyna się od loginu GitHub. Pierwsza osoba hostuje repozytorium.
-Repozytorium jest publiczne, więc bez numerów indeksu i e-maili (te są tylko w arkuszu prowadzącego).
+Repozytorium jest publiczne, więc bez e-maili (numery indeksów wpisujecie tylko w wersji w `pom.xml`).
 
 | Login | Imię | Moduł / encje, za które odpowiada |
 |---|---|---|

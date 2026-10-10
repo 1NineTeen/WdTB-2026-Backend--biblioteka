@@ -85,4 +85,21 @@ class Lab01ProjectRulesTest {
                 .as("Uzupełnijcie wizytówkę projektu w src/main/resources/static/index.html (zastąpcie wszystkie [uzupełnij])")
                 .doesNotContain("[uzupełnij");
     }
+
+    @Test
+    @DisplayName("R1.06 Wersja w pom.xml: 1.0.0-<nr indeksu>-<nr indeksu>[-<nr indeksu>]")
+    void versionContainsStudentNumbers() {
+        Matcher version = Pattern.compile("<version>([^<]+)</version>")
+                .matcher(Project.read("pom.xml").replaceAll("(?s)<parent>.*?</parent>", ""));
+        assertThat(version.find()).isTrue();
+        String value = version.group(1).trim();
+        assertThat(value)
+                .as("W pom.xml ustaw <version>1.0.0-<numery indeksów osób z zespołu oddzielone myślnikiem></version>, "
+                        + "np. 1.0.0-123456-123457-123458. Teraz: " + value)
+                .matches("1\\.0\\.0(-\\d{5,7}){2,3}");
+        String[] numbers = value.substring("1.0.0-".length()).split("-");
+        assertThat(Set.of(numbers))
+                .as("Każdy numer indeksu w wersji wpisujemy raz: " + value)
+                .hasSize(numbers.length);
+    }
 }

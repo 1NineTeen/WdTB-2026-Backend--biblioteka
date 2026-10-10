@@ -187,12 +187,19 @@ SELECT role, COUNT(*) FROM user_account GROUP BY role;
 <td><code>wdtb-2026-backend-&lt;nazwaprojektu&gt;</code></td>
 <td><code>wdtb-2026-backend-deskhop</code></td>
 </tr>
+<tr>
+<td><code>version</code> w <code>pom.xml</code></td>
+<td><code>1.0.0-&lt;nrindeksu1&gt;-&lt;nrindeksu2&gt;-&lt;nrindeksu3&gt;</code></td>
+<td><code>1.0.0-123456-123457-123458</code></td>
+</tr>
 </tbody>
 </table></div>
 <ul>
 <li>pakiet <code>pl.wsb.projekt</code> → <code>pl.wsb.&lt;nazwaprojektu&gt;</code> (IntelliJ: <em>Refactor → Rename</em> na pakiecie),</li>
 <li><code>ProjektApplication</code> → <code>&lt;NazwaProjektu&gt;Application</code>,</li>
-<li>w <code>pom.xml</code> dopiszcie nazwę do <code>&lt;artifactId&gt;wdtb-2026-backend&lt;/artifactId&gt;</code>.</li>
+<li>w <code>pom.xml</code> dopiszcie nazwę do <code>&lt;artifactId&gt;wdtb-2026-backend&lt;/artifactId&gt;</code>,</li>
+<li>w <code>pom.xml</code> ustawcie <strong>wersję</strong> z numerami indeksów osób z zespołu (R1.06):
+     <code>&lt;version&gt;1.0.0-&lt;nrindeksu1&gt;-&lt;nrindeksu2&gt;-&lt;nrindeksu3&gt;&lt;/version&gt;</code>, np. <code>1.0.0-123456-123457-123458</code>.</li>
 </ul>
 <p>Nazwa projektu: jedno słowo, małe litery, bez polskich znaków.</p>
 <blockquote>
@@ -241,7 +248,7 @@ erDiagram
 <li>Zmiany wysyłacie przez Pull Requesty (każda osoba co najmniej jeden: konto w <code>data.sql</code>, nazwa projektu, opis).
    Recenzję robi inna osoba z zespołu.</li>
 <li>Lokalnie: <code>mvn verify</code>. Na GitHubie w zakładce <em>Actions</em> przebieg „Testy i reguły” na <code>main</code> powinien być zielony:
-   reguły <strong>R1.01–R1.05</strong>. W <em>Summary</em> przebiegu widać, które reguły jeszcze nie przechodzą.</li>
+   reguły <strong>R1.01–R1.06</strong>. W <em>Summary</em> przebiegu widać, które reguły jeszcze nie przechodzą.</li>
 <li>Przed końcem zajęć jedna osoba taguje <code>lab-1</code>: <code>git tag lab-1 &amp;&amp; git push origin lab-1</code>
    (albo <em>Releases → Draft a new release → Choose a tag: lab-1</em>).</li>
 <li><strong>Prezentacja:</strong> każdy zespół w 2 minuty pokazuje wizytówkę na http://localhost:8080 i diagram ER.</li>
@@ -274,6 +281,10 @@ erDiagram
 <tr>
 <td>R1.05</td>
 <td>strona startowa nie zawiera już <code>[uzupełnij]</code></td>
+</tr>
+<tr>
+<td>R1.06</td>
+<td>wersja w <code>pom.xml</code>: <code>1.0.0-&lt;nr indeksu&gt;-&lt;nr indeksu&gt;[-&lt;nr indeksu&gt;]</code></td>
 </tr>
 </tbody>
 </table></div>

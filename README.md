@@ -56,4 +56,5 @@ dane startowe są w `src/main/resources/data.sql`.
 | repozytorium (fork, po zmianie nazwy) | `WdTB-2026-Backend-<nazwaprojektu>` |
 | pakiet Javy | `pl.wsb.<nazwaprojektu>` |
 | `artifactId` w `pom.xml` | `wdtb-2026-backend-<nazwaprojektu>` |
+| `version` w `pom.xml` | `1.0.0-<nrindeksu1>-<nrindeksu2>-<nrindeksu3>` |
 | karta projektu | `PROJEKT.md` |
