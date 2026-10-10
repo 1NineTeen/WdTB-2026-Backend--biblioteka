@@ -32,7 +32,7 @@ Robi to **jedna osoba z zespołu** (osoba hostująca), pozostałe osoby patrzą 
 
 1. **Fork.** Na stronie tego repozytorium kliknijcie **Fork** → *Owner*: Wasze konto → **Create fork**.
    Fork to Wasza kopia szablonu na Waszym koncie; w niej pracuje cały zespół.
-2. **Zmiana nazwy.** W forku: *Settings → General → Repository name* → zamieńcie końcówkę `-projectname-`
+2. **Zmiana nazwy.** W forku: *Settings → General → Repository name* → zamieńcie końcówkę `-projectname--`
    na nazwę projektu, np. `WdTB-2026-Backend-deskhop` → **Rename**. Nazwa projektu: jedno słowo, małe litery,
    bez polskich znaków. Fork możecie zrobić od razu, a nazwę zmieniacie, gdy zespół wybierze nazwę projektu (LAB 01, krok C3).
 3. **Włączenie sprawdzania.** Zakładka **Actions** → *I understand my workflows, go ahead and enable them*.

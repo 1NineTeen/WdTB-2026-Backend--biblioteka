@@ -23,7 +23,7 @@ on:
 
 env:
   # Repozytorium szablonu (właściciel/nazwa), z którego pobierane są oficjalne reguły.
-  RULES_REPO: wkoszela/WdTB-2026-Backend--projectname-
+  RULES_REPO: wkoszela/WdTB-2026-Backend--projectname--
 
 permissions:
   contents: read
