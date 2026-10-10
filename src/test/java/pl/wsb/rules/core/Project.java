@@ -103,7 +103,7 @@ public final class Project {
         return applicationClass;
     }
 
-    /** Np. {@code pl.wsb.deskhop}. */
+    /** Np. {@code pl.wsb.kawiarnia}. */
     public static String rootPackage() {
         return applicationClass().getPackageName();
     }
