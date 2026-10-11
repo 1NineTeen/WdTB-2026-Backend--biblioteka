@@ -11,6 +11,7 @@ Materiały przygotował: **Wojciech Koszela**, prowadzący
 **Dokumentacja: [wkoszela.github.io/WdTB-2026-Backend--projectname--](https://wkoszela.github.io/WdTB-2026-Backend--projectname--/)**
 (instrukcja LAB 01: [`lab01.html`](https://wkoszela.github.io/WdTB-2026-Backend--projectname--/lab01.html)).
 Są tam instrukcje do zajęć, wymagania, zasady zaliczenia i opis reguł projektu.
+**Arkusz zespołów (Excel): [otwórz w SharePoint](https://m365ht-my.sharepoint.com/:x:/g/personal/wojciech_koszela_wroclaw_merito_pl/IQCEEPWN_2owS6zMeDfSfeG-AXpOGAC7AgOlj9SAudd8Y0w?e=S2s4H9)**, zakładka Waszej grupy.
 Te same strony znajdują się w katalogu [`docs/`](docs/index.html); po sklonowaniu repozytorium można je otworzyć lokalnie w przeglądarce.
 
 ## W skrócie
@@ -43,7 +44,7 @@ Robi to **jedna osoba z zespołu** (osoba hostująca), pozostałe osoby patrzą 
 4. **Zespół.** *Settings → Collaborators → Add people*: pozostałe osoby z zespołu, żeby mogły wysyłać zmiany.
    Zaproszone osoby akceptują zaproszenie (e-mail albo https://github.com/notifications). Prowadzącego nie dodajecie:
    repozytorium jest publiczne, wystarczy link w arkuszu.
-5. **Arkusz zespołów.** Jedna osoba wpisuje cały zespół w zakładce swojej grupy: nazwa projektu, link do repozytorium,
+5. **[Arkusz zespołów](https://m365ht-my.sharepoint.com/:x:/g/personal/wojciech_koszela_wroclaw_merito_pl/IQCEEPWN_2owS6zMeDfSfeG-AXpOGAC7AgOlj9SAudd8Y0w?e=S2s4H9).** Jedna osoba wpisuje cały zespół w zakładce swojej grupy: nazwa projektu, link do repozytorium,
    **krótki opis** (1–2 zdania: jaki problem rozwiązujecie i dla kogo) i dane trzech osób.
 
 O czym łatwo zapomnieć:
