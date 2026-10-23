@@ -22,7 +22,9 @@
 <p><strong>Zajęcia są oceniane.</strong> Ocenę wystawia prowadzący na koniec zajęć ze stanu repozytorium na tagu <code>lab-2</code>.
 Zielone „Testy i reguły” (R2.01–R2.10) to warunek konieczny. Kryteria oceny prowadzący podaje na początku zajęć.</p>
 <p><strong>Pracujemy na zajęciach, nie w domu.</strong> Na koniec zajęć pomysł z LAB 01 jest zapisany w kodzie jako model danych:
-4–6 własnych tabel jako encje JPA, relacje między nimi, dane startowe w <code>data.sql</code>, zmiany od każdej osoby z zespołu.</p>
+4–6 własnych tabel jako encje JPA, relacje między nimi, dane startowe w <code>data.sql</code>, commity podpisane przez każdą osobę z zespołu.</p>
+<p><strong>Pracujemy na jednym laptopie.</strong> Zespół siada przy komputerze osoby hostującej, jak na LAB 01.
+Przy klawiaturze zmieniacie się po każdej encji, a każdy commit podpisuje osoba, która go napisała (krok C3).</p>
 </blockquote>
 <blockquote>
 <p><strong>Od tego zaczynamy.</strong> Każdy zespół uruchamia aplikację w IntelliJ i pokazuje na <strong>http://localhost:8080</strong>
@@ -39,7 +41,7 @@ Te same strony są w katalogu <code>docs/</code> po pobraniu nowych materiałów
 <li><span class="tag theory">Teoria</span><strong>B · Wprowadzenie:</strong> tabela ↔ encja, relacje w JPA na przykładzie kawiarni</li>
 <li><span class="tag task">Zadanie</span><strong>C · Aktualizacja projektu:</strong> nowe materiały, <code>lab=2</code>, podział pracy w zespole</li>
 <li><span class="tag task">Zadanie</span><strong>D · Model danych zespołu:</strong> tabele i relacje na kartce, dopasowane do reguł</li>
-<li><span class="tag task">Zadanie</span><strong>E · Encje w kodzie:</strong> krok po kroku, każda osoba swoje klasy</li>
+<li><span class="tag task">Zadanie</span><strong>E · Encje w kodzie:</strong> krok po kroku, przy klawiaturze na zmianę</li>
 <li><span class="tag task">Zadanie</span><strong>F · Dane startowe:</strong> <code>data.sql</code> i sprawdzenie w konsoli H2</li>
 <li><span class="tag task">Zadanie</span><strong>G · Reguły, commit, tag <code>lab-2</code></strong></li>
 </ol>
@@ -282,9 +284,8 @@ private UserAccount account;        // null, gdy gość nie ma konta (np. rezerw
 <h3>C1. Nowe materiały z szablonu</h3>
 <p>Przed zajęciami w szablonie pojawiły się instrukcja LAB 02 i reguły R2.01–R2.10. Pobieracie je do forka:</p>
 <ol>
-<li><strong>Osoba hostująca</strong> na stronie forka na GitHubie: <strong>Sync fork → Update branch</strong>.</li>
-<li><strong>Każda osoba</strong> w IntelliJ: <em>Git → Pull</em>. Osoby, które jeszcze nie mają projektu na swoim komputerze, klonują fork
-   tak jak na LAB 01 (<em>File → New → Project from Version Control → GitHub</em>).</li>
+<li>Na stronie forka na GitHubie: <strong>Sync fork → Update branch</strong>.</li>
+<li>Na laptopie w IntelliJ: <em>Git → Pull</em>.</li>
 </ol>
 <blockquote>
 <p><strong>Gdy GitHub pokaże konflikt przy Sync fork:</strong> nie klikajcie <em>Discard commits</em>, to usunęłoby Waszą pracę z LAB 01.
@@ -294,20 +295,27 @@ zgodnie z instrukcją: <code>pom.xml</code>, <code>data.sql</code>, <code>static
 Dlatego przy tych plikach konfliktu nie będzie.</p>
 </blockquote>
 <h3>C2. Włączenie reguł LAB 02</h3>
-<p>Jedna osoba w <code>pom.xml</code> zmienia <code>&lt;lab&gt;1&lt;/lab&gt;</code> na <code>&lt;lab&gt;2&lt;/lab&gt;</code>,
-klika <em>Load Maven Changes</em> (ikona w prawym górnym rogu edytora) i od razu wysyła zmianę:
-<em>Git → Commit</em> z opisem „LAB 02: reguły”, potem <em>Push</em>. Pozostałe osoby robią <em>Git → Pull</em>.</p>
+<p>W <code>pom.xml</code> zmieńcie <code>&lt;lab&gt;1&lt;/lab&gt;</code> na <code>&lt;lab&gt;2&lt;/lab&gt;</code>,
+kliknijcie <em>Load Maven Changes</em> (ikona w prawym górnym rogu edytora) i od razu wyślijcie zmianę:
+<em>Git → Commit</em> z opisem „LAB 02: reguły”, potem <em>Push</em>.</p>
 <p>Od tej chwili <em>Maven → Lifecycle → verify</em> uruchamia też reguły LAB 02. Na starcie wszystkie są czerwone: to lista zadań na dziś.</p>
-<h3>C3. Podział pracy bez konfliktów</h3>
-<p>Na LAB 02 zmiany wysyła <strong>każda osoba ze swojego konta</strong>. Konflikty w Gicie biorą się z edycji tego samego
-fragmentu pliku przez dwie osoby. Unikacie ich tak:</p>
+<h3>C3. Praca na jednym laptopie</h3>
+<p>Wszyscy pracujecie na tej samej kopii projektu, więc konfliktów między Wami nie będzie. Trzeba tylko zadbać, żeby
+w historii było widać, kto co napisał. Raport <em>Wkład członków zespołu</em> w GitHub Actions liczy commity według autora,
+a bez zmiany autora wszystkie commity trafią na konto osoby hostującej.</p>
 <ol>
-<li><strong>Każda osoba ma własne pliki.</strong> Dzielicie tabele między siebie (część D). Osoba tworzy klasy swoich encji
-   w pakiecie swojego modułu i nie edytuje klas pozostałych osób. Gdy trzeba coś zmienić w cudzej encji
-   (np. dodać relację), prosi autora.</li>
-<li><strong><code>data.sql</code> ma sekcje.</strong> Zanim ktokolwiek zacznie wpisywać dane, osoba hostująca dopisuje na końcu
-   <code>data.sql</code> nagłówki sekcji dla wszystkich tabel w kolejności kluczy obcych (najpierw tabele, na które wskazują inne)
-   i wysyła to jednym commitem. Potem każda osoba wypełnia tylko swoje sekcje:
+<li><strong>Zmiana przy klawiaturze po każdej encji.</strong> Jedna osoba pisze, pozostałe podpowiadają i sprawdzają z instrukcją.
+   Kolejność ustalacie w części D: przy każdej tabeli zapisujecie imię osoby, która ją napisze.</li>
+<li><strong>Autor commita.</strong> W oknie <em>Commit</em> kliknijcie ikonę koła zębatego obok przycisku <em>Commit</em>
+   (<em>Commit Options</em>) i w polu <em>Author</em> wpiszcie osobę, która napisała zmianę:
+<pre><code>Anna Nowak &lt;anna.nowak@example.com&gt;
+</code></pre>
+   Adres e-mail to ten sam adres, którego osoba używa na GitHubie. IntelliJ zapamiętuje wpisanych autorów, więc
+   przy kolejnych commitach wybieracie osobę z listy.</li>
+<li><strong>Małe commity.</strong> Po każdej działającej encji z jej danymi w <code>data.sql</code>: uruchomienie aplikacji, <em>Commit</em>
+   z właściwym autorem, <em>Push</em>. Potem przy klawiaturze siada następna osoba.</li>
+<li><strong><code>data.sql</code> ma sekcje.</strong> Na początku części F dopiszcie nagłówki sekcji dla wszystkich tabel w kolejności
+   kluczy obcych (najpierw tabele, na które wskazują inne). Każda osoba wypełnia sekcję swojej tabeli:
 <pre><code>-- ===== LAB 02 · moduł seating: cafe_table (Anna) =====
 
 -- ===== LAB 02 · moduł booking: guest (Jan) =====
@@ -318,17 +326,13 @@ fragmentu pliku przez dwie osoby. Unikacie ich tak:</p>
 
 -- ===== LAB 02 · moduł booking: reservation_extra (Ola) =====
 </code></pre></li>
-<li><strong>Małe, częste commity.</strong> Po każdej działającej encji: <em>Git → Pull</em>, uruchomienie aplikacji, <em>Commit</em>, <em>Push</em>.
-   Commit raz na godzinę to za rzadko.</li>
-<li><strong>Zawsze Pull przed Push.</strong> Gdy IntelliJ pokaże konflikt, otwórzcie <em>Merge…</em>, wybierzcie obie zmiany (lewa i prawa strona)
-   i dopiero wtedy wyślijcie.</li>
 <li><strong>Nikt nie edytuje</strong> <code>src/test/java/pl/wsb/rules</code> ani <code>.github/workflows</code>.</li>
 </ol>
 <div class="tbl"><table>
 <thead>
 <tr>
 <th>Krok</th>
-<th>Osoba hostująca</th>
+<th>Osoba 1 (hostująca)</th>
 <th>Osoba 2</th>
 <th>Osoba 3</th>
 </tr>
@@ -337,32 +341,36 @@ fragmentu pliku przez dwie osoby. Unikacie ich tak:</p>
 <tr>
 <td>C1–C2</td>
 <td>Sync fork, <code>lab=2</code>, commit, push</td>
-<td>Pull</td>
-<td>Pull</td>
+<td colspan="2">podpowiadają</td>
 </tr>
 <tr>
 <td>D</td>
-<td colspan="3">wspólnie: schemat tabel na kartce, podział tabel między osoby</td>
+<td colspan="3">wspólnie: schemat tabel na kartce, przy każdej tabeli imię osoby, która ją napisze</td>
 </tr>
 <tr>
-<td>E</td>
-<td>pakiety modułów i enumy, encje modułu 1</td>
-<td>encje modułu 2 z <code>@ManyToOne</code></td>
-<td>encja łącząca N:M, powiązanie z <code>UserAccount</code></td>
+<td>E–F, runda 1</td>
+<td>pakiety modułów, enum, pierwsza encja i jej dane</td>
+<td colspan="2">podpowiadają</td>
 </tr>
 <tr>
-<td>F</td>
-<td>nagłówki sekcji w <code>data.sql</code>, dane swoich tabel</td>
-<td>dane swoich tabel</td>
-<td>dane swoich tabel</td>
+<td>E–F, runda 2</td>
+<td>podpowiada</td>
+<td>encja z <code>@ManyToOne</code> (np. do <code>UserAccount</code>) i jej dane</td>
+<td>podpowiada</td>
+</tr>
+<tr>
+<td>E–F, runda 3</td>
+<td colspan="2">podpowiadają</td>
+<td>encja łącząca N:M i jej dane</td>
 </tr>
 <tr>
 <td>G</td>
 <td>tag <code>lab-2</code> i push tagu</td>
-<td colspan="2">verify, poprawki, każda osoba ma commity</td>
+<td colspan="2">verify, sprawdzenie raportu wkładu w <em>Actions</em></td>
 </tr>
 </tbody>
 </table></div>
+<p>Przy 4–6 tabelach robicie dwie albo trzy rundy, aż każda osoba napisze co najmniej jedną encję z relacją.</p>
 </section>
 <section class="part task">
 <h2><span class="tag task">Zadanie</span>D · Model danych zespołu</h2>
@@ -575,7 +583,7 @@ utworzyłby dodatkową tabelę <code>cafe_table_reservations</code>, której nie
 <h2><span class="tag task">Zadanie</span>F · Dane startowe i konsola H2</h2>
 <h3>F1. data.sql</h3>
 <p>Hibernate tworzy tabele od nowa przy każdym starcie, a potem Spring Boot wykonuje <code>src/main/resources/data.sql</code>.
-Każda osoba wypełnia swoje sekcje (C3). Zasady:</p>
+Każda osoba wypełnia sekcję swojej tabeli (C3). Zasady:</p>
 <ul>
 <li><strong>Kolejność:</strong> najpierw tabele, na które wskazują klucze obce (stoliki i goście przed rezerwacjami, rezerwacje przed dodatkami do rezerwacji).</li>
 <li><strong>Identyfikatory:</strong> nie wpisujecie <code>id</code>; baza numeruje wiersze od 1 w kolejności wstawiania. W kluczach obcych
@@ -673,16 +681,17 @@ z <code>Caused by</code>: tam jest nazwa tabeli i kolumny.</p>
 <li><strong>Reguły lokalnie:</strong> panel <em>Maven</em> (prawa krawędź okna) → <em>Lifecycle</em> → dwuklik na <em>verify</em>.
    W oknie <em>Run</em> przy każdej regule R2.xx jest zielony albo czerwony znak, a przy czerwonej opis, co poprawić.
    Poprawiacie, aż LAB 01 i LAB 02 są zielone.</li>
-<li><strong>Każda osoba wysyła swoje zmiany:</strong> <em>Git → Pull</em>, <em>Commit</em> z opisem (np. „Encja rezerwacji i dane startowe”), <em>Push</em>.
-   Na GitHubie zakładka <em>Actions</em>: przebieg „Testy i reguły” ma być zielony.</li>
-<li><strong>Tag <code>lab-2</code></strong> (osoba hostująca, gdy wszystkie zmiany są na GitHubie): okno <em>Git</em> → zakładka <em>Log</em> →
+<li><strong>Ostatnie zmiany:</strong> <em>Commit</em> z opisem (np. „Poprawki po regułach LAB 02”) i właściwym autorem (C3), <em>Push</em>.
+   Na GitHubie zakładka <em>Actions</em>: przebieg „Testy i reguły” ma być zielony, a w <em>Summary</em> raport
+   <em>Wkład członków zespołu</em> pokazuje commity każdej osoby.</li>
+<li><strong>Tag <code>lab-2</code></strong> (gdy wszystkie zmiany są na GitHubie): okno <em>Git</em> → zakładka <em>Log</em> →
    prawy przycisk na ostatnim commicie → <em>New Tag…</em> → nazwa <code>lab-2</code>. Potem <em>Git → Push</em> i w oknie zaznaczcie
    <em>Push Tags</em>. W <em>Actions</em> pojawi się przebieg dla tagu: to stan, który ocenia prowadzący.</li>
 <li><strong>Wizytówka:</strong> w <code>static/index.html</code> dopiszcie do listy zmian, co powstało na LAB 02 (tabele i relacje).
    Od tego zaczniecie prezentację na LAB 03.</li>
 </ol>
 <p>Prowadzący ocenia ze stanu na tagu: zielone reguły (warunek konieczny), zgodność modelu z pomysłem z wizytówki,
-sensowne dane startowe, commity od każdej osoby (raport <em>Wkład członków zespołu</em> w <em>Actions → Summary</em>) i rozmowę:
+sensowne dane startowe, commity podpisane przez każdą osobę (raport <em>Wkład członków zespołu</em> w <em>Actions → Summary</em>) i rozmowę:
 każda osoba potrafi wyjaśnić dowolną encję zespołu, nie tylko własną.</p>
 <h3>Reguły LAB 02</h3>
 <div class="tbl"><table>
