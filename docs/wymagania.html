@@ -14,7 +14,7 @@
 <div class="wrap">
 <div class="top">
   <a class="logo" href="index.html"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></a>
-  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><span class="disabled" aria-disabled="true" title="Instrukcja pojawi się przed zajęciami">LAB 02</span><a href="wymagania.html" aria-current="page">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html" aria-current="page">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
 </div>
 <main class="doc"><article class="md">
 <h1>Wymagania projektu</h1>
@@ -48,6 +48,38 @@
 <tr>
 <td>Arkusz zespołów</td>
 <td>nazwa projektu, link do repozytorium, krótki opis projektu (1–2 zdania), dane każdej osoby</td>
+</tr>
+</tbody>
+</table></div>
+<h2>LAB 02 · Encje i relacje</h2>
+<p>Ocena ze stanu repozytorium na tagu <code>lab-2</code>. Instrukcja: <a href="lab02.html">LAB 02</a>.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Wymaganie</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Encje</td>
+<td>co najmniej 4 własne encje poza <code>UserAccount</code>, w co najmniej 2 modułach, w pakietach <code>pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.domain</code> (R2.01–R2.03)</td>
+</tr>
+<tr>
+<td>Relacje</td>
+<td><code>@ManyToOne</code> z <code>@JoinColumn</code>, relacja wiele-do-wielu (encja łącząca lub <code>@ManyToMany</code>), <code>@OneToMany</code> tylko z <code>mappedBy</code>, co najmniej jedna encja wskazuje na <code>UserAccount</code> (R2.04–R2.06, R2.09)</td>
+</tr>
+<tr>
+<td>Typy</td>
+<td>enumy jako <code>@Enumerated(EnumType.STRING)</code>, kwoty w <code>BigDecimal</code> (R2.07–R2.08)</td>
+</tr>
+<tr>
+<td>Dane startowe</td>
+<td>aplikacja startuje, każda własna tabela ma wiersze z <code>data.sql</code> (R2.10)</td>
+</tr>
+<tr>
+<td>Zespół</td>
+<td><code>&lt;lab&gt;2&lt;/lab&gt;</code> w <code>pom.xml</code>, commity od każdej osoby, tag <code>lab-2</code> utworzony na zajęciach</td>
 </tr>
 </tbody>
 </table></div>

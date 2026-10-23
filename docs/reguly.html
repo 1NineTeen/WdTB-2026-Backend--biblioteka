@@ -14,7 +14,7 @@
 <div class="wrap">
 <div class="top">
   <a class="logo" href="index.html"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></a>
-  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><span class="disabled" aria-disabled="true" title="Instrukcja pojawi się przed zajęciami">LAB 02</span><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html" aria-current="page">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html" aria-current="page">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
 </div>
 <main class="doc"><article class="md">
 <h1>Reguły projektu</h1>
@@ -44,6 +44,11 @@ więc ten sam zestaw ocenia wszystkie zespoły.</p>
 <td>01</td>
 <td>pliki + Spring Boot</td>
 <td>tożsamość projektu, wizytówka, aplikacja startuje, konta zespołu</td>
+</tr>
+<tr>
+<td>02</td>
+<td>ArchUnit + Spring Boot</td>
+<td>encje i ich pakiety, relacje (<code>@ManyToOne</code>, N:M, <code>mappedBy</code>), typy kolumn, dane startowe w każdej tabeli</td>
 </tr>
 </tbody>
 </table></div>
@@ -88,6 +93,60 @@ pl.wsb.&lt;projekt&gt;.shared | common | config moduły wspólne, dostępne dla 
 </tr>
 </tbody>
 </table></div>
+<h2>LAB 02 · Encje i relacje</h2>
+<p>Instrukcja: <a href="lab02.html">LAB 02</a>. „Własne encje” to wszystkie klasy z <code>@Entity</code> poza gotowym <code>UserAccount</code>.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Reguła</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R2.01</td>
+<td>Co najmniej 4 własne encje (<code>@Entity</code>)</td>
+</tr>
+<tr>
+<td>R2.02</td>
+<td>Encje i <code>@Embeddable</code> leżą w pakietach <code>pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.domain</code></td>
+</tr>
+<tr>
+<td>R2.03</td>
+<td>Co najmniej 2 moduły z własnymi encjami</td>
+</tr>
+<tr>
+<td>R2.04</td>
+<td>Jest relacja <code>@ManyToOne</code>, a każda ma <code>@JoinColumn(name = "…_id")</code></td>
+</tr>
+<tr>
+<td>R2.05</td>
+<td>Relacja wiele-do-wielu: encja łącząca z dwiema <code>@ManyToOne</code> albo pole <code>@ManyToMany</code></td>
+</tr>
+<tr>
+<td>R2.06</td>
+<td>Co najmniej jedna własna encja wskazuje na <code>UserAccount</code> (<code>@ManyToOne</code> lub <code>@OneToOne</code>)</td>
+</tr>
+<tr>
+<td>R2.07</td>
+<td>Każde pole typu enum w encji ma <code>@Enumerated(EnumType.STRING)</code></td>
+</tr>
+<tr>
+<td>R2.08</td>
+<td>W encjach i <code>@Embeddable</code> nie ma pól <code>double</code> ani <code>float</code> (kwoty w <code>BigDecimal</code>)</td>
+</tr>
+<tr>
+<td>R2.09</td>
+<td>Każde <code>@OneToMany</code> ma <code>mappedBy</code> (strona odwrotna relacji)</td>
+</tr>
+<tr>
+<td>R2.10</td>
+<td>Aplikacja startuje na czystej bazie H2, a każda własna tabela ma co najmniej jeden wiersz z <code>data.sql</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Reguły R2.01–R2.09 czytają skompilowane klasy (ArchUnit), R2.10 uruchamia aplikację. Autotest w
+<code>src/test/java/pl/wsb/rules/lab02</code> sprawdza je na przykładzie kawiarni z instrukcji i na celowo błędnym modelu.</p>
 <p>Reguły kolejnych laboratoriów pojawią się w szablonie przed danymi zajęciami.</p>
 </article></main>
 <footer>

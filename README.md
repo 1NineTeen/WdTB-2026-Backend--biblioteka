@@ -9,7 +9,8 @@ Materiały przygotował: **Wojciech Koszela**, prowadzący
 [![E-mail](https://img.shields.io/badge/E--mail-wojciech.koszela%40wroclaw.merito.pl-C8102E)](mailto:wojciech.koszela@wroclaw.merito.pl)
 
 **Dokumentacja: [wkoszela.github.io/WdTB-2026-Backend--projectname--](https://wkoszela.github.io/WdTB-2026-Backend--projectname--/)**
-(instrukcja LAB 01: [`lab01.html`](https://wkoszela.github.io/WdTB-2026-Backend--projectname--/lab01.html)).
+(instrukcje: [LAB 01](https://wkoszela.github.io/WdTB-2026-Backend--projectname--/lab01.html),
+[LAB 02](https://wkoszela.github.io/WdTB-2026-Backend--projectname--/lab02.html)).
 Są tam instrukcje do zajęć, wymagania, zasady zaliczenia i opis reguł projektu.
 **Arkusz zespołów (Excel): [otwórz w SharePoint](https://m365ht-my.sharepoint.com/:x:/g/personal/wojciech_koszela_wroclaw_merito_pl/IQCEEPWN_2owS6zMeDfSfeG-AXpOGAC7AgOlj9SAudd8Y0w?e=S2s4H9)**, zakładka Waszej grupy.
 Te same strony znajdują się w katalogu [`docs/`](docs/index.html); po sklonowaniu repozytorium można je otworzyć lokalnie w przeglądarce.
@@ -25,7 +26,7 @@ Te same strony znajdują się w katalogu [`docs/`](docs/index.html); po sklonowa
 | Zajęcia | Temat |
 |---|---|
 | LAB 01 | Start: projekt, aplikacja i opis pomysłu (bez oceny) |
-| LAB 02 | Encje i relacje w JPA |
+| LAB 02 | Encje i relacje w JPA (ocena z tagu `lab-2`) |
 | LAB 03 | Repozytoria i zapytania |
 | LAB 04 | Serwisy i komponenty |
 | LAB 05 | Kontrolery REST |
@@ -111,6 +112,22 @@ Na LAB 01 wystarczy, że zmiany zacommituje jedna osoba z zespołu. Zmiany wysy�
 Nie zmieniajcie katalogu `src/test/java/pl/wsb/rules` ani `.github/workflows`: tam są reguły, którymi sprawdzamy projekt.
 
 Szczegóły krok po kroku: `docs/lab01.html`.
+
+## Co zmodyfikować na LAB 02
+
+Instrukcja krok po kroku: `docs/lab02.html`. Zmiany wysyła **każda osoba ze swojego konta**.
+
+| Plik | Zmiana | Reguła |
+|---|---|---|
+| `pom.xml`, `<lab>` | `1` → `2` (jedna osoba, od razu commit i push) | włącza R2.xx |
+| `pl.wsb.<projekt>.<moduł>.domain` | pakiety co najmniej 2 modułów, w nich enumy i co najmniej 4 encje (`@Entity`) | R2.01–R2.03 |
+| encje | `@ManyToOne` z `@JoinColumn(name = "…_id")`, encja łącząca N:M, pole typu `UserAccount`, `@OneToMany` tylko z `mappedBy` | R2.04–R2.06, R2.09 |
+| typy pól | enumy z `@Enumerated(EnumType.STRING)`, kwoty w `BigDecimal` | R2.07–R2.08 |
+| `src/main/resources/data.sql` | sekcja per tabela (nagłówki dopisuje jedna osoba, potem każdy wypełnia swoje), wiersze w każdej tabeli | R2.10 |
+| `src/main/resources/static/index.html` | w liście zmian: co powstało na LAB 02 | — |
+
+Na koniec zajęć osoba hostująca tworzy tag `lab-2` (okno *Git* → *Log* → prawy przycisk na commicie → *New Tag…*) i wysyła go
+(*Git → Push* z zaznaczonym *Push Tags*). Prowadzący ocenia stan repozytorium na tym tagu.
 
 ## Konwencja nazw
 

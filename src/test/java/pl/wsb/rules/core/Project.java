@@ -110,7 +110,12 @@ public final class Project {
 
     /** Nazwa modułu klasy (pierwszy segment pod pakietem głównym) albo pusty, gdy klasa leży w pakiecie głównym. */
     public static Optional<String> moduleOf(JavaClass javaClass) {
-        String root = rootPackage() + ".";
+        return moduleOf(javaClass, rootPackage());
+    }
+
+    /** Jak {@link #moduleOf(JavaClass)}, ale względem podanego pakietu głównego (np. dla przykładów w testach reguł). */
+    public static Optional<String> moduleOf(JavaClass javaClass, String rootPackage) {
+        String root = rootPackage + ".";
         String pkg = javaClass.getPackageName();
         if (!pkg.startsWith(root)) {
             return Optional.empty();
@@ -122,7 +127,12 @@ public final class Project {
 
     /** Warstwa klasy w module (domain/application/api/web/infrastructure) albo pusty. */
     public static Optional<String> layerOf(JavaClass javaClass) {
-        String root = rootPackage() + ".";
+        return layerOf(javaClass, rootPackage());
+    }
+
+    /** Jak {@link #layerOf(JavaClass)}, ale względem podanego pakietu głównego. */
+    public static Optional<String> layerOf(JavaClass javaClass, String rootPackage) {
+        String root = rootPackage + ".";
         String pkg = javaClass.getPackageName();
         if (!pkg.startsWith(root)) {
             return Optional.empty();

@@ -14,12 +14,12 @@
 <div class="wrap">
 <div class="top">
   <a class="logo" href="index.html"><img src="assets/merito-logo.png" alt="Uniwersytet WSB Merito Wrocław"></a>
-  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><span class="disabled" aria-disabled="true" title="Instrukcja pojawi się przed zajęciami">LAB 02</span><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html" aria-current="page">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
+  <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html">LAB 02</a><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html" aria-current="page">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
 </div>
 <main class="doc"><article class="md">
 <h1>Roadmapa laboratoriów</h1>
 <p>Każde laboratorium dokłada jedną warstwę backendu, a reguły projektu rosną razem z kodem.
-Laboratoria 01–02 są rozpisane szczegółowo. Pozostałe opisują zakres i wymagania; instrukcje pojawią się przed zajęciami.
+Laboratoria 01–02 mają instrukcje. Pozostałe opisują zakres i wymagania; instrukcje pojawią się przed zajęciami.
 Wymagania laboratoriów: <a href="wymagania.html">Wymagania</a>. Zaliczenie i obecności: <a href="zasady.html">Zasady</a>.
 Pracujemy na zajęciach; kryteria oceny prowadzący podaje zawsze na początku zajęć.</p>
 <pre><code>LAB 01        LAB 02          LAB 03            LAB 04           LAB 05           LAB 06          LAB 07
@@ -37,14 +37,16 @@ opis pomysłu  JPA, data.sql   Spring Data       DI, transakcje   DTO, walidacja
 <li><strong>Reguły:</strong> R1.01–R1.05</li>
 </ul>
 <h2>LAB 02 · Encje i relacje</h2>
-<p>Instrukcja pojawi się przed zajęciami.</p>
+<p>→ <a href="lab02.html">instrukcja LAB 02</a></p>
 <ul>
 <li><strong>na początek: prezentacja wizytówek</strong> z LAB 01: zespół uruchamia aplikację i pokazuje wypełnioną wizytówkę na <code>http://localhost:8080</code> (autorzy, pomysł, zmiany)</li>
-<li>encje JPA: <code>@Entity</code>, <code>@Table</code>, <code>@Id</code>, <code>@GeneratedValue</code>, <code>@Column</code>, <code>@Enumerated</code></li>
-<li>relacje: <code>@ManyToOne</code>, <code>@OneToMany(mappedBy)</code>, <code>@ManyToMany</code> / encja łącząca, <code>@OneToOne</code>, powiązanie z <code>user_account</code></li>
+<li>wprowadzenie: tabela ↔ encja, typy kolumn, relacje na przykładzie kawiarni, tabele wspólne dla większości projektów (osoba z kontem, zasób, transakcja ze statusem)</li>
+<li>encje JPA: <code>@Entity</code>, <code>@Table</code>, <code>@Id</code>, <code>@GeneratedValue</code>, <code>@Column</code>, <code>@Enumerated(STRING)</code></li>
+<li>relacje: <code>@ManyToOne</code> + <code>@JoinColumn</code>, <code>@OneToMany(mappedBy)</code>, encja łącząca / <code>@ManyToMany</code>, <code>@OneToOne</code>, powiązanie z <code>user_account</code></li>
 <li>typy: <code>BigDecimal</code> dla kwot, enumy jako tekst, daty</li>
-<li>konsola H2: czytanie DDL wygenerowanego przez Hibernate</li>
-<li>dane startowe w <code>data.sql</code></li>
+<li>praca zespołu bez konfliktów: własne pliki, sekcje w <code>data.sql</code>, małe commity od każdej osoby</li>
+<li>konsola H2: czytanie DDL wygenerowanego przez Hibernate, dane startowe w <code>data.sql</code>, tag <code>lab-2</code></li>
+<li><strong>Reguły:</strong> R2.01–R2.10</li>
 </ul>
 <h2>LAB 03 · Repozytoria i zapytania</h2>
 <ul>
