@@ -40,7 +40,7 @@ Te same strony są w katalogu <code>docs/</code> po pobraniu nowych materiałów
 <li><span class="tag task">Zadanie</span><strong>A · Prezentacja wizytówek:</strong> każdy zespół, 2–3 minuty</li>
 <li><span class="tag theory">Teoria</span><strong>B · Wprowadzenie:</strong> tabela ↔ encja, relacje w JPA na przykładzie kawiarni</li>
 <li><span class="tag task">Zadanie</span><strong>C · Aktualizacja projektu:</strong> nowe materiały, <code>lab=2</code>, podział pracy w zespole</li>
-<li><span class="tag task">Zadanie</span><strong>D · Model danych zespołu:</strong> tabele i relacje na kartce, dopasowane do reguł</li>
+<li><span class="tag task">Zadanie</span><strong>D · Lista tabel:</strong> najpierw tabele bez relacji, potem te, które na nie wskazują</li>
 <li><span class="tag task">Zadanie</span><strong>E · Encje w kodzie:</strong> krok po kroku, przy klawiaturze na zmianę</li>
 <li><span class="tag task">Zadanie</span><strong>F · Dane startowe:</strong> <code>data.sql</code> i sprawdzenie w konsoli H2</li>
 <li><span class="tag task">Zadanie</span><strong>G · Reguły, commit, tag <code>lab-2</code></strong></li>
@@ -55,7 +55,6 @@ Te same strony są w katalogu <code>docs/</code> po pobraniu nowych materiałów
 <li><strong>pomysł:</strong> problem, dla kogo jest rozwiązanie, trzy najważniejsze funkcje,</li>
 <li><strong>zmiany wprowadzone na LAB 01.</strong></li>
 </ol>
-<p>Prowadzący zapisuje przy każdym zespole, jakie tabele wynikają z pomysłu. Wrócicie do tego w części D.</p>
 </section>
 <section class="part theory">
 <h2><span class="tag theory">Teoria</span>B · Wprowadzenie: tabela ↔ encja, relacje</h2>
@@ -302,7 +301,7 @@ i od razu wyślijcie zmianę: <em>Git → Commit</em> z opisem „LAB 02: reguł
 <p>Wszyscy pracujecie na tej samej kopii projektu, więc konfliktów między Wami nie będzie.</p>
 <ol>
 <li><strong>Zmiana przy klawiaturze po każdej encji.</strong> Jedna osoba pisze, pozostałe podpowiadają i sprawdzają z instrukcją.
-   W części D przy każdej tabeli zapisujecie imię osoby, która ją napisze.</li>
+</li>
 <li><strong>Małe commity.</strong> Po każdej działającej encji z jej danymi w <code>data.sql</code>: uruchomienie aplikacji, <em>Commit</em>, <em>Push</em>.</li>
 <li><strong><code>data.sql</code> ma sekcje.</strong> Na początku części F dopiszcie nagłówki sekcji dla wszystkich tabel w kolejności
    kluczy obcych (najpierw tabele, na które wskazują inne):
@@ -320,23 +319,22 @@ i od razu wyślijcie zmianę: <em>Git → Commit</em> z opisem „LAB 02: reguł
 </ol>
 </section>
 <section class="part task">
-<h2><span class="tag task">Zadanie</span>D · Model danych zespołu</h2>
-<p>Zanim napiszecie kod, narysujcie tabele na kartce (albo w dowolnym narzędziu). Prowadzący podchodzi do zespołów i sprawdza schemat.
-Punktem wyjścia są rzeczowniki z opisu pomysłu (LAB 01, krok C2) i tabela z części B5.</p>
+<h2><span class="tag task">Zadanie</span>D · Lista tabel</h2>
+<p>Nie rysujecie schematu, od razu piszecie kod. Wypiszcie 4–6 tabel z opisu pomysłu (pomoże tabela z części B5)
+i ułóżcie je w dwie grupy:</p>
 <ol>
-<li><strong>Lista tabel:</strong> 4–6 własnych (poza <code>user_account</code>, R2.01). Przy każdej: kolumny, typy, które kolumny są wymagane.</li>
-<li><strong>Strzałki:</strong> każda relacja „wiele-do-jednego” to strzałka od tabeli „wiele” do tabeli „jeden”, a w kodzie
-   pole <code>@ManyToOne</code>. Przy strzałce zapiszcie nazwę kolumny klucza obcego: <code>&lt;tabela&gt;_id</code> (R2.04).</li>
-<li><strong>Relacja wiele-do-wielu:</strong> znajdźcie parę tabel, które łączy coś z własnymi atrybutami (ilość, data, miejsce, wynik).
-   To Wasza encja łącząca: osobna tabela z dwiema strzałkami (R2.05).</li>
-<li><strong>Obiekt ze statusem:</strong> wybierzcie encję z cyklem życia (rezerwacja, zamówienie, wypożyczenie) i wypiszcie stałe enuma,
-   np. <code>NEW, CONFIRMED, CANCELLED, DONE</code> (R2.07). Kwoty to <code>BigDecimal</code> (R2.08).</li>
-<li><strong>Osoba z kontem:</strong> wskażcie encję, która ma pole typu <code>UserAccount</code> (R2.06).</li>
-<li><strong>Moduły:</strong> pogrupujcie tabele w co najmniej 2 moduły (pakiety), np. <code>seating</code> i <code>booking</code> (R2.03).
-   Jedno słowo, małe litery, po angielsku.</li>
-<li><strong>Podział:</strong> przy każdej tabeli imię osoby, która ją napisze. Encja łącząca i encja wskazująca na konto powinny trafić
-   do różnych osób niż tabele, na które wskazują, żeby każda osoba napisała co najmniej jedną relację.</li>
+<li><strong>Tabele bez relacji</strong> piszecie najpierw: to, co się rezerwuje, wypożycza lub kupuje, i słowniki.
+   W kawiarni to stolik i dodatek (krok E3).</li>
+<li><strong>Tabele z relacjami</strong> piszecie potem, bo wskazują na tabele z pierwszej grupy: osoba z kontem,
+   obiekt ze statusem, encja łącząca. W kawiarni to gość, rezerwacja i dodatek do rezerwacji (kroki E4–E6).</li>
 </ol>
+<p>Na koniec zajęć reguły sprawdzą, czy model ma:</p>
+<ul>
+<li>co najmniej 4 własne encje (R2.01) w co najmniej 2 modułach, np. <code>seating</code> i <code>booking</code> (R2.03),</li>
+<li>relację <code>@ManyToOne</code> z <code>@JoinColumn</code> (R2.04) i encję łączącą wiele-do-wielu (R2.05),</li>
+<li>encję z polem typu <code>UserAccount</code> (R2.06),</li>
+<li>status jako enum (R2.07) i kwoty jako <code>BigDecimal</code> (R2.08).</li>
+</ul>
 </section>
 <section class="part task">
 <h2><span class="tag task">Zadanie</span>E · Encje w kodzie: krok po kroku</h2>
@@ -401,6 +399,9 @@ Setterów nie generujcie: stan encji będą zmieniać metody biznesowe (LAB 04).
     primary key (id)
 )
 </code></pre>
+<p>Tak samo napiszcie od razu pozostałe tabele bez relacji. W kawiarni to <code>Extra</code> w <code>booking.domain</code>:
+<code>name</code> (<code>String</code>) i <code>price</code> (<code>BigDecimal</code>, <code>precision = 10, scale = 2</code>).
+Dopiero gdy wszystkie się tworzą, przechodzicie do relacji.</p>
 <h3>E4. Encja z relacją do konta (@ManyToOne)</h3>
 <p><code>Guest</code> w <code>booking.domain</code>: dane gościa, powiązane z kontem logowania.</p>
 <pre><code>@Entity
@@ -488,7 +489,7 @@ public class Reservation {
 <h3>E6. Encja łącząca: relacja wiele-do-wielu</h3>
 <p>Rezerwacja może mieć wiele dodatków (tort, kwiaty), a dodatek trafia do wielu rezerwacji. Para ma atrybut (ilość), więc
 zamiast <code>@ManyToMany</code> powstaje encja <code>ReservationExtra</code> z dwoma polami <code>@ManyToOne</code>.
-Najpierw słownik <code>Extra</code> (id, <code>name</code>, <code>price</code> jako <code>BigDecimal</code>), potem:</p>
+Słownik <code>Extra</code> macie już z kroku E3. Encja łącząca:</p>
 <pre><code>@Entity
 @Table(name = "reservation_extra",
         uniqueConstraints = @UniqueConstraint(columnNames = {"reservation_id", "extra_id"}))
@@ -569,7 +570,7 @@ insert into reservation_extra (reservation_id, extra_id, quantity) values
 </code></pre>
 <h3>F2. Sprawdzenie w konsoli H2</h3>
 <p>Po <em>Rerun</em> otwórzcie <strong>http://localhost:8080/h2-console</strong> (JDBC URL <code>jdbc:h2:file:./data/wdtb</code>,
-użytkownik <code>sa</code>, hasło puste). Po lewej stronie jest lista tabel: rozwińcie swoją i porównajcie kolumny ze schematem z części D. Wykonajcie:</p>
+użytkownik <code>sa</code>, hasło puste). Po lewej stronie jest lista tabel: rozwińcie swoją i sprawdźcie kolumny. Wykonajcie:</p>
 <pre><code>select * from reservation;
 
 select r.id, g.full_name, t.number as table_no, r.starts_at, r.status
