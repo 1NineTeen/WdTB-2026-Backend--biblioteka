@@ -115,8 +115,7 @@ Szczegóły krok po kroku: `docs/lab01.html`.
 
 ## Co zmodyfikować na LAB 02
 
-Instrukcja krok po kroku: `docs/lab02.html`. Zespół pracuje **na jednym laptopie**: przy klawiaturze zmieniacie się po każdej encji,
-a w oknie *Commit* → *Commit Options* → *Author* wpisujecie osobę, która napisała zmianę.
+Instrukcja krok po kroku: `docs/lab02.html`. Zespół pracuje **na jednym laptopie**: przy klawiaturze zmieniacie się po każdej encji.
 
 | Plik | Zmiana | Reguła |
 |---|---|---|
@@ -124,7 +123,7 @@ a w oknie *Commit* → *Commit Options* → *Author* wpisujecie osobę, która n
 | `pl.wsb.<projekt>.<moduł>.domain` | pakiety co najmniej 2 modułów, w nich enumy i co najmniej 4 encje (`@Entity`) | R2.01–R2.03 |
 | encje | `@ManyToOne` z `@JoinColumn(name = "…_id")`, encja łącząca N:M, pole typu `UserAccount`, `@OneToMany` tylko z `mappedBy` | R2.04–R2.06, R2.09 |
 | typy pól | enumy z `@Enumerated(EnumType.STRING)`, kwoty w `BigDecimal` | R2.07–R2.08 |
-| `src/main/resources/data.sql` | sekcja per tabela (nagłówki na początku, potem każda osoba wypełnia sekcję swojej tabeli), wiersze w każdej tabeli | R2.10 |
+| `src/main/resources/data.sql` | sekcja per tabela (nagłówki na początku, potem dane każdej tabeli w jej sekcji), wiersze w każdej tabeli | R2.10 |
 | `src/main/resources/static/index.html` | w liście zmian: co powstało na LAB 02 | — |
 
 Na koniec zajęć zespół tworzy tag `lab-2` (okno *Git* → *Log* → prawy przycisk na commicie → *New Tag…*) i wysyła go
