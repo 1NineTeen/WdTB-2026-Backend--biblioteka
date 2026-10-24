@@ -24,7 +24,7 @@ Zielone „Testy i reguły” (R2.01–R2.05) to warunek konieczny. Kryteria oce
 <p><strong>Pracujemy na zajęciach, nie w domu.</strong> Na koniec zajęć projekt ma <strong>3 własne tabele z Waszego pomysłu</strong> jako encje JPA,
 dane startowe w <code>data.sql</code> i sprawdzone wiersze w konsoli H2. Relacji między tabelami jeszcze nie dodajecie.</p>
 <p><strong>Pracujemy na jednym laptopie.</strong> Zespół siada przy komputerze osoby hostującej, jak na LAB 01.
-Przy klawiaturze zmieniacie się po każdej encji (krok C3).</p>
+Pracujecie razem nad każdą tabelą (krok C3).</p>
 </blockquote>
 <blockquote>
 <p><strong>Od tego zaczynamy.</strong> Każdy zespół uruchamia aplikację w IntelliJ i pokazuje na <strong>http://localhost:8080</strong>
@@ -41,7 +41,7 @@ Te same strony są w katalogu <code>docs/</code> po pobraniu nowych materiałów
 <li><span class="tag theory">Teoria</span><strong>B · Wprowadzenie:</strong> encje na przykładzie kawiarni, typy kolumn, <code>@Embeddable</code>, pokaz relacji</li>
 <li><span class="tag task">Zadanie</span><strong>C · Aktualizacja projektu:</strong> nowe materiały, <code>lab=2</code>, podział pracy w zespole</li>
 <li><span class="tag task">Zadanie</span><strong>D · Wybór tabel:</strong> 3 tabele bez relacji z Waszego pomysłu</li>
-<li><span class="tag task">Zadanie</span><strong>E · Encje Waszego projektu:</strong> 3 własne tabele, przy klawiaturze na zmianę</li>
+<li><span class="tag task">Zadanie</span><strong>E · Encje Waszego projektu:</strong> 3 własne tabele, praca całego zespołu</li>
 <li><span class="tag task">Zadanie</span><strong>F · Dane startowe:</strong> <code>data.sql</code> i sprawdzenie w konsoli H2</li>
 <li><span class="tag task">Zadanie</span><strong>G · Reguły, commit, tag <code>lab-2</code></strong></li>
 </ol>
@@ -458,8 +458,8 @@ i od razu wyślijcie zmianę: <em>Git → Commit</em> z opisem „LAB 02: reguł
 <h3>C3. Praca na jednym laptopie</h3>
 <p>Wszyscy pracujecie na tej samej kopii projektu, więc konfliktów między Wami nie będzie.</p>
 <ol>
-<li><strong>Zmiana przy klawiaturze po każdej encji.</strong> Jedna osoba pisze, pozostałe podpowiadają i sprawdzają z instrukcją.
-</li>
+<li><strong>Praca zespołowa.</strong> Tabele wymyślacie i piszecie razem. Kto siedzi przy klawiaturze, ustalacie sami;
+   pozostałe osoby podpowiadają i sprawdzają z instrukcją.</li>
 <li><strong>Małe commity.</strong> Po każdej działającej encji: uruchomienie aplikacji, <em>Commit</em>, <em>Push</em>.</li>
 <li><strong><code>data.sql</code> ma sekcje.</strong> Na początku części F dopiszcie nagłówek sekcji dla każdej tabeli:
 <pre><code>-- ===== LAB 02 · &lt;tabela 1&gt; =====
@@ -486,7 +486,7 @@ Dla każdej tabeli ustalcie:</p>
 <section class="part task">
 <h2><span class="tag task">Zadanie</span>E · Encje Waszego projektu</h2>
 <p>Tworzycie <strong>własne</strong> 3 tabele z części D. Wzorem są encje kawiarni z części B3. Nazwy klas, pól i pakietów
-po angielsku, jak w <code>UserAccount</code>. Każdą tabelę pisze inna osoba (C3).</p>
+po angielsku, jak w <code>UserAccount</code>. Pracujecie razem całym zespołem (C3).</p>
 <h3>E1. Pakiety modułów</h3>
 <p>Prawy przycisk na pakiecie <code>pl.wsb.&lt;projekt&gt;</code> → <em>New → Package</em> → wpiszcie <code>&lt;moduł&gt;.domain</code>,
 np. <code>menu.domain</code> (IntelliJ utworzy oba poziomy). Tak samo dla pozostałych modułów z części D (R2.02).</p>
@@ -525,7 +525,7 @@ public class &lt;NazwaKlasy&gt; {
 <ol>
 <li><em>Rerun</em> w oknie <em>Run</em>. W logu znajdźcie <code>create table &lt;nazwa_tabeli&gt;</code> i sprawdźcie kolumny i typy.</li>
 <li><em>Git → Commit</em> z opisem, np. „Encja pozycji menu”, potem <em>Push</em>.</li>
-<li>Przy klawiaturze siada następna osoba i robi kolejną tabelę od kroku E2.</li>
+<li>Kolejna tabela: znowu od kroku E2.</li>
 </ol>
 </section>
 <section class="part task">

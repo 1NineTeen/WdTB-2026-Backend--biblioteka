@@ -115,7 +115,7 @@ Szczegóły krok po kroku: `docs/lab01.html`.
 
 ## Co zmodyfikować na LAB 02
 
-Instrukcja krok po kroku: `docs/lab02.html`. Zespół pracuje **na jednym laptopie**: przy klawiaturze zmieniacie się po każdej encji.
+Instrukcja krok po kroku: `docs/lab02.html`. Zespół pracuje razem **na jednym laptopie**.
 
 | Plik | Zmiana | Reguła |
 |---|---|---|
