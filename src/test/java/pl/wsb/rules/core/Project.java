@@ -49,15 +49,27 @@ public final class Project {
     }
 
     /**
-     * Numer laboratorium: z parametru {@code -Dlab} (Maven, GitHub Actions), a gdy go nie ma (testy uruchomione
-     * bezpośrednio w IntelliJ) z {@code <lab>} w pom.xml projektu. Domyślnie 1.
+     * Numer laboratorium. W Mavenie i GitHub Actions z parametru {@code -Dlab} (z tagu lab-N albo z pom.xml).
+     * Gdy testy uruchamia IntelliJ (zielona strzałka przy klasie testowej), zawsze z {@code <lab>} w pom.xml na dysku:
+     * IntelliJ przekazuje {@code -Dlab} z ostatniego przeładowania Mavena, więc po zmianie pom.xml bywa nieaktualny.
+     * Domyślnie 1.
      */
     public static int currentLab() {
+        if (runByIntelliJ()) {
+            java.util.Optional<Integer> fromPom = labFromPom();
+            if (fromPom.isPresent()) {
+                return fromPom.get();
+            }
+        }
         String fromProperty = System.getProperty("lab");
         if (fromProperty != null && !fromProperty.isBlank()) {
             return Integer.parseInt(fromProperty.trim());
         }
         return labFromPom().orElse(1);
+    }
+
+    private static boolean runByIntelliJ() {
+        return System.getProperty("sun.java.command", "").contains("com.intellij.rt.");
     }
 
     private static java.util.Optional<Integer> labFromPom() {
