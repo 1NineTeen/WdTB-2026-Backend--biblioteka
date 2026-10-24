@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Widok reguł (LAB 02, LAB 03) na model danych projektu: encje, ich pola i relacje, odczytane z plików .class
+ * Widok reguł na model danych projektu: encje, ich pola i relacje, odczytane z plików .class
  * przez ArchUnit (bez uruchamiania aplikacji).
  *
  * <p>Model jest generyczny: nie zna domeny zespołu. Jedyna klasa, którą rozpoznaje po nazwie,

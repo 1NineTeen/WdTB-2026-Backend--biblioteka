@@ -4,6 +4,7 @@ import com.tngtech.archunit.core.importer.ClassFileImporter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pl.wsb.rules.core.JpaModel;
+import pl.wsb.rules.core.SinceLab;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -11,8 +12,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 /**
  * Autotest reguł LAB 02 (nie dotyczy projektu zespołu): dowód, że reguły przechodzą dla poprawnego modelu
  * (przykład kawiarni w {@code pl.wsb.rules.examples.cafe}) i wskazują błędy w celowo złym modelu
- * ({@code pl.wsb.rules.examples.broken}). Działa niezależnie od numeru laboratorium.
+ * ({@code pl.wsb.rules.examples.broken}). Uruchamia się razem z regułami LAB 02.
  */
+@SinceLab(2)
 @DisplayName("Autotest reguł LAB 02 · przykład kawiarni")
 class Lab02RulesSelfTest {
 
