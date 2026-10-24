@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Reguły LAB 02: pierwsze encje projektu (encje JPA, pakiety, typy kolumn, dane startowe).
- * Sprawdzenia R2.01–R2.04 czytają pliki .class (ArchUnit), R2.05 uruchamia aplikację na czystej bazie H2.
+ * Sprawdzenia R2.01–R2.04, R2.06 i R2.07 czytają pliki .class (ArchUnit), R2.05 uruchamia aplikację na czystej bazie H2.
  */
 @SinceLab(2)
 @DisplayName("LAB 02 · Encje i dane startowe")
@@ -51,7 +51,7 @@ class Lab02ProjectRulesTest {
     }
 
     @Test
-    @DisplayName("R2.05 Dane startowe: aplikacja startuje, a każda własna tabela ma wiersze z data.sql")
+    @DisplayName("R2.05 Dane startowe: aplikacja startuje, a każda własna tabela ma co najmniej 3 wiersze z data.sql")
     void everyOwnTableHasSeedData() {
         List<String> empty = new ArrayList<>();
         List<String> seeded = new ArrayList<>();
@@ -63,14 +63,26 @@ class Lab02ProjectRulesTest {
                     .toList();
             for (EntityType<?> entity : entities) {
                 long rows = count(em, entity);
-                (rows > 0 ? seeded : empty).add(tableName(entity) + " (" + entity.getName() + ")");
+                (rows >= Lab02Checks.MIN_ROWS ? seeded : empty).add(tableName(entity) + " (" + entity.getName() + ", wierszy: " + rows + ")");
             }
         }
         assertThat(empty)
-                .withFailMessage("Tabele bez danych startowych: %s. Dopiszcie do src/main/resources/data.sql co najmniej jeden "
-                                + "insert do każdej z nich. Tabele z danymi: %s",
-                        empty, seeded)
+                .withFailMessage("Za mało danych startowych w tabelach: %s. Każda własna tabela potrzebuje co najmniej %d wierszy: "
+                                + "dopiszcie insert do src/main/resources/data.sql. Tabele z wystarczającymi danymi: %s",
+                        empty, Lab02Checks.MIN_ROWS, seeded)
                 .isEmpty();
+    }
+
+    @Test
+    @DisplayName("R2.06 Każda własna tabela ma co najmniej 4 kolumny poza id")
+    void everyOwnEntityHasEnoughColumns() {
+        Lab02Checks.everyOwnEntityHasEnoughColumns(JpaModel.ofProject());
+    }
+
+    @Test
+    @DisplayName("R2.07 Każda własna tabela ma co najmniej jedną kolumnę wymaganą (nullable = false)")
+    void everyOwnEntityHasRequiredColumn() {
+        Lab02Checks.everyOwnEntityHasRequiredColumn(JpaModel.ofProject());
     }
 
     private static long count(EntityManager em, EntityType<?> entity) {

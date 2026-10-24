@@ -93,6 +93,7 @@ Dane dopisane ręcznie w konsoli H2 znikają po restarcie; to, co ma zostać, do
 | testy i reguły dla laboratorium z `<lab>` w `pom.xml` | panel *Maven* (prawa krawędź okna) → *Lifecycle* → dwuklik na *verify* |
 
 Wynik jest w oknie *Run*: przy każdej regule zielony albo czerwony znak, a przy czerwonej opis, co poprawić.
+W GitHub Actions przebieg „Testy i reguły” ma dwa etapy: *Ocena 4 · reguły obowiązkowe* i *Ocena 5 · warunki dodatkowe*.
 
 ## Co zmodyfikować na LAB 01
 
@@ -120,9 +121,11 @@ Instrukcja krok po kroku: `docs/lab02.html`. Zespół pracuje razem **na jednym 
 | Plik | Zmiana | Reguła |
 |---|---|---|
 | `pom.xml`, `<lab>` | `1` → `2` (od razu commit i push) | włącza R2.xx |
-| `pl.wsb.<projekt>.<moduł>.domain` | 3 własne encje (`@Entity`) bez relacji, enumy w tych samych pakietach | R2.01–R2.02 |
+| `pl.wsb.<projekt>.<moduł>.domain` | 3 własne encje (`@Entity`) bez relacji, enumy i klasy `@Embeddable` w tych samych pakietach | R2.01–R2.02 |
 | typy pól | enumy z `@Enumerated(EnumType.STRING)`, kwoty w `BigDecimal` | R2.03–R2.04 |
-| `src/main/resources/data.sql` | sekcja per tabela, co najmniej jeden wiersz w każdej tabeli; sprawdzenie w konsoli H2 | R2.05 |
+| kolumny | co najmniej 4 kolumny poza `id` w każdej tabeli, w tym co najmniej jedna z `nullable = false` | R2.06–R2.07 |
+| `src/main/resources/data.sql` | sekcja per tabela, co najmniej 3 wiersze w każdej tabeli; sprawdzenie w konsoli H2 | R2.05 |
+| na ocenę 5 | kolumna typu enum i klasa `@Embeddable` użyta przez `@Embedded` | R2.08–R2.09 |
 | `src/main/resources/static/index.html` | w liście zmian: co powstało na LAB 02 | — |
 
 Na koniec zajęć zespół tworzy tag `lab-2` (okno *Git* → *Log* → prawy przycisk na commicie → *New Tag…*) i wysyła go

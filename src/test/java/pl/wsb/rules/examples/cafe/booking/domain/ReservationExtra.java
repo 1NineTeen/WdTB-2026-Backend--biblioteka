@@ -35,6 +35,9 @@ public class ReservationExtra {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
+    @Column(name = "note", length = 120)
+    private String note;
+
     protected ReservationExtra() {
     }
 

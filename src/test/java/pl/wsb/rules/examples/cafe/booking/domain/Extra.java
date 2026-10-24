@@ -24,6 +24,12 @@ public class Extra {
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
+    @Column(name = "description", length = 120)
+    private String description;
+
+    @Column(name = "available", nullable = false)
+    private Boolean available;
+
     protected Extra() {
     }
 

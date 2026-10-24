@@ -2,12 +2,21 @@ package pl.wsb.rules.lab02;
 
 import com.tngtech.archunit.core.domain.JavaClass;
 import com.tngtech.archunit.core.domain.JavaField;
+import com.tngtech.archunit.core.domain.JavaModifier;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 import pl.wsb.rules.core.JpaModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,6 +28,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 final class Lab02Checks {
 
     static final int MIN_OWN_ENTITIES = 3;
+    static final int MIN_COLUMNS = 4;
+    static final int MIN_ROWS = 3;
 
     private static final Set<String> FLOATING_POINT = Set.of("double", "float", "java.lang.Double", "java.lang.Float");
 
@@ -93,5 +104,79 @@ final class Lab02Checks {
                 .withFailMessage("Kwoty i inne wielkości dziesiętne przechowujemy w BigDecimal (double i float zaokrąglają: "
                         + "0.1 + 0.2 ≠ 0.3), a ilości w Integer. Zmieńcie typ pól: %s", offenders)
                 .isEmpty();
+    }
+
+    /** R2.06 */
+    static void everyOwnEntityHasEnoughColumns(JpaModel model) {
+        List<String> tooSmall = new ArrayList<>();
+        for (JavaClass c : model.ownEntities()) {
+            List<String> columns = columns(c);
+            if (columns.size() < MIN_COLUMNS) {
+                tooSmall.add(c.getSimpleName() + " " + columns);
+            }
+        }
+        assertThat(tooSmall)
+                .withFailMessage("Każda własna tabela ma co najmniej %d kolumny poza id. Za mało kolumn mają: %s. "
+                                + "Dopiszcie pola z @Column, np. nazwę, opis, datę, kwotę albo status (typy z części B2 instrukcji).",
+                        MIN_COLUMNS, tooSmall)
+                .isEmpty();
+    }
+
+    /** Kolumny tabeli encji poza id: pola trwałe, a pole @Embedded liczy się jako wszystkie kolumny klasy wbudowanej. */
+    static List<String> columns(JavaClass entity) {
+        List<String> columns = new ArrayList<>();
+        for (JavaField f : JpaModel.fields(entity)) {
+            if (f.isAnnotatedWith(Id.class) || f.isAnnotatedWith(Transient.class)
+                    || f.getModifiers().contains(JavaModifier.TRANSIENT)
+                    || f.isAnnotatedWith(OneToMany.class) || f.isAnnotatedWith(ManyToMany.class)) {
+                continue;
+            }
+            if (f.isAnnotatedWith(Embedded.class)) {
+                JpaModel.fields(f.getRawType()).forEach(e -> columns.add(f.getName() + "." + e.getName()));
+            } else {
+                columns.add(f.getName());
+            }
+        }
+        return columns;
+    }
+
+    /** R2.07 */
+    static void everyOwnEntityHasRequiredColumn(JpaModel model) {
+        List<String> withoutRequired = model.ownEntities().stream()
+                .filter(c -> JpaModel.fields(c).stream().noneMatch(Lab02Checks::isRequired))
+                .map(JavaClass::getSimpleName)
+                .toList();
+        assertThat(withoutRequired)
+                .withFailMessage("Każda własna tabela ma co najmniej jedną kolumnę wymaganą: @Column(name = \"…\", nullable = false), "
+                        + "np. nazwę albo datę, bez której wiersz nie ma sensu. Brak kolumny wymaganej w: %s", withoutRequired)
+                .isEmpty();
+    }
+
+    private static boolean isRequired(JavaField f) {
+        if (f.isAnnotatedWith(Id.class)) {
+            return false;
+        }
+        return f.tryGetAnnotationOfType(Column.class).map(c -> !c.nullable()).orElse(false)
+                || f.tryGetAnnotationOfType(JoinColumn.class).map(j -> !j.nullable()).orElse(false);
+    }
+
+    /** R2.08 (na ocenę 5): brak zwraca opis, co dopisać. */
+    static Optional<String> missingEnumColumn(JpaModel model) {
+        boolean present = model.ownEntities().stream()
+                .flatMap(c -> JpaModel.fields(c).stream())
+                .anyMatch(f -> f.getRawType().isEnum());
+        return present ? Optional.empty() : Optional.of(
+                "Na ocenę 5: żadna własna tabela nie ma kolumny typu enum. Dodajcie np. status albo kategorię jako enum "
+                        + "z @Enumerated(EnumType.STRING) i stałymi pisanymi wielkimi literami.");
+    }
+
+    /** R2.09 (na ocenę 5): brak zwraca opis, co dopisać. */
+    static Optional<String> missingEmbedded(JpaModel model) {
+        boolean present = model.ownEntities().stream()
+                .flatMap(c -> JpaModel.fields(c).stream())
+                .anyMatch(f -> f.isAnnotatedWith(Embedded.class) && f.getRawType().isAnnotatedWith(jakarta.persistence.Embeddable.class));
+        return present ? Optional.empty() : Optional.of(
+                "Na ocenę 5: żadna własna tabela nie używa klasy wbudowanej. Utwórzcie klasę z @Embeddable (np. adres, okres od–do, "
+                        + "dane kontaktowe) w pakiecie <moduł>.domain i dodajcie ją do encji jako pole z @Embedded.");
     }
 }

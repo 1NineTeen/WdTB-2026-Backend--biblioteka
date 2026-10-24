@@ -1,6 +1,7 @@
 package pl.wsb.rules.examples.cafe.booking.domain;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +30,9 @@ public class Guest {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_account_id")
     private UserAccount account;
+
+    @Embedded
+    private Address address;
 
     protected Guest() {
     }

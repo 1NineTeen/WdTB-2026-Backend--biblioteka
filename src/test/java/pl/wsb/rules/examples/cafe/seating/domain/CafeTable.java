@@ -24,6 +24,9 @@ public class CafeTable {
     @Column(name = "number", nullable = false, unique = true)
     private Integer number;
 
+    @Column(name = "active", nullable = false)
+    private Boolean active;
+
     @Column(name = "seats", nullable = false)
     private Integer seats;
 

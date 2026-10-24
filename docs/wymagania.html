@@ -66,12 +66,20 @@
 <td>co najmniej 3 własne encje poza <code>UserAccount</code>, w pakietach <code>pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.domain</code> (R2.01–R2.02); relacji jeszcze nie dodajecie</td>
 </tr>
 <tr>
+<td>Kolumny</td>
+<td>w każdej tabeli co najmniej 4 kolumny poza <code>id</code>, w tym co najmniej jedna wymagana (<code>nullable = false</code>) (R2.06–R2.07)</td>
+</tr>
+<tr>
 <td>Typy</td>
 <td>enumy jako <code>@Enumerated(EnumType.STRING)</code>, kwoty w <code>BigDecimal</code> (R2.03–R2.04)</td>
 </tr>
 <tr>
 <td>Dane startowe</td>
-<td>aplikacja startuje, każda własna tabela ma wiersze z <code>data.sql</code>, widoczne w konsoli H2 (R2.05)</td>
+<td>aplikacja startuje, każda własna tabela ma co najmniej 3 wiersze z <code>data.sql</code>, widoczne w konsoli H2 (R2.05)</td>
+</tr>
+<tr>
+<td>Na ocenę 5</td>
+<td>kolumna typu enum (R2.08) i klasa <code>@Embeddable</code> użyta w encji przez <code>@Embedded</code> (R2.09); etap „Ocena 5” w GitHub Actions</td>
 </tr>
 <tr>
 <td>Zespół</td>
