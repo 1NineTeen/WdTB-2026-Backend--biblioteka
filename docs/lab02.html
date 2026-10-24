@@ -435,48 +435,6 @@ join cafe_table t on t.id = r.table_id;
 </tr>
 </tbody>
 </table></div>
-<h3>B6. Od czego zacząć: tabele bez relacji</h3>
-<p>Na tych zajęciach wybieracie z pomysłu <strong>3 tabele, które nie wskazują na inne</strong>: to, co się rezerwuje, wypożycza
-lub kupuje, słowniki i osoby. Przykłady z projektów w arkuszu zespołów:</p>
-<div class="tbl"><table>
-<thead>
-<tr>
-<th>Typ projektu</th>
-<th>3 tabele bez relacji</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>kawiarnia (przykład z B3)</td>
-<td>Stolik, Pozycja menu, Gość</td>
-</tr>
-<tr>
-<td>kino, wydarzenia</td>
-<td>Film, Sala, Widz</td>
-</tr>
-<tr>
-<td>siłownia, zajęcia</td>
-<td>Zajęcia, Trener, Typ karnetu</td>
-</tr>
-<tr>
-<td>biblioteka, wypożyczalnia</td>
-<td>Książka, Kategoria, Czytelnik</td>
-</tr>
-<tr>
-<td>sklep</td>
-<td>Produkt, Kategoria, Klient</td>
-</tr>
-<tr>
-<td>hotel, parking, sale</td>
-<td>Pokój lub Miejsce, Usługa dodatkowa, Gość</td>
-</tr>
-<tr>
-<td>gry, rankingi</td>
-<td>Gracz, Gra, Turniej</td>
-</tr>
-</tbody>
-</table></div>
-<p>Tabele, które łączą inne (rezerwacja, wypożyczenie, zamówienie, wynik meczu), dojdą razem z relacjami.</p>
 </section>
 <section class="part task">
 <h2><span class="tag task">Zadanie</span>C · Aktualizacja projektu</h2>
@@ -515,7 +473,7 @@ i od razu wyślijcie zmianę: <em>Git → Commit</em> z opisem „LAB 02: reguł
 </section>
 <section class="part task">
 <h2><span class="tag task">Zadanie</span>D · Wybór tabel</h2>
-<p>Wybierzcie z opisu pomysłu <strong>3 tabele bez relacji</strong> (podpowiedzi w części B6). Dla każdej tabeli ustalcie:</p>
+<p>Na podstawie tematu Waszego projektu sami wybierzcie <strong>3 tabele</strong>, które nie wskazują na inne tabele. Dla każdej tabeli ustalcie:</p>
 <ol>
 <li><strong>nazwę klasy i tabeli</strong> po angielsku, np. <code>MenuItem</code> i <code>menu_item</code>,</li>
 <li><strong>3–5 kolumn</strong> z typami z części B2; przynajmniej w jednej tabeli kwota (<code>BigDecimal</code>), data albo enum,</li>
