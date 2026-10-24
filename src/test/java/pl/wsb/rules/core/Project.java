@@ -48,8 +48,27 @@ public final class Project {
     private Project() {
     }
 
+    /**
+     * Numer laboratorium: z parametru {@code -Dlab} (Maven, GitHub Actions), a gdy go nie ma (testy uruchomione
+     * bezpośrednio w IntelliJ) z {@code <lab>} w pom.xml projektu. Domyślnie 1.
+     */
     public static int currentLab() {
-        return Integer.parseInt(System.getProperty("lab", "1").trim());
+        String fromProperty = System.getProperty("lab");
+        if (fromProperty != null && !fromProperty.isBlank()) {
+            return Integer.parseInt(fromProperty.trim());
+        }
+        return labFromPom().orElse(1);
+    }
+
+    private static java.util.Optional<Integer> labFromPom() {
+        Path pom = projectDir().resolve("pom.xml");
+        try {
+            java.util.regex.Matcher m = java.util.regex.Pattern.compile("<lab>\\s*(\\d+)\\s*</lab>")
+                    .matcher(java.nio.file.Files.readString(pom));
+            return m.find() ? java.util.Optional.of(Integer.parseInt(m.group(1))) : java.util.Optional.empty();
+        } catch (java.io.IOException | RuntimeException e) {
+            return java.util.Optional.empty();
+        }
     }
 
     public static Path projectDir() {
