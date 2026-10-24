@@ -21,7 +21,7 @@
 <blockquote>
 <p><strong>Zajęcia są oceniane.</strong> Ocenę wystawia prowadzący na koniec zajęć ze stanu repozytorium na tagu <code>lab-2</code>.
 Zielone „Testy i reguły” (R2.01–R2.05) to warunek konieczny. Kryteria oceny prowadzący podaje na początku zajęć.</p>
-<p><strong>Pracujemy na zajęciach, nie w domu.</strong> Na koniec zajęć projekt ma <strong>3 własne tabele</strong> jako encje JPA,
+<p><strong>Pracujemy na zajęciach, nie w domu.</strong> Na koniec zajęć projekt ma <strong>3 własne tabele z Waszego pomysłu</strong> jako encje JPA,
 dane startowe w <code>data.sql</code> i sprawdzone wiersze w konsoli H2. Relacji między tabelami jeszcze nie dodajecie.</p>
 <p><strong>Pracujemy na jednym laptopie.</strong> Zespół siada przy komputerze osoby hostującej, jak na LAB 01.
 Przy klawiaturze zmieniacie się po każdej encji (krok C3).</p>
@@ -38,10 +38,10 @@ Te same strony są w katalogu <code>docs/</code> po pobraniu nowych materiałów
 <p class="legend"><span class="tag theory">Teoria</span>do przeczytania i omówienia, nic nie zmieniacie w kodzie. <span class="tag task">Zadanie</span>wykonujecie w IntelliJ i na GitHubie.</p>
 <ol class="agenda">
 <li><span class="tag task">Zadanie</span><strong>A · Prezentacja wizytówek:</strong> każdy zespół, 2–3 minuty</li>
-<li><span class="tag theory">Teoria</span><strong>B · Wprowadzenie:</strong> tabela ↔ encja, typy kolumn, pokaz relacji jednokierunkowej</li>
+<li><span class="tag theory">Teoria</span><strong>B · Wprowadzenie:</strong> encje na przykładzie kawiarni, typy kolumn, <code>@Embeddable</code>, pokaz relacji</li>
 <li><span class="tag task">Zadanie</span><strong>C · Aktualizacja projektu:</strong> nowe materiały, <code>lab=2</code>, podział pracy w zespole</li>
 <li><span class="tag task">Zadanie</span><strong>D · Wybór tabel:</strong> 3 tabele bez relacji z Waszego pomysłu</li>
-<li><span class="tag task">Zadanie</span><strong>E · Encje w kodzie:</strong> 3 encje krok po kroku, przy klawiaturze na zmianę</li>
+<li><span class="tag task">Zadanie</span><strong>E · Encje Waszego projektu:</strong> 3 własne tabele, przy klawiaturze na zmianę</li>
 <li><span class="tag task">Zadanie</span><strong>F · Dane startowe:</strong> <code>data.sql</code> i sprawdzenie w konsoli H2</li>
 <li><span class="tag task">Zadanie</span><strong>G · Reguły, commit, tag <code>lab-2</code></strong></li>
 </ol>
@@ -57,7 +57,7 @@ Te same strony są w katalogu <code>docs/</code> po pobraniu nowych materiałów
 </ol>
 </section>
 <section class="part theory">
-<h2><span class="tag theory">Teoria</span>B · Wprowadzenie: tabela ↔ encja, typy kolumn, relacja</h2>
+<h2><span class="tag theory">Teoria</span>B · Wprowadzenie: encje, typy kolumn, @Embeddable, relacja</h2>
 <h3>B1. Encja to klasa, która opisuje tabelę</h3>
 <p>Na LAB 01 widzieliście w oknie <em>Run</em> polecenie <code>create table user_account</code>. Hibernate wygenerował je
 z klasy <code>UserAccount</code>. Tak działa JPA: <strong>klasa ↔ tabela, pole ↔ kolumna, obiekt ↔ wiersz</strong>.
@@ -146,20 +146,15 @@ Otwórzcie <code>account/domain/UserAccount.java</code> i porównajcie z tabelą
 </tr>
 </tbody>
 </table></div>
-<h3>B3. Pokaz: relacja jednokierunkowa</h3>
-<p>Tego kroku nie wykonujecie w swoim projekcie: to pokaz, jak tabele łączą się ze sobą. Relacje dodacie na kolejnych zajęciach.</p>
-<p>W kawiarni rezerwacja dotyczy jednego stolika, a przy jednym stoliku może być wiele rezerwacji. W bazie zapisuje to
-<strong>klucz obcy</strong>: kolumna <code>reservation.table_id</code> wskazuje wiersz w tabeli <code>cafe_table</code>.</p>
-<pre><code>cafe_table                     reservation
-+----+--------+-------+        +----+---------------------+----------+
-| id | number | seats |        | id | starts_at           | table_id |
-+----+--------+-------+        +----+---------------------+----------+
-|  1 |      1 |     2 | &lt;------|  2 | 2026-11-15 12:30:00 |        1 |
-|  2 |      2 |     4 | &lt;------|  1 | 2026-11-14 18:00:00 |        2 |
-+----+--------+-------+        +----+---------------------+----------+
-</code></pre>
-<p>W JPA kolumnę klucza obcego opisuje <strong>pole typu drugiej encji</strong>. Stolik jest zwykłą encją bez relacji:</p>
-<pre><code>@Entity
+<h3>B3. Przykład: trzy encje kawiarni</h3>
+<p>Tak wyglądają trzy tabele bez relacji dla kawiarni z LAB 01. To wzór: Wy w części E tworzycie tabele <strong>ze swojego projektu</strong>.
+Każda encja leży w pakiecie swojego modułu: <code>seating.domain</code>, <code>menu.domain</code>, <code>guest.domain</code>.</p>
+<p><strong>Stolik</strong>, klasa <code>CafeTable</code> (nazwa <code>Table</code> jest zajęta przez adnotację JPA):</p>
+<pre><code>package pl.wsb.kawiarnia.seating.domain;
+
+import jakarta.persistence.*;
+
+@Entity
 @Table(name = "cafe_table")
 public class CafeTable {
 
@@ -178,9 +173,191 @@ public class CafeTable {
 
     protected CafeTable() {
     }
+
+    public CafeTable(Integer number, Integer seats, String room) {
+        this.number = number;
+        this.seats = seats;
+        this.room = room;
+    }
+
+    // gettery: Code → Generate… → Getter → zaznaczcie wszystkie pola
 }
 </code></pre>
-<p>Rezerwacja ma pole <code>table</code> typu <code>CafeTable</code>:</p>
+<p>Hibernate generuje z tej klasy:</p>
+<pre><code>create table cafe_table (
+    number integer not null unique,
+    seats integer not null,
+    id bigint generated by default as identity,
+    room varchar(40) not null,
+    primary key (id)
+)
+</code></pre>
+<p><strong>Pozycja menu</strong> ma kategorię ze stałej listy (enum) i cenę (kwota). Najpierw enum <code>MenuCategory</code>:</p>
+<pre><code>package pl.wsb.kawiarnia.menu.domain;
+
+public enum MenuCategory {
+    COFFEE, TEA, CAKE
+}
+</code></pre>
+<p>Potem encja <code>MenuItem</code>:</p>
+<pre><code>@Entity
+@Table(name = "menu_item")
+public class MenuItem {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name", nullable = false, unique = true, length = 60)
+    private String name;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "category", nullable = false, length = 20)
+    private MenuCategory category;
+
+    @Column(name = "price", nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
+
+    @Column(name = "available", nullable = false)
+    private Boolean available;
+
+    protected MenuItem() {
+    }
+
+    // konstruktor z polami i gettery: Code → Generate…
+}
+</code></pre>
+<p>W logu enum jest tekstem, a cena liczbą z dwoma miejscami po przecinku. Z <code>double</code> byłoby <code>float(53)</code>,
+czyli zaokrąglenia przy każdym dodawaniu (R2.04):</p>
+<pre><code>create table menu_item (
+    available boolean not null,
+    price numeric(10,2) not null,
+    id bigint generated by default as identity,
+    name varchar(60) not null unique,
+    category enum ('CAKE','COFFEE','TEA') not null,
+    primary key (id)
+)
+</code></pre>
+<p><strong>Gość</strong>, klasa <code>Guest</code>, ma datę i kolumnę opcjonalną: telefon nie jest wymagany, więc nie ma <code>nullable = false</code>.
+Adres to osobna klasa wbudowana, opisana w B4:</p>
+<pre><code>@Entity
+@Table(name = "guest")
+public class Guest {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "full_name", nullable = false, length = 80)
+    private String fullName;
+
+    @Column(name = "phone", length = 20)
+    private String phone;
+
+    @Column(name = "registered_on", nullable = false)
+    private LocalDate registeredOn;
+
+    @Embedded
+    private Address address;               // klasa wbudowana z B4
+
+    protected Guest() {
+    }
+
+    // konstruktor z polami i gettery: Code → Generate…
+}
+</code></pre>
+<p>Dane startowe dla tych trzech tabel w <code>data.sql</code>:</p>
+<pre><code>-- ===== LAB 02 · cafe_table =====
+insert into cafe_table (number, seats, room) values
+    (1, 2, 'sala główna'),
+    (2, 4, 'sala główna'),
+    (3, 6, 'ogródek');
+
+-- ===== LAB 02 · menu_item =====
+insert into menu_item (name, category, price, available) values
+    ('Espresso',        'COFFEE',  9.00, true),
+    ('Herbata zielona', 'TEA',    11.50, true),
+    ('Sernik',          'CAKE',   16.00, false);
+
+-- ===== LAB 02 · guest =====
+insert into guest (full_name, phone, registered_on, street, city, postal_code) values
+    ('Anna Kowalska', '600100200', '2026-10-01', 'Ruska 12', 'Wrocław', '50-079'),
+    ('Jan Nowak',     null,        '2026-10-12', null,       null,      null);
+</code></pre>
+<h3>B4. Klasa wbudowana: @Embeddable</h3>
+<p>Czasem kilka kolumn tworzy całość, np. adres: ulica, miasto, kod pocztowy. Zamiast trzech luźnych pól w encji
+tworzy się małą klasę z <code>@Embeddable</code> i używa jej w encji jako pola z <code>@Embedded</code>.
+Klasa wbudowana <strong>nie jest osobną tabelą</strong>: jej kolumny trafiają do tabeli encji, która jej używa.</p>
+<pre><code>@Embeddable
+public class Address {
+
+    @Column(name = "street", length = 80)
+    private String street;
+
+    @Column(name = "city", length = 40)
+    private String city;
+
+    @Column(name = "postal_code", length = 6)
+    private String postalCode;
+
+    protected Address() {
+    }
+}
+</code></pre>
+<p>W encji <code>Guest</code> wystarczy pole <code>@Embedded private Address address;</code>. Hibernate tworzy jedną tabelę <code>guest</code>,
+w której są też kolumny adresu:</p>
+<pre><code>create table guest (
+    registered_on date not null,
+    postal_code varchar(6),
+    id bigint generated by default as identity,
+    phone varchar(20),
+    city varchar(40),
+    full_name varchar(80) not null,
+    street varchar(80),
+    primary key (id)
+)
+</code></pre>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th></th>
+<th><code>@Entity</code></th>
+<th><code>@Embeddable</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>własna tabela</td>
+<td>tak</td>
+<td>nie, kolumny w tabeli encji</td>
+</tr>
+<tr>
+<td>własne <code>id</code></td>
+<td>tak</td>
+<td>nie</td>
+</tr>
+<tr>
+<td>przykłady</td>
+<td>stolik, produkt, klient</td>
+<td>adres, okres od–do, kwota z walutą, dane kontaktowe</td>
+</tr>
+</tbody>
+</table></div>
+<p>Klasa <code>@Embeddable</code> leży w tym samym pakiecie <code>&lt;moduł&gt;.domain</code> co encja (R2.02). Nie liczy się jako jedna z 3 tabel.</p>
+<h3>B5. Pokaz: relacja jednokierunkowa</h3>
+<p>Tego kroku nie wykonujecie w swoim projekcie: to pokaz, jak tabele łączą się ze sobą. Relacje dodacie na kolejnych zajęciach.</p>
+<p>W kawiarni rezerwacja dotyczy jednego stolika, a przy jednym stoliku może być wiele rezerwacji. W bazie zapisuje to
+<strong>klucz obcy</strong>: kolumna <code>reservation.table_id</code> wskazuje wiersz w tabeli <code>cafe_table</code>.</p>
+<pre><code>cafe_table                     reservation
++----+--------+-------+        +----+---------------------+----------+
+| id | number | seats |        | id | starts_at           | table_id |
++----+--------+-------+        +----+---------------------+----------+
+|  1 |      1 |     2 | &lt;------|  2 | 2026-11-15 12:30:00 |        1 |
+|  2 |      2 |     4 | &lt;------|  1 | 2026-11-14 18:00:00 |        2 |
++----+--------+-------+        +----+---------------------+----------+
+</code></pre>
+<p>W JPA kolumnę klucza obcego opisuje <strong>pole typu drugiej encji</strong>. Stolik to encja <code>CafeTable</code> z B3, bez zmian.
+Rezerwacja ma pole <code>table</code> typu <code>CafeTable</code>:</p>
 <pre><code>@Entity
 @Table(name = "reservation")
 public class Reservation {
@@ -258,7 +435,7 @@ join cafe_table t on t.id = r.table_id;
 </tr>
 </tbody>
 </table></div>
-<h3>B4. Od czego zacząć: tabele bez relacji</h3>
+<h3>B6. Od czego zacząć: tabele bez relacji</h3>
 <p>Na tych zajęciach wybieracie z pomysłu <strong>3 tabele, które nie wskazują na inne</strong>: to, co się rezerwuje, wypożycza
 lub kupuje, słowniki i osoby. Przykłady z projektów w arkuszu zespołów:</p>
 <div class="tbl"><table>
@@ -270,7 +447,7 @@ lub kupuje, słowniki i osoby. Przykłady z projektów w arkuszu zespołów:</p>
 </thead>
 <tbody>
 <tr>
-<td>kawiarnia (przykład w instrukcji)</td>
+<td>kawiarnia (przykład z B3)</td>
 <td>Stolik, Pozycja menu, Gość</td>
 </tr>
 <tr>
@@ -327,18 +504,18 @@ i od razu wyślijcie zmianę: <em>Git → Commit</em> z opisem „LAB 02: reguł
 </li>
 <li><strong>Małe commity.</strong> Po każdej działającej encji: uruchomienie aplikacji, <em>Commit</em>, <em>Push</em>.</li>
 <li><strong><code>data.sql</code> ma sekcje.</strong> Na początku części F dopiszcie nagłówek sekcji dla każdej tabeli:
-<pre><code>-- ===== LAB 02 · cafe_table =====
+<pre><code>-- ===== LAB 02 · &lt;tabela 1&gt; =====
 
--- ===== LAB 02 · menu_item =====
+-- ===== LAB 02 · &lt;tabela 2&gt; =====
 
--- ===== LAB 02 · guest =====
+-- ===== LAB 02 · &lt;tabela 3&gt; =====
 </code></pre></li>
 <li><strong>Nikt nie edytuje</strong> <code>src/test/java/pl/wsb/rules</code> ani <code>.github/workflows</code>.</li>
 </ol>
 </section>
 <section class="part task">
 <h2><span class="tag task">Zadanie</span>D · Wybór tabel</h2>
-<p>Wybierzcie z opisu pomysłu <strong>3 tabele bez relacji</strong> (podpowiedzi w części B4). Dla każdej tabeli ustalcie:</p>
+<p>Wybierzcie z opisu pomysłu <strong>3 tabele bez relacji</strong> (podpowiedzi w części B6). Dla każdej tabeli ustalcie:</p>
 <ol>
 <li><strong>nazwę klasy i tabeli</strong> po angielsku, np. <code>MenuItem</code> i <code>menu_item</code>,</li>
 <li><strong>3–5 kolumn</strong> z typami z części B2; przynajmniej w jednej tabeli kwota (<code>BigDecimal</code>), data albo enum,</li>
@@ -347,180 +524,74 @@ i od razu wyślijcie zmianę: <em>Git → Commit</em> z opisem „LAB 02: reguł
 <p>Nie rysujecie schematu, od razu piszecie kod.</p>
 </section>
 <section class="part task">
-<h2><span class="tag task">Zadanie</span>E · Encje w kodzie: krok po kroku</h2>
-<p>Przykład prowadzi kawiarnię z LAB 01: stolik, pozycja menu i gość. Wy wpisujecie <strong>swoje</strong> nazwy tabel i kolumn;
-nazwy klas, pól i pakietów po angielsku, jak w <code>UserAccount</code>. Po każdej encji uruchamiacie aplikację
-(<em>Rerun</em> w oknie <em>Run</em>) i czytacie w logu polecenie <code>create table</code>. Czerwona adnotacja:
-<em>Alt+Enter → Import class</em> (pakiet <code>jakarta.persistence</code>).</p>
+<h2><span class="tag task">Zadanie</span>E · Encje Waszego projektu</h2>
+<p>Tworzycie <strong>własne</strong> 3 tabele z części D. Wzorem są encje kawiarni z części B3. Nazwy klas, pól i pakietów
+po angielsku, jak w <code>UserAccount</code>. Każdą tabelę pisze inna osoba (C3).</p>
 <h3>E1. Pakiety modułów</h3>
-<p>Prawy przycisk na pakiecie <code>pl.wsb.&lt;projekt&gt;</code> → <em>New → Package</em> → wpiszcie <code>seating.domain</code>
-(IntelliJ utworzy oba poziomy). Tak samo <code>menu.domain</code> i <code>guest.domain</code>. Encje i enumy leżą
-w pakietach <code>&lt;moduł&gt;.domain</code> (R2.02).</p>
-<h3>E2. Pierwsza encja: stolik</h3>
-<p>Prawy przycisk na <code>seating.domain</code> → <em>New → Java Class</em> → <code>CafeTable</code>
-(nazwa <code>Table</code> jest zajęta przez adnotację JPA):</p>
-<pre><code>package pl.wsb.kawiarnia.seating.domain;
+<p>Prawy przycisk na pakiecie <code>pl.wsb.&lt;projekt&gt;</code> → <em>New → Package</em> → wpiszcie <code>&lt;moduł&gt;.domain</code>,
+np. <code>menu.domain</code> (IntelliJ utworzy oba poziomy). Tak samo dla pozostałych modułów z części D (R2.02).</p>
+<h3>E2. Enum, jeśli tabela ma stałą listę wartości</h3>
+<p>Prawy przycisk na <code>&lt;moduł&gt;.domain</code> → <em>New → Java Class</em> → <em>Enum</em> → nazwa, np. <code>Category</code> albo <code>Status</code>.
+Stałe wielkimi literami, jak <code>MenuCategory</code> w B3.</p>
+<h3>E3. Encja</h3>
+<p>Prawy przycisk na <code>&lt;moduł&gt;.domain</code> → <em>New → Java Class</em> → nazwa klasy. Szkielet, który uzupełniacie swoimi kolumnami:</p>
+<pre><code>package pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.domain;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "cafe_table")
-public class CafeTable {
+@Table(name = "&lt;nazwa_tabeli&gt;")
+public class &lt;NazwaKlasy&gt; {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "number", nullable = false, unique = true)
-    private Integer number;
+    @Column(name = "&lt;kolumna&gt;", nullable = false, length = 60)
+    private String &lt;pole&gt;;
 
-    @Column(name = "seats", nullable = false)
-    private Integer seats;
+    // kolejne kolumny: typy z części B2, enum z @Enumerated(EnumType.STRING), kwoty w BigDecimal
 
-    @Column(name = "room", nullable = false, length = 40)
-    private String room;
-
-    protected CafeTable() {
+    protected &lt;NazwaKlasy&gt;() {
     }
-
-    public CafeTable(Integer number, Integer seats, String room) {
-        this.number = number;
-        this.seats = seats;
-        this.room = room;
-    }
-
-    // gettery: Code → Generate… → Getter → zaznaczcie wszystkie pola
 }
 </code></pre>
-<p>Konstruktor i gettery generuje IntelliJ: <em>Code → Generate…</em> (macOS <kbd>⌘N</kbd>, Windows <kbd>Alt+Insert</kbd>).
-Setterów nie generujcie. Po <em>Rerun</em> w logu pojawia się:</p>
-<pre><code>create table cafe_table (
-    number integer not null unique,
-    seats integer not null,
-    id bigint generated by default as identity,
-    room varchar(40) not null,
-    primary key (id)
-)
-</code></pre>
-<h3>E3. Druga encja: pozycja menu (enum i kwota)</h3>
-<p>Najpierw enum: prawy przycisk na <code>menu.domain</code> → <em>New → Java Class</em> → <em>Enum</em> → <code>MenuCategory</code>:</p>
-<pre><code>package pl.wsb.kawiarnia.menu.domain;
-
-public enum MenuCategory {
-    COFFEE, TEA, CAKE
-}
-</code></pre>
-<p>Potem encja <code>MenuItem</code> w <code>menu.domain</code>:</p>
-<pre><code>@Entity
-@Table(name = "menu_item")
-public class MenuItem {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "name", nullable = false, unique = true, length = 60)
-    private String name;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "category", nullable = false, length = 20)
-    private MenuCategory category;
-
-    @Column(name = "price", nullable = false, precision = 10, scale = 2)
-    private BigDecimal price;
-
-    @Column(name = "available", nullable = false)
-    private Boolean available;
-
-    protected MenuItem() {
-    }
-
-    // konstruktor z polami i gettery: Code → Generate…
-}
-</code></pre>
-<p>W logu enum jest tekstem, a cena liczbą z dwoma miejscami po przecinku. Z <code>double</code> byłoby <code>float(53)</code>,
-czyli zaokrąglenia przy każdym dodawaniu (R2.04):</p>
-<pre><code>create table menu_item (
-    available boolean not null,
-    price numeric(10,2) not null,
-    id bigint generated by default as identity,
-    name varchar(60) not null unique,
-    category enum ('CAKE','COFFEE','TEA') not null,
-    primary key (id)
-)
-</code></pre>
-<h3>E4. Trzecia encja: gość (data i kolumna opcjonalna)</h3>
-<p><code>Guest</code> w <code>guest.domain</code>. Telefon nie jest wymagany, więc nie ma <code>nullable = false</code>:</p>
-<pre><code>@Entity
-@Table(name = "guest")
-public class Guest {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "full_name", nullable = false, length = 80)
-    private String fullName;
-
-    @Column(name = "phone", length = 20)
-    private String phone;
-
-    @Column(name = "registered_on", nullable = false)
-    private LocalDate registeredOn;
-
-    protected Guest() {
-    }
-
-    // konstruktor z polami i gettery: Code → Generate…
-}
-</code></pre>
-<pre><code>create table guest (
-    registered_on date not null,
-    id bigint generated by default as identity,
-    phone varchar(20),
-    full_name varchar(80) not null,
-    primary key (id)
-)
-</code></pre>
+<ul>
+<li><strong>Czerwona adnotacja:</strong> <em>Alt+Enter → Import class</em> (pakiet <code>jakarta.persistence</code>).</li>
+<li><strong>Konstruktor z polami i gettery:</strong> <em>Code → Generate…</em> (macOS <kbd>⌘N</kbd>, Windows <kbd>Alt+Insert</kbd>). Setterów nie generujcie.</li>
+<li><strong>Grupa kolumn</strong>, np. adres: opcjonalnie klasa <code>@Embeddable</code> jak w B4.</li>
+</ul>
+<h3>E4. Sprawdzenie i commit</h3>
+<ol>
+<li><em>Rerun</em> w oknie <em>Run</em>. W logu znajdźcie <code>create table &lt;nazwa_tabeli&gt;</code> i sprawdźcie kolumny i typy.</li>
+<li><em>Git → Commit</em> z opisem, np. „Encja pozycji menu”, potem <em>Push</em>.</li>
+<li>Przy klawiaturze siada następna osoba i robi kolejną tabelę od kroku E2.</li>
+</ol>
 </section>
 <section class="part task">
 <h2><span class="tag task">Zadanie</span>F · Dane startowe i konsola H2</h2>
 <h3>F1. data.sql</h3>
 <p>Hibernate tworzy tabele od nowa przy każdym starcie, a potem Spring Boot wykonuje <code>src/main/resources/data.sql</code>.
-Dane każdej tabeli wpisujecie w jej sekcji (C3) na końcu pliku, pod kontami z LAB 01. Zasady:</p>
+Dane każdej Waszej tabeli wpisujecie w jej sekcji (C3) na końcu pliku, pod kontami z LAB 01. Wzór jest w części B3. Zasady:</p>
 <ul>
 <li><strong>Bez <code>id</code>:</strong> baza numeruje wiersze sama, od 1.</li>
-<li><strong>Nazwy kolumn</strong> dokładnie jak w <code>@Column(name)</code>; enumy jako tekst w apostrofach (<code>'COFFEE'</code>);
+<li><strong>Nazwy kolumn</strong> dokładnie jak w <code>@Column(name)</code>; enumy jako tekst w apostrofach (np. <code>'COFFEE'</code>);
    daty jako <code>'2026-10-01'</code>; kwoty z kropką (<code>9.00</code>).</li>
 <li><strong>2–3 wiersze na tabelę</strong>, sensowne dla Waszego pomysłu. Reguła R2.05 wymaga co najmniej jednego w każdej tabeli.</li>
 </ul>
-<pre><code>-- ===== LAB 02 · cafe_table =====
-insert into cafe_table (number, seats, room) values
-    (1, 2, 'sala główna'),
-    (2, 4, 'sala główna'),
-    (3, 6, 'ogródek');
-
--- ===== LAB 02 · menu_item =====
-insert into menu_item (name, category, price, available) values
-    ('Espresso',        'COFFEE',  9.00, true),
-    ('Herbata zielona', 'TEA',    11.50, true),
-    ('Sernik',          'CAKE',   16.00, false);
-
--- ===== LAB 02 · guest =====
-insert into guest (full_name, phone, registered_on) values
-    ('Anna Kowalska', '600100200', '2026-10-01'),
-    ('Jan Nowak',     null,        '2026-10-12');
+<pre><code>-- ===== LAB 02 · &lt;nazwa_tabeli&gt; =====
+insert into &lt;nazwa_tabeli&gt; (&lt;kolumna1&gt;, &lt;kolumna2&gt;, &lt;kolumna3&gt;) values
+    (…, …, …),
+    (…, …, …);
 </code></pre>
 <h3>F2. Sprawdzenie w konsoli H2</h3>
 <p>Po <em>Rerun</em> otwórzcie <strong>http://localhost:8080/h2-console</strong> (JDBC URL <code>jdbc:h2:file:./data/wdtb</code>,
 użytkownik <code>sa</code>, hasło puste). Po lewej stronie jest lista tabel: rozwińcie każdą swoją tabelę i sprawdźcie kolumny.
 Potem dla każdej tabeli wykonajcie <code>select</code> i porównajcie wiersze z <code>data.sql</code>:</p>
-<pre><code>select * from cafe_table;
-select * from menu_item;
-select * from guest;
-
-select name, price from menu_item where category = 'COFFEE' order by price;
+<pre><code>select * from &lt;nazwa_tabeli&gt;;
 </code></pre>
+<p>Na przykładzie kawiarni: <code>select * from menu_item;</code> albo z warunkiem
+<code>select name, price from menu_item where category = 'COFFEE' order by price;</code></p>
 <p>Każda tabela ma pokazać tyle wierszy, ile wpisaliście. Pusta tabela oznacza brak sekcji w <code>data.sql</code> albo literówkę w nazwie tabeli.</p>
 <h3>F3. Typowe błędy przy starcie</h3>
 <div class="tbl"><table>
