@@ -1,4 +1,4 @@
-package pl.wsb.rules.lab02.counterexample.shop;
+package pl.wsb.rules.examples.broken.shop;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;

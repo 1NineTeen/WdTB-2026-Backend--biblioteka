@@ -26,7 +26,7 @@ Te same strony znajdują się w katalogu [`docs/`](docs/index.html); po sklonowa
 | Zajęcia | Temat |
 |---|---|
 | LAB 01 | Start: projekt, aplikacja i opis pomysłu (bez oceny) |
-| LAB 02 | Encje i relacje w JPA (ocena z tagu `lab-2`) |
+| LAB 02 | Encje JPA i dane startowe (ocena z tagu `lab-2`) |
 | LAB 03 | Repozytoria i zapytania |
 | LAB 04 | Serwisy i komponenty |
 | LAB 05 | Kontrolery REST |
@@ -120,10 +120,9 @@ Instrukcja krok po kroku: `docs/lab02.html`. Zespół pracuje **na jednym laptop
 | Plik | Zmiana | Reguła |
 |---|---|---|
 | `pom.xml`, `<lab>` | `1` → `2` (od razu commit i push) | włącza R2.xx |
-| `pl.wsb.<projekt>.<moduł>.domain` | pakiety co najmniej 2 modułów, w nich enumy i co najmniej 4 encje (`@Entity`) | R2.01–R2.03 |
-| encje | `@ManyToOne` z `@JoinColumn(name = "…_id")`, encja łącząca N:M, pole typu `UserAccount`, `@OneToMany` tylko z `mappedBy` | R2.04–R2.06, R2.09 |
-| typy pól | enumy z `@Enumerated(EnumType.STRING)`, kwoty w `BigDecimal` | R2.07–R2.08 |
-| `src/main/resources/data.sql` | sekcja per tabela (nagłówki na początku, potem dane każdej tabeli w jej sekcji), wiersze w każdej tabeli | R2.10 |
+| `pl.wsb.<projekt>.<moduł>.domain` | 3 własne encje (`@Entity`) bez relacji, enumy w tych samych pakietach | R2.01–R2.02 |
+| typy pól | enumy z `@Enumerated(EnumType.STRING)`, kwoty w `BigDecimal` | R2.03–R2.04 |
+| `src/main/resources/data.sql` | sekcja per tabela, co najmniej jeden wiersz w każdej tabeli; sprawdzenie w konsoli H2 | R2.05 |
 | `src/main/resources/static/index.html` | w liście zmian: co powstało na LAB 02 | — |
 
 Na koniec zajęć zespół tworzy tag `lab-2` (okno *Git* → *Log* → prawy przycisk na commicie → *New Tag…*) i wysyła go

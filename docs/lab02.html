@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LAB 02 · Encje i relacje · Wprowadzenie do technologii backendowych</title>
+<title>LAB 02 · Encje i dane startowe · Wprowadzenie do technologii backendowych</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -17,12 +17,12 @@
   <nav class="jump" aria-label="Dokumentacja"><a href="index.html">Start</a><a href="lab01.html">LAB 01</a><a href="lab02.html" aria-current="page">LAB 02</a><a href="wymagania.html">Wymagania</a><a href="zasady.html">Zasady</a><a href="reguly.html">Reguły</a><a href="pomysl.html">Pomysł</a><a href="zespol.html">Praca w zespole</a><a href="roadmapa.html">Roadmapa</a><button class="theme-toggle" type="button" aria-label="Przełącz motyw jasny lub ciemny">Motyw</button></nav>
 </div>
 <main class="doc"><article class="md">
-<h1>LAB 02 · Encje i relacje: model danych projektu</h1>
+<h1>LAB 02 · Encje i dane startowe: pierwsze tabele projektu</h1>
 <blockquote>
 <p><strong>Zajęcia są oceniane.</strong> Ocenę wystawia prowadzący na koniec zajęć ze stanu repozytorium na tagu <code>lab-2</code>.
-Zielone „Testy i reguły” (R2.01–R2.10) to warunek konieczny. Kryteria oceny prowadzący podaje na początku zajęć.</p>
-<p><strong>Pracujemy na zajęciach, nie w domu.</strong> Na koniec zajęć pomysł z LAB 01 jest zapisany w kodzie jako model danych:
-4–6 własnych tabel jako encje JPA, relacje między nimi, dane startowe w <code>data.sql</code>.</p>
+Zielone „Testy i reguły” (R2.01–R2.05) to warunek konieczny. Kryteria oceny prowadzący podaje na początku zajęć.</p>
+<p><strong>Pracujemy na zajęciach, nie w domu.</strong> Na koniec zajęć projekt ma <strong>3 własne tabele</strong> jako encje JPA,
+dane startowe w <code>data.sql</code> i sprawdzone wiersze w konsoli H2. Relacji między tabelami jeszcze nie dodajecie.</p>
 <p><strong>Pracujemy na jednym laptopie.</strong> Zespół siada przy komputerze osoby hostującej, jak na LAB 01.
 Przy klawiaturze zmieniacie się po każdej encji (krok C3).</p>
 </blockquote>
@@ -38,10 +38,10 @@ Te same strony są w katalogu <code>docs/</code> po pobraniu nowych materiałów
 <p class="legend"><span class="tag theory">Teoria</span>do przeczytania i omówienia, nic nie zmieniacie w kodzie. <span class="tag task">Zadanie</span>wykonujecie w IntelliJ i na GitHubie.</p>
 <ol class="agenda">
 <li><span class="tag task">Zadanie</span><strong>A · Prezentacja wizytówek:</strong> każdy zespół, 2–3 minuty</li>
-<li><span class="tag theory">Teoria</span><strong>B · Wprowadzenie:</strong> tabela ↔ encja, relacje w JPA na przykładzie kawiarni</li>
+<li><span class="tag theory">Teoria</span><strong>B · Wprowadzenie:</strong> tabela ↔ encja, typy kolumn, pokaz relacji jednokierunkowej</li>
 <li><span class="tag task">Zadanie</span><strong>C · Aktualizacja projektu:</strong> nowe materiały, <code>lab=2</code>, podział pracy w zespole</li>
-<li><span class="tag task">Zadanie</span><strong>D · Lista tabel:</strong> najpierw tabele bez relacji, potem te, które na nie wskazują</li>
-<li><span class="tag task">Zadanie</span><strong>E · Encje w kodzie:</strong> krok po kroku, przy klawiaturze na zmianę</li>
+<li><span class="tag task">Zadanie</span><strong>D · Wybór tabel:</strong> 3 tabele bez relacji z Waszego pomysłu</li>
+<li><span class="tag task">Zadanie</span><strong>E · Encje w kodzie:</strong> 3 encje krok po kroku, przy klawiaturze na zmianę</li>
 <li><span class="tag task">Zadanie</span><strong>F · Dane startowe:</strong> <code>data.sql</code> i sprawdzenie w konsoli H2</li>
 <li><span class="tag task">Zadanie</span><strong>G · Reguły, commit, tag <code>lab-2</code></strong></li>
 </ol>
@@ -57,7 +57,7 @@ Te same strony są w katalogu <code>docs/</code> po pobraniu nowych materiałów
 </ol>
 </section>
 <section class="part theory">
-<h2><span class="tag theory">Teoria</span>B · Wprowadzenie: tabela ↔ encja, relacje</h2>
+<h2><span class="tag theory">Teoria</span>B · Wprowadzenie: tabela ↔ encja, typy kolumn, relacja</h2>
 <h3>B1. Encja to klasa, która opisuje tabelę</h3>
 <p>Na LAB 01 widzieliście w oknie <em>Run</em> polecenie <code>create table user_account</code>. Hibernate wygenerował je
 z klasy <code>UserAccount</code>. Tak działa JPA: <strong>klasa ↔ tabela, pole ↔ kolumna, obiekt ↔ wiersz</strong>.
@@ -146,142 +146,165 @@ Otwórzcie <code>account/domain/UserAccount.java</code> i porównajcie z tabelą
 </tr>
 </tbody>
 </table></div>
-<h3>B3. Relacje: klucz obcy to pole typu innej encji</h3>
-<p>W bazie relacja to kolumna z kluczem obcym, np. <code>reservation.table_id</code> wskazuje wiersz w <code>cafe_table</code>.
-W JPA tę kolumnę opisuje <strong>pole typu drugiej encji</strong>. Przykład kawiarni z LAB 01:</p>
-<pre><code>cafe_table  1 ───&lt; N  reservation  N &gt;─── 1  guest  N &gt;─── 1  user_account
- (stolik)              (rezerwacja)          (gość)             (konto, gotowe)
-                            1
-                            │
-                            &lt; N
-                      reservation_extra  N &gt;─── 1  extra
-                      (dodatek do rezerwacji:        (tort, kwiaty)
-                       rezerwacja + dodatek + ilość)
+<h3>B3. Pokaz: relacja jednokierunkowa</h3>
+<p>Tego kroku nie wykonujecie w swoim projekcie: to pokaz, jak tabele łączą się ze sobą. Relacje dodacie na kolejnych zajęciach.</p>
+<p>W kawiarni rezerwacja dotyczy jednego stolika, a przy jednym stoliku może być wiele rezerwacji. W bazie zapisuje to
+<strong>klucz obcy</strong>: kolumna <code>reservation.table_id</code> wskazuje wiersz w tabeli <code>cafe_table</code>.</p>
+<pre><code>cafe_table                     reservation
++----+--------+-------+        +----+---------------------+----------+
+| id | number | seats |        | id | starts_at           | table_id |
++----+--------+-------+        +----+---------------------+----------+
+|  1 |      1 |     2 | &lt;------|  2 | 2026-11-15 12:30:00 |        1 |
+|  2 |      2 |     4 | &lt;------|  1 | 2026-11-14 18:00:00 |        2 |
++----+--------+-------+        +----+---------------------+----------+
+</code></pre>
+<p>W JPA kolumnę klucza obcego opisuje <strong>pole typu drugiej encji</strong>. Stolik jest zwykłą encją bez relacji:</p>
+<pre><code>@Entity
+@Table(name = "cafe_table")
+public class CafeTable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "number", nullable = false, unique = true)
+    private Integer number;
+
+    @Column(name = "seats", nullable = false)
+    private Integer seats;
+
+    @Column(name = "room", nullable = false, length = 40)
+    private String room;
+
+    protected CafeTable() {
+    }
+}
+</code></pre>
+<p>Rezerwacja ma pole <code>table</code> typu <code>CafeTable</code>:</p>
+<pre><code>@Entity
+@Table(name = "reservation")
+public class Reservation {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "starts_at", nullable = false)
+    private LocalDateTime startsAt;
+
+    @Column(name = "party_size", nullable = false)
+    private Integer partySize;
+
+    // wiele rezerwacji → jeden stolik; table_id to kolumna klucza obcego
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "table_id", nullable = false)
+    private CafeTable table;
+
+    protected Reservation() {
+    }
+}
+</code></pre>
+<p>Hibernate generuje z tego kolumnę <code>table_id</code> i klucz obcy:</p>
+<pre><code>create table reservation (
+    party_size integer not null,
+    id bigint generated by default as identity,
+    starts_at timestamp(6) not null,
+    table_id bigint not null,
+    primary key (id)
+)
+
+alter table if exists reservation
+   add constraint FKs87ss6lovy66qn86ra7rbc8e1
+   foreign key (table_id)
+   references cafe_table
+</code></pre>
+<p>W <code>data.sql</code> najpierw wstawia się stoliki, potem rezerwacje z numerem <code>id</code> stolika:</p>
+<pre><code>insert into cafe_table (number, seats, room) values
+    (1, 2, 'sala główna'),
+    (2, 4, 'sala główna');
+
+insert into reservation (starts_at, party_size, table_id) values
+    ('2026-11-14 18:00:00', 4, 2),
+    ('2026-11-15 12:30:00', 2, 1);
+</code></pre>
+<p>W konsoli H2 obie tabele łączy zapytanie z <code>join</code> po kluczu obcym:</p>
+<pre><code>select r.starts_at, r.party_size, t.number as table_no, t.room
+from reservation r
+join cafe_table t on t.id = r.table_id;
 </code></pre>
 <div class="tbl"><table>
 <thead>
 <tr>
-<th>Relacja</th>
-<th>Gdzie jest klucz obcy</th>
-<th>W kodzie</th>
+<th>Element</th>
+<th>Znaczenie</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>wiele-do-jednego</strong><br>wiele rezerwacji → jeden stolik</td>
-<td>w tabeli „wiele” (<code>reservation.table_id</code>)</td>
-<td><code>@ManyToOne @JoinColumn(name = "table_id") private CafeTable table;</code><br>
-   <strong>Podstawowa relacja. Od niej zawsze zaczynacie.</strong></td>
+<td><code>@ManyToOne</code></td>
+<td>wiele rezerwacji wskazuje na jeden stolik; adnotacja stoi po stronie „wiele”</td>
 </tr>
 <tr>
-<td><strong>jeden-do-wielu</strong><br>stolik → jego rezerwacje</td>
-<td>bez nowej kolumny: to druga strona tej samej relacji</td>
-<td><code>@OneToMany(mappedBy = "table") private List&lt;Reservation&gt; reservations;</code><br>
-   opcjonalna; <code>mappedBy</code> wskazuje nazwę pola <code>@ManyToOne</code> po drugiej stronie</td>
+<td><code>@JoinColumn(name = "table_id")</code></td>
+<td>nazwa kolumny klucza obcego w tabeli <code>reservation</code></td>
 </tr>
 <tr>
-<td><strong>wiele-do-wielu</strong><br>rezerwacja ↔ dodatek</td>
-<td>osobna tabela z dwoma kluczami obcymi (<code>reservation_extra</code>)</td>
-<td><strong>encja łącząca</strong> z dwoma polami <code>@ManyToOne</code> i własnymi atrybutami (ilość, data, status).
-   <code>@ManyToMany</code> z <code>@JoinTable</code> tylko wtedy, gdy para nie ma żadnych atrybutów</td>
+<td><code>fetch = FetchType.LAZY</code></td>
+<td>stolik jest doczytywany z bazy dopiero wtedy, gdy kod go użyje</td>
 </tr>
 <tr>
-<td><strong>jeden-do-jednego</strong><br>gość ↔ konto</td>
-<td>klucz obcy z <code>unique</code></td>
-<td><code>@OneToOne @JoinColumn(name = "user_account_id", unique = true) private UserAccount account;</code><br>
-   rzadko potrzebna; częściej wystarczy <code>@ManyToOne</code></td>
+<td><strong>jednokierunkowa</strong></td>
+<td>rezerwacja zna swój stolik, a w klasie <code>CafeTable</code> nie ma nic o rezerwacjach; w bazie to wystarcza</td>
 </tr>
 </tbody>
 </table></div>
-<h3>B4. Konto użytkownika a klient</h3>
-<p><code>UserAccount</code> to <strong>konto logowania</strong>: e-mail, rola, data założenia. Nie dopisujcie do niego numeru
-telefonu, adresu ani historii zamówień. Osoba korzystająca z Waszej aplikacji (gość, klient, czytelnik, członek klubu,
-gracz, uczeń) to <strong>własna encja z danymi biznesowymi</strong>, która wskazuje na konto:</p>
-<pre><code>@ManyToOne(fetch = FetchType.LAZY)
-@JoinColumn(name = "user_account_id")
-private UserAccount account;        // null, gdy gość nie ma konta (np. rezerwacja telefoniczna)
-</code></pre>
-<p>Dzięki temu na LAB 06 to samo konto posłuży do logowania, a Wasza encja pozostanie niezależna od mechanizmu uwierzytelniania.</p>
-<h3>B5. Tabele, które powtarzają się w większości projektów</h3>
-<p>Z opisów projektów w arkuszu zespołów wynika, że prawie każdy projekt ma ten sam szkielet:
-<strong>osoba</strong> (z kontem) korzysta z <strong>zasobu lub oferty</strong>, a łączy je <strong>transakcja ze statusem</strong>
-(rezerwacja, wypożyczenie, zamówienie, zapis). Różnią się tylko nazwy:</p>
+<h3>B4. Od czego zacząć: tabele bez relacji</h3>
+<p>Na tych zajęciach wybieracie z pomysłu <strong>3 tabele, które nie wskazują na inne</strong>: to, co się rezerwuje, wypożycza
+lub kupuje, słowniki i osoby. Przykłady z projektów w arkuszu zespołów:</p>
 <div class="tbl"><table>
 <thead>
 <tr>
-<th>Tabela</th>
-<th>Co przechowuje</th>
-<th>Kino / wydarzenia</th>
-<th>Siłownia / zajęcia</th>
-<th>Biblioteka / wypożyczalnia</th>
-<th>Sklep / zamówienia</th>
+<th>Typ projektu</th>
+<th>3 tabele bez relacji</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>user_account</code> (gotowa)</td>
-<td>logowanie: e-mail, rola</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
+<td>kawiarnia (przykład w instrukcji)</td>
+<td>Stolik, Pozycja menu, Gość</td>
 </tr>
 <tr>
-<td><strong>osoba</strong> → konto</td>
-<td>imię i nazwisko, telefon, numer karty; <code>@ManyToOne UserAccount</code></td>
-<td>Widz</td>
-<td>Członek klubu, Trener</td>
-<td>Czytelnik</td>
-<td>Klient</td>
+<td>kino, wydarzenia</td>
+<td>Film, Sala, Widz</td>
 </tr>
 <tr>
-<td><strong>adres</strong> → osoba</td>
-<td>ulica, miasto, kod; <code>@ManyToOne</code> osoby (jedna osoba, wiele adresów)</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td>Adres dostawy</td>
+<td>siłownia, zajęcia</td>
+<td>Zajęcia, Trener, Typ karnetu</td>
 </tr>
 <tr>
-<td><strong>zasób / oferta</strong></td>
-<td>to, co się rezerwuje, wypożycza lub kupuje; często z kategorią</td>
-<td>Film, Seans → Sala</td>
-<td>Zajęcia → Trener, Typ karnetu</td>
-<td>Książka, Egzemplarz → Książka</td>
-<td>Produkt → Kategoria</td>
+<td>biblioteka, wypożyczalnia</td>
+<td>Książka, Kategoria, Czytelnik</td>
 </tr>
 <tr>
-<td><strong>transakcja ze statusem</strong></td>
-<td>obiekt z cyklem życia: data, status (enum), kwota</td>
-<td>Rezerwacja biletu</td>
-<td>Karnet klienta, Zapis na zajęcia</td>
-<td>Wypożyczenie</td>
-<td>Zamówienie</td>
+<td>sklep</td>
+<td>Produkt, Kategoria, Klient</td>
 </tr>
 <tr>
-<td><strong>encja łącząca N:M</strong></td>
-<td>para + atrybuty; dwa pola <code>@ManyToOne</code></td>
-<td>Rezerwacja: Widz × Seans + miejsce</td>
-<td>Zapis: Członek × Zajęcia + data</td>
-<td>Wypożyczenie: Czytelnik × Egzemplarz + daty</td>
-<td>Pozycja: Zamówienie × Produkt + ilość, cena</td>
+<td>hotel, parking, sale</td>
+<td>Pokój lub Miejsce, Usługa dodatkowa, Gość</td>
 </tr>
 <tr>
-<td><strong>płatność</strong> → transakcja</td>
-<td>kwota, data, metoda, status</td>
-<td>Płatność</td>
-<td>Płatność za karnet</td>
-<td>Kara za zwłokę</td>
-<td>Płatność</td>
+<td>gry, rankingi</td>
+<td>Gracz, Gra, Turniej</td>
 </tr>
 </tbody>
 </table></div>
-<p>Ten sam wzór mają pozostałe projekty: hotel lub parking (Zasób → Rezerwacja ← Klient), gry i rankingi (Gracz × Mecz + wynik), magazyn lub zadania (Produkt × Lokalizacja + ilość), dziennik (Uczeń × Przedmiot + ocena).</p>
+<p>Tabele, które łączą inne (rezerwacja, wypożyczenie, zamówienie, wynik meczu), dojdą razem z relacjami.</p>
 </section>
 <section class="part task">
 <h2><span class="tag task">Zadanie</span>C · Aktualizacja projektu</h2>
 <h3>C1. Nowe materiały z szablonu</h3>
-<p>Przed zajęciami w szablonie pojawiły się instrukcja LAB 02 i reguły R2.01–R2.10. Pobieracie je do forka:</p>
+<p>Przed zajęciami w szablonie pojawiły się instrukcja LAB 02 i reguły R2.01–R2.05. Pobieracie je do forka:</p>
 <ol>
 <li>Na stronie forka na GitHubie: <strong>Sync fork → Update branch</strong>.</li>
 <li>Na laptopie w IntelliJ: <em>Git → Pull</em>.</li>
@@ -302,60 +325,40 @@ i od razu wyślijcie zmianę: <em>Git → Commit</em> z opisem „LAB 02: reguł
 <ol>
 <li><strong>Zmiana przy klawiaturze po każdej encji.</strong> Jedna osoba pisze, pozostałe podpowiadają i sprawdzają z instrukcją.
 </li>
-<li><strong>Małe commity.</strong> Po każdej działającej encji z jej danymi w <code>data.sql</code>: uruchomienie aplikacji, <em>Commit</em>, <em>Push</em>.</li>
-<li><strong><code>data.sql</code> ma sekcje.</strong> Na początku części F dopiszcie nagłówki sekcji dla wszystkich tabel w kolejności
-   kluczy obcych (najpierw tabele, na które wskazują inne):
-<pre><code>-- ===== LAB 02 · moduł seating: cafe_table =====
+<li><strong>Małe commity.</strong> Po każdej działającej encji: uruchomienie aplikacji, <em>Commit</em>, <em>Push</em>.</li>
+<li><strong><code>data.sql</code> ma sekcje.</strong> Na początku części F dopiszcie nagłówek sekcji dla każdej tabeli:
+<pre><code>-- ===== LAB 02 · cafe_table =====
 
--- ===== LAB 02 · moduł booking: guest =====
+-- ===== LAB 02 · menu_item =====
 
--- ===== LAB 02 · moduł booking: extra =====
-
--- ===== LAB 02 · moduł booking: reservation =====
-
--- ===== LAB 02 · moduł booking: reservation_extra =====
+-- ===== LAB 02 · guest =====
 </code></pre></li>
 <li><strong>Nikt nie edytuje</strong> <code>src/test/java/pl/wsb/rules</code> ani <code>.github/workflows</code>.</li>
 </ol>
 </section>
 <section class="part task">
-<h2><span class="tag task">Zadanie</span>D · Lista tabel</h2>
-<p>Nie rysujecie schematu, od razu piszecie kod. Wypiszcie 4–6 tabel z opisu pomysłu (pomoże tabela z części B5)
-i ułóżcie je w dwie grupy:</p>
+<h2><span class="tag task">Zadanie</span>D · Wybór tabel</h2>
+<p>Wybierzcie z opisu pomysłu <strong>3 tabele bez relacji</strong> (podpowiedzi w części B4). Dla każdej tabeli ustalcie:</p>
 <ol>
-<li><strong>Tabele bez relacji</strong> piszecie najpierw: to, co się rezerwuje, wypożycza lub kupuje, i słowniki.
-   W kawiarni to stolik i dodatek (krok E3).</li>
-<li><strong>Tabele z relacjami</strong> piszecie potem, bo wskazują na tabele z pierwszej grupy: osoba z kontem,
-   obiekt ze statusem, encja łącząca. W kawiarni to gość, rezerwacja i dodatek do rezerwacji (kroki E4–E6).</li>
+<li><strong>nazwę klasy i tabeli</strong> po angielsku, np. <code>MenuItem</code> i <code>menu_item</code>,</li>
+<li><strong>3–5 kolumn</strong> z typami z części B2; przynajmniej w jednej tabeli kwota (<code>BigDecimal</code>), data albo enum,</li>
+<li><strong>moduł</strong>, czyli pakiet, do którego trafi encja: jedno słowo, małe litery, po angielsku, np. <code>menu</code>.</li>
 </ol>
-<p>Na koniec zajęć reguły sprawdzą, czy model ma:</p>
-<ul>
-<li>co najmniej 4 własne encje (R2.01) w co najmniej 2 modułach, np. <code>seating</code> i <code>booking</code> (R2.03),</li>
-<li>relację <code>@ManyToOne</code> z <code>@JoinColumn</code> (R2.04) i encję łączącą wiele-do-wielu (R2.05),</li>
-<li>encję z polem typu <code>UserAccount</code> (R2.06),</li>
-<li>status jako enum (R2.07) i kwoty jako <code>BigDecimal</code> (R2.08).</li>
-</ul>
+<p>Nie rysujecie schematu, od razu piszecie kod.</p>
 </section>
 <section class="part task">
 <h2><span class="tag task">Zadanie</span>E · Encje w kodzie: krok po kroku</h2>
-<p>Przykład prowadzi kawiarnię z LAB 01. Wy wpisujecie <strong>swoje</strong> nazwy tabel i kolumn; nazwy klas, pól i pakietów
-po angielsku, jak w <code>UserAccount</code>. Po każdym kroku uruchamiacie aplikację (<em>Rerun</em> w oknie <em>Run</em>)
-i czytacie w logu polecenie <code>create table</code> dla nowej encji. Czerwona adnotacja: <em>Alt+Enter → Import class</em>
-(pakiet <code>jakarta.persistence</code>).</p>
+<p>Przykład prowadzi kawiarnię z LAB 01: stolik, pozycja menu i gość. Wy wpisujecie <strong>swoje</strong> nazwy tabel i kolumn;
+nazwy klas, pól i pakietów po angielsku, jak w <code>UserAccount</code>. Po każdej encji uruchamiacie aplikację
+(<em>Rerun</em> w oknie <em>Run</em>) i czytacie w logu polecenie <code>create table</code>. Czerwona adnotacja:
+<em>Alt+Enter → Import class</em> (pakiet <code>jakarta.persistence</code>).</p>
 <h3>E1. Pakiety modułów</h3>
 <p>Prawy przycisk na pakiecie <code>pl.wsb.&lt;projekt&gt;</code> → <em>New → Package</em> → wpiszcie <code>seating.domain</code>
-(IntelliJ utworzy oba poziomy). Tak samo <code>booking.domain</code>. Wszystkie encje, enumy i klasy <code>@Embeddable</code>
-leżą w pakietach <code>&lt;moduł&gt;.domain</code> (R2.02); pozostałe warstwy modułu dojdą na kolejnych laboratoriach.</p>
-<h3>E2. Enum statusu</h3>
-<p>Prawy przycisk na <code>booking.domain</code> → <em>New → Java Class</em> → <em>Enum</em> → <code>ReservationStatus</code>:</p>
-<pre><code>package pl.wsb.kawiarnia.booking.domain;
-
-public enum ReservationStatus {
-    NEW, CONFIRMED, CANCELLED, DONE
-}
-</code></pre>
-<h3>E3. Encja bez relacji</h3>
-<p><em>New → Java Class</em> → <code>CafeTable</code> w <code>seating.domain</code> (nazwa <code>Table</code> jest zajęta przez adnotację JPA):</p>
+(IntelliJ utworzy oba poziomy). Tak samo <code>menu.domain</code> i <code>guest.domain</code>. Encje i enumy leżą
+w pakietach <code>&lt;moduł&gt;.domain</code> (R2.02).</p>
+<h3>E2. Pierwsza encja: stolik</h3>
+<p>Prawy przycisk na <code>seating.domain</code> → <em>New → Java Class</em> → <code>CafeTable</code>
+(nazwa <code>Table</code> jest zajęta przez adnotację JPA):</p>
 <pre><code>package pl.wsb.kawiarnia.seating.domain;
 
 import jakarta.persistence.*;
@@ -390,7 +393,7 @@ public class CafeTable {
 }
 </code></pre>
 <p>Konstruktor i gettery generuje IntelliJ: <em>Code → Generate…</em> (macOS <kbd>⌘N</kbd>, Windows <kbd>Alt+Insert</kbd>).
-Setterów nie generujcie: stan encji będą zmieniać metody biznesowe (LAB 04). Po <em>Rerun</em> w logu pojawia się:</p>
+Setterów nie generujcie. Po <em>Rerun</em> w logu pojawia się:</p>
 <pre><code>create table cafe_table (
     number integer not null unique,
     seats integer not null,
@@ -399,11 +402,55 @@ Setterów nie generujcie: stan encji będą zmieniać metody biznesowe (LAB 04).
     primary key (id)
 )
 </code></pre>
-<p>Tak samo napiszcie od razu pozostałe tabele bez relacji. W kawiarni to <code>Extra</code> w <code>booking.domain</code>:
-<code>name</code> (<code>String</code>) i <code>price</code> (<code>BigDecimal</code>, <code>precision = 10, scale = 2</code>).
-Dopiero gdy wszystkie się tworzą, przechodzicie do relacji.</p>
-<h3>E4. Encja z relacją do konta (@ManyToOne)</h3>
-<p><code>Guest</code> w <code>booking.domain</code>: dane gościa, powiązane z kontem logowania.</p>
+<h3>E3. Druga encja: pozycja menu (enum i kwota)</h3>
+<p>Najpierw enum: prawy przycisk na <code>menu.domain</code> → <em>New → Java Class</em> → <em>Enum</em> → <code>MenuCategory</code>:</p>
+<pre><code>package pl.wsb.kawiarnia.menu.domain;
+
+public enum MenuCategory {
+    COFFEE, TEA, CAKE
+}
+</code></pre>
+<p>Potem encja <code>MenuItem</code> w <code>menu.domain</code>:</p>
+<pre><code>@Entity
+@Table(name = "menu_item")
+public class MenuItem {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name", nullable = false, unique = true, length = 60)
+    private String name;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "category", nullable = false, length = 20)
+    private MenuCategory category;
+
+    @Column(name = "price", nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
+
+    @Column(name = "available", nullable = false)
+    private Boolean available;
+
+    protected MenuItem() {
+    }
+
+    // konstruktor z polami i gettery: Code → Generate…
+}
+</code></pre>
+<p>W logu enum jest tekstem, a cena liczbą z dwoma miejscami po przecinku. Z <code>double</code> byłoby <code>float(53)</code>,
+czyli zaokrąglenia przy każdym dodawaniu (R2.04):</p>
+<pre><code>create table menu_item (
+    available boolean not null,
+    price numeric(10,2) not null,
+    id bigint generated by default as identity,
+    name varchar(60) not null unique,
+    category enum ('CAKE','COFFEE','TEA') not null,
+    primary key (id)
+)
+</code></pre>
+<h3>E4. Trzecia encja: gość (data i kolumna opcjonalna)</h3>
+<p><code>Guest</code> w <code>guest.domain</code>. Telefon nie jest wymagany, więc nie ma <code>nullable = false</code>:</p>
 <pre><code>@Entity
 @Table(name = "guest")
 public class Guest {
@@ -418,167 +465,63 @@ public class Guest {
     @Column(name = "phone", length = 20)
     private String phone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_account_id")
-    private UserAccount account;               // import pl.wsb.kawiarnia.account.domain.UserAccount
+    @Column(name = "registered_on", nullable = false)
+    private LocalDate registeredOn;
 
     protected Guest() {
     }
 
-    public Guest(String fullName, String phone, UserAccount account) { … }
-
-    // gettery
+    // konstruktor z polami i gettery: Code → Generate…
 }
 </code></pre>
-<p>W logu, oprócz <code>create table guest</code> z kolumną <code>user_account_id bigint</code>, pojawia się klucz obcy:</p>
-<pre><code>alter table if exists guest
-   add constraint FKd9rr1jsx25ybl6bf1nl12ywhq
-   foreign key (user_account_id)
-   references user_account
+<pre><code>create table guest (
+    registered_on date not null,
+    id bigint generated by default as identity,
+    phone varchar(20),
+    full_name varchar(80) not null,
+    primary key (id)
+)
 </code></pre>
-<p><code>fetch = FetchType.LAZY</code> oznacza, że konto jest doczytywane z bazy dopiero przy pierwszym użyciu, a nie razem z gościem.
-Dla <code>@ManyToOne</code> dopisujcie to zawsze; dlaczego to ważne, zobaczycie na LAB 03 przy problemie N+1.</p>
-<h3>E5. Encja ze statusem, kwotą i dwiema relacjami</h3>
-<p><code>Reservation</code> w <code>booking.domain</code>: obiekt z cyklem życia.</p>
-<pre><code>@Entity
-@Table(name = "reservation")
-public class Reservation {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "guest_id", nullable = false)
-    private Guest guest;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "table_id", nullable = false)
-    private CafeTable table;                   // import pl.wsb.kawiarnia.seating.domain.CafeTable
-
-    @Column(name = "starts_at", nullable = false)
-    private LocalDateTime startsAt;
-
-    @Column(name = "party_size", nullable = false)
-    private Integer partySize;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, length = 20)
-    private ReservationStatus status;
-
-    @Column(name = "deposit", nullable = false, precision = 10, scale = 2)
-    private BigDecimal deposit;
-
-    protected Reservation() {
-    }
-
-    public Reservation(Guest guest, CafeTable table, LocalDateTime startsAt, Integer partySize, BigDecimal deposit) {
-        this.guest = guest;
-        this.table = table;
-        this.startsAt = startsAt;
-        this.partySize = partySize;
-        this.status = ReservationStatus.NEW;   // nowa rezerwacja zawsze zaczyna od NEW
-        this.deposit = deposit;
-    }
-
-    // gettery
-}
-</code></pre>
-<p>Zwróćcie uwagę na DDL: <code>status enum ('CANCELLED','CONFIRMED','DONE','NEW')</code> (tekst, nie liczba) i
-<code>deposit numeric(10,2)</code>. Z <code>double</code> byłoby <code>float(53)</code>, czyli zaokrąglenia przy każdym dodawaniu.</p>
-<h3>E6. Encja łącząca: relacja wiele-do-wielu</h3>
-<p>Rezerwacja może mieć wiele dodatków (tort, kwiaty), a dodatek trafia do wielu rezerwacji. Para ma atrybut (ilość), więc
-zamiast <code>@ManyToMany</code> powstaje encja <code>ReservationExtra</code> z dwoma polami <code>@ManyToOne</code>.
-Słownik <code>Extra</code> macie już z kroku E3. Encja łącząca:</p>
-<pre><code>@Entity
-@Table(name = "reservation_extra",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"reservation_id", "extra_id"}))
-public class ReservationExtra {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "reservation_id", nullable = false)
-    private Reservation reservation;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "extra_id", nullable = false)
-    private Extra extra;
-
-    @Column(name = "quantity", nullable = false)
-    private Integer quantity;
-
-    protected ReservationExtra() {
-    }
-
-    public ReservationExtra(Reservation reservation, Extra extra, Integer quantity) { … }
-
-    // gettery
-}
-</code></pre>
-<p><code>uniqueConstraints</code> pilnuje, żeby ten sam dodatek nie trafił dwa razy do jednej rezerwacji. W DDL: <code>unique (reservation_id, extra_id)</code>.</p>
-<h3>E7. Strona odwrotna (@OneToMany), opcjonalnie</h3>
-<p>Jeśli chcecie przejść od stolika do listy jego rezerwacji, dopiszcie w <code>CafeTable</code>:</p>
-<pre><code>@OneToMany(mappedBy = "table")
-private List&lt;Reservation&gt; reservations = new ArrayList&lt;&gt;();
-</code></pre>
-<p><code>mappedBy = "table"</code> to nazwa pola <code>@ManyToOne</code> w <code>Reservation</code>. Bez <code>mappedBy</code> Hibernate
-utworzyłby dodatkową tabelę <code>cafe_table_reservations</code>, której nie planowaliście (R2.09). W DDL nic nie przybywa: to tylko widok z drugiej strony.</p>
 </section>
 <section class="part task">
 <h2><span class="tag task">Zadanie</span>F · Dane startowe i konsola H2</h2>
 <h3>F1. data.sql</h3>
 <p>Hibernate tworzy tabele od nowa przy każdym starcie, a potem Spring Boot wykonuje <code>src/main/resources/data.sql</code>.
-Dane każdej tabeli wpisujecie w jej sekcji (C3). Zasady:</p>
+Dane każdej tabeli wpisujecie w jej sekcji (C3) na końcu pliku, pod kontami z LAB 01. Zasady:</p>
 <ul>
-<li><strong>Kolejność:</strong> najpierw tabele, na które wskazują klucze obce (stoliki i goście przed rezerwacjami, rezerwacje przed dodatkami do rezerwacji).</li>
-<li><strong>Identyfikatory:</strong> nie wpisujecie <code>id</code>; baza numeruje wiersze od 1 w kolejności wstawiania. W kluczach obcych
-   używacie tych numerów. Konta demo z szablonu mają <code>id</code> 1–4, więc konta zespołu dopisane po nich to 5, 6, 7.</li>
-<li><strong>Nazwy kolumn</strong> dokładnie jak w <code>@Column(name)</code> i <code>@JoinColumn(name)</code>; enumy jako tekst w apostrofach; daty jako <code>'2026-11-14 18:00:00'</code>.</li>
-<li><strong>2–3 wiersze na tabelę</strong>, sensowne dla Waszego pomysłu. Reguła R2.10 wymaga co najmniej jednego w każdej tabeli.</li>
+<li><strong>Bez <code>id</code>:</strong> baza numeruje wiersze sama, od 1.</li>
+<li><strong>Nazwy kolumn</strong> dokładnie jak w <code>@Column(name)</code>; enumy jako tekst w apostrofach (<code>'COFFEE'</code>);
+   daty jako <code>'2026-10-01'</code>; kwoty z kropką (<code>9.00</code>).</li>
+<li><strong>2–3 wiersze na tabelę</strong>, sensowne dla Waszego pomysłu. Reguła R2.05 wymaga co najmniej jednego w każdej tabeli.</li>
 </ul>
-<pre><code>-- ===== LAB 02 · moduł seating: cafe_table (Anna) =====
+<pre><code>-- ===== LAB 02 · cafe_table =====
 insert into cafe_table (number, seats, room) values
     (1, 2, 'sala główna'),
     (2, 4, 'sala główna'),
     (3, 6, 'ogródek');
 
--- ===== LAB 02 · moduł booking: guest (Jan) =====
--- user_account_id 5 i 6 to konta zespołu dopisane na LAB 01 (konta demo mają id 1–4)
-insert into guest (full_name, phone, user_account_id) values
-    ('Anna Kowalska', '600100200', 5),
-    ('Jan Nowak',     '600300400', 6),
-    ('Gość bez konta', null,       null);
+-- ===== LAB 02 · menu_item =====
+insert into menu_item (name, category, price, available) values
+    ('Espresso',        'COFFEE',  9.00, true),
+    ('Herbata zielona', 'TEA',    11.50, true),
+    ('Sernik',          'CAKE',   16.00, false);
 
--- ===== LAB 02 · moduł booking: extra (Ola) =====
-insert into extra (name, price) values
-    ('Tort urodzinowy', 89.00),
-    ('Kwiaty na stole', 35.50);
-
--- ===== LAB 02 · moduł booking: reservation (Jan) =====
-insert into reservation (guest_id, table_id, starts_at, party_size, status, deposit) values
-    (1, 2, '2026-11-14 18:00:00', 4, 'CONFIRMED', 50.00),
-    (2, 3, '2026-11-15 12:30:00', 5, 'NEW',       0.00),
-    (3, 1, '2026-11-15 16:00:00', 2, 'CANCELLED', 0.00);
-
--- ===== LAB 02 · moduł booking: reservation_extra (Ola) =====
-insert into reservation_extra (reservation_id, extra_id, quantity) values
-    (1, 1, 1),
-    (1, 2, 2);
+-- ===== LAB 02 · guest =====
+insert into guest (full_name, phone, registered_on) values
+    ('Anna Kowalska', '600100200', '2026-10-01'),
+    ('Jan Nowak',     null,        '2026-10-12');
 </code></pre>
 <h3>F2. Sprawdzenie w konsoli H2</h3>
 <p>Po <em>Rerun</em> otwórzcie <strong>http://localhost:8080/h2-console</strong> (JDBC URL <code>jdbc:h2:file:./data/wdtb</code>,
-użytkownik <code>sa</code>, hasło puste). Po lewej stronie jest lista tabel: rozwińcie swoją i sprawdźcie kolumny. Wykonajcie:</p>
-<pre><code>select * from reservation;
+użytkownik <code>sa</code>, hasło puste). Po lewej stronie jest lista tabel: rozwińcie każdą swoją tabelę i sprawdźcie kolumny.
+Potem dla każdej tabeli wykonajcie <code>select</code> i porównajcie wiersze z <code>data.sql</code>:</p>
+<pre><code>select * from cafe_table;
+select * from menu_item;
+select * from guest;
 
-select r.id, g.full_name, t.number as table_no, r.starts_at, r.status
-from reservation r
-join guest g on g.id = r.guest_id
-join cafe_table t on t.id = r.table_id;
+select name, price from menu_item where category = 'COFFEE' order by price;
 </code></pre>
-<p>Drugie zapytanie łączy trzy tabele kluczami obcymi: tak baza „widzi” Wasze relacje. Na LAB 03 to samo napiszecie w JPQL.</p>
+<p>Każda tabela ma pokazać tyle wierszy, ile wpisaliście. Pusta tabela oznacza brak sekcji w <code>data.sql</code> albo literówkę w nazwie tabeli.</p>
 <h3>F3. Typowe błędy przy starcie</h3>
 <div class="tbl"><table>
 <thead>
@@ -589,12 +532,8 @@ join cafe_table t on t.id = r.table_id;
 </thead>
 <tbody>
 <tr>
-<td><code>Referential integrity constraint violation</code></td>
-<td>klucz obcy wskazuje wiersz, którego jeszcze nie ma: zła kolejność sekcji w <code>data.sql</code> albo zły numer <code>id</code></td>
-</tr>
-<tr>
 <td><code>Column "…" not found</code></td>
-<td>nazwa kolumny w <code>insert</code> różni się od <code>@Column(name)</code> / <code>@JoinColumn(name)</code></td>
+<td>nazwa kolumny w <code>insert</code> różni się od <code>@Column(name)</code></td>
 </tr>
 <tr>
 <td><code>Table "…" not found</code></td>
@@ -606,7 +545,7 @@ join cafe_table t on t.id = r.table_id;
 </tr>
 <tr>
 <td><code>Unique index or primary key violation</code></td>
-<td>dwa wiersze z tą samą wartością kolumny <code>unique</code> (np. numer stolika)</td>
+<td>dwa wiersze z tą samą wartością kolumny <code>unique</code> (np. numer stolika, nazwa pozycji menu)</td>
 </tr>
 <tr>
 <td><code>No default constructor for entity</code></td>
@@ -619,7 +558,7 @@ join cafe_table t on t.id = r.table_id;
 </tbody>
 </table></div>
 <blockquote>
-<p>Błąd w <code>data.sql</code> zatrzymuje start aplikacji, więc czerwone są też R1.02 i R2.10. Czytajcie log od pierwszej linii
+<p>Błąd w <code>data.sql</code> zatrzymuje start aplikacji, więc czerwone są też R1.02 i R2.05. Czytajcie log od pierwszej linii
 z <code>Caused by</code>: tam jest nazwa tabeli i kolumny.</p>
 </blockquote>
 </section>
@@ -634,12 +573,11 @@ z <code>Caused by</code>: tam jest nazwa tabeli i kolumny.</p>
 <li><strong>Tag <code>lab-2</code></strong> (gdy wszystkie zmiany są na GitHubie): okno <em>Git</em> → zakładka <em>Log</em> →
    prawy przycisk na ostatnim commicie → <em>New Tag…</em> → nazwa <code>lab-2</code>. Potem <em>Git → Push</em> i w oknie zaznaczcie
    <em>Push Tags</em>. W <em>Actions</em> pojawi się przebieg dla tagu: to stan, który ocenia prowadzący.</li>
-<li><strong>Wizytówka:</strong> w <code>static/index.html</code> dopiszcie do listy zmian, co powstało na LAB 02 (tabele i relacje).
-   Od tego zaczniecie prezentację na LAB 03.</li>
+<li><strong>Wizytówka:</strong> w <code>static/index.html</code> dopiszcie do listy zmian, co powstało na LAB 02 (nazwy tabel).
+   Od tego zaczniecie prezentację na kolejnych zajęciach.</li>
 </ol>
-<p>Prowadzący ocenia ze stanu na tagu: zielone reguły (warunek konieczny), zgodność modelu z pomysłem z wizytówki,
-sensowne dane startowe i rozmowę:
-każda osoba potrafi wyjaśnić dowolną encję zespołu, nie tylko własną.</p>
+<p>Prowadzący ocenia ze stanu na tagu: zielone reguły (warunek konieczny), zgodność tabel z pomysłem z wizytówki,
+sensowne dane startowe i rozmowę: każda osoba potrafi wyjaśnić dowolną encję zespołu, nie tylko własną.</p>
 <h3>Reguły LAB 02</h3>
 <div class="tbl"><table>
 <thead>
@@ -651,7 +589,7 @@ każda osoba potrafi wyjaśnić dowolną encję zespołu, nie tylko własną.</p
 <tbody>
 <tr>
 <td>R2.01</td>
-<td>co najmniej 4 własne encje (<code>@Entity</code>) poza <code>UserAccount</code></td>
+<td>co najmniej 3 własne encje (<code>@Entity</code>) poza <code>UserAccount</code></td>
 </tr>
 <tr>
 <td>R2.02</td>
@@ -659,40 +597,20 @@ każda osoba potrafi wyjaśnić dowolną encję zespołu, nie tylko własną.</p
 </tr>
 <tr>
 <td>R2.03</td>
-<td>co najmniej 2 moduły z własnymi encjami</td>
-</tr>
-<tr>
-<td>R2.04</td>
-<td>jest relacja <code>@ManyToOne</code>, a każda ma <code>@JoinColumn(name = "…_id")</code></td>
-</tr>
-<tr>
-<td>R2.05</td>
-<td>relacja wiele-do-wielu: encja łącząca z dwiema <code>@ManyToOne</code> albo <code>@ManyToMany</code></td>
-</tr>
-<tr>
-<td>R2.06</td>
-<td>co najmniej jedna własna encja wskazuje na <code>UserAccount</code> (<code>@ManyToOne</code> lub <code>@OneToOne</code>)</td>
-</tr>
-<tr>
-<td>R2.07</td>
 <td>każde pole typu enum ma <code>@Enumerated(EnumType.STRING)</code></td>
 </tr>
 <tr>
-<td>R2.08</td>
+<td>R2.04</td>
 <td>w encjach nie ma pól <code>double</code> ani <code>float</code> (kwoty w <code>BigDecimal</code>)</td>
 </tr>
 <tr>
-<td>R2.09</td>
-<td>każde <code>@OneToMany</code> ma <code>mappedBy</code></td>
-</tr>
-<tr>
-<td>R2.10</td>
+<td>R2.05</td>
 <td>aplikacja startuje na czystej bazie, a każda własna tabela ma co najmniej jeden wiersz z <code>data.sql</code></td>
 </tr>
 </tbody>
 </table></div>
-<p>Reguły są generyczne: patrzą na adnotacje i pakiety, nie na nazwy Waszych tabel. Ten sam kod reguł przechodzi dla przykładu
-kawiarni (autotest w <code>src/test/java/pl/wsb/rules/lab02</code>), więc gdy coś jest czerwone, przyczyna jest w Waszym modelu.</p>
+<p>Reguły są generyczne: patrzą na adnotacje i pakiety, nie na nazwy Waszych tabel. Gdy coś jest czerwone, komunikat przy regule
+mówi, którą klasę lub tabelę poprawić.</p>
 </section>
 </article></main>
 

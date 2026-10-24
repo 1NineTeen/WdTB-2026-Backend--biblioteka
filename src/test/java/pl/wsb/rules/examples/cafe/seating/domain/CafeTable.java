@@ -1,4 +1,4 @@
-package pl.wsb.rules.lab02.sample.seating.domain;
+package pl.wsb.rules.examples.cafe.seating.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import pl.wsb.rules.lab02.sample.booking.domain.Reservation;
+import pl.wsb.rules.examples.cafe.booking.domain.Reservation;
 
 import java.util.ArrayList;
 import java.util.List;

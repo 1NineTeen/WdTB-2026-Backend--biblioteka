@@ -1,4 +1,4 @@
-package pl.wsb.rules.lab02.sample.account.domain;
+package pl.wsb.rules.examples.cafe.account.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

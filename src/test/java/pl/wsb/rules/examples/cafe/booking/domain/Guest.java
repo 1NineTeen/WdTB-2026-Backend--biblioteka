@@ -1,4 +1,4 @@
-package pl.wsb.rules.lab02.sample.booking.domain;
+package pl.wsb.rules.examples.cafe.booking.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import pl.wsb.rules.lab02.sample.account.domain.UserAccount;
+import pl.wsb.rules.examples.cafe.account.domain.UserAccount;
 
 /** Gość kawiarni: dane biznesowe osoby, powiązane z kontem logowania (UserAccount). */
 @Entity
