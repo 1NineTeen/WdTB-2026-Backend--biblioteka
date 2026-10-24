@@ -411,9 +411,10 @@ po angielsku, jak w <code>UserAccount</code>. Pracujecie razem całym zespołem 
 <h3>E1. Pakiety modułów</h3>
 <p>Prawy przycisk na pakiecie <code>pl.wsb.&lt;projekt&gt;</code> → <em>New → Package</em> → wpiszcie <code>&lt;moduł&gt;.domain</code>,
 np. <code>menu.domain</code> (IntelliJ utworzy oba poziomy). Tak samo dla pozostałych modułów z części D (R2.02).</p>
-<h3>E2. Enum, jeśli tabela ma stałą listę wartości</h3>
+<h3>E2. Enum (na ocenę 5 w co najmniej jednej tabeli)</h3>
 <p>Prawy przycisk na <code>&lt;moduł&gt;.domain</code> → <em>New → Java Class</em> → <em>Enum</em> → nazwa, np. <code>Category</code> albo <code>Status</code>.
-Stałe wielkimi literami, jak <code>MenuCategory</code> w B3.</p>
+Stałe wielkimi literami, jak <code>MenuCategory</code> w B3. W encji pole enum zawsze z <code>@Enumerated(EnumType.STRING)</code> (R2.06).
+Na ocenę 4 ten krok możecie pominąć.</p>
 <h3>E3. Encja</h3>
 <p>Prawy przycisk na <code>&lt;moduł&gt;.domain</code> → <em>New → Java Class</em> → nazwa klasy. Szkielet, który uzupełniacie swoimi kolumnami:</p>
 <pre><code>package pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.domain;
@@ -440,7 +441,7 @@ public class &lt;NazwaKlasy&gt; {
 <ul>
 <li><strong>Czerwona adnotacja:</strong> <em>Alt+Enter → Import class</em> (pakiet <code>jakarta.persistence</code>).</li>
 <li><strong>Konstruktor z polami i gettery:</strong> <em>Code → Generate…</em> (macOS <kbd>⌘N</kbd>, Windows <kbd>Alt+Insert</kbd>). Setterów nie generujcie.</li>
-<li><strong>Grupa kolumn</strong>, np. adres: opcjonalnie klasa <code>@Embeddable</code> jak w B4.</li>
+<li><strong>Grupa kolumn</strong>, np. adres: klasa <code>@Embeddable</code> jak w B4. Na ocenę 4 opcjonalna, na ocenę 5 wymagana w co najmniej jednej tabeli (R2.07).</li>
 </ul>
 <h3>E4. Sprawdzenie i commit</h3>
 <ol>

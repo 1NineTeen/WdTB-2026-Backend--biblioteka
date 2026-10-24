@@ -174,10 +174,10 @@
 
           <rect x="560" y="234" width="230" height="266" rx="12" class="dash"/>
           <text x="675" y="262" text-anchor="middle" class="label">Encje</text>
-          <text x="675" y="282" text-anchor="middle" class="mono small">@Entity · @ManyToOne</text>
+          <text x="675" y="282" text-anchor="middle" class="mono small">@Entity · @Column</text>
           <text x="675" y="312" text-anchor="middle" class="small muted">klasa Javy = tabela</text>
           <text x="675" y="330" text-anchor="middle" class="small muted">pole = kolumna</text>
-          <text x="675" y="348" text-anchor="middle" class="small muted">relacja = klucz obcy</text>
+          <text x="675" y="348" text-anchor="middle" class="small muted">wiersz = obiekt</text>
           <text x="675" y="378" text-anchor="middle" class="small muted">nie wychodzą poza</text>
           <text x="675" y="396" text-anchor="middle" class="small muted">serwis do kontrolera</text>
           <rect x="637" y="440" width="76" height="26" rx="13" class="pill"/>
@@ -211,8 +211,8 @@
         <div class="badge">02</div>
         <div class="stop-body">
           <div class="stop-title"><h3>Encje i dane startowe</h3><span class="tagp ready">instrukcja</span></div>
-          <p>Zaczynamy od prezentacji wizytówek. Potem encje na przykładzie kawiarni, <code>@Embeddable</code>, a w projekcie 3 własne tabele jako encje JPA: enumy jako tekst, kwoty w BigDecimal, dane startowe w data.sql sprawdzone w konsoli H2. Zespół pracuje razem na jednym laptopie; na koniec zespół pokazuje przebieg w GitHub Actions.</p>
-          <div class="tags"><span class="tag">@Entity</span><span class="tag">@Column</span><span class="tag">@Enumerated</span><span class="tag">@Embeddable</span><span class="tag">BigDecimal</span><span class="tag">data.sql</span><span class="tag">H2</span></div>
+          <p>Zaczynamy od prezentacji wizytówek. Potem encje na przykładzie kawiarni i klasa wbudowana <code>@Embeddable</code>, a w projekcie 3 własne tabele <strong>bez relacji</strong>: co najmniej 4 kolumny, kolumna wymagana i co najmniej 3 wiersze danych w <code>data.sql</code>, sprawdzone w konsoli H2. Na ocenę 5 także enum i <code>@Embeddable</code>. Relacje między tabelami dojdą na kolejnych zajęciach. Zespół pracuje razem na jednym laptopie; na koniec pokazuje przebieg w GitHub Actions.</p>
+          <div class="tags"><span class="tag">@Entity</span><span class="tag">@Column</span><span class="tag">@Enumerated</span><span class="tag">@Embeddable</span><span class="tag">data.sql</span><span class="tag">H2</span></div>
           <a class="go" href="lab02.html">Otwórz instrukcję LAB 02 →</a>
         </div>
       </article>
