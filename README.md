@@ -26,7 +26,7 @@ Te same strony znajdują się w katalogu [`docs/`](docs/index.html); po sklonowa
 | Zajęcia | Temat |
 |---|---|
 | LAB 01 | Start: projekt, aplikacja i opis pomysłu (bez oceny) |
-| LAB 02 | Encje JPA i dane startowe (ocena z tagu `lab-2`) |
+| LAB 02 | Encje JPA i dane startowe (ocena z pokazanego przebiegu w GitHub Actions) |
 | LAB 03 | Repozytoria i zapytania |
 | LAB 04 | Serwisy i komponenty |
 | LAB 05 | Kontrolery REST |
@@ -128,8 +128,9 @@ Instrukcja krok po kroku: `docs/lab02.html`. Zespół pracuje razem **na jednym 
 | na ocenę 5 | kolumna typu enum i klasa `@Embeddable` użyta przez `@Embedded` | R2.07–R2.08 |
 | `src/main/resources/static/index.html` | w liście zmian: co powstało na LAB 02 | — |
 
-Na koniec zajęć zespół tworzy tag `lab-2` (okno *Git* → *Log* → prawy przycisk na commicie → *New Tag…*) i wysyła go
-(*Git → Push* z zaznaczonym *Push Tags*). Prowadzący ocenia stan repozytorium na tym tagu.
+Na koniec zajęć zespół pokazuje prowadzącemu przebieg „Testy i reguły” w zakładce *Actions* dla ostatniego commita na `main`.
+Przebieg można uruchomić ręcznie: *Actions* → *Testy i reguły* → *Run workflow* → numer laboratorium `2`.
+Opcjonalnie zespół tworzy tag `lab-2` (okno *Git* → *Log* → prawy przycisk na commicie → *New Tag…*, potem *Git → Push* z *Push Tags*).
 
 ## Konwencja nazw
 

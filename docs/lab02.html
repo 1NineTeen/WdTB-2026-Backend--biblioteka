@@ -19,7 +19,8 @@
 <main class="doc"><article class="md">
 <h1>LAB 02 · Encje i dane startowe: pierwsze tabele projektu</h1>
 <blockquote>
-<p><strong>Zajęcia są oceniane.</strong> Ocenę wystawia prowadzący na koniec zajęć ze stanu repozytorium na tagu <code>lab-2</code>.
+<p><strong>Zajęcia są oceniane.</strong> Ocenę wystawia prowadzący na koniec zajęć na podstawie przebiegu w GitHub Actions,
+który zespół mu pokazuje (krok G).
 Zielony etap „Ocena 4” (reguły R2.01–R2.06) to warunek konieczny. Na ocenę 5 zielony musi być też etap „Ocena 5”
 (R2.07–R2.08: kolumna enum i klasa <code>@Embeddable</code>). Szczegóły w części G.</p>
 <p><strong>Pracujemy na zajęciach, nie w domu.</strong> Na koniec zajęć projekt ma <strong>3 własne tabele z Waszego pomysłu</strong> jako encje JPA,
@@ -44,7 +45,7 @@ Te same strony są w katalogu <code>docs/</code> po pobraniu nowych materiałów
 <li><span class="tag task">Zadanie</span><strong>D · Wybór tabel:</strong> 3 tabele bez relacji z Waszego pomysłu</li>
 <li><span class="tag task">Zadanie</span><strong>E · Encje Waszego projektu:</strong> 3 własne tabele, praca całego zespołu</li>
 <li><span class="tag task">Zadanie</span><strong>F · Przykładowe dane:</strong> <code>insert</code> do każdej tabeli w <code>data.sql</code>, sprawdzenie w konsoli H2</li>
-<li><span class="tag task">Zadanie</span><strong>G · Reguły, commit, tag <code>lab-2</code></strong></li>
+<li><span class="tag task">Zadanie</span><strong>G · Reguły, commit, pokazanie przebiegu</strong></li>
 </ol>
 <section class="part task">
 <h2><span class="tag task">Zadanie</span>A · Prezentacja wizytówek</h2>
@@ -607,7 +608,7 @@ z <code>Caused by</code>: tam jest nazwa tabeli i kolumny.</p>
 </blockquote>
 </section>
 <section class="part task">
-<h2><span class="tag task">Zadanie</span>G · Reguły, commit, tag lab-2</h2>
+<h2><span class="tag task">Zadanie</span>G · Reguły, commit, pokazanie przebiegu</h2>
 <ol>
 <li><strong>Reguły lokalnie:</strong> panel <em>Maven</em> (prawa krawędź okna) → <em>Lifecycle</em> → dwuklik na <em>verify</em>.
    W oknie <em>Run</em> przy każdej regule R2.xx jest zielony albo czerwony znak, a przy czerwonej opis, co poprawić.
@@ -616,13 +617,16 @@ z <code>Caused by</code>: tam jest nazwa tabeli i kolumny.</p>
    Na GitHubie zakładka <em>Actions</em> → przebieg „Testy i reguły” ma dwa etapy:
    <strong>Ocena 4 · reguły obowiązkowe</strong> (musi być zielony) i <strong>Ocena 5 · warunki dodatkowe</strong>
    (uruchamia się po zielonym etapie „Ocena 4”). Przy czerwonym etapie w <em>Summary</em> jest lista reguł do poprawy.</li>
-<li><strong>Tag <code>lab-2</code></strong> (gdy wszystkie zmiany są na GitHubie): okno <em>Git</em> → zakładka <em>Log</em> →
-   prawy przycisk na ostatnim commicie → <em>New Tag…</em> → nazwa <code>lab-2</code>. Potem <em>Git → Push</em> i w oknie zaznaczcie
-   <em>Push Tags</em>. W <em>Actions</em> pojawi się przebieg dla tagu: to stan, który ocenia prowadzący.</li>
-<li><strong>Wizytówka:</strong> w <code>static/index.html</code> dopiszcie do listy zmian, co powstało na LAB 02 (nazwy tabel).
-   Od tego zaczniecie prezentację na kolejnych zajęciach.</li>
+<li><strong>Wizytówka:</strong> w <code>static/index.html</code> dopiszcie do listy zmian, co powstało na LAB 02 (nazwy tabel),
+   potem <em>Commit</em> i <em>Push</em>. Od tego zaczniecie prezentację na kolejnych zajęciach.</li>
+<li><strong>Pokazanie przebiegu (obowiązkowe):</strong> gdy wszystkie zmiany są na GitHubie, pokażcie prowadzącemu w zakładce
+   <em>Actions</em> przebieg „Testy i reguły” dla ostatniego commita na <code>main</code>: oba etapy i <em>Summary</em>.
+   Jeśli przebiegu nie ma albo dotyczy starszego commita, uruchomcie go ręcznie: <em>Actions</em> → <em>Testy i reguły</em> → <em>Run workflow</em> → gałąź <code>main</code>, w polu „Numer laboratorium” wpiszcie <code>2</code> → <em>Run workflow</em>.</li>
+<li><strong>Tag <code>lab-2</code> (opcjonalnie):</strong> zaznacza wersję do oceny. Okno <em>Git</em> → zakładka <em>Log</em> →
+   prawy przycisk na ostatnim commicie → <em>New Tag…</em> → nazwa <code>lab-2</code>, potem <em>Git → Push</em> z zaznaczonym
+   <em>Push Tags</em>. Tag sam uruchamia przebieg z regułami LAB 02.</li>
 </ol>
-<p>Prowadzący ocenia ze stanu na tagu:</p>
+<p>Prowadzący ocenia na podstawie pokazanego przebiegu:</p>
 <div class="tbl"><table>
 <thead>
 <tr>
