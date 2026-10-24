@@ -34,9 +34,9 @@ class Lab02ProjectRulesTest {
     }
 
     @Test
-    @DisplayName("R2.02 Encje i @Embeddable leżą w pakietach pl.wsb.<projekt>.<moduł>.domain")
-    void entitiesLiveInModuleDomainPackages() {
-        Lab02Checks.entitiesLiveInModuleDomainPackages(JpaModel.ofProject());
+    @DisplayName("R2.02 Encje i @Embeddable leżą w pakietach pl.wsb.<projekt>.<moduł>.entity")
+    void entitiesLiveInModuleEntityPackages() {
+        Lab02Checks.entitiesLiveInModuleEntityPackages(JpaModel.ofProject());
     }
 
     @Test

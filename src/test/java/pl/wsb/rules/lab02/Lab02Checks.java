@@ -38,22 +38,27 @@ final class Lab02Checks {
         List<JavaClass> own = model.ownEntities();
         assertThat(own)
                 .withFailMessage("Potrzeba co najmniej %d własnych encji (@Entity) poza UserAccount, jest %d: %s. "
-                                + "Każda tabela to klasa z @Entity w pakiecie %s.<moduł>.domain.",
+                                + "Każda tabela to klasa z @Entity w pakiecie %s.<moduł>.entity.",
                         MIN_OWN_ENTITIES, own.size(), JpaModel.names(own), model.rootPackage())
                 .hasSizeGreaterThanOrEqualTo(MIN_OWN_ENTITIES);
     }
 
-    /** R2.02 */
-    static void entitiesLiveInModuleDomainPackages(JpaModel model) {
+    static final String ENTITY_LAYER = "entity";
+
+    /** R2.02: własne encje i klasy wbudowane w pakietach {@code <root>.<moduł>.entity} (gotowe UserAccount zostaje na swoim miejscu). */
+    static void entitiesLiveInModuleEntityPackages(JpaModel model) {
         List<String> misplaced = new ArrayList<>();
         for (JavaClass c : model.mappedClasses()) {
-            boolean ok = model.moduleOf(c).isPresent() && model.layerOf(c).filter("domain"::equals).isPresent();
+            if (JpaModel.isUserAccount(c)) {
+                continue;
+            }
+            boolean ok = model.moduleOf(c).isPresent() && model.layerOf(c).filter(ENTITY_LAYER::equals).isPresent();
             if (!ok) {
                 misplaced.add(c.getSimpleName() + " (" + c.getPackageName() + ")");
             }
         }
         assertThat(misplaced)
-                .withFailMessage("Encje i klasy @Embeddable leżą w pakietach %s.<moduł>.domain, np. %s.booking.domain. "
+                .withFailMessage("Encje, klasy @Embeddable i enumy leżą w pakietach %s.<moduł>.entity, np. %s.booking.entity. "
                                 + "Przenieście (IntelliJ: Refactor → Move): %s",
                         model.rootPackage(), model.rootPackage(), misplaced)
                 .isEmpty();
@@ -156,6 +161,6 @@ final class Lab02Checks {
                 .anyMatch(f -> f.isAnnotatedWith(Embedded.class) && f.getRawType().isAnnotatedWith(jakarta.persistence.Embeddable.class));
         return present ? Optional.empty() : Optional.of(
                 "Na ocenę 5: żadna własna tabela nie używa klasy wbudowanej. Utwórzcie klasę z @Embeddable (np. adres, okres od–do, "
-                        + "dane kontaktowe) w pakiecie <moduł>.domain i dodajcie ją do encji jako pole z @Embedded.");
+                        + "dane kontaktowe) w pakiecie <moduł>.entity i dodajcie ją do encji jako pole z @Embedded.");
     }
 }
