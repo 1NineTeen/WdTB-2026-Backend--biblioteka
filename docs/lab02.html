@@ -22,7 +22,7 @@
 <p><strong>Zajęcia są oceniane.</strong> Ocenę wystawia prowadzący na koniec zajęć ze stanu repozytorium na tagu <code>lab-2</code>.
 Zielone „Testy i reguły” (R2.01–R2.05) to warunek konieczny. Kryteria oceny prowadzący podaje na początku zajęć.</p>
 <p><strong>Pracujemy na zajęciach, nie w domu.</strong> Na koniec zajęć projekt ma <strong>3 własne tabele z Waszego pomysłu</strong> jako encje JPA,
-dane startowe w <code>data.sql</code> i sprawdzone wiersze w konsoli H2. Relacji między tabelami jeszcze nie dodajecie.</p>
+<strong>przykładowe dane</strong> w każdej z nich (polecenia <code>insert</code> w <code>data.sql</code>) i sprawdzone wiersze w konsoli H2. Relacji między tabelami jeszcze nie dodajecie.</p>
 <p><strong>Pracujemy na jednym laptopie.</strong> Zespół siada przy komputerze osoby hostującej, jak na LAB 01.
 Pracujecie razem nad każdą tabelą (krok C3).</p>
 </blockquote>
@@ -42,7 +42,7 @@ Te same strony są w katalogu <code>docs/</code> po pobraniu nowych materiałów
 <li><span class="tag task">Zadanie</span><strong>C · Aktualizacja projektu:</strong> nowe materiały, <code>lab=2</code>, podział pracy w zespole</li>
 <li><span class="tag task">Zadanie</span><strong>D · Wybór tabel:</strong> 3 tabele bez relacji z Waszego pomysłu</li>
 <li><span class="tag task">Zadanie</span><strong>E · Encje Waszego projektu:</strong> 3 własne tabele, praca całego zespołu</li>
-<li><span class="tag task">Zadanie</span><strong>F · Dane startowe:</strong> <code>data.sql</code> i sprawdzenie w konsoli H2</li>
+<li><span class="tag task">Zadanie</span><strong>F · Przykładowe dane:</strong> <code>insert</code> do każdej tabeli w <code>data.sql</code>, sprawdzenie w konsoli H2</li>
 <li><span class="tag task">Zadanie</span><strong>G · Reguły, commit, tag <code>lab-2</code></strong></li>
 </ol>
 <section class="part task">
@@ -479,7 +479,8 @@ Dla każdej tabeli ustalcie:</p>
 <ol>
 <li><strong>nazwę klasy i tabeli</strong> po angielsku, np. <code>MenuItem</code> i <code>menu_item</code>,</li>
 <li><strong>3–5 kolumn</strong> z typami z części B2; przynajmniej w jednej tabeli kwota (<code>BigDecimal</code>), data albo enum,</li>
-<li><strong>moduł</strong>, czyli pakiet, do którego trafi encja: jedno słowo, małe litery, po angielsku, np. <code>menu</code>.</li>
+<li><strong>moduł</strong>, czyli pakiet, do którego trafi encja: jedno słowo, małe litery, po angielsku, np. <code>menu</code>,</li>
+<li><strong>2–3 przykładowe wiersze</strong>, sensowne dla Waszego tematu: wpiszecie je w części F.</li>
 </ol>
 <p>Nie rysujecie schematu, od razu piszecie kod.</p>
 </section>
@@ -530,14 +531,15 @@ public class &lt;NazwaKlasy&gt; {
 </section>
 <section class="part task">
 <h2><span class="tag task">Zadanie</span>F · Dane startowe i konsola H2</h2>
-<h3>F1. data.sql</h3>
+<h3>F1. Przykładowe dane: insert w data.sql</h3>
 <p>Hibernate tworzy tabele od nowa przy każdym starcie, a potem Spring Boot wykonuje <code>src/main/resources/data.sql</code>.
-Dane każdej Waszej tabeli wpisujecie w jej sekcji (C3) na końcu pliku, pod kontami z LAB 01. Wzór jest w części B3. Zasady:</p>
+Do <strong>każdej</strong> Waszej tabeli dopiszcie polecenie <code>insert</code> z 2–3 przykładowymi wierszami, w sekcji tej tabeli (C3)
+na końcu pliku, pod kontami z LAB 01. Wzór jest w części B3. Zasady:</p>
 <ul>
 <li><strong>Bez <code>id</code>:</strong> baza numeruje wiersze sama, od 1.</li>
 <li><strong>Nazwy kolumn</strong> dokładnie jak w <code>@Column(name)</code>; enumy jako tekst w apostrofach (np. <code>'COFFEE'</code>);
    daty jako <code>'2026-10-01'</code>; kwoty z kropką (<code>9.00</code>).</li>
-<li><strong>2–3 wiersze na tabelę</strong>, sensowne dla Waszego pomysłu. Reguła R2.05 wymaga co najmniej jednego w każdej tabeli.</li>
+<li><strong>Dane sensowne dla Waszego tematu</strong>, nie „test1”, „test2”. Reguła R2.05 sprawdza, że żadna tabela nie jest pusta.</li>
 </ul>
 <pre><code>-- ===== LAB 02 · &lt;nazwa_tabeli&gt; =====
 insert into &lt;nazwa_tabeli&gt; (&lt;kolumna1&gt;, &lt;kolumna2&gt;, &lt;kolumna3&gt;) values
