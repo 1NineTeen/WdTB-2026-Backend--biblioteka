@@ -121,11 +121,11 @@ Instrukcja krok po kroku: `docs/lab02.html`. Zespół pracuje razem **na jednym 
 | Plik | Zmiana | Reguła |
 |---|---|---|
 | `pom.xml`, `<lab>` | `1` → `2` (od razu commit i push) | włącza R2.xx |
-| `pl.wsb.<projekt>.<moduł>.domain` | 3 własne encje (`@Entity`) bez relacji, enumy i klasy `@Embeddable` w tych samych pakietach | R2.01–R2.02 |
-| typy pól | enumy z `@Enumerated(EnumType.STRING)`, kwoty w `BigDecimal` (zalecenie) | R2.03 |
-| kolumny | co najmniej 4 kolumny poza `id` w każdej tabeli, w tym co najmniej jedna z `nullable = false` | R2.05–R2.06 |
-| `src/main/resources/data.sql` | sekcja per tabela, co najmniej 3 wiersze w każdej tabeli; sprawdzenie w konsoli H2 | R2.04 |
-| na ocenę 5 | kolumna typu enum i klasa `@Embeddable` użyta przez `@Embedded` | R2.07–R2.08 |
+| `pl.wsb.<projekt>.<moduł>.domain` | 3 własne encje (`@Entity`) bez relacji; enumy i klasy `@Embeddable` w tych samych pakietach | R2.01–R2.02 |
+| typy pól | kwoty w `BigDecimal` (zalecenie) | — |
+| kolumny | co najmniej 4 kolumny poza `id` w każdej tabeli, w tym co najmniej jedna z `nullable = false` | R2.04–R2.05 |
+| `src/main/resources/data.sql` | sekcja per tabela, co najmniej 3 wiersze w każdej tabeli; sprawdzenie w konsoli H2 | R2.03 |
+| na ocenę 5 | kolumna typu enum z `@Enumerated(EnumType.STRING)` i klasa `@Embeddable` użyta przez `@Embedded` | R2.06–R2.07 |
 | `src/main/resources/static/index.html` | w liście zmian: co powstało na LAB 02 | — |
 
 Na koniec zajęć zespół pokazuje prowadzącemu przebieg „Testy i reguły” w zakładce *Actions* dla ostatniego commita na `main`.

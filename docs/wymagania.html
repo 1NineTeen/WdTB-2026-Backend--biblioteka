@@ -67,19 +67,19 @@
 </tr>
 <tr>
 <td>Kolumny</td>
-<td>w każdej tabeli co najmniej 4 kolumny poza <code>id</code>, w tym co najmniej jedna wymagana (<code>nullable = false</code>) (R2.05–R2.06)</td>
+<td>w każdej tabeli co najmniej 4 kolumny poza <code>id</code>, w tym co najmniej jedna wymagana (<code>nullable = false</code>) (R2.04–R2.05)</td>
 </tr>
 <tr>
 <td>Typy</td>
-<td>enumy jako <code>@Enumerated(EnumType.STRING)</code>, kwoty w <code>BigDecimal</code> (R2.03)</td>
+<td>kwoty w <code>BigDecimal</code> (zalecenie, bez reguły); enumy tylko na ocenę 5</td>
 </tr>
 <tr>
 <td>Dane startowe</td>
-<td>aplikacja startuje, każda własna tabela ma co najmniej 3 wiersze z <code>data.sql</code>, widoczne w konsoli H2 (R2.04)</td>
+<td>aplikacja startuje, każda własna tabela ma co najmniej 3 wiersze z <code>data.sql</code>, widoczne w konsoli H2 (R2.03)</td>
 </tr>
 <tr>
 <td>Na ocenę 5</td>
-<td>kolumna typu enum (R2.07) i klasa <code>@Embeddable</code> użyta w encji przez <code>@Embedded</code> (R2.08); etap „Ocena 5” w GitHub Actions</td>
+<td>kolumna typu enum z <code>@Enumerated(EnumType.STRING)</code> (R2.06) i klasa <code>@Embeddable</code> użyta w encji przez <code>@Embedded</code> (R2.07); etap „Ocena 5” w GitHub Actions</td>
 </tr>
 <tr>
 <td>Zespół</td>

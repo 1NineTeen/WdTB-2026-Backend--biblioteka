@@ -113,32 +113,28 @@ pl.wsb.&lt;projekt&gt;.shared | common | config moduły wspólne, dostępne dla 
 </tr>
 <tr>
 <td>R2.03</td>
-<td>Każde pole typu enum w encji ma <code>@Enumerated(EnumType.STRING)</code></td>
-</tr>
-<tr>
-<td>R2.04</td>
 <td>Aplikacja startuje na czystej bazie H2, a każda własna tabela ma co najmniej 3 wiersze z <code>data.sql</code></td>
 </tr>
 <tr>
-<td>R2.05</td>
+<td>R2.04</td>
 <td>Każda własna tabela ma co najmniej 4 kolumny poza <code>id</code> (kolumny klasy <code>@Embedded</code> się liczą)</td>
 </tr>
 <tr>
-<td>R2.06</td>
+<td>R2.05</td>
 <td>Każda własna tabela ma co najmniej jedną kolumnę wymaganą (<code>nullable = false</code>)</td>
 </tr>
 <tr>
-<td>R2.07</td>
-<td><strong>Ocena 5:</strong> co najmniej jedna własna tabela ma kolumnę typu enum</td>
+<td>R2.06</td>
+<td><strong>Ocena 5:</strong> co najmniej jedna własna tabela ma kolumnę typu enum, a każde pole enum ma <code>@Enumerated(EnumType.STRING)</code></td>
 </tr>
 <tr>
-<td>R2.08</td>
+<td>R2.07</td>
 <td><strong>Ocena 5:</strong> co najmniej jedna własna tabela ma pole <code>@Embedded</code> typu klasy <code>@Embeddable</code></td>
 </tr>
 </tbody>
 </table></div>
-<p>R2.01–R2.06 działają w etapie „Ocena 4”, R2.07–R2.08 w etapie „Ocena 5” (uruchamianym po zielonym etapie „Ocena 4”).
-R2.04 uruchamia aplikację, pozostałe czytają skompilowane klasy (ArchUnit). Autotest w
+<p>R2.01–R2.05 działają w etapie „Ocena 4”, R2.06–R2.07 w etapie „Ocena 5” (uruchamianym po zielonym etapie „Ocena 4”).
+R2.03 uruchamia aplikację, pozostałe czytają skompilowane klasy (ArchUnit). Autotest w
 <code>src/test/java/pl/wsb/rules/lab02</code> sprawdza je na przykładzie kawiarni i na celowo błędnym modelu.</p>
 <p>Reguły kolejnych laboratoriów pojawią się w szablonie przed danymi zajęciami.</p>
 </article></main>

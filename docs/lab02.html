@@ -21,8 +21,8 @@
 <blockquote>
 <p><strong>Zajęcia są oceniane.</strong> Ocenę wystawia prowadzący na koniec zajęć na podstawie przebiegu w GitHub Actions,
 który zespół mu pokazuje (krok G).
-Zielony etap „Ocena 4” (reguły R2.01–R2.06) to warunek konieczny. Na ocenę 5 zielony musi być też etap „Ocena 5”
-(R2.07–R2.08: kolumna enum i klasa <code>@Embeddable</code>). Szczegóły w części G.</p>
+Zielony etap „Ocena 4” (reguły R2.01–R2.05) to warunek konieczny. Na ocenę 5 zielony musi być też etap „Ocena 5”
+(R2.06–R2.07: kolumna enum i klasa <code>@Embeddable</code>). Szczegóły w części G.</p>
 <p><strong>Pracujemy na zajęciach, nie w domu.</strong> Na koniec zajęć projekt ma <strong>3 własne tabele z Waszego pomysłu</strong> jako encje JPA,
 <strong>przykładowe dane</strong> w każdej z nich (polecenia <code>insert</code> w <code>data.sql</code>) i sprawdzone wiersze w konsoli H2. Relacji między tabelami jeszcze nie dodajecie.</p>
 <p><strong>Pracujemy na jednym laptopie.</strong> Zespół siada przy komputerze osoby hostującej, jak na LAB 01.
@@ -351,12 +351,12 @@ w której są też kolumny adresu:</p>
 </tr>
 </tbody>
 </table></div>
-<p>Klasa <code>@Embeddable</code> leży w tym samym pakiecie <code>&lt;moduł&gt;.domain</code> co encja (R2.02). Nie liczy się jako jedna z 3 tabel, ale jej kolumny liczą się do kolumn tabeli encji (R2.05). Na ocenę 5 co najmniej jedna encja ma pole <code>@Embedded</code> (R2.08).</p>
+<p>Klasa <code>@Embeddable</code> leży w tym samym pakiecie <code>&lt;moduł&gt;.domain</code> co encja (R2.02). Nie liczy się jako jedna z 3 tabel, ale jej kolumny liczą się do kolumn tabeli encji (R2.04). Na ocenę 5 co najmniej jedna encja ma pole <code>@Embedded</code> (R2.07).</p>
 </section>
 <section class="part task">
 <h2><span class="tag task">Zadanie</span>C · Aktualizacja projektu</h2>
 <h3>C1. Nowe materiały z szablonu</h3>
-<p>Przed zajęciami w szablonie pojawiły się instrukcja LAB 02 i reguły R2.01–R2.08. Pobieracie je do forka:</p>
+<p>Przed zajęciami w szablonie pojawiły się instrukcja LAB 02 i reguły R2.01–R2.07. Pobieracie je do forka:</p>
 <ol>
 <li>Na stronie forka na GitHubie: <strong>Sync fork → Update branch</strong>.</li>
 <li>Na laptopie w IntelliJ: <em>Git → Pull</em>.</li>
@@ -395,13 +395,13 @@ i od razu wyślijcie zmianę: <em>Git → Commit</em> z opisem „LAB 02: reguł
 Dla każdej tabeli ustalcie:</p>
 <ol>
 <li><strong>nazwę klasy i tabeli</strong> po angielsku, np. <code>MenuItem</code> i <code>menu_item</code>,</li>
-<li><strong>co najmniej 4 kolumny poza <code>id</code></strong> z typami z części B2 (R2.05), w tym co najmniej jedna wymagana,
-   czyli z <code>nullable = false</code> (R2.06),</li>
+<li><strong>co najmniej 4 kolumny poza <code>id</code></strong> z typami z części B2 (R2.04), w tym co najmniej jedna wymagana,
+   czyli z <code>nullable = false</code> (R2.05),</li>
 <li><strong>moduł</strong>, czyli pakiet, do którego trafi encja: jedno słowo, małe litery, po angielsku, np. <code>menu</code>,</li>
-<li><strong>co najmniej 3 przykładowe wiersze</strong>, sensowne dla Waszego tematu: wpiszecie je w części F (R2.04).</li>
+<li><strong>co najmniej 3 przykładowe wiersze</strong>, sensowne dla Waszego tematu: wpiszecie je w części F (R2.03).</li>
 </ol>
-<p><strong>Na ocenę 5</strong> dodatkowo: w co najmniej jednej tabeli kolumna typu enum, np. status albo kategoria (R2.07),
-i w co najmniej jednej tabeli klasa wbudowana <code>@Embeddable</code>, np. adres albo okres od–do (R2.08). Wzór w częściach B3 i B4.</p>
+<p><strong>Na ocenę 5</strong> dodatkowo: w co najmniej jednej tabeli kolumna typu enum z <code>@Enumerated(EnumType.STRING)</code>, np. status albo kategoria (R2.06),
+i w co najmniej jednej tabeli klasa wbudowana <code>@Embeddable</code>, np. adres albo okres od–do (R2.07). Wzór w częściach B3 i B4.</p>
 <p>Nie rysujecie schematu, od razu piszecie kod.</p>
 </section>
 <section class="part task">
@@ -459,7 +459,7 @@ na końcu pliku, pod kontami z LAB 01. Wzór jest w części B3. Zasady:</p>
 <li><strong>Bez <code>id</code>:</strong> baza numeruje wiersze sama, od 1.</li>
 <li><strong>Nazwy kolumn</strong> dokładnie jak w <code>@Column(name)</code>; enumy jako tekst w apostrofach (np. <code>'COFFEE'</code>);
    daty jako <code>'2026-10-01'</code>; kwoty z kropką (<code>9.00</code>).</li>
-<li><strong>Dane sensowne dla Waszego tematu</strong>, nie „test1”, „test2”. Reguła R2.04 sprawdza, że każda tabela ma co najmniej 3 wiersze.</li>
+<li><strong>Dane sensowne dla Waszego tematu</strong>, nie „test1”, „test2”. Reguła R2.03 sprawdza, że każda tabela ma co najmniej 3 wiersze.</li>
 </ul>
 <pre><code>-- ===== LAB 02 · &lt;nazwa_tabeli&gt; =====
 insert into &lt;nazwa_tabeli&gt; (&lt;kolumna1&gt;, &lt;kolumna2&gt;, &lt;kolumna3&gt;) values
@@ -512,7 +512,7 @@ Potem dla każdej tabeli wykonajcie <code>select</code> i porównajcie wiersze z
 </tbody>
 </table></div>
 <blockquote>
-<p>Błąd w <code>data.sql</code> zatrzymuje start aplikacji, więc czerwone są też R1.02 i R2.04. Czytajcie log od pierwszej linii
+<p>Błąd w <code>data.sql</code> zatrzymuje start aplikacji, więc czerwone są też R1.02 i R2.03. Czytajcie log od pierwszej linii
 z <code>Caused by</code>: tam jest nazwa tabeli i kolumny.</p>
 </blockquote>
 </section>
@@ -521,7 +521,7 @@ z <code>Caused by</code>: tam jest nazwa tabeli i kolumny.</p>
 <ol>
 <li><strong>Reguły lokalnie:</strong> panel <em>Maven</em> (prawa krawędź okna) → <em>Lifecycle</em> → dwuklik na <em>verify</em>.
    W oknie <em>Run</em> przy każdej regule R2.xx jest zielony albo czerwony znak, a przy czerwonej opis, co poprawić.
-   Poprawiacie, aż LAB 01 i LAB 02 są zielone. Zestaw „LAB 02 · na ocenę 5” (R2.07–R2.08) jest potrzebny tylko na ocenę 5.</li>
+   Poprawiacie, aż LAB 01 i LAB 02 są zielone. Zestaw „LAB 02 · na ocenę 5” (R2.06–R2.07) jest potrzebny tylko na ocenę 5.</li>
 <li><strong>Ostatnie zmiany:</strong> <em>Commit</em> z opisem (np. „Poprawki po regułach LAB 02”), <em>Push</em>.
    Na GitHubie zakładka <em>Actions</em> → przebieg „Testy i reguły” ma dwa etapy:
    <strong>Ocena 4 · reguły obowiązkowe</strong> (musi być zielony) i <strong>Ocena 5 · warunki dodatkowe</strong>
@@ -546,11 +546,11 @@ z <code>Caused by</code>: tam jest nazwa tabeli i kolumny.</p>
 <tbody>
 <tr>
 <td><strong>4</strong></td>
-<td>zielony etap „Ocena 4 · reguły obowiązkowe” (R2.01–R2.06 i reguły LAB 01)</td>
+<td>zielony etap „Ocena 4 · reguły obowiązkowe” (R2.01–R2.05 i reguły LAB 01)</td>
 </tr>
 <tr>
 <td><strong>5</strong></td>
-<td>dodatkowo zielony etap „Ocena 5 · warunki dodatkowe”: kolumna enum (R2.07) i klasa <code>@Embeddable</code> (R2.08)</td>
+<td>dodatkowo zielony etap „Ocena 5 · warunki dodatkowe”: kolumna enum (R2.06) i klasa <code>@Embeddable</code> (R2.07)</td>
 </tr>
 </tbody>
 </table></div>
@@ -578,31 +578,26 @@ każda osoba potrafi wyjaśnić dowolną encję zespołu.</p>
 </tr>
 <tr>
 <td>R2.03</td>
-<td>każde pole typu enum ma <code>@Enumerated(EnumType.STRING)</code></td>
-<td>4 i 5</td>
-</tr>
-<tr>
-<td>R2.04</td>
 <td>aplikacja startuje na czystej bazie, a każda własna tabela ma co najmniej 3 wiersze z <code>data.sql</code></td>
 <td>4 i 5</td>
 </tr>
 <tr>
-<td>R2.05</td>
+<td>R2.04</td>
 <td>każda własna tabela ma co najmniej 4 kolumny poza <code>id</code> (kolumny klasy <code>@Embedded</code> się liczą)</td>
 <td>4 i 5</td>
 </tr>
 <tr>
-<td>R2.06</td>
+<td>R2.05</td>
 <td>każda własna tabela ma co najmniej jedną kolumnę wymaganą (<code>nullable = false</code>)</td>
 <td>4 i 5</td>
 </tr>
 <tr>
-<td>R2.07</td>
-<td>co najmniej jedna własna tabela ma kolumnę typu enum</td>
+<td>R2.06</td>
+<td>co najmniej jedna własna tabela ma kolumnę typu enum, a każde pole enum ma <code>@Enumerated(EnumType.STRING)</code></td>
 <td>5</td>
 </tr>
 <tr>
-<td>R2.08</td>
+<td>R2.07</td>
 <td>co najmniej jedna własna tabela ma pole <code>@Embedded</code> typu klasy <code>@Embeddable</code></td>
 <td>5</td>
 </tr>

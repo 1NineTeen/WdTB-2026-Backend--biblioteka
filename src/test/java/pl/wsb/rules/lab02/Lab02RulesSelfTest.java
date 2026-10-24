@@ -28,7 +28,7 @@ class Lab02RulesSelfTest {
     }
 
     @Test
-    @DisplayName("Przykład kawiarni spełnia R2.01–R2.03, R2.05 i R2.06")
+    @DisplayName("Przykład kawiarni spełnia R2.01–R2.02, R2.04–R2.06")
     void cafeSatisfiesStaticRules() {
         JpaModel cafe = model(CAFE);
         assertThatCode(() -> {

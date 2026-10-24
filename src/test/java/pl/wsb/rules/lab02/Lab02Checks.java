@@ -59,7 +59,7 @@ final class Lab02Checks {
                 .isEmpty();
     }
 
-    /** R2.03 */
+    /** R2.06 (na ocenę 5), część 2: każde pole enum zapisane jako tekst. */
     static void enumsStoredAsString(JpaModel model) {
         List<String> offenders = new ArrayList<>();
         for (JavaClass c : model.mappedClasses()) {
@@ -85,7 +85,7 @@ final class Lab02Checks {
     }
 
 
-    /** R2.05 */
+    /** R2.04 */
     static void everyOwnEntityHasEnoughColumns(JpaModel model) {
         List<String> tooSmall = new ArrayList<>();
         for (JavaClass c : model.ownEntities()) {
@@ -119,7 +119,7 @@ final class Lab02Checks {
         return columns;
     }
 
-    /** R2.06 */
+    /** R2.05 */
     static void everyOwnEntityHasRequiredColumn(JpaModel model) {
         List<String> withoutRequired = model.ownEntities().stream()
                 .filter(c -> JpaModel.fields(c).stream().noneMatch(Lab02Checks::isRequired))
@@ -139,7 +139,7 @@ final class Lab02Checks {
                 || f.tryGetAnnotationOfType(JoinColumn.class).map(j -> !j.nullable()).orElse(false);
     }
 
-    /** R2.07 (na ocenę 5): brak zwraca opis, co dopisać. */
+    /** R2.06 (na ocenę 5), część 1: brak zwraca opis, co dopisać. */
     static Optional<String> missingEnumColumn(JpaModel model) {
         boolean present = model.ownEntities().stream()
                 .flatMap(c -> JpaModel.fields(c).stream())
@@ -149,7 +149,7 @@ final class Lab02Checks {
                         + "z @Enumerated(EnumType.STRING) i stałymi pisanymi wielkimi literami.");
     }
 
-    /** R2.08 (na ocenę 5): brak zwraca opis, co dopisać. */
+    /** R2.07 (na ocenę 5): brak zwraca opis, co dopisać. */
     static Optional<String> missingEmbedded(JpaModel model) {
         boolean present = model.ownEntities().stream()
                 .flatMap(c -> JpaModel.fields(c).stream())
