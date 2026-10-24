@@ -1,4 +1,4 @@
-package pl.wsb.rules.examples.cafe.entity;
+package pl.wsb.rules.examples.cafe.booking.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;

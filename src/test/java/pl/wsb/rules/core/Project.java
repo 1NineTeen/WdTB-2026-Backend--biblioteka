@@ -28,8 +28,7 @@ import static org.assertj.core.api.Assertions.fail;
  * <p>Reguły są generyczne: nie znają domeny Waszego projektu. Wszystko wyznaczają z konwencji:
  * <pre>
  * pl.wsb.&lt;projekt&gt;                      ← klasa z @SpringBootApplication
- * pl.wsb.&lt;projekt&gt;.entity                 ← encje, @Embeddable, enumy zespołu        (LAB 02)
- * pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.domain        ← repozytoria, logika domeny        (kolejne laboratoria)
+ * pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.domain        ← encje, value objecty, enumy, repozytoria
  * pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.application   ← serwisy, przypadki użycia     (LAB 03)
  * pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.api           ← publiczny kontrakt modułu     (LAB 03)
  * pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.web           ← kontrolery REST, DTO          (LAB 04)

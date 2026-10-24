@@ -55,8 +55,7 @@ więc ten sam zestaw ocenia wszystkie zespoły.</p>
 <h2>Konwencja pakietów</h2>
 <pre><code>pl.wsb.&lt;projekt&gt;                          klasa @SpringBootApplication (dokładnie jedna)
 pl.wsb.&lt;projekt&gt;.account.domain           gotowe konto użytkownika (user_account)
-pl.wsb.&lt;projekt&gt;.entity                   Wasze @Entity, @Embeddable, enumy (LAB 02)
-pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.domain           *Repository, logika domeny (kolejne laboratoria)
+pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.domain           @Entity, @Embeddable, enumy, *Repository
 pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.application      @Service, przypadki użycia, @Transactional
 pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.api              publiczny kontrakt: fasady, rekordy, zdarzenia
 pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.web              @RestController, *Request / *Response
@@ -110,7 +109,7 @@ pl.wsb.&lt;projekt&gt;.shared | common | config moduły wspólne, dostępne dla 
 </tr>
 <tr>
 <td>R2.02</td>
-<td>Encje i <code>@Embeddable</code> leżą w pakiecie <code>pl.wsb.&lt;projekt&gt;.entity</code> (gotowe <code>UserAccount</code> zostaje w <code>account.domain</code>)</td>
+<td>Encje i <code>@Embeddable</code> leżą w pakietach <code>pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.domain</code></td>
 </tr>
 <tr>
 <td>R2.03</td>

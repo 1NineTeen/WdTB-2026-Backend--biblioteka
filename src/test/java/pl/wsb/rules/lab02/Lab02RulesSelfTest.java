@@ -33,7 +33,7 @@ class Lab02RulesSelfTest {
         JpaModel cafe = model(CAFE);
         assertThatCode(() -> {
             Lab02Checks.atLeastThreeOwnEntities(cafe);
-            Lab02Checks.entitiesLiveInEntityPackage(cafe);
+            Lab02Checks.entitiesLiveInModuleDomainPackages(cafe);
             Lab02Checks.enumsStoredAsString(cafe);
             Lab02Checks.everyOwnEntityHasEnoughColumns(cafe);
             Lab02Checks.everyOwnEntityHasRequiredColumn(cafe);
@@ -69,8 +69,8 @@ class Lab02RulesSelfTest {
         JpaModel broken = model(BROKEN);
         assertThatThrownBy(() -> Lab02Checks.atLeastThreeOwnEntities(model(NOTHING)))
                 .hasMessageContaining("co najmniej 3 własnych encji");
-        assertThatThrownBy(() -> Lab02Checks.entitiesLiveInEntityPackage(broken))
-                .hasMessageContaining("pl.wsb.rules.examples.broken.entity").hasMessageContaining("broken.shop");
+        assertThatThrownBy(() -> Lab02Checks.entitiesLiveInModuleDomainPackages(broken))
+                .hasMessageContaining("<moduł>.domain").hasMessageContaining("broken.shop");
         assertThatThrownBy(() -> Lab02Checks.enumsStoredAsString(broken))
                 .hasMessageContaining("EnumType.STRING").hasMessageContaining("Order.status");
         assertThatThrownBy(() -> Lab02Checks.everyOwnEntityHasEnoughColumns(broken))
