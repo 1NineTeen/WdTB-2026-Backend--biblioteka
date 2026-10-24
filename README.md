@@ -68,7 +68,7 @@ Wymagania: JDK 21 lub nowsze, IntelliJ IDEA (Maven i Git są wbudowane), konto n
 
 ### Uruchomienie aplikacji
 
-1. Otwórzcie klasę `bibliotekaApplication` (po zmianie nazwy: `<NazwaProjektu>Application`).
+1. Otwórzcie klasę `BibliotekaApplication` (po zmianie nazwy: `<NazwaProjektu>Application`).
 2. Kliknijcie zieloną strzałkę obok metody `main` → *Run 'ProjektApplication'*.
 3. W oknie *Run* na dole poczekajcie na `Started ProjektApplication in … seconds`.
 4. Otwórzcie http://localhost:8080 (strona startowa) i http://localhost:8080/h2-console (baza danych:
