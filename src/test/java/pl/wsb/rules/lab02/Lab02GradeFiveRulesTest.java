@@ -20,13 +20,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 class Lab02GradeFiveRulesTest {
 
     @Test
-    @DisplayName("R2.08 Co najmniej jedna kolumna typu enum (@Enumerated(EnumType.STRING))")
+    @DisplayName("R2.07 Co najmniej jedna kolumna typu enum (@Enumerated(EnumType.STRING))")
     void enumColumn() {
         met(Lab02Checks.missingEnumColumn(JpaModel.ofProject()));
     }
 
     @Test
-    @DisplayName("R2.09 Klasa wbudowana: pole @Embedded typu klasy @Embeddable")
+    @DisplayName("R2.08 Klasa wbudowana: pole @Embedded typu klasy @Embeddable")
     void embeddedClass() {
         met(Lab02Checks.missingEmbedded(JpaModel.ofProject()));
     }

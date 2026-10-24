@@ -28,14 +28,13 @@ class Lab02RulesSelfTest {
     }
 
     @Test
-    @DisplayName("Przykład kawiarni spełnia R2.01–R2.04, R2.06 i R2.07")
+    @DisplayName("Przykład kawiarni spełnia R2.01–R2.03, R2.05 i R2.06")
     void cafeSatisfiesStaticRules() {
         JpaModel cafe = model(CAFE);
         assertThatCode(() -> {
             Lab02Checks.atLeastThreeOwnEntities(cafe);
             Lab02Checks.entitiesLiveInModuleDomainPackages(cafe);
             Lab02Checks.enumsStoredAsString(cafe);
-            Lab02Checks.noFloatingPointColumns(cafe);
             Lab02Checks.everyOwnEntityHasEnoughColumns(cafe);
             Lab02Checks.everyOwnEntityHasRequiredColumn(cafe);
         }).doesNotThrowAnyException();
@@ -74,8 +73,6 @@ class Lab02RulesSelfTest {
                 .hasMessageContaining("<moduł>.domain").hasMessageContaining("broken.shop");
         assertThatThrownBy(() -> Lab02Checks.enumsStoredAsString(broken))
                 .hasMessageContaining("EnumType.STRING").hasMessageContaining("Order.status");
-        assertThatThrownBy(() -> Lab02Checks.noFloatingPointColumns(broken))
-                .hasMessageContaining("BigDecimal").hasMessageContaining("Order.total").hasMessageContaining("Customer.discount");
         assertThatThrownBy(() -> Lab02Checks.everyOwnEntityHasEnoughColumns(broken))
                 .hasMessageContaining("co najmniej 4 kolumny").hasMessageContaining("Customer [discount]")
                 .hasMessageContaining("OrderLine [quantity]").hasMessageContaining("Order [customer, status, total]");

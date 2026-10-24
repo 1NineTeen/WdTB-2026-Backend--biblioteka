@@ -17,7 +17,6 @@ import pl.wsb.rules.core.JpaModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,8 +29,6 @@ final class Lab02Checks {
     static final int MIN_OWN_ENTITIES = 3;
     static final int MIN_COLUMNS = 4;
     static final int MIN_ROWS = 3;
-
-    private static final Set<String> FLOATING_POINT = Set.of("double", "float", "java.lang.Double", "java.lang.Float");
 
     private Lab02Checks() {
     }
@@ -87,26 +84,8 @@ final class Lab02Checks {
                 .isEmpty();
     }
 
-    /** R2.04 */
-    static void noFloatingPointColumns(JpaModel model) {
-        List<String> offenders = new ArrayList<>();
-        for (JavaClass c : model.mappedClasses()) {
-            if (JpaModel.isUserAccount(c)) {
-                continue;
-            }
-            for (JavaField f : JpaModel.fields(c)) {
-                if (FLOATING_POINT.contains(f.getRawType().getName())) {
-                    offenders.add(JpaModel.where(f) + " (" + f.getRawType().getSimpleName() + ")");
-                }
-            }
-        }
-        assertThat(offenders)
-                .withFailMessage("Kwoty i inne wielkości dziesiętne przechowujemy w BigDecimal (double i float zaokrąglają: "
-                        + "0.1 + 0.2 ≠ 0.3), a ilości w Integer. Zmieńcie typ pól: %s", offenders)
-                .isEmpty();
-    }
 
-    /** R2.06 */
+    /** R2.05 */
     static void everyOwnEntityHasEnoughColumns(JpaModel model) {
         List<String> tooSmall = new ArrayList<>();
         for (JavaClass c : model.ownEntities()) {
@@ -140,7 +119,7 @@ final class Lab02Checks {
         return columns;
     }
 
-    /** R2.07 */
+    /** R2.06 */
     static void everyOwnEntityHasRequiredColumn(JpaModel model) {
         List<String> withoutRequired = model.ownEntities().stream()
                 .filter(c -> JpaModel.fields(c).stream().noneMatch(Lab02Checks::isRequired))
@@ -160,7 +139,7 @@ final class Lab02Checks {
                 || f.tryGetAnnotationOfType(JoinColumn.class).map(j -> !j.nullable()).orElse(false);
     }
 
-    /** R2.08 (na ocenę 5): brak zwraca opis, co dopisać. */
+    /** R2.07 (na ocenę 5): brak zwraca opis, co dopisać. */
     static Optional<String> missingEnumColumn(JpaModel model) {
         boolean present = model.ownEntities().stream()
                 .flatMap(c -> JpaModel.fields(c).stream())
@@ -170,7 +149,7 @@ final class Lab02Checks {
                         + "z @Enumerated(EnumType.STRING) i stałymi pisanymi wielkimi literami.");
     }
 
-    /** R2.09 (na ocenę 5): brak zwraca opis, co dopisać. */
+    /** R2.08 (na ocenę 5): brak zwraca opis, co dopisać. */
     static Optional<String> missingEmbedded(JpaModel model) {
         boolean present = model.ownEntities().stream()
                 .flatMap(c -> JpaModel.fields(c).stream())

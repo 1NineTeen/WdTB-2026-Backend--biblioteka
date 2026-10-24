@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Reguły LAB 02: pierwsze encje projektu (encje JPA, pakiety, typy kolumn, dane startowe).
- * Sprawdzenia R2.01–R2.04, R2.06 i R2.07 czytają pliki .class (ArchUnit), R2.05 uruchamia aplikację na czystej bazie H2.
+ * Sprawdzenia R2.01–R2.03, R2.05 i R2.06 czytają pliki .class (ArchUnit), R2.04 uruchamia aplikację na czystej bazie H2.
  */
 @SinceLab(2)
 @DisplayName("LAB 02 · Encje i dane startowe")
@@ -45,13 +45,7 @@ class Lab02ProjectRulesTest {
     }
 
     @Test
-    @DisplayName("R2.04 Kwoty w BigDecimal: w encjach nie ma pól double ani float")
-    void noFloatingPointColumns() {
-        Lab02Checks.noFloatingPointColumns(JpaModel.ofProject());
-    }
-
-    @Test
-    @DisplayName("R2.05 Dane startowe: aplikacja startuje, a każda własna tabela ma co najmniej 3 wiersze z data.sql")
+    @DisplayName("R2.04 Dane startowe: aplikacja startuje, a każda własna tabela ma co najmniej 3 wiersze z data.sql")
     void everyOwnTableHasSeedData() {
         List<String> empty = new ArrayList<>();
         List<String> seeded = new ArrayList<>();
@@ -74,13 +68,13 @@ class Lab02ProjectRulesTest {
     }
 
     @Test
-    @DisplayName("R2.06 Każda własna tabela ma co najmniej 4 kolumny poza id")
+    @DisplayName("R2.05 Każda własna tabela ma co najmniej 4 kolumny poza id")
     void everyOwnEntityHasEnoughColumns() {
         Lab02Checks.everyOwnEntityHasEnoughColumns(JpaModel.ofProject());
     }
 
     @Test
-    @DisplayName("R2.07 Każda własna tabela ma co najmniej jedną kolumnę wymaganą (nullable = false)")
+    @DisplayName("R2.06 Każda własna tabela ma co najmniej jedną kolumnę wymaganą (nullable = false)")
     void everyOwnEntityHasRequiredColumn() {
         Lab02Checks.everyOwnEntityHasRequiredColumn(JpaModel.ofProject());
     }

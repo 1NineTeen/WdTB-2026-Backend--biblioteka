@@ -122,10 +122,10 @@ Instrukcja krok po kroku: `docs/lab02.html`. Zespół pracuje razem **na jednym 
 |---|---|---|
 | `pom.xml`, `<lab>` | `1` → `2` (od razu commit i push) | włącza R2.xx |
 | `pl.wsb.<projekt>.<moduł>.domain` | 3 własne encje (`@Entity`) bez relacji, enumy i klasy `@Embeddable` w tych samych pakietach | R2.01–R2.02 |
-| typy pól | enumy z `@Enumerated(EnumType.STRING)`, kwoty w `BigDecimal` | R2.03–R2.04 |
-| kolumny | co najmniej 4 kolumny poza `id` w każdej tabeli, w tym co najmniej jedna z `nullable = false` | R2.06–R2.07 |
-| `src/main/resources/data.sql` | sekcja per tabela, co najmniej 3 wiersze w każdej tabeli; sprawdzenie w konsoli H2 | R2.05 |
-| na ocenę 5 | kolumna typu enum i klasa `@Embeddable` użyta przez `@Embedded` | R2.08–R2.09 |
+| typy pól | enumy z `@Enumerated(EnumType.STRING)`, kwoty w `BigDecimal` (zalecenie) | R2.03 |
+| kolumny | co najmniej 4 kolumny poza `id` w każdej tabeli, w tym co najmniej jedna z `nullable = false` | R2.05–R2.06 |
+| `src/main/resources/data.sql` | sekcja per tabela, co najmniej 3 wiersze w każdej tabeli; sprawdzenie w konsoli H2 | R2.04 |
+| na ocenę 5 | kolumna typu enum i klasa `@Embeddable` użyta przez `@Embedded` | R2.07–R2.08 |
 | `src/main/resources/static/index.html` | w liście zmian: co powstało na LAB 02 | — |
 
 Na koniec zajęć zespół tworzy tag `lab-2` (okno *Git* → *Log* → prawy przycisk na commicie → *New Tag…*) i wysyła go
