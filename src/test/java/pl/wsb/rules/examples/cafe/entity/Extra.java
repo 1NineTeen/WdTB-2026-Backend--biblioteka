@@ -1,4 +1,4 @@
-package pl.wsb.rules.examples.cafe.booking.domain;
+package pl.wsb.rules.examples.cafe.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

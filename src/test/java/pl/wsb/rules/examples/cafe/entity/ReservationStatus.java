@@ -1,4 +1,4 @@
-package pl.wsb.rules.examples.cafe.booking.domain;
+package pl.wsb.rules.examples.cafe.entity;
 
 /** Cykl życia rezerwacji. W bazie zapisywany jako tekst (@Enumerated(EnumType.STRING)). */
 public enum ReservationStatus {

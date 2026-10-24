@@ -121,7 +121,7 @@ Instrukcja krok po kroku: `docs/lab02.html`. Zespół pracuje razem **na jednym 
 | Plik | Zmiana | Reguła |
 |---|---|---|
 | `pom.xml`, `<lab>` | `1` → `2` (od razu commit i push) | włącza R2.xx |
-| `pl.wsb.<projekt>.<moduł>.domain` | 3 własne encje (`@Entity`) bez relacji; enumy i klasy `@Embeddable` w tych samych pakietach | R2.01–R2.02 |
+| `pl.wsb.<projekt>.entity` | 3 własne encje (`@Entity`) bez relacji; enumy i klasy `@Embeddable` w tym samym pakiecie | R2.01–R2.02 |
 | typy pól | kwoty w `BigDecimal` (zalecenie) | — |
 | kolumny | co najmniej 4 kolumny poza `id` w każdej tabeli, w tym co najmniej jedna z `nullable = false` | R2.04–R2.05 |
 | `src/main/resources/data.sql` | sekcja per tabela, co najmniej 3 wiersze w każdej tabeli; sprawdzenie w konsoli H2 | R2.03 |

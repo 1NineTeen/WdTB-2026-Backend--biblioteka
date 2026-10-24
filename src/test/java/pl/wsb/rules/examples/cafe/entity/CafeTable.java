@@ -1,4 +1,4 @@
-package pl.wsb.rules.examples.cafe.seating.domain;
+package pl.wsb.rules.examples.cafe.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import pl.wsb.rules.examples.cafe.booking.domain.Reservation;
 
 import java.util.ArrayList;
 import java.util.List;

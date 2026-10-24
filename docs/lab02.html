@@ -150,9 +150,9 @@ Otwórzcie <code>account/domain/UserAccount.java</code> i porównajcie z tabelą
 </table></div>
 <h3>B3. Przykład: trzy encje kawiarni</h3>
 <p>Tak wyglądają trzy tabele bez relacji dla kawiarni z LAB 01. To wzór: Wy w części E tworzycie tabele <strong>ze swojego projektu</strong>.
-Każda encja leży w pakiecie swojego modułu: <code>seating.domain</code>, <code>menu.domain</code>, <code>guest.domain</code>.</p>
+Wszystkie encje, enum i klasa wbudowana leżą w jednym pakiecie <code>pl.wsb.kawiarnia.entity</code>.</p>
 <p><strong>Stolik</strong>, klasa <code>CafeTable</code> (nazwa <code>Table</code> jest zajęta przez adnotację JPA):</p>
-<pre><code>package pl.wsb.kawiarnia.seating.domain;
+<pre><code>package pl.wsb.kawiarnia.entity;
 
 import jakarta.persistence.*;
 
@@ -200,7 +200,7 @@ public class CafeTable {
 )
 </code></pre>
 <p><strong>Pozycja menu</strong> ma kategorię ze stałej listy (enum) i cenę (kwota). Najpierw enum <code>MenuCategory</code>:</p>
-<pre><code>package pl.wsb.kawiarnia.menu.domain;
+<pre><code>package pl.wsb.kawiarnia.entity;
 
 public enum MenuCategory {
     COFFEE, TEA, CAKE
@@ -351,7 +351,7 @@ w której są też kolumny adresu:</p>
 </tr>
 </tbody>
 </table></div>
-<p>Klasa <code>@Embeddable</code> leży w tym samym pakiecie <code>&lt;moduł&gt;.domain</code> co encja (R2.02). Nie liczy się jako jedna z 3 tabel, ale jej kolumny liczą się do kolumn tabeli encji (R2.04). Na ocenę 5 co najmniej jedna encja ma pole <code>@Embedded</code> (R2.07).</p>
+<p>Klasa <code>@Embeddable</code> leży w tym samym pakiecie <code>entity</code> co encje (R2.02). Nie liczy się jako jedna z 3 tabel, ale jej kolumny liczą się do kolumn tabeli encji (R2.04). Na ocenę 5 co najmniej jedna encja ma pole <code>@Embedded</code> (R2.07).</p>
 </section>
 <section class="part task">
 <h2><span class="tag task">Zadanie</span>C · Aktualizacja projektu</h2>
@@ -397,7 +397,6 @@ Dla każdej tabeli ustalcie:</p>
 <li><strong>nazwę klasy i tabeli</strong> po angielsku, np. <code>MenuItem</code> i <code>menu_item</code>,</li>
 <li><strong>co najmniej 4 kolumny poza <code>id</code></strong> z typami z części B2 (R2.04), w tym co najmniej jedna wymagana,
    czyli z <code>nullable = false</code> (R2.05),</li>
-<li><strong>moduł</strong>, czyli pakiet, do którego trafi encja: jedno słowo, małe litery, po angielsku, np. <code>menu</code>,</li>
 <li><strong>co najmniej 3 przykładowe wiersze</strong>, sensowne dla Waszego tematu: wpiszecie je w części F (R2.03).</li>
 </ol>
 <p><strong>Na ocenę 5</strong> dodatkowo: w co najmniej jednej tabeli kolumna typu enum z <code>@Enumerated(EnumType.STRING)</code>, np. status albo kategoria (R2.06),
@@ -408,16 +407,17 @@ i w co najmniej jednej tabeli klasa wbudowana <code>@Embeddable</code>, np. adre
 <h2><span class="tag task">Zadanie</span>E · Encje Waszego projektu</h2>
 <p>Tworzycie <strong>własne</strong> 3 tabele z części D. Wzorem są encje kawiarni z części B3. Nazwy klas, pól i pakietów
 po angielsku, jak w <code>UserAccount</code>. Pracujecie razem całym zespołem (C3).</p>
-<h3>E1. Pakiety modułów</h3>
-<p>Prawy przycisk na pakiecie <code>pl.wsb.&lt;projekt&gt;</code> → <em>New → Package</em> → wpiszcie <code>&lt;moduł&gt;.domain</code>,
-np. <code>menu.domain</code> (IntelliJ utworzy oba poziomy). Tak samo dla pozostałych modułów z części D (R2.02).</p>
+<h3>E1. Pakiet entity</h3>
+<p>Prawy przycisk na pakiecie <code>pl.wsb.&lt;projekt&gt;</code> → <em>New → Package</em> → wpiszcie <code>entity</code>.
+Wszystkie Wasze encje, enumy i klasy <code>@Embeddable</code> tworzycie w tym pakiecie (R2.02). Gotowa klasa <code>UserAccount</code>
+zostaje tam, gdzie jest.</p>
 <h3>E2. Enum (na ocenę 5 w co najmniej jednej tabeli)</h3>
-<p>Prawy przycisk na <code>&lt;moduł&gt;.domain</code> → <em>New → Java Class</em> → <em>Enum</em> → nazwa, np. <code>Category</code> albo <code>Status</code>.
+<p>Prawy przycisk na pakiecie <code>entity</code> → <em>New → Java Class</em> → <em>Enum</em> → nazwa, np. <code>Category</code> albo <code>Status</code>.
 Stałe wielkimi literami, jak <code>MenuCategory</code> w B3. W encji pole enum zawsze z <code>@Enumerated(EnumType.STRING)</code> (R2.06).
 Na ocenę 4 ten krok możecie pominąć.</p>
 <h3>E3. Encja</h3>
-<p>Prawy przycisk na <code>&lt;moduł&gt;.domain</code> → <em>New → Java Class</em> → nazwa klasy. Szkielet, który uzupełniacie swoimi kolumnami:</p>
-<pre><code>package pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.domain;
+<p>Prawy przycisk na pakiecie <code>entity</code> → <em>New → Java Class</em> → nazwa klasy. Szkielet, który uzupełniacie swoimi kolumnami:</p>
+<pre><code>package pl.wsb.&lt;projekt&gt;.entity;
 
 import jakarta.persistence.*;
 
@@ -574,7 +574,7 @@ każda osoba potrafi wyjaśnić dowolną encję zespołu.</p>
 </tr>
 <tr>
 <td>R2.02</td>
-<td>encje i <code>@Embeddable</code> leżą w pakietach <code>pl.wsb.&lt;projekt&gt;.&lt;moduł&gt;.domain</code></td>
+<td>encje i <code>@Embeddable</code> leżą w pakiecie <code>pl.wsb.&lt;projekt&gt;.entity</code></td>
 <td>4 i 5</td>
 </tr>
 <tr>
