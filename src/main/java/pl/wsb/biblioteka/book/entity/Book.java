@@ -1,10 +1,10 @@
 package pl.wsb.biblioteka.book.entity;
 
 import jakarta.persistence.*;
+import pl.wsb.biblioteka.account.domain.UserAccount;
 
 @Entity
 @Table(name = "book")
-
 public class Book {
 
     @Id
@@ -28,16 +28,30 @@ public class Book {
     @Column(name = "available", nullable = false)
     private Boolean available;
 
+    // LAB 03 - uzytkownik, ktory dodal ksiazke
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_account_id", nullable = false)
+    private UserAccount addedBy;
+
+    // Konstruktor wymagany przez JPA
     protected Book() {
     }
 
-    public Book(String title, String author, String isbn,
-                BookCategory category, Boolean available) {
+    // Konstruktor ksiazki
+    public Book(
+            String title,
+            String author,
+            String isbn,
+            BookCategory category,
+            Boolean available,
+            UserAccount addedBy) {
+
         this.title = title;
         this.author = author;
         this.isbn = isbn;
         this.category = category;
         this.available = available;
+        this.addedBy = addedBy;
     }
 
     public Long getId() {
@@ -62,5 +76,9 @@ public class Book {
 
     public Boolean getAvailable() {
         return available;
+    }
+
+    public UserAccount getAddedBy() {
+        return addedBy;
     }
 }

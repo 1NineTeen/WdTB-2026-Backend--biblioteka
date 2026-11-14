@@ -1,7 +1,11 @@
 package pl.wsb.biblioteka.reader.entity;
 
 import jakarta.persistence.*;
+import pl.wsb.biblioteka.loan.entity.Loan;
+
 import java.time.LocalDate;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "reader")
@@ -11,16 +15,14 @@ public class Reader {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name",
-            nullable = false, length = 60)
+    @Column(name = "first_name", nullable = false, length = 60)
     private String firstName;
 
-    @Column(name = "last_name",
-            nullable = false, length = 80)
+    @Column(name = "last_name", nullable = false, length = 80)
     private String lastName;
 
-    @Column(name = "email",
-            nullable = false, unique = true, length = 120)
+    @Column(name = "email", nullable = false,
+            unique = true, length = 120)
     private String email;
 
     @Column(name = "registered_on", nullable = false)
@@ -32,12 +34,23 @@ public class Reader {
     @Embedded
     private Address address;
 
+    // LAB 03 - czytelnik moze miec wiele wypozyczen
+    @OneToMany(mappedBy = "reader", fetch = FetchType.LAZY)
+    private List<Loan> loans = new ArrayList<>();
+
+    // Konstruktor wymagany przez JPA
     protected Reader() {
     }
 
-    public Reader(String firstName, String lastName,
-                  String email, LocalDate registeredOn,
-                  Boolean active, Address address) {
+    // Konstruktor czytelnika
+    public Reader(
+            String firstName,
+            String lastName,
+            String email,
+            LocalDate registeredOn,
+            Boolean active,
+            Address address) {
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -72,5 +85,9 @@ public class Reader {
 
     public Address getAddress() {
         return address;
+    }
+
+    public List<Loan> getLoans() {
+        return loans;
     }
 }
