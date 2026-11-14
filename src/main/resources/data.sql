@@ -11,8 +11,9 @@ insert into user_account (email, display_name, role, created_at) values
 -- insert into user_account (email, display_name, role, created_at) values
 --     ('imie.nazwisko@student.merito.pl', 'Imię', 'USER', current_timestamp);
 
--- ===== LAB 02/03 - BOOK =====
--- Kazda ksiazka ma przypisanego uzytkownika
+
+-- ===== LAB 02/03 · book =====
+-- user_account_id wskazuje konto z sekcji powyzej
 
 INSERT INTO book
 (title, author, isbn, category, available, user_account_id)
@@ -27,8 +28,7 @@ VALUES
      'Stephen Hawking', '9788328701861', 'SCIENCE', false, 3);
 
 
--- ===== LAB 02/03 - READER =====
--- Czytelnicy biblioteki
+-- ===== LAB 02 · reader =====
 
 INSERT INTO reader
 (first_name, last_name, email,
@@ -44,8 +44,8 @@ VALUES
      '2026-10-10', false, 'Dluga 15', 'Wroclaw', '53-633');
 
 
--- ===== LAB 03 - LIBRARY_CARD =====
--- Kazda karta jest przypisana do czytelnika
+-- ===== LAB 03 · library_card =====
+-- reader_id wskazuje czytelnika z sekcji powyzej
 
 INSERT INTO library_card
 (card_number, issued_on, expires_on, active, reader_id)
@@ -55,8 +55,8 @@ VALUES
     ('K-0003', '2026-10-10', '2027-10-10', false, 3);
 
 
--- ===== LAB 02/03 - LOAN =====
--- Kazde wypozyczenie ma przypisanego czytelnika
+-- ===== LAB 02/03 · loan =====
+-- reader_id wskazuje czytelnika
 
 INSERT INTO loan
 (loan_date, due_date, return_date,
@@ -72,8 +72,8 @@ VALUES
      'OVERDUE', 1, 3);
 
 
--- ===== LAB 03 - LOAN_BOOK =====
--- Powiazania wypozyczen z ksiazkami
+-- ===== LAB 03 · loan_book =====
+-- Tabela laczaca wypozyczenia i ksiazki
 
 INSERT INTO loan_book (loan_id, book_id)
 VALUES
@@ -81,3 +81,4 @@ VALUES
     (1, 2),
     (2, 3),
     (3, 2);
+
