@@ -10,22 +10,25 @@ insert into user_account (email, display_name, role, created_at) values
 -- LAB 01: Wasze konta (zmieńcie na swoje dane, rola USER)
 -- insert into user_account (email, display_name, role, created_at) values
 --     ('imie.nazwisko@student.merito.pl', 'Imię', 'USER', current_timestamp);
--- ===== LAB 02 · book =====
+
+-- ===== LAB 02/03 - BOOK =====
+-- Kazda ksiazka ma przypisanego uzytkownika
 
 INSERT INTO book
-(title, author, isbn, category, available)
+(title, author, isbn, category, available, user_account_id)
 VALUES
     ('Wiedzmin: Ostatnie zyczenie',
-     'Andrzej Sapkowski', '9788375780635', 'FANTASY', true),
+     'Andrzej Sapkowski', '9788375780635', 'FANTASY', true, 1),
 
     ('Lalka',
-     'Boleslaw Prus', '9788373271890', 'FICTION', true),
+     'Boleslaw Prus', '9788373271890', 'FICTION', false, 2),
 
     ('Krotka historia czasu',
-     'Stephen Hawking', '9788328701861', 'SCIENCE', false);
+     'Stephen Hawking', '9788328701861', 'SCIENCE', false, 3);
 
 
--- ===== LAB 02 · reader =====
+-- ===== LAB 02/03 - READER =====
+-- Czytelnicy biblioteki
 
 INSERT INTO reader
 (first_name, last_name, email,
@@ -41,16 +44,40 @@ VALUES
      '2026-10-10', false, 'Dluga 15', 'Wroclaw', '53-633');
 
 
--- ===== LAB 02 · loan =====
+-- ===== LAB 03 - LIBRARY_CARD =====
+-- Kazda karta jest przypisana do czytelnika
+
+INSERT INTO library_card
+(card_number, issued_on, expires_on, active, reader_id)
+VALUES
+    ('K-0001', '2026-10-01', '2027-10-01', true, 1),
+    ('K-0002', '2026-10-05', '2027-10-05', true, 2),
+    ('K-0003', '2026-10-10', '2027-10-10', false, 3);
+
+
+-- ===== LAB 02/03 - LOAN =====
+-- Kazde wypozyczenie ma przypisanego czytelnika
 
 INSERT INTO loan
-(loan_date, due_date, return_date, status, renewal_count)
+(loan_date, due_date, return_date,
+ status, renewal_count, reader_id)
 VALUES
     ('2026-10-01', '2026-10-15', '2026-10-12',
-     'RETURNED', 0),
+     'RETURNED', 0, 1),
 
-    ('2026-10-10', '2026-11-10', NULL,
-     'ACTIVE', 0),
+    ('2026-11-01', '2026-11-20', NULL,
+     'ACTIVE', 0, 2),
 
     ('2026-09-01', '2026-09-30', NULL,
-     'OVERDUE', 1);
+     'OVERDUE', 1, 3);
+
+
+-- ===== LAB 03 - LOAN_BOOK =====
+-- Powiazania wypozyczen z ksiazkami
+
+INSERT INTO loan_book (loan_id, book_id)
+VALUES
+    (1, 1),
+    (1, 2),
+    (2, 3),
+    (3, 2);
